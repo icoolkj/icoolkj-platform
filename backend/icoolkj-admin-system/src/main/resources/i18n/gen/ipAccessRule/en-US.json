@@ -1,0 +1,124 @@
+{
+  "page": {
+    "title": "IP Access Rule Management",
+    "description": "Manage ip access rule records",
+    "addTitle": "Add IP Access Rule",
+    "editTitle": "Edit IP Access Rule",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled"
+  },
+  "fields": {
+    "ruleName": {
+      "label": "Rule Name",
+      "placeholder": "Enter rule name",
+      "validation": {
+        "required": "Rule Name is required",
+        "maxLength": "Rule Name must not exceed 100 characters"
+      }
+    },
+    "ipAddress": {
+      "label": "IP Address or CIDR",
+      "placeholder": "Enter IP address or CIDR",
+      "validation": {
+        "required": "IP Address or CIDR is required",
+        "maxLength": "IP Address or CIDR must not exceed 255 characters"
+      }
+    },
+    "matchType": {
+      "label": "Match Type",
+      "placeholder": "Select match type",
+      "validation": {
+        "required": "Match Type is required",
+        "maxLength": "Match Type must not exceed 1 characters"
+      }
+    },
+    "ruleType": {
+      "label": "Rule Type",
+      "placeholder": "Select rule type",
+      "validation": {
+        "required": "Rule Type is required",
+        "maxLength": "Rule Type must not exceed 1 characters"
+      }
+    },
+    "applyScope": {
+      "label": "Apply Scope",
+      "placeholder": "Select apply scope",
+      "validation": {
+        "required": "Apply Scope is required",
+        "maxLength": "Apply Scope must not exceed 1 characters"
+      }
+    },
+    "priorityNo": {
+      "label": "Priority",
+      "placeholder": "Enter priority",
+      "validation": {
+        "required": "Priority is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "startAt": {
+      "label": "Effective Start Time",
+      "placeholder": "Select effective start time",
+      "validation": {}
+    },
+    "endAt": {
+      "label": "Effective End Time",
+      "placeholder": "Select effective end time",
+      "validation": {}
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Enter remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "ipAccessRule",
+    "apiModule": "system",
+    "functionName": "IP Access Rule",
+    "constraints": {
+      "ruleName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "ipAddress": {
+        "required": true,
+        "maxLength": 255
+      },
+      "matchType": {
+        "required": true,
+        "maxLength": 1
+      },
+      "ruleType": {
+        "required": true,
+        "maxLength": 1
+      },
+      "applyScope": {
+        "required": true,
+        "maxLength": 1
+      },
+      "priorityNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "startAt": {},
+      "endAt": {},
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

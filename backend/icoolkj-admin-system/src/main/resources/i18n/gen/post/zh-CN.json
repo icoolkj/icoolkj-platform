@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "岗位",
+    "description": "管理岗位，支持新增、修改与删除",
+    "addTitle": "新增岗位",
+    "editTitle": "修改岗位",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用"
+  },
+  "fields": {
+    "postName": {
+      "label": "岗位名称",
+      "placeholder": "请输入岗位名称",
+      "validation": {
+        "required": "请输入岗位名称",
+        "maxLength": "岗位名称长度不能超过50"
+      }
+    },
+    "postCode": {
+      "label": "岗位编码",
+      "placeholder": "请输入岗位编码",
+      "validation": {
+        "required": "请输入岗位编码",
+        "maxLength": "岗位编码长度不能超过64"
+      }
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序",
+      "validation": {
+        "required": "请输入显示顺序"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    }
+  },
+  "meta": {
+    "businessName": "post",
+    "apiModule": "system",
+    "functionName": "岗位",
+    "constraints": {
+      "postName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "postCode": {
+        "required": true,
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

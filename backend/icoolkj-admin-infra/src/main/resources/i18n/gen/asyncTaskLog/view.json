@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "businessName": "asyncTaskLog",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:asyncTaskLog",
+    "className": "AsyncTaskLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "taskId",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 220
+      },
+      {
+        "field": "logLevel",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "infra_log_level",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "taskId",
+        "component": "text",
+        "width": 170,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "logLevel",
+        "component": "dict-tag",
+        "dictType": "infra_log_level",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "logContent",
+        "component": "text",
+        "minWidth": 260,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "tenantId",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "tenantId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "taskId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "logLevel",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "logContent",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      }
+    ]
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "businessName": "databaseBackup",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "monitor:dbBackup",
+    "className": "DatabaseBackup"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "fileName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 260
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "fileName",
+        "component": "text",
+        "minWidth": 240,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "sizeText",
+        "component": "text",
+        "width": 120,
+        "minWidth": 100,
+        "align": "right",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "modifiedAt",
+        "component": "text",
+        "width": 180,
+        "minWidth": 160,
+        "align": "center",
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 180
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": []
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "download",
+        "labelKey": "download",
+        "permKey": "list",
+        "handler": "databaseBackup.download",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "delete",
+        "labelKey": "delete",
+        "permKey": "delete",
+        "type": "danger",
+        "handler": "databaseBackup.delete",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

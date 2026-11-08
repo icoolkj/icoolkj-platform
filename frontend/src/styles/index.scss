@@ -1,0 +1,164 @@
+:root {
+  --ic-primary: #1677ff;
+  --ic-primary-light: #e6f4ff;
+  --ic-sidebar-bg: #001529;
+  --ic-sidebar-active: #1677ff;
+  --ic-page-bg: #f0f2f5;
+  --ic-card-radius: 8px;
+  --ic-text-secondary: #8c8c8c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--el-text-color-primary, #262626);
+  background: var(--ic-page-bg, #f0f2f5);
+}
+
+.page-container {
+  padding: 16px;
+}
+
+.search-card {
+  margin-bottom: 12px;
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.table-card {
+  border: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.search-card :deep(.el-card__body) {
+  padding-bottom: 2px;
+}
+
+.table-card :deep(.el-card__body) {
+  padding-top: 8px;
+}
+
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toolbar-left {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.table-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.table-cover-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
+}
+
+.dict-tags-item + .dict-tags-item {
+  margin-left: 4px;
+}
+
+/* 操作按钮：全局 default；行内操作用 link，禁止单独设 size */
+.table-card :deep(.el-table .el-button.is-link) {
+  vertical-align: middle;
+}
+
+.dialog-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.dialog-table-wrap {
+  min-height: 360px;
+}
+
+.import-dialog :deep(.el-dialog__body) {
+  padding-top: 12px;
+}
+
+.preview-dialog :deep(.el-dialog__body) {
+  padding-top: 8px;
+}
+
+.navbar-tool-popper.el-popper {
+  min-width: 140px !important;
+}
+
+/* Collapsed sidebar: popup must use dark text (parent menu sets white text-color). */
+.sidebar-menu-popper.el-popper {
+  min-width: 160px !important;
+  border: none !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12) !important;
+}
+
+.sidebar-menu-popper .el-menu--popup {
+  min-width: 160px;
+  padding: 4px 0;
+}
+
+.sidebar-menu-popper .el-menu-item,
+.sidebar-menu-popper .el-sub-menu__title {
+  color: var(--el-text-color-primary) !important;
+}
+
+.sidebar-menu-popper .el-menu-item:hover,
+.sidebar-menu-popper .el-sub-menu__title:hover {
+  background: var(--el-fill-color-light) !important;
+}
+
+.sidebar-menu-popper .el-menu-item.is-active {
+  color: var(--el-color-primary) !important;
+  background: var(--el-color-primary-light-9) !important;
+}
+
+/* Shell top bar icon buttons — crisp on dark/light header */
+.shell-header-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ic-header-icon, var(--ic-header-text-muted, #595959));
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.shell-header-icon-btn:hover {
+  background: var(--ic-header-hover, rgba(0, 0, 0, 0.04));
+  color: var(--ic-header-text, #262626);
+}
+
+.shell-header-icon-btn .el-icon {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.shell-header-icon-btn .el-icon svg {
+  display: block;
+}

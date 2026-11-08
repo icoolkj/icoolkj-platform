@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "iCoolKJ Platform — 源码公开的企业中后台框架（非商业学习研究）",
+    "description": "多租户、权限、流程与代码生成一体，支撑 SaaS 与业务系统快速搭建。"
+  },
+  "nav": {
+    "home": "首页",
+    "product": "产品能力",
+    "docs": "文档",
+    "license": "许可与使用",
+    "delivery": "许可与使用范围",
+    "about": "关于",
+    "console": "进入控制台",
+    "language": "语言",
+    "theme": "外观",
+    "themeLight": "浅色",
+    "themeDark": "深色"
+  },
+  "footer": {
+    "rights": "依 iCoolKJ 非商业学习研究许可证 v1.0 提供"
+  }
+}

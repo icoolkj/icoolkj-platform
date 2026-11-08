@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.job.mapper.SysJobMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.job.domain.SysJobEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="job_code" property="jobCode"/>
+        <result column="job_name" property="jobName"/>
+        <result column="job_group" property="jobGroup"/>
+        <result column="cron_expression" property="cronExpression"/>
+        <result column="misfire_policy" property="misfirePolicy"/>
+        <result column="allow_concurrent" property="allowConcurrent"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, job_code, job_name, job_group, cron_expression, misfire_policy,
+        allow_concurrent, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="jobCode != null and jobCode != ''">AND job_code = #{jobCode}</if>
+            <if test="jobName != null and jobName != ''">AND job_name like concat('%', #{jobName}, '%')</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="jobGroup != null and jobGroup != ''">AND job_group = #{jobGroup}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_job
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByJobCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_job
+        WHERE job_code = #{jobCode} AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_job
+        <include refid="Query_Where"/>
+        ORDER BY job_group ASC, job_code ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_job
+        <include refid="Query_Where"/>
+    </select>
+
+    <select id="selectAllEnabled" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_job
+        WHERE deleted = 0 AND status = '0'
+        ORDER BY job_code ASC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_job (
+            id, tenant_id, job_code, job_name, job_group, cron_expression, misfire_policy,
+            allow_concurrent, status, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{jobCode}, #{jobName}, #{jobGroup}, #{cronExpression}, #{misfirePolicy},
+            #{allowConcurrent}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_job
+        <set>
+            cron_expression = #{cronExpression},
+            misfire_policy = #{misfirePolicy},
+            allow_concurrent = #{allowConcurrent},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+</mapper>

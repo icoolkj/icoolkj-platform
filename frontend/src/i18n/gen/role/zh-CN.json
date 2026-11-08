@@ -1,0 +1,103 @@
+{
+  "page": {
+    "title": "角色",
+    "description": "管理角色，支持新增、修改与删除",
+    "addTitle": "新增角色",
+    "editTitle": "修改角色",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "assignMenu": "菜单授权",
+    "assignMenuTitle": "菜单授权"
+  },
+  "fields": {
+    "roleName": {
+      "label": "角色名称",
+      "placeholder": "请输入角色名称",
+      "validation": {
+        "required": "请输入角色名称",
+        "maxLength": "角色名称长度不能超过50"
+      }
+    },
+    "roleCode": {
+      "label": "角色编码",
+      "placeholder": "请输入角色编码",
+      "validation": {
+        "required": "请输入角色编码",
+        "maxLength": "角色编码长度不能超过64"
+      }
+    },
+    "dataScope": {
+      "label": "数据范围",
+      "placeholder": "请选择数据范围（多角色取并集；选「全部」将放行本租户全部行）",
+      "validation": {
+        "required": "请输入数据范围",
+        "maxLength": "数据范围长度不能超过1"
+      }
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序",
+      "validation": {
+        "required": "请输入显示顺序"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "isSuperRole": {
+      "label": "是否超级管理员角色",
+      "placeholder": "请选择是否超级管理员角色",
+      "validation": {
+        "required": "请输入是否超级管理员角色"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "role",
+    "apiModule": "system",
+    "functionName": "角色",
+    "constraints": {
+      "roleName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "roleCode": {
+        "required": true,
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "dataScope": {
+        "required": true,
+        "maxLength": 1
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "isSuperRole": {
+        "required": true
+      }
+    }
+  }
+}

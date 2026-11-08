@@ -1,0 +1,86 @@
+---
+description: Entity Lombok 规范与按表代码生成（iCoolKJ Gen）
+globs:
+  - backend/**/domain/*Entity.java
+  - backend/icoolkj-admin-generator/**
+  - backend/**/mapper/**
+  - backend/**/resources/mapper/**
+---
+
+# 代码生成与 Lombok 规范
+
+## 生成器位置
+
+**正式生成器**：`backend/icoolkj-admin-generator/`（Java + Apache Velocity）
+
+- 元数据表：`gen_table` / `gen_table_column`（见 `V1__schema.sql` 中 gen_* 段 + 平台 seed）
+- REST API：`/tool/gen/*`（导入、预览、下载 zip、写入项目目录）
+- 模板：`src/main/resources/vm/java|xml|ts|vue/v3/`
+
+启动 `icoolkj-admin-api` 后可通过 HTTP 调用；后续可接入管理端 UI（参考 `icoolkj-ui/views/tool/gen`）。
+
+> `tools/icoolkj-codegen/` 为早期 Python 试验，**不再使用**。
+
+## Entity
+
+- **租户表**：`extends TenantBaseEntity`
+- **平台覆盖表**：`extends BaseEntity` + `tenantId`
+- **全局表**：`extends BaseEntity`
+- **关联/日志表**：`@Data` 独立类
+
+Lombok：子类用 `@Getter @Setter @EqualsAndHashCode(callSuper=true) @ToString(callSuper=true)`；独立实体用 `@Data`。
+
+## 主键与通用字段
+
+- 创建：`IdGeneratorUtils.nextIdStr()`（雪花 ID，`SnowflakeIdGenerator`）
+- 审计：`createdBy/updatedBy/createdAt/updatedAt/deleted` 由 `MetaObjectHandlerImpl` 填充
+- 租户：`tenantId` 由租户插件 + MetaObjectHandler 填充
+
+## Mapper / XML
+
+- Service 禁止 `Wrappers` / `BaseMapper`
+- 标准方法：`selectById`、`selectList`、`selectPage`、`countByQuery`、`insert`、`updateById`、`deleteById`
+
+## CRUD 栈（单表）
+
+Entity → Mapper/XML → DTO/VO/Convert → Service/Impl → Controller（`ApiResponse` + `PageResult`）
+
+Controller 路径规范：`GET /page`、`GET /{id}`、`POST /create`、`PUT /update`、`DELETE /{id}`，禁止无路径的 `@PostMapping` / `@PutMapping`。
+
+### 行级 L3（有 user_id/dept_id 时）
+
+必须按 `.cursor/rules/row-access-l3.mdc`：
+
+- `@DataScope` **只**在 Service 接口 `page`
+- Mapper 分页 WHERE：`${dataScopeSql}`（仅 `hasDataScope`）
+- create：`OwnershipColumns`；详情/改删：`RowAccessSupport.assertReadable`
+- Controller **禁止** `@DataScope`
+
+Excel 导出 / 导入（Gen 标准）：
+- 导出：`GET /export`（与 `/page` 同查询条件）+ EasyExcel 国际化；表头/文件名走 `gen.{business}` i18n。
+- 导入（`isImport=1`）：`GET /import-template` + `POST /import` + `POST /import-async`；生成 `*ExcelImportAsyncHandler`；`importRows` 含 Bean Validation，默认走 `create()` 全有或全无。
+- 前端积木：`GenExcelToolbarActions`（仅渲染 builtin `export`/`import`）；业务页传 `perm.export` / `perm.import` + `importFileAsync`。
+- 导入步骤提示：优先 `page.importStepTemplateHint` / `importStepUploadHint`，否则 `common.*`。
+
+```json
+"extensions": {
+  "toolbarActions": [
+    { "id": "export", "builtin": "export", "permKey": "export", "allowOnReadOnly": true },
+    { "id": "import", "builtin": "import", "permKey": "import" }
+  ]
+}
+```
+
+`fileName` 可选，仅作下载失败时的回退；优先使用响应头 `X-Download-Filename`（兼容旧名 `X-Export-Filename`）/ `Content-Disposition`。
+勿再手写 `#toolbar-extra` 导出/导入按钮。
+
+生成器按 `backend_module` / `api_module` / `base_type` 写入对应模块目录。
+
+## 前端产物风格
+
+生成的 `frontend/src/**`（含 `i18n/gen/**/*.json`）须符合：
+
+- `frontend/.prettierrc.json`（`semi: false`、`singleQuote`、`printWidth: 100`、`endOfLine: lf`）
+- `frontend/eslint.config.mjs`
+
+写入时统一 LF + 末尾换行（`GenTextNormalize` / `GenJsonWriter`）。类型 import 在 `vm/ts/api.ts.vm` 中固定多行，避免超长单行触发 Prettier。

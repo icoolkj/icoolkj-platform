@@ -1,0 +1,103 @@
+{
+  "page": {
+    "title": "Locale Management",
+    "description": "Manage locale records",
+    "addTitle": "Add Locale",
+    "editTitle": "Edit Locale",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled"
+  },
+  "fields": {
+    "localeCode": {
+      "label": "Locale Code",
+      "placeholder": "Please enter Locale Code",
+      "validation": {
+        "required": "Locale Code is required",
+        "maxLength": "Locale Code must not exceed 16 characters",
+        "format": "Invalid locale code format"
+      }
+    },
+    "localeName": {
+      "label": "Locale Name",
+      "placeholder": "Please enter Locale Name",
+      "validation": {
+        "required": "Locale Name is required",
+        "maxLength": "Locale Name must not exceed 64 characters"
+      }
+    },
+    "nativeName": {
+      "label": "Native Name",
+      "placeholder": "Please enter Native Name",
+      "validation": {
+        "required": "Native Name is required",
+        "maxLength": "Native Name must not exceed 64 characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Please enter Sort",
+      "validation": {
+        "required": "Sort No is required"
+      }
+    },
+    "isDefault": {
+      "label": "Default",
+      "placeholder": "Please select Default",
+      "validation": {
+        "required": "Is Default is required",
+        "maxLength": "Is Default must not exceed 1 characters",
+        "invalid": "Invalid default flag"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters",
+        "invalid": "Invalid status"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 256 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "i18nLocale",
+    "apiModule": "system",
+    "functionName": "Locale",
+    "constraints": {
+      "localeCode": {
+        "required": true,
+        "maxLength": 16
+      },
+      "localeName": {
+        "required": true,
+        "maxLength": 64
+      },
+      "nativeName": {
+        "required": true,
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 256
+      },
+      "sortNo": {
+        "required": true
+      },
+      "isDefault": {
+        "required": true,
+        "maxLength": 1
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

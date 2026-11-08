@@ -1,0 +1,54 @@
+package ${packageName}.domain;
+
+#foreach($import in $importList)
+import ${import};
+#end
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+#if($baseType == "tenant")
+import com.icoolkj.platform.framework.mybatis.TenantBaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+#set($BaseClass="TenantBaseEntity")
+#elseif($baseType == "platform" || $baseType == "base")
+import com.icoolkj.platform.framework.mybatis.BaseEntity;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+#set($BaseClass="BaseEntity")
+#else
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import lombok.Getter;
+import lombok.Setter;
+#end
+
+/** ${functionName} — maps to `${tableName}`. */
+@TableName("${tableName}")
+#if($baseType == "tenant" || $baseType == "platform" || $baseType == "base")
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class ${EntityName} extends ${BaseClass} {
+#else
+@Getter
+@Setter
+public class ${EntityName} {
+#end
+
+#foreach($column in $columns)
+#if(!$table.isSuperColumn($column.javaField))
+#if($column.isPk())
+    @TableId(type = IdType.ASSIGN_ID)
+#elseif($column.columnName != $column.javaField)
+    @TableField("${column.columnName}")
+#end
+    private $column.javaType $column.javaField;
+
+#end
+#end
+}

@@ -1,0 +1,121 @@
+{
+  "page": {
+    "title": "部门",
+    "description": "管理部门，支持新增、修改与删除",
+    "addTitle": "新增部门",
+    "editTitle": "修改部门",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "treeRoot": "顶级部门",
+    "addChild": "新增子项"
+  },
+  "fields": {
+    "deptName": {
+      "label": "部门名称",
+      "placeholder": "请输入部门名称",
+      "validation": {
+        "required": "请输入部门名称",
+        "maxLength": "部门名称长度不能超过50"
+      }
+    },
+    "deptCode": {
+      "label": "部门编码",
+      "placeholder": "请输入部门编码",
+      "validation": {
+        "maxLength": "部门编码长度不能超过64"
+      }
+    },
+    "parentId": {
+      "label": "上级部门",
+      "placeholder": "请选择上级部门",
+      "validation": {
+        "required": "请选择上级部门",
+        "maxLength": "父部门ID长度不能超过20"
+      }
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序",
+      "validation": {
+        "required": "请输入显示顺序"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "leaderName": {
+      "label": "负责人",
+      "placeholder": "请输入负责人",
+      "validation": {
+        "maxLength": "负责人长度不能超过50"
+      }
+    },
+    "phone": {
+      "label": "联系电话",
+      "placeholder": "请输入联系电话",
+      "validation": {
+        "maxLength": "联系电话长度不能超过20"
+      }
+    },
+    "email": {
+      "label": "邮箱",
+      "placeholder": "请输入邮箱",
+      "validation": {
+        "maxLength": "邮箱长度不能超过100"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "dept",
+    "apiModule": "system",
+    "functionName": "部门",
+    "constraints": {
+      "deptName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "deptCode": {
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "parentId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "leaderName": {
+        "maxLength": 50
+      },
+      "phone": {
+        "maxLength": 20
+      },
+      "email": {
+        "maxLength": 100
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

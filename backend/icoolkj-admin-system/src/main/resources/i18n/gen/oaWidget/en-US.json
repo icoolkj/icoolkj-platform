@@ -1,0 +1,22 @@
+{
+  "page": {
+    "preview": "Preview",
+    "download": "Download",
+    "delete": "Delete",
+    "upload": "Upload",
+    "emptyAttachments": "No attachments",
+    "maxFiles": "Up to {n} files",
+    "limitReached": "Limit reached ({n})",
+    "downloadFailed": "Download failed",
+    "uploadFailed": "Upload failed",
+    "previewFailed": "Preview failed",
+    "kindImage": "Image",
+    "kindVideo": "Video",
+    "kindDoc": "Doc",
+    "kindOther": "File",
+    "previewFit": "Fit",
+    "previewFullscreen": "Fullscreen",
+    "previewExitFullscreen": "Exit fullscreen",
+    "previewNewTab": "Open in new tab"
+  }
+}

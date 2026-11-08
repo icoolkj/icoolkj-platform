@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "businessName": "fileProfile",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:fileProfile",
+    "className": "InfraFileProfile"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "custom-form"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "businessName": "fileAccessPolicy",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:fileAccessPolicy",
+    "className": "InfraFileAccessPolicy"
+  },
+  "page": {
+    "layout": "custom-form"
+  }
+}

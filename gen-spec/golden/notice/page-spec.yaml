@@ -1,0 +1,97 @@
+specVersion: "1.0"
+pageKey: notice
+layout: standard-crud
+
+meta:
+  apiModule: system
+  backendModule: system
+  permissionPrefix: system:notice
+  className: Notice
+
+entity:
+  tableName: sys_notice
+  businessName: notice
+  functionName: 通知公告
+
+# 详情积木金样例：compile 写入 view.json.extensions
+extensions:
+  rowActions:
+    - id: detail
+      labelKey: detailAction
+      dialog: GenNoticeDetailDialog
+      dialogIdProp: noticeId
+      allowOnReadOnly: true
+    - id: submitApprove
+      labelKey: submitApprove
+      permKey: submit
+      handler: notice.submitApprove
+    - id: withdrawApprove
+      labelKey: withdrawApprove
+      permKey: withdraw
+      type: warning
+      handler: notice.withdrawApprove
+    - id: edit
+      builtin: edit
+      permKey: update
+    - id: delete
+      builtin: delete
+      permKey: delete
+      type: danger
+  dialogs:
+    - GenNoticeDetailDialog
+
+fields:
+  - javaField: noticeTitle
+    javaType: String
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+  - javaField: noticeType
+    javaType: String
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isInsert: true
+    isEdit: true
+    dictType: sys_notice_type
+  - javaField: publishStatus
+    javaType: String
+    isQuery: true
+    queryType: EQ
+    isList: true
+  - javaField: status
+    javaType: String
+    isList: true
+    isInsert: true
+    isEdit: true
+    dictType: sys_notice_status
+  - javaField: noticeContent
+    javaType: String
+    isInsert: true
+    isEdit: true
+  - javaField: noticeSummary
+    javaType: String
+    isInsert: true
+    isEdit: true
+  - javaField: publishLocations
+    javaType: String
+    isInsert: true
+    isEdit: true
+  - javaField: coverFileId
+    javaType: String
+    isInsert: true
+    isEdit: true
+  - javaField: sortNo
+    javaType: Integer
+    isList: true
+    isInsert: true
+    isEdit: true
+  - javaField: remark
+    javaType: String
+    isInsert: true
+    isEdit: true
+  - javaField: createdAt
+    javaType: Date
+    isList: true

@@ -1,0 +1,49 @@
+{
+  "page": {
+    "title": "AI 调用记录",
+    "description": "查看 AI 调用审计，支持详情追溯",
+    "addTitle": "新增",
+    "editTitle": "修改",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "logDetail": "详情",
+    "systemPrompt": "系统提示词",
+    "userMessage": "用户消息",
+    "aiResponse": "AI 响应",
+    "errorMessage": "错误信息"
+  },
+  "fields": {
+    "bizType": {
+      "label": "业务类型",
+      "placeholder": "请选择业务类型"
+    },
+    "responseStatus": {
+      "label": "状态",
+      "placeholder": "请选择状态"
+    },
+    "operatorName": {
+      "label": "操作人",
+      "placeholder": "请输入操作人"
+    },
+    "model": {
+      "label": "模型"
+    },
+    "costTime": {
+      "label": "耗时(ms)"
+    },
+    "userPromptPreview": {
+      "label": "用户消息"
+    },
+    "responsePreview": {
+      "label": "AI 响应"
+    },
+    "createdAt": {
+      "label": "创建时间"
+    }
+  },
+  "meta": {
+    "businessName": "aiInvokeLog",
+    "apiModule": "tool",
+    "functionName": "AI 调用记录",
+    "constraints": {}
+  }
+}

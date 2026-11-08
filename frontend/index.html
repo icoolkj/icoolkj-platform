@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="%SHELL_LANG%">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>%SHELL_TITLE%</title>
+    <script>
+      try {
+        var locale = localStorage.getItem('%LOCALE_STORAGE_KEY%')
+        if (locale) document.documentElement.lang = locale
+      } catch (e) {}
+    </script>
+    %BAIDU_HM_SCRIPT%
+    %DEVTOOLS_GUARD_SCRIPT%
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

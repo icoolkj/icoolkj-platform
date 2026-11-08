@@ -1,0 +1,132 @@
+{
+  "page": {
+    "title": "第三方调用日志",
+    "description": "查看第三方服务调用审计记录",
+    "addTitle": "新增第三方调用日志表",
+    "editTitle": "修改第三方调用日志表",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用"
+  },
+  "fields": {
+    "providerName": {
+      "label": "服务提供方",
+      "placeholder": "请输入服务提供方",
+      "validation": {
+        "required": "请输入服务提供方",
+        "maxLength": "服务提供方长度不能超过100"
+      }
+    },
+    "bizType": {
+      "label": "业务类型",
+      "placeholder": "请选择业务类型",
+      "validation": {
+        "maxLength": "业务类型长度不能超过50"
+      }
+    },
+    "requestUrl": {
+      "label": "请求地址",
+      "placeholder": "请输入请求地址",
+      "validation": {
+        "maxLength": "请求地址长度不能超过500"
+      }
+    },
+    "requestMethod": {
+      "label": "请求方法",
+      "placeholder": "请输入请求方法",
+      "validation": {
+        "maxLength": "请求方法长度不能超过20"
+      }
+    },
+    "responseStatus": {
+      "label": "调用状态",
+      "placeholder": "请选择调用状态",
+      "validation": {
+        "required": "请输入调用状态 0成功 1失败",
+        "maxLength": "调用状态 0成功 1失败长度不能超过1"
+      }
+    },
+    "costTime": {
+      "label": "耗时(ms)",
+      "placeholder": "请输入耗时毫秒",
+      "validation": {}
+    },
+    "calledAt": {
+      "label": "调用时间",
+      "placeholder": "请选择调用时间",
+      "validation": {
+        "required": "请输入调用时间"
+      }
+    },
+    "tenantId": {
+      "label": "租户ID",
+      "placeholder": "请输入租户ID",
+      "validation": {
+        "required": "请输入租户ID",
+        "maxLength": "租户ID长度不能超过20"
+      }
+    },
+    "requestData": {
+      "label": "脱敏后请求数据",
+      "placeholder": "请输入脱敏后请求数据",
+      "validation": {
+        "maxLength": "脱敏后请求数据长度不能超过65535"
+      }
+    },
+    "responseData": {
+      "label": "脱敏后响应数据",
+      "placeholder": "请输入脱敏后响应数据",
+      "validation": {
+        "maxLength": "脱敏后响应数据长度不能超过65535"
+      }
+    },
+    "errorMessage": {
+      "label": "错误信息",
+      "placeholder": "请输入错误信息",
+      "validation": {
+        "maxLength": "错误信息长度不能超过65535"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "thirdPartyCallLog",
+    "apiModule": "infra",
+    "functionName": "第三方调用日志",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "providerName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "bizType": {
+        "maxLength": 50
+      },
+      "requestUrl": {
+        "maxLength": 500
+      },
+      "requestMethod": {
+        "maxLength": 20
+      },
+      "requestData": {
+        "maxLength": 65535
+      },
+      "responseData": {
+        "maxLength": 65535
+      },
+      "responseStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "errorMessage": {
+        "maxLength": 65535
+      },
+      "costTime": {},
+      "calledAt": {
+        "required": true
+      }
+    }
+  }
+}

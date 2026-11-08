@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaInstancePromoteMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaInstancePromoteEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="instance_id" property="instanceId"/>
+        <result column="slot_code" property="slotCode"/>
+        <result column="str_value" property="strValue"/>
+        <result column="field_code" property="fieldCode"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectByInstanceId" resultMap="BaseResultMap">
+        SELECT id, tenant_id, instance_id, slot_code, str_value, field_code,
+               created_by, created_at, updated_by, updated_at, deleted
+        FROM oa_instance_promote WHERE instance_id = #{instanceId} AND deleted = 0
+    </select>
+
+    <insert id="insertBatch">
+        INSERT INTO oa_instance_promote (
+            id, tenant_id, instance_id, slot_code, str_value, field_code,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.tenantId}, #{item.instanceId}, #{item.slotCode}, #{item.strValue}, #{item.fieldCode},
+             #{item.createdBy}, #{item.createdAt}, #{item.updatedBy}, #{item.updatedAt}, #{item.deleted})
+        </foreach>
+    </insert>
+
+    <!-- Soft-delete must uniquify slot_code: uk includes (instance_id, slot_code, deleted). -->
+    <update id="deleteByInstanceId">
+        UPDATE oa_instance_promote
+        SET slot_code = CONCAT(SUBSTRING(slot_code, 1, 11), '#', id),
+            deleted = 1,
+            updated_at = NOW(3)
+        WHERE instance_id = #{instanceId} AND deleted = 0
+    </update>
+</mapper>

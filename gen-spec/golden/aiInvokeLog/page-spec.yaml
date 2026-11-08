@@ -1,0 +1,58 @@
+specVersion: "1.0"
+pageKey: aiInvokeLog
+layout: standard-crud
+
+meta:
+  apiModule: tool
+  backendModule: generator
+  permissionPrefix: tool:ai
+  className: AiInvokeLog
+
+entity:
+  tableName: tool_ai_invoke_log
+  businessName: aiInvokeLog
+  functionName: AI调用记录
+
+# 只读审计 + 详情积木金样例
+extensions:
+  rowActions:
+    - id: detail
+      labelKey: logDetail
+      dialog: GenAiInvokeLogDetailDialog
+      allowOnReadOnly: true
+  dialogs:
+    - GenAiInvokeLogDetailDialog
+
+fields:
+  - javaField: bizType
+    javaType: String
+    isQuery: true
+    queryType: EQ
+    isList: true
+    dictType: tool_ai_invoke_biz_type
+  - javaField: responseStatus
+    javaType: String
+    isQuery: true
+    queryType: EQ
+    isList: true
+    dictType: tool_ai_invoke_status
+  - javaField: operatorName
+    javaType: String
+    isQuery: true
+    queryType: LIKE
+    isList: true
+  - javaField: model
+    javaType: String
+    isList: true
+  - javaField: costTime
+    javaType: Long
+    isList: true
+  - javaField: userPromptPreview
+    javaType: String
+    isList: true
+  - javaField: responsePreview
+    javaType: String
+    isList: true
+  - javaField: createdAt
+    javaType: Date
+    isList: true

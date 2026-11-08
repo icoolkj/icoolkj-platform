@@ -1,0 +1,4 @@
+# api test-only overrides (shared test loaded automatically)
+springdoc:
+  swagger-ui:
+    enabled: true

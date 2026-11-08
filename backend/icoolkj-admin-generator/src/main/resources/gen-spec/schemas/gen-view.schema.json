@@ -1,0 +1,369 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icoolkj.local/schemas/gen-view.schema.json",
+  "title": "GenViewSchema",
+  "type": "object",
+  "required": ["meta"],
+  "additionalProperties": true,
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["businessName", "apiModule"],
+      "additionalProperties": false,
+      "properties": {
+        "businessName": { "type": "string" },
+        "apiModule": { "type": "string" },
+        "resourceKey": { "type": "string" },
+        "backendModule": { "type": "string" },
+        "permissionPrefix": { "type": "string" },
+        "className": { "type": "string" }
+      }
+    },
+    "page": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": [
+            "standard-crud",
+            "tree-crud",
+            "master-detail",
+            "region-org",
+            "custom-form",
+            "custom",
+            "workbench",
+            "card-catalog",
+            "custom-profile"
+          ]
+        },
+        "selectable": { "type": "boolean" },
+        "selectionFilter": {
+          "type": "string",
+          "enum": ["workflowCanDelete", "none"]
+        }
+      }
+    },
+    "query": { "$ref": "#/$defs/queryBlock" },
+    "table": { "$ref": "#/$defs/tableBlock" },
+    "readOnly": { "type": "boolean" },
+    "form": { "$ref": "#/$defs/formBlock" },
+    "tree": { "$ref": "#/$defs/treeBlock" },
+    "masterDetail": { "$ref": "#/$defs/masterDetailBlock" },
+    "extensions": { "$ref": "#/$defs/extensionsBlock" },
+    "regionOrg": { "type": "object", "additionalProperties": true },
+    "detailDialog": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Domain detail brick config (e.g. siteMessage meta/receipt tabs)"
+    }
+  },
+  "$defs": {
+    "queryField": {
+      "type": "object",
+      "required": ["field", "component"],
+      "additionalProperties": false,
+      "properties": {
+        "field": { "type": "string" },
+        "component": {
+          "type": "string",
+          "enum": ["input", "select", "date", "tree-select"]
+        },
+        "queryType": { "type": "string", "enum": ["EQ", "LIKE"] },
+        "dictType": { "type": "string" },
+        "width": { "type": "number" },
+        "treeSource": { "type": "string" },
+        "treeLabelField": { "type": "string" },
+        "treeValueField": { "type": "string" }
+      }
+    },
+    "tableField": {
+      "type": "object",
+      "required": ["field", "component"],
+      "additionalProperties": false,
+      "properties": {
+        "field": { "type": "string" },
+        "component": {
+          "type": "string",
+          "enum": [
+            "text",
+            "dict-tag",
+            "dict-tags",
+            "icon",
+            "image",
+            "datetime",
+            "switch",
+            "audit-i18n",
+            "tag"
+          ]
+        },
+        "dictType": { "type": "string" },
+        "auditCategory": { "type": "string", "enum": ["modules", "businessTypes"] },
+        "imageField": { "type": "string" },
+        "downloadScope": { "type": "string", "enum": ["infra", "notice"] },
+        "activeValue": { "type": "string" },
+        "inactiveValue": { "type": "string" },
+        "minWidth": { "type": "number" },
+        "width": { "type": "number" },
+        "align": { "type": "string", "enum": ["left", "center", "right"] },
+        "showOverflowTooltip": { "type": "boolean" }
+      }
+    },
+    "formField": {
+      "type": "object",
+      "required": ["field", "component"],
+      "additionalProperties": true,
+      "properties": {
+        "field": { "type": "string" },
+        "component": {
+          "type": "string",
+          "enum": [
+            "input",
+            "textarea",
+            "select",
+            "radio",
+            "checkbox",
+            "datetime",
+            "date",
+            "daterange",
+            "input-number",
+            "tree-select",
+            "password",
+            "icon-picker",
+            "avatar-picker",
+            "cover-picker",
+            "rich-editor",
+            "file",
+            "user",
+            "dept",
+            "icon"
+          ]
+        },
+        "insert": { "type": "boolean" },
+        "edit": { "type": "boolean" },
+        "insertOnly": { "type": "boolean" },
+        "disabledOnEdit": { "type": "boolean" },
+        "span": { "type": "number" },
+        "dictType": { "type": "string" },
+        "rows": { "type": "number" },
+        "maxLength": { "type": "number" },
+        "valueFormat": { "type": "string" },
+        "min": { "type": "number" },
+        "defaultValue": {},
+        "showWhen": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "field": { "type": "string" },
+            "values": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "treeSource": { "type": "string" },
+        "treeLabelField": { "type": "string" },
+        "treeValueField": { "type": "string" }
+      }
+    },
+    "queryBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "maxVisible": { "type": "number" },
+        "collapsible": { "type": "boolean" },
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/queryField" }
+        }
+      }
+    },
+    "tableBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tableField" }
+        },
+        "actions": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "edit": { "type": "boolean" },
+            "delete": { "type": "boolean" },
+            "width": { "type": "number" }
+          }
+        }
+      }
+    },
+    "formBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": { "type": "string", "enum": ["dialog", "drawer", "page"] },
+        "dialogWidth": { "type": "number" },
+        "labelWidth": { "type": "number" },
+        "closeOnClickModal": { "type": "boolean" },
+        "closeOnPressEscape": { "type": "boolean" },
+        "createDefaults": {
+          "type": "object",
+          "additionalProperties": true,
+          "description": "Merged into create form before field defaultValue"
+        },
+        "fields": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/formField" }
+        }
+      }
+    },
+    "rowAction": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "builtin": { "type": "string", "enum": ["edit", "delete"] },
+        "labelKey": { "type": "string" },
+        "permKey": { "type": "string" },
+        "type": { "type": "string", "enum": ["primary", "danger", "warning", "success"] },
+        "handler": {
+          "type": "string",
+          "description": "Registered handler id, e.g. user.resetPassword"
+        },
+        "dialog": {
+          "type": "string",
+          "description": "Registered dialog widget id, e.g. GenUserRoleDialog"
+        },
+        "dialogRowKey": { "type": "string" },
+        "dialogIdProp": {
+          "type": "string",
+          "description": "Dialog prop name for the row id (e.g. noticeId, messageId); default id"
+        },
+        "allowOnReadOnly": {
+          "type": "boolean",
+          "description": "When true, row action remains visible on readOnly pages (e.g. audit detail)"
+        },
+        "showWhen": { "$ref": "#/$defs/fieldCondition" },
+        "showWhenAll": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/fieldCondition" }
+        },
+        "workflowWhen": {
+          "type": "string",
+          "enum": ["canEdit", "canSubmit", "canWithdraw", "canDelete", "canClose"]
+        },
+        "disabledWhen": { "$ref": "#/$defs/fieldCondition" }
+      }
+    },
+    "fieldCondition": {
+      "type": "object",
+      "required": ["field", "values"],
+      "additionalProperties": false,
+      "properties": {
+        "field": { "type": "string" },
+        "values": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "toolbarAction": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "builtin": { "type": "string", "enum": ["export", "import", "batchDelete"] },
+        "labelKey": { "type": "string" },
+        "permKey": { "type": "string" },
+        "type": {
+          "type": "string",
+          "enum": ["primary", "danger", "warning", "success", "default"]
+        },
+        "selectionRequired": { "type": "boolean" },
+        "selectionFilter": {
+          "type": "string",
+          "enum": ["workflowCanDelete", "none"]
+        },
+        "fileName": { "type": "string" },
+        "exportPath": { "type": "string" },
+        "importPath": { "type": "string" },
+        "importTemplatePath": { "type": "string" },
+        "allowOnReadOnly": { "type": "boolean" }
+      }
+    },
+    "treeSourceConfig": {
+      "type": "object",
+      "required": ["apiKey", "labelField"],
+      "additionalProperties": false,
+      "properties": {
+        "apiKey": { "type": "string" },
+        "parentField": { "type": "string" },
+        "rootValue": { "type": "string" },
+        "labelField": { "type": "string" },
+        "valueField": { "type": "string" },
+        "rootLabelKey": { "type": "string" },
+        "pageSize": { "type": "number" },
+        "wrapRoot": { "type": "boolean" }
+      }
+    },
+    "extensionsBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "toolbarActions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/toolbarAction" }
+        },
+        "rowActions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/rowAction" }
+        },
+        "dialogs": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Dialog widget ids registered in gen/blocks"
+        },
+        "treeSources": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/treeSourceConfig" },
+          "description": "Tree-select data sources keyed by treeSource field value"
+        }
+      }
+    },
+    "panelSchema": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "query": { "$ref": "#/$defs/queryBlock" },
+        "table": { "$ref": "#/$defs/tableBlock" },
+        "form": { "$ref": "#/$defs/formBlock" }
+      }
+    },
+    "treeBlock": {
+      "type": "object",
+      "required": ["parentField"],
+      "additionalProperties": false,
+      "properties": {
+        "parentField": { "type": "string" },
+        "rootValue": { "type": "string" },
+        "rowKey": { "type": "string" },
+        "labelField": { "type": "string" },
+        "sortField": { "type": "string" },
+        "pageSize": { "type": "number" },
+        "defaultExpandAll": { "type": "boolean" },
+        "actions": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "masterDetailBlock": {
+      "type": "object",
+      "required": ["detailForeignKey", "master", "detail"],
+      "additionalProperties": false,
+      "properties": {
+        "masterSpan": { "type": "number" },
+        "detailSpan": { "type": "number" },
+        "detailForeignKey": { "type": "string" },
+        "master": { "$ref": "#/$defs/panelSchema" },
+        "detail": { "$ref": "#/$defs/panelSchema" }
+      }
+    }
+  }
+}

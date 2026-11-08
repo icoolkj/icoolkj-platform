@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "AI API Config",
+    "description": "(Migrated) Configure providers, models, and capability bindings in AI Catalog",
+    "docsLink": "Catalog docs",
+    "testConnection": "Test connection",
+    "saveConfig": "Save",
+    "configHint": "AI is configured via Catalog (e.g. openai_compatible). Platform defaults and tenant overrides live under AI Catalog.",
+    "configOverrideHint": "Showing tenant override values (over platform defaults).",
+    "configInheritHint": "Currently inheriting platform defaults; saving will create a tenant override.",
+    "enabled": "Enable AI",
+    "timeoutSeconds": "Timeout (seconds)",
+    "baseUrl": "API Base URL",
+    "model": "Model",
+    "apiKey": "API Key",
+    "apiKeyPlaceholder": "Leave blank to keep the saved key",
+    "apiKeyConfigured": "Configured ({masked})",
+    "testSuccess": "Connection OK"
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "aiConfig",
+    "apiModule": "tool",
+    "functionName": "AI API Config",
+    "constraints": {}
+  }
+}

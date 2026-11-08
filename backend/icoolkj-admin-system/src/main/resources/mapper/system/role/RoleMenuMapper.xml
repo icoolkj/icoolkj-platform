@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.role.mapper.RoleMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.role.domain.RoleMenuEntity">
+        <result column="tenant_id" property="tenantId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="menu_id" property="menuId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tenant_id, role_id, menu_id
+    </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_role_menu
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="roleId != null and roleId != ''">AND role_id = #{roleId}</if>
+            <if test="menuId != null and menuId != ''">AND menu_id = #{menuId}</if>
+        </where>
+        ORDER BY 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_role_menu (tenant_id, role_id, menu_id)
+        VALUES (#{tenantId}, #{roleId}, #{menuId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM sys_role_menu
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="roleId != null and roleId != ''">AND role_id = #{roleId}</if>
+            <if test="menuId != null and menuId != ''">AND menu_id = #{menuId}</if>
+        </where>
+    </delete>
+
+    <select id="selectMenuIdsByTenantAndRoleIds" resultType="java.lang.String">
+        SELECT DISTINCT rm.menu_id
+        FROM sys_role_menu rm
+        INNER JOIN sys_role r ON r.id = rm.role_id AND r.tenant_id = rm.tenant_id AND r.deleted = 0 AND r.status = '0'
+        WHERE rm.tenant_id = #{tenantId}
+          AND rm.role_id IN <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">#{roleId}</foreach>
+    </select>
+
+    <delete id="deleteByMenuIdForNonPlatformTenants">
+        DELETE FROM sys_role_menu WHERE menu_id = #{menuId} AND tenant_id &lt;&gt; '0'
+    </delete>
+
+    <delete id="deleteByMenuIdsForNonPlatformTenants">
+        DELETE FROM sys_role_menu
+        WHERE tenant_id &lt;&gt; '0'
+          AND menu_id IN <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+    </delete>
+
+    <delete id="deleteByMenuIds">
+        DELETE FROM sys_role_menu
+        WHERE menu_id IN <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+    </delete>
+
+</mapper>

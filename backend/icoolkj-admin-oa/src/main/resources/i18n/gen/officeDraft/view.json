@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "businessName": "officeDraft",
+    "apiModule": "oa",
+    "backendModule": "oa",
+    "permissionPrefix": "oa:office:draft",
+    "className": "OfficeDraft"
+  },
+  "readOnly": true,
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      { "field": "instanceTitle", "component": "input", "queryType": "LIKE", "width": 200 },
+      {
+        "field": "categoryCode",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 160
+      },
+      {
+        "field": "approveStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "oa_approve_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "instanceTitle",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "categoryCode",
+        "component": "dict-tag",
+        "dictType": "wf_biz_type",
+        "width": 120,
+        "align": "center"
+      },
+      {
+        "field": "approveStatus",
+        "component": "dict-tag",
+        "dictType": "oa_approve_status",
+        "width": 110,
+        "align": "center"
+      },
+      { "field": "updatedAt", "component": "datetime", "width": 170, "align": "center" },
+      { "field": "createdAt", "component": "datetime", "width": 170, "align": "center" }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 260 }
+  },
+  "form": { "mode": "dialog", "fields": [] },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "view",
+        "labelKey": "viewDetail",
+        "handler": "officeDraft.view",
+        "allowOnReadOnly": true
+      },
+      { "id": "edit", "builtin": "edit", "permKey": "update", "allowOnReadOnly": true },
+      {
+        "id": "submit",
+        "labelKey": "submitApprove",
+        "permKey": "submit",
+        "handler": "officeDraft.submit",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "close",
+        "labelKey": "closeInstance",
+        "permKey": "close",
+        "type": "warning",
+        "handler": "officeDraft.close",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "delete",
+        "builtin": "delete",
+        "permKey": "delete",
+        "type": "danger",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

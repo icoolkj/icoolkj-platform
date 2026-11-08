@@ -1,0 +1,68 @@
+iCoolKJ Platform
+================
+
+Product Name : iCoolKJ Platform
+Chinese Name : iCoolKJ 通用开发平台（源码公开 · 非商业学习研究）
+Domain       : https://icoolkj.com
+Version      : V2.2 (architecture baseline)
+License      : iCoolKJ Non-Commercial Study and Research License v1.0
+SPDX         : LicenseRef-iCoolKJ-NonCommercial-1.0
+License File : LICENSE.txt
+
+Copyright (c) icoolkj.
+All rights not expressly granted in LICENSE.txt are reserved.
+
+Author       : icoolkj
+Email        : icoolkj@163.com
+QQ           : 594047667
+Website      : https://icoolkj.com
+
+--------------------------------------------------------------------------------
+LICENSE STATUS / 许可性质说明
+--------------------------------------------------------------------------------
+本项目为「源码公开 / Source Available」，采用 iCoolKJ 非商业学习研究许可证
+v1.0：允许个人学习、研究与教学用途，明确禁止任何商业使用。
+
+本项目**不是** OSI 认证的开源软件（Open Source）。该许可证不满足《开源定义》
+第 6 条（不得歧视应用领域）。请勿将本项目描述为 "Open Source"、
+"开源软件" 或使用 MIT / Apache / GPL 等 OSI 许可证名称指代本项目。
+
+Commercial use of any kind requires a separate prior written licence from the
+copyright holder. Contact icoolkj <icoolkj@163.com> | QQ 594047667.
+
+This project is NOT OSI-approved Open Source. It is Source Available under a
+non-commercial study and research licence. Do not describe it as "Open Source"
+or refer to it by OSI licence names.
+
+--------------------------------------------------------------------------------
+ATTRIBUTION / 署名要求
+--------------------------------------------------------------------------------
+Every copy, substantial portion, derivative work or public presentation must
+retain the following notice:
+
+    iCoolKJ Platform
+    Copyright (c) icoolkj  |  https://icoolkj.com
+    Licensed under iCoolKJ Non-Commercial Study and Research License v1.0
+    (Source Available, NOT Open Source)
+
+Historical commits may carry the author names "daipeng" or
+"icoolkj <icoolkj@163.com>" and the address "594047667@qq.com". The current
+rights holder and contact for all licensing matters is identified above.
+
+--------------------------------------------------------------------------------
+THIRD-PARTY COMPONENTS / 第三方组件
+--------------------------------------------------------------------------------
+This distribution includes or depends on third-party open source components.
+Their respective copyright notices and licences are listed in
+THIRD-PARTY-NOTICES.md and remain the property of their respective owners.
+Those components are NOT covered by the iCoolKJ licence above; they are
+governed by their own terms.
+
+Note: some third-party components are distributed under copyleft or
+exception-based licences. Review THIRD-PARTY-NOTICES.md before any use,
+and seek your own legal advice for compliance.
+
+--------------------------------------------------------------------------------
+This notice must be retained in all copies or substantial portions of the
+Software and documentation. / 本声明须在所有副本或实质性部分中保留。
+================================================================================

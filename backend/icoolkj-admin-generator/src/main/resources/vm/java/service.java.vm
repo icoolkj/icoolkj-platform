@@ -1,0 +1,43 @@
+package ${packageName}.service;
+
+import com.icoolkj.platform.common.model.page.PageResult;
+#if($hasDataScope)
+import com.icoolkj.platform.framework.annotation.DataScope;
+#end
+#if($hasImport)
+import com.icoolkj.platform.framework.excel.ExcelImportResult;
+import ${packageName}.excel.${ClassName}ImportRow;
+#end
+import ${packageName}.dto.${ClassName}CreateRequest;
+import ${packageName}.dto.${ClassName}PageQuery;
+import ${packageName}.dto.${ClassName}UpdateRequest;
+import ${packageName}.vo.${ClassName}VO;
+#if($hasImport)
+
+import java.util.List;
+#end
+
+/** ${functionName}服务 */
+public interface ${ClassName}Service {
+
+#if($hasDataScope)
+    @DataScope(deptColumn = "${dataScopeDeptColumn}", userColumn = "${dataScopeUserColumn}")
+#end
+    PageResult<${ClassName}VO> page(${ClassName}PageQuery query);
+
+    ${ClassName}VO getById(String id);
+
+    String create(${ClassName}CreateRequest request);
+
+    void update(${ClassName}UpdateRequest request);
+
+    void deleteById(String id);
+#if($hasImport)
+
+    /**
+     * All-or-nothing Excel import. Implement mapping from {@link ${ClassName}ImportRow} to create/update.
+     * Bean Validation → {@code toCreateRequest} → {@code create()}；任一行失败则全有或全无回滚。
+     */
+    ExcelImportResult importRows(List<${ClassName}ImportRow> rows);
+#end
+}

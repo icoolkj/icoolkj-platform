@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.job.mapper.SysJobLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.job.domain.SysJobLogEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="job_id" property="jobId"/>
+        <result column="job_code" property="jobCode"/>
+        <result column="trigger_type" property="triggerType"/>
+        <result column="trigger_user_id" property="triggerUserId"/>
+        <result column="status" property="status"/>
+        <result column="job_message" property="jobMessage"/>
+        <result column="exception_info" property="exceptionInfo"/>
+        <result column="request_param" property="requestParam"/>
+        <result column="result_summary" property="resultSummary"/>
+        <result column="started_at" property="startedAt"/>
+        <result column="finished_at" property="finishedAt"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, job_id, job_code, trigger_type, trigger_user_id, status, job_message,
+        exception_info, request_param, result_summary, started_at, finished_at, created_at
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            <if test="jobCode != null and jobCode != ''">AND job_code = #{jobCode}</if>
+            <if test="jobId != null and jobId != ''">AND job_id = #{jobId}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="triggerType != null and triggerType != ''">AND trigger_type = #{triggerType}</if>
+            <if test="triggerUserId != null and triggerUserId != ''">AND trigger_user_id = #{triggerUserId}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_job_log
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_job_log
+        <include refid="Query_Where"/>
+        ORDER BY started_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_job_log
+        <include refid="Query_Where"/>
+    </select>
+
+    <select id="countRunningByJobCode" resultType="long">
+        SELECT COUNT(1) FROM sys_job_log
+        WHERE job_code = #{jobCode} AND status = 'RUNNING'
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_job_log (
+            id, tenant_id, job_id, job_code, trigger_type, trigger_user_id, status, job_message,
+            exception_info, request_param, result_summary, started_at, finished_at, created_at
+        ) VALUES (
+            #{id}, #{tenantId}, #{jobId}, #{jobCode}, #{triggerType}, #{triggerUserId}, #{status}, #{jobMessage},
+            #{exceptionInfo}, #{requestParam}, #{resultSummary}, #{startedAt}, #{finishedAt}, #{createdAt}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_job_log
+        <set>
+            status = #{status},
+            job_message = #{jobMessage},
+            exception_info = #{exceptionInfo},
+            request_param = #{requestParam},
+            result_summary = #{resultSummary},
+            finished_at = #{finishedAt}
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>

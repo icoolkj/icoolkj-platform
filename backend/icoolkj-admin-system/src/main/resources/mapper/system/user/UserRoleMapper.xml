@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.user.mapper.UserRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.user.domain.UserRoleEntity">
+        <result column="tenant_id" property="tenantId"/>
+        <result column="user_id" property="userId"/>
+        <result column="role_id" property="roleId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tenant_id, user_id, role_id
+    </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_user_role
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+            <if test="roleId != null and roleId != ''">AND role_id = #{roleId}</if>
+        </where>
+        ORDER BY 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_user_role (tenant_id, user_id, role_id)
+        VALUES (#{tenantId}, #{userId}, #{roleId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM sys_user_role
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+            <if test="roleId != null and roleId != ''">AND role_id = #{roleId}</if>
+        </where>
+    </delete>
+
+    <select id="selectRoleIdsByTenantAndUser" resultType="java.lang.String">
+        SELECT DISTINCT ur.role_id
+        FROM sys_user_role ur
+        INNER JOIN sys_role r ON r.id = ur.role_id AND r.tenant_id = ur.tenant_id AND r.deleted = 0
+        WHERE ur.tenant_id = #{tenantId}
+          AND ur.user_id = #{userId}
+          AND r.status = '0'
+    </select>
+
+    <select id="selectRoleCodesByTenantAndUser" resultType="java.lang.String">
+        SELECT DISTINCT r.role_code
+        FROM sys_user_role ur
+        INNER JOIN sys_role r ON r.id = ur.role_id AND r.tenant_id = ur.tenant_id AND r.deleted = 0
+        WHERE ur.tenant_id = #{tenantId}
+          AND ur.user_id = #{userId}
+          AND r.status = '0'
+    </select>
+
+    <select id="existsSuperRoleByTenantAndUser" resultType="boolean">
+        SELECT COUNT(1) &gt; 0
+        FROM sys_user_role ur
+        INNER JOIN sys_role r ON r.id = ur.role_id AND r.tenant_id = ur.tenant_id AND r.deleted = 0
+        WHERE ur.tenant_id = #{tenantId}
+          AND ur.user_id = #{userId}
+          AND r.is_super_role = '1'
+          AND r.status = '0'
+    </select>
+
+</mapper>

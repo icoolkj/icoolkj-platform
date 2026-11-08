@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.ai.mapper.AiSkillMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.ai.domain.AiSkillEntity">
+        <id column="id" property="id"/>
+        <result column="skill_code" property="skillCode"/>
+        <result column="tool_name" property="toolName"/>
+        <result column="category" property="category"/>
+        <result column="skill_name" property="skillName"/>
+        <result column="name_i18n" property="nameI18n"/>
+        <result column="description" property="description"/>
+        <result column="description_i18n" property="descriptionI18n"/>
+        <result column="required_permission" property="requiredPermission"/>
+        <result column="tool_description" property="toolDescription"/>
+        <result column="parameters_schema_json" property="parametersSchemaJson"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, skill_code, tool_name, category, skill_name, name_i18n, description, description_i18n,
+        required_permission, tool_description, parameters_schema_json, sort_no, status, remark,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="skillCode != null and skillCode != ''">AND skill_code = #{skillCode}</if>
+            <if test="toolName != null and toolName != ''">AND tool_name = #{toolName}</if>
+            <if test="category != null and category != ''">AND category = #{category}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="skillName != null and skillName != ''">AND skill_name like concat('%', #{skillName}, '%')</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_ai_skill
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_ai_skill
+        <include refid="Query_Where"/>
+        ORDER BY sort_no ASC, created_at ASC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_ai_skill (
+            id, skill_code, tool_name, category, skill_name, name_i18n, description, description_i18n,
+            required_permission, tool_description, parameters_schema_json, sort_no, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{skillCode}, #{toolName}, #{category}, #{skillName}, #{nameI18n}, #{description}, #{descriptionI18n},
+            #{requiredPermission}, #{toolDescription}, #{parametersSchemaJson}, #{sortNo}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_ai_skill
+        <set>
+            skill_code = #{skillCode},
+            tool_name = #{toolName},
+            category = #{category},
+            skill_name = #{skillName},
+            name_i18n = #{nameI18n},
+            description = #{description},
+            description_i18n = #{descriptionI18n},
+            required_permission = #{requiredPermission},
+            tool_description = #{toolDescription},
+            parameters_schema_json = #{parametersSchemaJson},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_ai_skill SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectBySkillCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_ai_skill
+        WHERE deleted = 0 AND skill_code = #{skillCode}
+        LIMIT 1
+    </select>
+
+    <select id="selectByToolName" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_ai_skill
+        WHERE deleted = 0 AND tool_name = #{toolName}
+        LIMIT 1
+    </select>
+
+    <select id="selectEnabled" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_ai_skill
+        WHERE deleted = 0 AND status = '0'
+        <if test="category != null and category != ''">
+            AND category = #{category}
+        </if>
+        ORDER BY sort_no ASC, created_at ASC
+    </select>
+
+</mapper>

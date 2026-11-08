@@ -1,0 +1,103 @@
+{
+  "page": {
+    "title": "语言配置",
+    "description": "管理语言配置，支持新增、修改与删除",
+    "addTitle": "新增语言配置",
+    "editTitle": "修改语言配置",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用"
+  },
+  "fields": {
+    "localeCode": {
+      "label": "语言编码",
+      "placeholder": "请输入语言编码",
+      "validation": {
+        "required": "请输入语言编码",
+        "maxLength": "语言编码长度不能超过16",
+        "format": "语言代码格式不正确"
+      }
+    },
+    "localeName": {
+      "label": "语言名称",
+      "placeholder": "请输入语言名称",
+      "validation": {
+        "required": "请输入语言名称",
+        "maxLength": "语言名称长度不能超过64"
+      }
+    },
+    "nativeName": {
+      "label": "本地名称",
+      "placeholder": "请输入本地名称",
+      "validation": {
+        "required": "请输入本地名称",
+        "maxLength": "本地名称长度不能超过64"
+      }
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序",
+      "validation": {
+        "required": "请输入排序"
+      }
+    },
+    "isDefault": {
+      "label": "默认语言",
+      "placeholder": "请选择默认语言",
+      "validation": {
+        "required": "请输入是否默认",
+        "maxLength": "是否默认长度不能超过1",
+        "invalid": "是否默认取值无效"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入状态 0正常 1停用",
+        "maxLength": "状态 0正常 1停用长度不能超过1",
+        "invalid": "状态取值无效"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过256"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "i18nLocale",
+    "apiModule": "system",
+    "functionName": "语言配置",
+    "constraints": {
+      "localeCode": {
+        "required": true,
+        "maxLength": 16
+      },
+      "localeName": {
+        "required": true,
+        "maxLength": 64
+      },
+      "nativeName": {
+        "required": true,
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 256
+      },
+      "sortNo": {
+        "required": true
+      },
+      "isDefault": {
+        "required": true,
+        "maxLength": 1
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

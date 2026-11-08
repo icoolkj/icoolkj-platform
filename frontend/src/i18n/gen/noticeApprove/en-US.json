@@ -1,0 +1,154 @@
+{
+  "page": {
+    "title": "Notice Approval",
+    "viewTitle": "Notice Detail",
+    "noticePanel": "Notice Details",
+    "timelinePanel": "Flow History",
+    "progressTabFlow": "Flowchart",
+    "emptyFlow": "No process design data",
+    "approvePanel": "Approval",
+    "submitApprove": "Submit",
+    "missingBizId": "Missing bizId parameter",
+    "missingTaskId": "Missing taskId parameter",
+    "completeSuccess": "Approval submitted",
+    "emptyNotice": "No notice data",
+    "emptyTimeline": "No approval records",
+    "emptyInstance": "No process information",
+    "timelineStarter": "Starter",
+    "timelineAssignee": "Assignee",
+    "timelineToUser": "To",
+    "timelineResult": "Result",
+    "timelineActionTransfer": "Transfer",
+    "timelineActionDelegate": "Delegate",
+    "timelineActionDelegateReturn": "Delegate return",
+    "timelineActionWithdraw": "Withdraw",
+    "timelineActionTerminate": "Admin terminate",
+    "timelineReasonNoticeWithdraw": "Applicant withdrew the notice approval",
+    "timelineReasonNoticeCloseAfterReturn": "Notice closed after return",
+    "timelineReasonStarterWithdraw": "Starter withdrew from Submitted",
+    "timelineReasonCancelled": "Process withdrawn",
+    "timelineActionJump": "Jump",
+    "timelineActionRejectJump": "Reject jump",
+    "timelineActionTimeout": "Timeout",
+    "timelineActionAddSign": "Add sign",
+    "timelineActionAddSignHandoff": "Add-sign handoff",
+    "timelineActionAddSignReturn": "Add-sign return",
+    "timelineActionRemoveSign": "Remove sign",
+    "startEvent": "Submitted",
+    "cycleSubmit": "Submission #{n}",
+    "expandHistory": "Show full history ({n})",
+    "collapseHistory": "Latest cycle only",
+    "nodePending": "Pending",
+    "nodeSkipped": "Skipped",
+    "waitingAssignee": "Awaiting assignee",
+    "resultPass": "Approved",
+    "resultReject": "Rejected",
+    "quickComments": "Quick comments",
+    "quickCommentPlaceholder": "Pick a quick comment (searchable)",
+    "publishedYes": "Yes",
+    "publishedNo": "No",
+    "actionTransfer": "Transfer",
+    "actionDelegate": "Delegate",
+    "actionAddSign": "Add sign",
+    "actionRemoveSign": "Remove sign",
+    "transferTitle": "Transfer to",
+    "transferSuccess": "Transferred",
+    "delegateTitle": "Delegate to",
+    "delegateSuccess": "Delegated (returns to you after they approve)",
+    "delegateUntilTitle": "Delegation deadline",
+    "delegateUntilHint": "Optional. After expiry the delegatee cannot submit. Empty = until they return.",
+    "delegateUntilPh": "Pick deadline (optional)",
+    "jumpTitle": "Jump to node",
+    "targetActivityId": "Target node",
+    "jumpSuccess": "Jumped",
+    "addSignTitle": "Add signers",
+    "addSignMode": "Add-sign mode",
+    "addSignBefore": "Before (pre)",
+    "addSignAfter": "After (post)",
+    "addSignSuccess": "Add-sign applied",
+    "removeSignTitle": "Remove sign",
+    "removeSignHint": "Select assignees to remove (at least one must remain)",
+    "removeSignEmpty": "No removable assignees",
+    "removeSignSuccess": "Remove-sign applied",
+    "pickerPendingList": "Candidates",
+    "pickerSelected": "Selected",
+    "pickerAddCurrentPage": "Add page",
+    "pickerClearSelected": "Clear",
+    "pickerUserSearch": "Search users",
+    "pickerDeptTree": "Department",
+    "pickerUserNickname": "Name",
+    "pickerUserAccount": "Account"
+  },
+  "fields": {
+    "approved": {
+      "label": "Result",
+      "validation": {
+        "required": "Please select approval result"
+      }
+    },
+    "comment": {
+      "label": "Comment",
+      "placeholder": "Optional comment",
+      "placeholderReject": "Please enter the reject reason",
+      "validation": {
+        "maxLength": "Comment must not exceed {max} characters",
+        "requiredOnReject": "Comment is required when rejecting"
+      }
+    },
+    "taskId": {
+      "label": "Task ID"
+    },
+    "currentNode": {
+      "label": "Current Step"
+    },
+    "coverPreviewUrl": {
+      "label": "Cover"
+    },
+    "publishStatus": {
+      "label": "Approval Status"
+    },
+    "approveStatus": {
+      "label": "Approval Status"
+    },
+    "noticeTitle": {
+      "label": "Title"
+    },
+    "noticeType": {
+      "label": "Type"
+    },
+    "noticeSummary": {
+      "label": "Summary"
+    },
+    "noticeContent": {
+      "label": "Content"
+    },
+    "publishLocations": {
+      "label": "Publish Locations"
+    },
+    "versionNo": {
+      "label": "Version"
+    },
+    "published": {
+      "label": "Published"
+    },
+    "deploymentId": {
+      "label": "Deployment ID"
+    },
+    "versionRemark": {
+      "label": "Remark"
+    }
+  },
+  "meta": {
+    "businessName": "noticeApprove",
+    "apiModule": "system",
+    "functionName": "Notice Approval",
+    "constraints": {
+      "approved": {
+        "required": true
+      },
+      "comment": {
+        "maxLength": 500
+      }
+    }
+  }
+}

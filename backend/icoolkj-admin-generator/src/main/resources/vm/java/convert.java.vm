@@ -1,0 +1,52 @@
+package ${packageName}.convert;
+
+import com.icoolkj.platform.framework.tenant.TenantFieldHelper;
+import ${packageName}.domain.${EntityName};
+import ${packageName}.dto.${ClassName}CreateRequest;
+import ${packageName}.dto.${ClassName}UpdateRequest;
+import ${packageName}.vo.${ClassName}VO;
+
+/** ${functionName}对象转换 */
+public final class ${ClassName}Convert {
+
+    private ${ClassName}Convert() {
+    }
+
+    public static ${ClassName}VO toVo(${EntityName} entity) {
+        if (entity == null) {
+            return null;
+        }
+        ${ClassName}VO vo = new ${ClassName}VO();
+#foreach($column in $columns)
+#if($column.isList() || $column.isPk())
+        vo.set${column.capJavaField}(entity.get${column.capJavaField}());
+#end
+#end
+        return vo;
+    }
+
+    public static ${EntityName} toEntity(${ClassName}CreateRequest request) {
+        ${EntityName} entity = new ${EntityName}();
+#if($baseType == "tenant")
+        entity.setTenantId(TenantFieldHelper.resolveTenantId(null));
+#end
+#foreach($column in $columns)
+#if($column.isInsert() && !$table.isSuperColumn($column.javaField))
+#if($column.javaField == "tenantId")
+        entity.setTenantId(TenantFieldHelper.resolveTenantId(request.getTenantId()));
+#else
+        entity.set${column.capJavaField}(request.get${column.capJavaField}());
+#end
+#end
+#end
+        return entity;
+    }
+
+    public static void copy(${ClassName}UpdateRequest request, ${EntityName} entity) {
+#foreach($column in $columns)
+#if($column.isEdit() && !$table.isSuperColumn($column.javaField) && $column.javaField != "tenantId")
+        entity.set${column.capJavaField}(request.get${column.capJavaField}());
+#end
+#end
+    }
+}

@@ -1,0 +1,100 @@
+{
+  "page": {
+    "title": "Regions",
+    "description": "National region tree maintained by platform (CRUD)",
+    "addTitle": "Add Region",
+    "editTitle": "Edit Region",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "treeRoot": "Root Region",
+    "addChild": "Add Child"
+  },
+  "fields": {
+    "regionName": {
+      "label": "Region Name",
+      "placeholder": "Enter region name",
+      "validation": {
+        "required": "Region name is required",
+        "maxLength": "Region name must not exceed 100 characters"
+      }
+    },
+    "regionCode": {
+      "label": "Region Code",
+      "placeholder": "Enter GB region code",
+      "validation": {
+        "required": "Region code is required",
+        "maxLength": "Region code must not exceed 12 characters"
+      }
+    },
+    "regionLevel": {
+      "label": "Level",
+      "placeholder": "Select level",
+      "validation": {
+        "required": "Region level is required",
+        "maxLength": "Region level must not exceed 1 character"
+      }
+    },
+    "parentId": {
+      "label": "Parent Region",
+      "placeholder": "Select parent region",
+      "validation": {
+        "required": "Parent region is required",
+        "maxLength": "Parent region must not exceed 20 characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Enter sort order",
+      "validation": {
+        "required": "Sort order is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 character"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Enter remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "region",
+    "apiModule": "system",
+    "functionName": "Region",
+    "constraints": {
+      "regionName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "regionCode": {
+        "required": true,
+        "maxLength": 12
+      },
+      "regionLevel": {
+        "required": true,
+        "maxLength": 1
+      },
+      "parentId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

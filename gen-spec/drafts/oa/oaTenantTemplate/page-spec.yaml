@@ -1,0 +1,87 @@
+specVersion: "1.0"
+pageKey: oaTenantTemplate
+layout: standard-crud
+vueVariant: oaTenantTemplateCrud
+
+meta:
+  apiModule: oa
+  backendModule: oa
+  permissionPrefix: oa:tenantTemplate
+  className: OaTenantTemplate
+
+entity:
+  tableName: oa_tenant_template
+  businessName: oaTenantTemplate
+  functionName: OA租户映射
+
+extensions:
+  listApi: GET /oa/tenantTemplate/page
+  detailApi: GET /oa/tenantTemplate/{id}
+  platformOptionsApi: GET /oa/tenantTemplate/platformOptions
+  enableApi: POST /oa/tenantTemplate/enable
+  versionApi: GET /oa/tenantTemplate/{id}/versions
+  fieldApi: GET /oa/tenantTemplate/version/{versionId}
+  createDraftApi: POST /oa/tenantTemplate/version/createDraft
+  saveFieldsApi: PUT /oa/tenantTemplate/version/saveFields
+  publishApi: POST /oa/tenantTemplate/version/publish
+  dialogs:
+    - OaTenantEnableDialog
+    - OaVersionFieldDialog
+  toolbarActions:
+    - enable
+    - createDraft
+    - editFields
+    - publish
+
+viewDefaults:
+  query:
+    maxVisible: 2
+    collapsible: false
+  form:
+    mode: dialog
+    dialogWidth: 560
+    labelWidth: 108
+  table:
+    actions:
+      edit: true
+      delete: false
+      width: 300
+
+fields:
+  - javaField: categoryCode
+    columnComment: 业务分类
+    isQuery: true
+    queryType: EQ
+    isList: true
+    htmlType: select
+    dictType: wf_biz_type
+  - javaField: templateName
+    columnComment: 模板名称
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isEdit: true
+    htmlType: input
+  - javaField: enableStatus
+    columnComment: 启用状态
+    isQuery: true
+    queryType: EQ
+    isList: true
+    htmlType: dict-tag
+    dictType: oa_enable_status
+  - javaField: latestVersionNo
+    columnComment: 已发布版本
+    isList: true
+    htmlType: text
+  - javaField: status
+    columnComment: 状态
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isEdit: true
+    htmlType: radio
+    dictType: sys_common_status
+  - javaField: remark
+    columnComment: 备注
+    isEdit: true
+    htmlType: textarea

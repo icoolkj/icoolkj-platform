@@ -1,0 +1,49 @@
+/** AUTO-GENERATED — ${functionName} 类型 */
+
+export interface ${ClassName}VO {
+  id?: string
+#foreach($column in $columns)
+#if($column.isList())
+#if($column.javaType == "Integer" || $column.javaType == "Long" || $column.javaType == "Double" || $column.javaType == "BigDecimal")
+  ${column.javaField}?: number
+#elseif($column.javaType == "Boolean")
+  ${column.javaField}?: boolean
+#else
+  ${column.javaField}?: string
+#end
+#end
+#end
+}
+
+export interface ${ClassName}PageQuery {
+  pageNo?: number
+  pageSize?: number
+#foreach($column in $columns)
+#if($column.isQuery())
+#if($column.javaType == "Integer" || $column.javaType == "Long" || $column.javaType == "Double" || $column.javaType == "BigDecimal")
+  ${column.javaField}?: number
+#elseif($column.javaType == "Boolean")
+  ${column.javaField}?: boolean
+#else
+  ${column.javaField}?: string
+#end
+#end
+#end
+}
+
+export interface ${ClassName}Form {
+  id?: string
+#foreach($column in $columns)
+#if($column.isInsert() || $column.isEdit())
+#if(!$column.isPk())
+#if($column.javaType == "Integer" || $column.javaType == "Long" || $column.javaType == "Double" || $column.javaType == "BigDecimal")
+  ${column.javaField}?: number
+#elseif($column.javaType == "Boolean")
+  ${column.javaField}?: boolean
+#else
+  ${column.javaField}?: string
+#end
+#end
+#end
+#end
+}

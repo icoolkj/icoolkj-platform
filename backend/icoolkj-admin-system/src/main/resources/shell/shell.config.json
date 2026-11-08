@@ -1,0 +1,43 @@
+{
+  "defaultLang": "zh-CN",
+  "defaultTitle": "iCoolKJ 平台",
+  "baiduHmId": "",
+  "baiduHmDevEnabled": false,
+  "blockDevtools": true,
+  "storageKeys": {
+    "accessToken": "icoolkj_access_token",
+    "refreshToken": "icoolkj_refresh_token",
+    "locale": "icoolkj-locale",
+    "layout": "icoolkj-layout",
+    "theme": "icoolkj-theme",
+    "loginRemember": "icoolkj-login-remember",
+    "loginLocalePending": "icoolkj-locale-login-pending"
+  },
+  "devtools": {
+    "gapPx": 160,
+    "debugLagMs": 100,
+    "pollMs": 500
+  },
+  "copyright": {
+    "brand": "icoolkj",
+    "icpNo": "请填写备案号",
+    "icpUrl": "https://beian.miit.gov.cn/",
+    "domain": "icoolkj.com",
+    "siteUrl": "https://icoolkj.com",
+    "email": "icoolkj@163.com"
+  },
+  "bootstrap": {
+    "zh-CN": {
+      "loading": "加载中...",
+      "errorTitle": "无法加载界面文案",
+      "errorHint": "请确认后端已启动，且 Flyway 迁移与国际化文案已就绪。",
+      "retry": "重试"
+    },
+    "en-US": {
+      "loading": "Loading...",
+      "errorTitle": "Unable to load UI translations",
+      "errorHint": "Ensure the backend is running and i18n messages are available (Flyway migrations applied).",
+      "retry": "Retry"
+    }
+  }
+}

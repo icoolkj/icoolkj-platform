@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "businessName": "region",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:region",
+    "className": "Region"
+  },
+  "page": {
+    "layout": "tree-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "regionName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "regionCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "regionLevel",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_region_level",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "regionName",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "regionCode",
+        "component": "text",
+        "width": 140,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "regionLevel",
+        "component": "dict-tag",
+        "dictType": "sys_region_level",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "align": "center"
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 220
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 640,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "parentId",
+        "component": "tree-select",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "treeSource": "self",
+        "treeLabelField": "regionName",
+        "treeValueField": "id"
+      },
+      {
+        "field": "regionName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "regionCode",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "regionLevel",
+        "component": "select",
+        "dictType": "sys_region_level",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "sortNo",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 12,
+        "min": 0
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  },
+  "tree": {
+    "parentField": "parentId",
+    "rootValue": "0",
+    "rowKey": "id",
+    "labelField": "regionName",
+    "sortField": "sortNo",
+    "pageSize": 10000,
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "addChild": true,
+      "addChildExclude": {
+        "field": "regionLevel",
+        "values": ["5"]
+      },
+      "expandCollapse": true,
+      "width": 260
+    }
+  }
+}

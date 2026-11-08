@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.sitemessage.mapper.SiteMessageRecipientMapper">
+
+    <resultMap id="RecipientResultMap" type="com.icoolkj.platform.system.sitemessage.domain.SiteMessageRecipientEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="message_id" property="messageId"/>
+        <result column="user_id" property="userId"/>
+        <result column="read_at" property="readAt"/>
+        <result column="deleted" property="deleted"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <resultMap id="InboxResultMap" type="com.icoolkj.platform.system.sitemessage.vo.SiteMessageInboxVO">
+        <id column="id" property="id"/>
+        <result column="message_id" property="messageId"/>
+        <result column="message_subject" property="messageSubject"/>
+        <result column="message_category" property="messageCategory"/>
+        <result column="message_content" property="messageContent"/>
+        <result column="sender_id" property="senderId"/>
+        <result column="sender_name" property="senderName"/>
+        <result column="sent_at" property="sentAt"/>
+        <result column="read_at" property="readAt"/>
+        <result column="read_status" property="readStatus"/>
+    </resultMap>
+
+    <sql id="Inbox_From">
+        FROM sys_site_message_recipient r
+        INNER JOIN sys_site_message m ON m.id = r.message_id AND m.deleted = 0
+    </sql>
+
+    <sql id="Inbox_Where">
+        <where>
+            r.deleted = 0
+            AND r.tenant_id = #{tenantId}
+            AND r.user_id = #{userId}
+            <if test="messageCategory != null and messageCategory != ''">
+                AND m.message_category = #{messageCategory}
+            </if>
+            <if test='readStatus != null and readStatus != "" and readStatus == "0"'>
+                AND r.read_at IS NULL
+            </if>
+            <if test='readStatus != null and readStatus != "" and readStatus == "1"'>
+                AND r.read_at IS NOT NULL
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="RecipientResultMap">
+        SELECT id, tenant_id, message_id, user_id, read_at, deleted, created_at
+        FROM sys_site_message_recipient
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectInboxDetail" resultMap="InboxResultMap">
+        SELECT r.id, r.message_id, m.message_subject, m.message_category, m.message_content,
+               m.sender_id, m.sender_name, m.sent_at, r.read_at,
+               CASE WHEN r.read_at IS NULL THEN '0' ELSE '1' END AS read_status
+        <include refid="Inbox_From"/>
+        WHERE r.id = #{id}
+          AND r.deleted = 0
+          AND r.tenant_id = #{tenantId}
+          AND r.user_id = #{userId}
+        LIMIT 1
+    </select>
+
+    <select id="selectInboxPage" resultMap="InboxResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT r.id, r.message_id, m.message_subject, m.message_category, NULL AS message_content,
+               m.sender_id, m.sender_name, m.sent_at, r.read_at,
+               CASE WHEN r.read_at IS NULL THEN '0' ELSE '1' END AS read_status
+        <include refid="Inbox_From"/>
+        <include refid="Inbox_Where"/>
+        ORDER BY m.sent_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countInboxByQuery" resultType="long">
+        SELECT COUNT(1)
+        <include refid="Inbox_From"/>
+        <include refid="Inbox_Where"/>
+    </select>
+
+    <insert id="batchInsert">
+        INSERT INTO sys_site_message_recipient (id, tenant_id, message_id, user_id, read_at, deleted, created_at)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.tenantId}, #{item.messageId}, #{item.userId}, #{item.readAt}, #{item.deleted}, #{item.createdAt})
+        </foreach>
+    </insert>
+
+    <update id="markRead">
+        UPDATE sys_site_message_recipient
+        SET read_at = #{readAt}
+        WHERE id = #{id}
+          AND tenant_id = #{tenantId}
+          AND user_id = #{userId}
+          AND deleted = 0
+          AND read_at IS NULL
+    </update>
+
+    <delete id="deleteByMessageId">
+        DELETE FROM sys_site_message_recipient WHERE message_id = #{messageId}
+    </delete>
+
+    <delete id="deleteByMessageIds">
+        DELETE FROM sys_site_message_recipient
+        WHERE message_id IN
+        <foreach collection="messageIds" item="messageId" open="(" separator="," close=")">
+            #{messageId}
+        </foreach>
+    </delete>
+
+    <select id="countByMessageId" resultType="long">
+        SELECT COUNT(1) FROM sys_site_message_recipient WHERE message_id = #{messageId}
+    </select>
+
+    <resultMap id="RecipientStatusResultMap" type="com.icoolkj.platform.system.sitemessage.vo.SiteMessageRecipientStatusVO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="user_nickname" property="userNickname"/>
+        <result column="username" property="username"/>
+        <result column="read_at" property="readAt"/>
+        <result column="read_status" property="readStatus"/>
+    </resultMap>
+
+    <sql id="RecipientStatus_From">
+        FROM sys_site_message_recipient r
+        INNER JOIN sys_user u ON u.id = r.user_id AND u.deleted = 0
+    </sql>
+
+    <sql id="RecipientStatus_Where">
+        <where>
+            r.deleted = 0
+            AND r.message_id = #{messageId}
+            <if test='readStatus != null and readStatus != "" and readStatus == "0"'>
+                AND r.read_at IS NULL
+            </if>
+            <if test='readStatus != null and readStatus != "" and readStatus == "1"'>
+                AND r.read_at IS NOT NULL
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectRecipientStatusPage" resultMap="RecipientStatusResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT r.id, r.user_id,
+               COALESCE(NULLIF(TRIM(u.nickname), ''), NULLIF(TRIM(u.real_name), ''), u.username) AS user_nickname,
+               u.username,
+               r.read_at,
+               CASE WHEN r.read_at IS NULL THEN '0' ELSE '1' END AS read_status
+        <include refid="RecipientStatus_From"/>
+        <include refid="RecipientStatus_Where"/>
+        ORDER BY (r.read_at IS NULL) DESC, user_nickname ASC, u.username ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countRecipientStatusByQuery" resultType="long">
+        SELECT COUNT(1)
+        <include refid="RecipientStatus_From"/>
+        <include refid="RecipientStatus_Where"/>
+    </select>
+
+</mapper>

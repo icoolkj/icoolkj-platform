@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.tenant.mapper.TenantMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.tenant.domain.TenantEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_code" property="tenantCode"/>
+        <result column="tenant_name" property="tenantName"/>
+        <result column="contact_name" property="contactName"/>
+        <result column="contact_phone" property="contactPhone"/>
+        <result column="contact_email" property="contactEmail"/>
+        <result column="license_no" property="licenseNo"/>
+        <result column="expire_at" property="expireAt"/>
+        <result column="account_limit" property="accountLimit"/>
+        <result column="status" property="status"/>
+        <result column="tenant_type" property="tenantType"/>
+        <result column="parent_tenant_id" property="parentTenantId"/>
+        <result column="ancestors" property="ancestors"/>
+        <result column="root_region_id" property="rootRegionId"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, 
+        tenant_code, 
+        tenant_name, 
+        contact_name, 
+        contact_phone, 
+        contact_email, 
+        license_no, 
+        expire_at, 
+        account_limit, 
+        status,
+        tenant_type,
+        parent_tenant_id,
+        ancestors,
+        root_region_id,
+        remark, 
+        created_by, 
+        created_at, 
+        updated_by, 
+        updated_at, 
+        deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantCode != null and tenantCode != ''">AND tenant_code = #{tenantCode}</if>
+            <if test="tenantName != null and tenantName != ''">AND tenant_name like concat('%', #{tenantName}, '%')</if>
+            <if test="contactName != null and contactName != ''">AND contact_name like concat('%', #{contactName}, '%')</if>
+            <if test="contactPhone != null and contactPhone != ''">AND contact_phone = #{contactPhone}</if>
+            <if test="contactEmail != null and contactEmail != ''">AND contact_email = #{contactEmail}</if>
+            <if test="licenseNo != null and licenseNo != ''">AND license_no = #{licenseNo}</if>
+            <if test="expireAt != null and expireAt != ''">AND expire_at = #{expireAt}</if>
+            <if test="accountLimit != null and accountLimit != ''">AND account_limit = #{accountLimit}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="tenantType != null and tenantType != ''">AND tenant_type = #{tenantType}</if>
+            <if test="remark != null and remark != ''">AND remark = #{remark}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_tenant WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_tenant
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/> FROM sys_tenant
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_tenant
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_tenant (<include refid="Base_Column_List"/>)
+        VALUES (#{id}, #{tenantCode}, #{tenantName}, #{contactName}, #{contactPhone}, #{contactEmail}, #{licenseNo}, #{expireAt}, #{accountLimit}, #{status}, #{tenantType}, #{parentTenantId}, #{ancestors}, #{rootRegionId}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_tenant
+        <set>
+            tenant_code = #{tenantCode},
+            tenant_name = #{tenantName},
+            contact_name = #{contactName},
+            contact_phone = #{contactPhone},
+            contact_email = #{contactEmail},
+            license_no = #{licenseNo},
+            expire_at = #{expireAt},
+            account_limit = #{accountLimit},
+            status = #{status},
+            parent_tenant_id = #{parentTenantId},
+            ancestors = #{ancestors},
+            root_region_id = #{rootRegionId},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted},
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_tenant SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectByTenantCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_tenant
+        WHERE tenant_code = #{tenantCode} AND deleted = 0
+        LIMIT 1
+    </select>
+
+</mapper>

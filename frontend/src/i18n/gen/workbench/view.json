@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "businessName": "workbench",
+    "apiModule": "dashboard",
+    "backendModule": "system",
+    "permissionPrefix": "dashboard:workplace",
+    "className": "Workbench"
+  },
+  "page": {
+    "layout": "workbench"
+  }
+}

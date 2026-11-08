@@ -1,0 +1,121 @@
+{
+  "page": {
+    "title": "Process Models",
+    "description": "Tenant autonomy: sync platform catalog → deploy BPMN → configure approver rules",
+    "addTitle": "New Process Model",
+    "editTitle": "Edit Process Model",
+    "deployAction": "Deploy",
+    "designAction": "Design",
+    "designTitle": "Process Design",
+    "deployTitle": "Deploy BPMN",
+    "versionAction": "Versions",
+    "versionTitle": "Version History",
+    "deploySuccess": "Deployed successfully",
+    "publishedYes": "Yes",
+    "publishedNo": "No",
+    "emptyVersion": "No version records",
+    "platformOwned": "Platform",
+    "syncFromPlatform": "Sync from Platform",
+    "syncTitle": "Sync Platform Models",
+    "syncHint": "Sync copies the sample BPMN and deploys it for this tenant; then edit the diagram and approver rules",
+    "syncBizType": "Business Type",
+    "syncModelKey": "Model Key",
+    "syncModelName": "Model Name",
+    "syncBindingMode": "Binding Mode",
+    "syncStatus": "Status",
+    "syncSynced": "Synced",
+    "syncPending": "Pending",
+    "syncAction": "Sync",
+    "syncSuccess": "Synced successfully"
+  },
+  "fields": {
+    "modelKey": {
+      "label": "Model Key",
+      "placeholder": "e.g. order_approve",
+      "validation": {
+        "required": "Model key is required",
+        "maxLength": "Model key must not exceed {max} characters"
+      }
+    },
+    "modelName": {
+      "label": "Model Name",
+      "placeholder": "Enter model name",
+      "validation": {
+        "required": "Model name is required",
+        "maxLength": "Model name must not exceed {max} characters"
+      }
+    },
+    "bizType": {
+      "label": "Business Type",
+      "placeholder": "e.g. sys_order",
+      "validation": {
+        "required": "Business type is required",
+        "maxLength": "Business type must not exceed {max} characters"
+      }
+    },
+    "categoryName": {
+      "label": "Category",
+      "validation": {
+        "maxLength": "Category must not exceed {max} characters"
+      }
+    },
+    "categoryId": {
+      "validation": {
+        "maxLength": "Category ID must not exceed {max} characters"
+      }
+    },
+    "formType": {
+      "label": "Form Type",
+      "validation": {
+        "maxLength": "Form type must not exceed {max} characters"
+      }
+    },
+    "formRoute": {
+      "label": "Form Route",
+      "placeholder": "/system/order/approve",
+      "validation": {
+        "maxLength": "Form route must not exceed {max} characters"
+      }
+    },
+    "latestVersion": { "label": "Version" },
+    "status": {
+      "label": "Status",
+      "validation": {
+        "maxLength": "Status must not exceed {max} characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed {max} characters"
+      }
+    },
+    "bpmnXml": {
+      "label": "BPMN XML",
+      "validation": {
+        "required": "BPMN XML is required"
+      }
+    },
+    "deployRemark": { "label": "Deploy Remark", "placeholder": "Optional deploy remark" },
+    "versionNo": { "label": "Version" },
+    "published": { "label": "Published" },
+    "deploymentId": { "label": "Deployment ID" },
+    "versionRemark": { "label": "Remark" }
+  },
+  "meta": {
+    "businessName": "workflowModel",
+    "apiModule": "workflow",
+    "functionName": "Process Model",
+    "constraints": {
+      "modelKey": { "required": true, "maxLength": 64 },
+      "modelName": { "required": true, "maxLength": 100 },
+      "bizType": { "required": true, "maxLength": 64 },
+      "categoryName": { "maxLength": 50 },
+      "formType": { "maxLength": 20 },
+      "formRoute": { "maxLength": 200 },
+      "status": { "maxLength": 1 },
+      "remark": { "maxLength": 500 },
+      "bpmnXml": { "required": true }
+    }
+  }
+}

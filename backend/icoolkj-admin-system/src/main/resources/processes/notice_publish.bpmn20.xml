@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="http://www.icoolkj.com/system/notice">
+  <!-- Emitter-contract sample: assignee via TaskListener + gw_{taskKey}; design_json is SoT -->
+  <process id="notice_publish" name="notice_publish" isExecutable="true">
+    <startEvent id="startEvent" name="start"/>
+    <userTask id="deptLeaderApprove" name="deptLeaderApprove">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${workflowAssigneeTaskListener}"/>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="gw_deptLeaderApprove" name="deptLeaderApproveResult" default="flowReject_deptLeaderApprove"/>
+    <userTask id="platformAdminApprove" name="platformAdminApprove">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${workflowAssigneeTaskListener}"/>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="gw_platformAdminApprove" name="platformAdminApproveResult" default="flowReject_platformAdminApprove"/>
+    <endEvent id="endApproved" name="endApproved"/>
+    <endEvent id="endRejected" name="endRejected"/>
+    <sequenceFlow id="flowStart" sourceRef="startEvent" targetRef="deptLeaderApprove"/>
+    <sequenceFlow id="flowTask_deptLeaderApprove" sourceRef="deptLeaderApprove" targetRef="gw_deptLeaderApprove"/>
+    <sequenceFlow id="flowApprove_deptLeaderApprove" sourceRef="gw_deptLeaderApprove" targetRef="platformAdminApprove">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approved}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flowReject_deptLeaderApprove" sourceRef="gw_deptLeaderApprove" targetRef="endRejected"/>
+    <sequenceFlow id="flowTask_platformAdminApprove" sourceRef="platformAdminApprove" targetRef="gw_platformAdminApprove"/>
+    <sequenceFlow id="flowApprove_platformAdminApprove" sourceRef="gw_platformAdminApprove" targetRef="endApproved">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approved}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flowReject_platformAdminApprove" sourceRef="gw_platformAdminApprove" targetRef="endRejected"/>
+  </process>
+</definitions>

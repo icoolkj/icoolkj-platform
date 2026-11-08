@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "businessName": "dict",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:dict",
+    "className": "Dict"
+  },
+  "page": {
+    "layout": "master-detail"
+  },
+  "masterDetail": {
+    "masterSpan": 10,
+    "detailSpan": 14,
+    "detailForeignKey": "dictTypeId",
+    "master": {
+      "query": {
+        "maxVisible": 3,
+        "collapsible": true,
+        "fields": [
+          {
+            "field": "dictName",
+            "component": "input",
+            "queryType": "LIKE",
+            "width": 180
+          },
+          {
+            "field": "dictType",
+            "component": "input",
+            "queryType": "LIKE",
+            "width": 160
+          },
+          {
+            "field": "status",
+            "component": "select",
+            "queryType": "EQ",
+            "dictType": "sys_common_status",
+            "width": 120
+          }
+        ]
+      },
+      "table": {
+        "fields": [
+          {
+            "field": "dictName",
+            "component": "text",
+            "minWidth": 120,
+            "showOverflowTooltip": true
+          },
+          {
+            "field": "dictType",
+            "component": "text",
+            "minWidth": 140,
+            "showOverflowTooltip": true
+          },
+          {
+            "field": "status",
+            "component": "dict-tag",
+            "dictType": "sys_common_status",
+            "width": 90,
+            "align": "center"
+          },
+          {
+            "field": "remark",
+            "component": "text",
+            "minWidth": 120,
+            "showOverflowTooltip": true
+          }
+        ],
+        "actions": {
+          "edit": true,
+          "delete": true,
+          "width": 140
+        }
+      },
+      "form": {
+        "mode": "dialog",
+        "dialogWidth": 560,
+        "labelWidth": 100,
+        "closeOnClickModal": false,
+        "closeOnPressEscape": false,
+        "fields": [
+          {
+            "field": "dictName",
+            "component": "input",
+            "insert": true,
+            "edit": true,
+            "span": 24
+          },
+          {
+            "field": "dictType",
+            "component": "input",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "disabledOnEdit": true
+          },
+          {
+            "field": "status",
+            "component": "radio",
+            "dictType": "sys_common_status",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "defaultValue": "0"
+          },
+          {
+            "field": "remark",
+            "component": "textarea",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "rows": 2
+          }
+        ]
+      }
+    },
+    "detail": {
+      "table": {
+        "fields": [
+          {
+            "field": "dictLabel",
+            "component": "text",
+            "minWidth": 120,
+            "showOverflowTooltip": true
+          },
+          {
+            "field": "dictValue",
+            "component": "text",
+            "minWidth": 100,
+            "showOverflowTooltip": true
+          },
+          {
+            "field": "valueType",
+            "component": "dict-tag",
+            "dictType": "sys_dict_value_type",
+            "width": 100,
+            "align": "center"
+          },
+          {
+            "field": "icon",
+            "component": "text",
+            "width": 120,
+            "showOverflowTooltip": true
+          },
+          {
+            "field": "listClass",
+            "component": "dict-tag",
+            "dictType": "sys_dict_list_class",
+            "width": 110,
+            "align": "center"
+          },
+          {
+            "field": "isDefault",
+            "component": "dict-tag",
+            "dictType": "sys_bool",
+            "width": 90,
+            "align": "center"
+          },
+          {
+            "field": "sortNo",
+            "component": "text",
+            "width": 80,
+            "align": "center"
+          },
+          {
+            "field": "status",
+            "component": "dict-tag",
+            "dictType": "sys_common_status",
+            "width": 90,
+            "align": "center"
+          }
+        ],
+        "actions": {
+          "edit": true,
+          "delete": true,
+          "width": 140
+        }
+      },
+      "form": {
+        "mode": "dialog",
+        "dialogWidth": 560,
+        "labelWidth": 108,
+        "closeOnClickModal": false,
+        "closeOnPressEscape": false,
+        "fields": [
+          {
+            "field": "dictLabel",
+            "component": "input",
+            "insert": true,
+            "edit": true,
+            "span": 24
+          },
+          {
+            "field": "dictValue",
+            "component": "input",
+            "insert": true,
+            "edit": true,
+            "span": 24
+          },
+          {
+            "field": "valueType",
+            "component": "select",
+            "dictType": "sys_dict_value_type",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "defaultValue": "string"
+          },
+          {
+            "field": "icon",
+            "component": "icon-picker",
+            "insert": true,
+            "edit": true,
+            "span": 24
+          },
+          {
+            "field": "cssClass",
+            "component": "input",
+            "insert": true,
+            "edit": true,
+            "span": 24
+          },
+          {
+            "field": "listClass",
+            "component": "select",
+            "dictType": "sys_dict_list_class",
+            "insert": true,
+            "edit": true,
+            "span": 24
+          },
+          {
+            "field": "isDefault",
+            "component": "radio",
+            "dictType": "sys_bool",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "defaultValue": "0"
+          },
+          {
+            "field": "sortNo",
+            "component": "input-number",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "min": 0,
+            "defaultValue": 0
+          },
+          {
+            "field": "status",
+            "component": "radio",
+            "dictType": "sys_common_status",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "defaultValue": "0"
+          },
+          {
+            "field": "remark",
+            "component": "textarea",
+            "insert": true,
+            "edit": true,
+            "span": 24,
+            "rows": 2
+          }
+        ]
+      }
+    }
+  }
+}

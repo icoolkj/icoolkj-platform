@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "审批人规则",
+    "description": "含平台默认规则（只读）与本租户覆盖规则",
+    "addTitle": "新建审批人规则",
+    "editTitle": "编辑审批人规则",
+    "strategyConfigHintRole": "示例：{\"roleCodes\":[\"dept_approver\",\"tenant_admin\"]}",
+    "strategyConfigHintFixedUser": "示例：{\"userId\":\"用户ID\"}",
+    "strategyConfigHintStarterDeptRole": "示例：{\"roleCodes\":[\"dept_approver\"]} — 发起人同部门",
+    "strategyConfigHintExpression": "示例：{\"expr\":\"starter\"}",
+    "strategyConfigInvalid": "策略配置必须是合法的 JSON",
+    "deleteConfirm": "确认删除该审批人规则？",
+    "platformOwned": "平台",
+    "platformReadonly": "只读"
+  },
+  "fields": {
+    "modelId": {
+      "label": "流程模型",
+      "placeholder": "请选择流程模型",
+      "validation": { "required": "请选择流程模型" }
+    },
+    "modelKey": { "label": "模型标识", "placeholder": "模型标识" },
+    "modelName": { "label": "模型名称" },
+    "taskDefinitionKey": {
+      "label": "BPMN 节点 ID",
+      "placeholder": "如 deptLeaderApprove",
+      "validation": {
+        "required": "请输入 BPMN 节点 ID",
+        "maxLength": "节点 ID 长度不能超过 {max} 个字符"
+      }
+    },
+    "variableName": {
+      "label": "流程变量名",
+      "placeholder": "如 deptLeaderUserId",
+      "validation": {
+        "required": "请输入流程变量名",
+        "maxLength": "变量名长度不能超过 {max} 个字符"
+      }
+    },
+    "strategyType": {
+      "label": "策略类型",
+      "placeholder": "请选择策略类型",
+      "validation": { "required": "请选择策略类型" }
+    },
+    "strategyConfig": {
+      "label": "策略配置 JSON",
+      "placeholder": "JSON 配置",
+      "validation": { "required": "请输入策略配置", "maxLength": "配置长度不能超过 {max} 个字符" }
+    },
+    "resolveScope": {
+      "label": "解析范围",
+      "placeholder": "请选择解析范围",
+      "validation": { "required": "请选择解析范围" }
+    },
+    "sortNo": {
+      "label": "排序",
+      "validation": { "required": "请输入排序号" }
+    },
+    "status": { "label": "状态" },
+    "ownerScope": { "label": "归属" },
+    "remark": { "label": "备注", "placeholder": "可选备注" },
+    "id": { "validation": { "required": "缺少规则 ID" } }
+  },
+  "meta": {
+    "businessName": "workflowApproverRule",
+    "apiModule": "workflow",
+    "functionName": "审批人规则",
+    "constraints": {
+      "modelId": { "required": true },
+      "taskDefinitionKey": { "required": true, "maxLength": 64 },
+      "variableName": { "required": true, "maxLength": 64 },
+      "strategyType": { "required": true },
+      "strategyConfig": { "required": true, "maxLength": 1000 },
+      "resolveScope": { "required": true },
+      "sortNo": { "required": true },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

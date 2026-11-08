@@ -1,0 +1,203 @@
+{
+  "page": {
+    "title": "租户",
+    "description": "管理租户，支持新增、修改与删除",
+    "addTitle": "新增租户",
+    "editTitle": "修改租户",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "disable": "停用",
+    "enable": "启用",
+    "disableConfirm": "确认停用该租户？",
+    "provisionTitle": "租户开通成功",
+    "provisionWarn": "请立即复制并妥善保管交接信息；明文初始密码仅此展示一次。丢失时可查阅平台「标准初始密码」配置，或后续重置该租户管理员密码。",
+    "provisionLoginTip": "登录页填写「租户编码 + 用户名 + 密码」。首次登录须修改密码。",
+    "provisionTenantName": "租户名称",
+    "provisionTenantCode": "租户编码",
+    "provisionAdminUsername": "管理员账号",
+    "provisionInitialPassword": "初始密码",
+    "provisionRootDept": "根部门",
+    "provisionRootDeptCode": "根部门编码",
+    "provisionCopy": "复制",
+    "provisionCopyAll": "一键复制全部",
+    "provisionSaved": "我已保存",
+    "provisionShowPassword": "显示",
+    "provisionHidePassword": "隐藏",
+    "provisionCopyAllText": "租户编码：{tenantCode}\n管理员账号：{adminUsername}\n初始密码：{initialPassword}\n说明：首次登录须改密"
+  },
+  "fields": {
+    "tenantCode": {
+      "label": "租户编码",
+      "placeholder": "请输入租户编码",
+      "validation": {
+        "required": "请输入租户编码",
+        "maxLength": "租户编码长度不能超过50",
+        "exists": "租户编码已存在"
+      }
+    },
+    "tenantName": {
+      "label": "租户名称",
+      "placeholder": "请输入租户名称",
+      "validation": {
+        "required": "请输入租户名称",
+        "maxLength": "租户名称长度不能超过100"
+      }
+    },
+    "adminUsername": {
+      "label": "管理员账号",
+      "placeholder": "可选；企业默认 tenant_admin，单位默认 org_admin",
+      "validation": {
+        "maxLength": "管理员账号长度不能超过50",
+        "invalid": "管理员账号须以字母开头，3–50 位字母/数字/下划线"
+      }
+    },
+    "rootDeptCode": {
+      "label": "根部门编码",
+      "placeholder": "可选；默认 root",
+      "validation": {
+        "maxLength": "根部门编码长度不能超过50",
+        "invalid": "根部门编码须以字母开头，字母/数字/下划线"
+      }
+    },
+    "rootDeptName": {
+      "label": "根部门名称",
+      "placeholder": "可选；默认与租户名称相同",
+      "validation": {
+        "maxLength": "根部门名称长度不能超过100"
+      }
+    },
+    "tenantType": {
+      "label": "租户类型",
+      "placeholder": "请选择租户类型",
+      "validation": {
+        "required": "请选择租户类型",
+        "maxLength": "租户类型长度不能超过20"
+      }
+    },
+    "parentTenantId": {
+      "label": "上级单位租户",
+      "placeholder": "请选择上级单位租户（可选）",
+      "validation": {
+        "maxLength": "上级单位租户长度不能超过20"
+      }
+    },
+    "contactName": {
+      "label": "联系人",
+      "placeholder": "请输入联系人",
+      "validation": {
+        "maxLength": "联系人长度不能超过50"
+      }
+    },
+    "contactPhone": {
+      "label": "联系电话",
+      "placeholder": "请输入联系电话",
+      "validation": {
+        "maxLength": "联系电话长度不能超过20"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "contactEmail": {
+      "label": "联系邮箱",
+      "placeholder": "请输入联系邮箱",
+      "validation": {
+        "maxLength": "联系邮箱长度不能超过100"
+      }
+    },
+    "licenseNo": {
+      "label": "营业执照号",
+      "placeholder": "请输入营业执照号",
+      "validation": {
+        "maxLength": "营业执照号长度不能超过100"
+      }
+    },
+    "expireAt": {
+      "label": "到期时间",
+      "placeholder": "请选择到期时间",
+      "validation": {}
+    },
+    "accountLimit": {
+      "label": "账号上限",
+      "placeholder": "请输入账号上限",
+      "validation": {}
+    },
+    "rootRegionId": {
+      "label": "服务根区划",
+      "placeholder": "企业租户选省/市/区县；单位租户可选国家/省/市/区县",
+      "validation": {
+        "required": "请选择服务根区划",
+        "maxLength": "服务根区划长度不能超过20"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "tenant",
+    "apiModule": "tenant",
+    "functionName": "租户",
+    "constraints": {
+      "tenantCode": {
+        "required": true,
+        "maxLength": 50
+      },
+      "tenantName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "adminUsername": {
+        "maxLength": 50
+      },
+      "rootDeptCode": {
+        "maxLength": 50
+      },
+      "rootDeptName": {
+        "maxLength": 100
+      },
+      "tenantType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "parentTenantId": {
+        "maxLength": 20
+      },
+      "contactName": {
+        "maxLength": 50
+      },
+      "contactPhone": {
+        "maxLength": 20
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "contactEmail": {
+        "maxLength": 100
+      },
+      "licenseNo": {
+        "maxLength": 100
+      },
+      "expireAt": {},
+      "accountLimit": {},
+      "rootRegionId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

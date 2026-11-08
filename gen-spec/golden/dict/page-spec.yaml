@@ -1,0 +1,113 @@
+specVersion: "1.0"
+pageKey: dict
+layout: master-detail
+vueVariant: masterDetail
+
+meta:
+  apiModule: system
+  backendModule: system
+  permissionPrefix: system:dict
+  className: Dict
+
+masterDetail:
+  masterSpan: 10
+  detailSpan: 14
+  detailForeignKey: dictTypeId
+  master:
+    tableName: sys_dict_type
+    businessName: dictType
+    functionName: 字典类型
+    fields:
+      - javaField: dictName
+        isQuery: true
+        queryType: LIKE
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: input
+      - javaField: dictType
+        isQuery: true
+        queryType: LIKE
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: input
+      - javaField: status
+        isQuery: true
+        queryType: EQ
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: radio
+        dictType: sys_common_status
+      - javaField: remark
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: textarea
+  detail:
+    tableName: sys_dict_item
+    businessName: dictItem
+    functionName: 字典数据
+    fields:
+      # dictTypeId = detailForeignKey，由选中主表自动注入，不进入表单/列表
+      - javaField: dictLabel
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: input
+      - javaField: dictValue
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: input
+      - javaField: valueType
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: select
+        dictType: sys_dict_value_type
+      - javaField: icon
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: icon-picker
+      - javaField: cssClass
+        isInsert: true
+        isEdit: true
+        htmlType: input
+      - javaField: listClass
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: select
+        dictType: sys_dict_list_class
+      - javaField: isDefault
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: radio
+        dictType: sys_bool
+      - javaField: sortNo
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: input-number
+      - javaField: status
+        isList: true
+        isInsert: true
+        isEdit: true
+        htmlType: radio
+        dictType: sys_common_status
+      - javaField: remark
+        isInsert: true
+        isEdit: true
+        htmlType: textarea
+
+viewDefaults:
+  form:
+    mode: dialog
+    dialogWidth: 560
+    labelWidth: 108
+    closeOnClickModal: false
+    closeOnPressEscape: false

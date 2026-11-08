@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.ThirdPartyCallLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.ThirdPartyCallLogEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="provider_name" property="providerName"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="request_url" property="requestUrl"/>
+        <result column="request_method" property="requestMethod"/>
+        <result column="request_data" property="requestData"/>
+        <result column="response_data" property="responseData"/>
+        <result column="response_status" property="responseStatus"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="cost_time" property="costTime"/>
+        <result column="called_at" property="calledAt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, provider_name, biz_type, request_url, request_method, request_data, response_data, response_status, error_message, cost_time, called_at
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="providerName != null and providerName != ''">AND provider_name = #{providerName}</if>
+            <if test="responseStatus != null and responseStatus != ''">AND response_status = #{responseStatus}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_thirdparty_call_log
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_thirdparty_call_log
+        <include refid="Query_Where"/>
+        ORDER BY called_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_thirdparty_call_log
+        <include refid="Query_Where"/>
+        ORDER BY called_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM infra_thirdparty_call_log
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO infra_thirdparty_call_log (id, tenant_id, provider_name, biz_type, request_url, request_method, request_data, response_data, response_status, error_message, cost_time, called_at)
+        VALUES (#{id}, #{tenantId}, #{providerName}, #{bizType}, #{requestUrl}, #{requestMethod}, #{requestData}, #{responseData}, #{responseStatus}, #{errorMessage}, #{costTime}, #{calledAt})
+    </insert>
+
+    <update id="updateById">
+        UPDATE infra_thirdparty_call_log
+        SET tenant_id = #{tenantId},
+            provider_name = #{providerName},
+            biz_type = #{bizType},
+            request_url = #{requestUrl},
+            request_method = #{requestMethod},
+            request_data = #{requestData},
+            response_data = #{responseData},
+            response_status = #{responseStatus},
+            error_message = #{errorMessage},
+            cost_time = #{costTime},
+            called_at = #{calledAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM infra_thirdparty_call_log WHERE id = #{id}
+    </delete>
+
+</mapper>

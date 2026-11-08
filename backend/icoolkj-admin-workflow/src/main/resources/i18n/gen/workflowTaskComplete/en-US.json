@@ -1,0 +1,19 @@
+{
+  "fields": {
+    "approved": {
+      "validation": {
+        "required": "Please select approval result"
+      }
+    },
+    "comment": {
+      "validation": {
+        "maxLength": "Comment must not exceed {max} characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "workflowTaskComplete",
+    "apiModule": "workflow",
+    "functionName": "Task Approval"
+  }
+}

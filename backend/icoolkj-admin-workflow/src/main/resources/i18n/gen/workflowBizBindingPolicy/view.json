@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "businessName": "workflowBizBindingPolicy",
+    "apiModule": "workflow",
+    "backendModule": "workflow",
+    "permissionPrefix": "workflow:bizBindingPolicy",
+    "className": "WorkflowBizBindingPolicy"
+  },
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 2,
+    "collapsible": false,
+    "fields": [
+      { "field": "bizType", "component": "input", "queryType": "LIKE", "width": 160 },
+      {
+        "field": "bindingMode",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_binding_mode",
+        "width": 180
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      { "field": "bizType", "component": "text", "minWidth": 140 },
+      {
+        "field": "bindingMode",
+        "component": "dict-tag",
+        "dictType": "wf_binding_mode",
+        "width": 160,
+        "align": "center"
+      },
+      {
+        "field": "allowTenantApproverOverride",
+        "component": "dict-tag",
+        "dictType": "sys_bool",
+        "width": 160,
+        "align": "center"
+      },
+      { "field": "remark", "component": "text", "minWidth": 200 }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 160 }
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      { "id": "delete", "builtin": "delete", "permKey": "delete", "type": "danger" }
+    ]
+  }
+}

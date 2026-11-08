@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.menu.mapper.MenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.menu.domain.MenuEntity">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="menu_type" property="menuType"/>
+        <result column="menu_name" property="menuName"/>
+        <result column="name_i18n" property="nameI18n"/>
+        <result column="route_name" property="routeName"/>
+        <result column="route_path" property="routePath"/>
+        <result column="component_path" property="componentPath"/>
+        <result column="permission_code" property="permissionCode"/>
+        <result column="icon" property="icon"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="visible" property="visible"/>
+        <result column="status" property="status"/>
+        <result column="is_external" property="isExternal"/>
+        <result column="is_cache" property="isCache"/>
+        <result column="remark" property="remark"/>
+        <result column="assign_scope" property="assignScope"/>
+        <result column="product_code" property="productCode"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, parent_id, menu_type, menu_name, name_i18n, route_name, route_path, component_path, permission_code, icon, sort_no, visible, status, is_external, is_cache, remark, assign_scope, product_code, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="menuName != null and menuName != ''">AND menu_name like concat('%', #{menuName}, '%')</if>
+            <if test="menuType != null and menuType != ''">AND menu_type = #{menuType}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="parentId != null and parentId != ''">AND parent_id = #{parentId}</if>
+            <if test="assignScope != null and assignScope != ''">AND assign_scope = #{assignScope}</if>
+            <if test="productCode != null and productCode != ''">AND product_code = #{productCode}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_menu
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_menu
+        <include refid="Query_Where"/>
+        ORDER BY sort_no ASC, id ASC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_menu
+        <include refid="Query_Where"/>
+        ORDER BY sort_no ASC, id ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_menu
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_menu (id, parent_id, menu_type, menu_name, name_i18n, route_name, route_path, component_path, permission_code, icon, sort_no, visible, status, is_external, is_cache, remark, assign_scope, product_code, created_by, created_at, updated_by, updated_at, deleted)
+        VALUES (#{id}, #{parentId}, #{menuType}, #{menuName}, #{nameI18n}, #{routeName}, #{routePath}, #{componentPath}, #{permissionCode}, #{icon}, #{sortNo}, #{visible}, #{status}, #{isExternal}, #{isCache}, #{remark}, #{assignScope}, #{productCode}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_menu
+        <set>
+            parent_id = #{parentId},
+            menu_type = #{menuType},
+            menu_name = #{menuName},
+            name_i18n = #{nameI18n},
+            route_name = #{routeName},
+            route_path = #{routePath},
+            component_path = #{componentPath},
+            permission_code = #{permissionCode},
+            icon = #{icon},
+            sort_no = #{sortNo},
+            visible = #{visible},
+            status = #{status},
+            is_external = #{isExternal},
+            is_cache = #{isCache},
+            remark = #{remark},
+            assign_scope = #{assignScope},
+            product_code = #{productCode},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_menu SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectPermissionCodesByMenuIds" resultType="java.lang.String">
+        SELECT DISTINCT permission_code FROM sys_menu
+        WHERE deleted = 0 AND status = '0' AND permission_code IS NOT NULL AND permission_code != ''
+          AND id IN <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+        ORDER BY permission_code
+    </select>
+    <select id="selectAllActivePermissionCodes" resultType="java.lang.String">
+        SELECT DISTINCT permission_code FROM sys_menu
+        WHERE deleted = 0 AND status = '0' AND permission_code IS NOT NULL AND permission_code != ''
+        ORDER BY permission_code
+    </select>
+
+    <select id="selectActivePermissionCodesForPlatformSuperAdmin" resultType="java.lang.String">
+        SELECT DISTINCT m.permission_code FROM sys_menu m
+        WHERE m.deleted = 0 AND m.status = '0'
+          AND m.permission_code IS NOT NULL AND m.permission_code != ''
+          AND NOT EXISTS (
+            SELECT 1 FROM sys_menu p
+            WHERE p.deleted = 0 AND p.status = '0'
+              AND p.assign_scope = 'PLATFORM'
+              AND m.assign_scope = 'TENANT'
+              AND p.parent_id = m.parent_id
+              AND p.permission_code IS NOT NULL AND p.permission_code != ''
+              AND p.permission_code = m.permission_code
+          )
+        ORDER BY m.permission_code
+    </select>
+
+    <select id="selectActivePermissionCodesExcludingMenuIds" resultType="java.lang.String">
+        SELECT DISTINCT permission_code FROM sys_menu
+        WHERE deleted = 0 AND status = '0' AND permission_code IS NOT NULL AND permission_code != ''
+        <if test="excludeMenuIds != null and excludeMenuIds.size() &gt; 0">
+            AND id NOT IN
+            <foreach collection="excludeMenuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+        </if>
+        ORDER BY permission_code
+    </select>
+
+    <select id="selectRouterMenus" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_menu
+        WHERE deleted = 0 AND status = '0'
+          AND (
+            (menu_type = 'M' AND visible = '0')
+            OR (menu_type = 'C' AND component_path IS NOT NULL AND component_path != '')
+          )
+        ORDER BY sort_no ASC, id ASC
+    </select>
+
+    <select id="selectRouterMenusByProductCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_menu
+        WHERE deleted = 0 AND status = '0'
+          AND product_code = #{productCode}
+          AND (
+            (menu_type = 'M' AND visible = '0')
+            OR (menu_type = 'C' AND component_path IS NOT NULL AND component_path != '')
+          )
+        ORDER BY sort_no ASC, id ASC
+    </select>
+
+    <select id="selectDistinctProductCodesByMenuIds" resultType="java.lang.String">
+        SELECT DISTINCT product_code FROM sys_menu
+        WHERE deleted = 0 AND status = '0'
+          AND product_code IS NOT NULL AND product_code != ''
+          AND id IN
+          <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+    </select>
+
+    <select id="selectAllActiveMenuIds" resultType="java.lang.String">
+        SELECT id FROM sys_menu
+        WHERE deleted = 0 AND status = '0'
+        ORDER BY sort_no ASC, id ASC
+    </select>
+
+    <select id="selectActiveMenuIdsForPlatformSuperAdmin" resultType="java.lang.String">
+        SELECT m.id FROM sys_menu m
+        WHERE m.deleted = 0 AND m.status = '0'
+          AND NOT EXISTS (
+            SELECT 1 FROM sys_menu p
+            WHERE p.deleted = 0 AND p.status = '0'
+              AND p.assign_scope = 'PLATFORM'
+              AND m.assign_scope = 'TENANT'
+              AND p.parent_id = m.parent_id
+              AND p.permission_code IS NOT NULL AND p.permission_code != ''
+              AND p.permission_code = m.permission_code
+          )
+        ORDER BY m.sort_no ASC, m.id ASC
+    </select>
+
+    <select id="selectActiveMenuIdsExcluding" resultType="java.lang.String">
+        SELECT id FROM sys_menu
+        WHERE deleted = 0 AND status = '0'
+        <if test="excludeMenuIds != null and excludeMenuIds.size() &gt; 0">
+            AND id NOT IN
+            <foreach collection="excludeMenuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+        </if>
+        ORDER BY sort_no ASC, id ASC
+    </select>
+
+    <select id="selectAssignScopeById" resultType="java.lang.String">
+        SELECT assign_scope FROM sys_menu WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="countByMenuIdsAndAssignScope" resultType="long">
+        SELECT COUNT(1) FROM sys_menu
+        WHERE deleted = 0 AND assign_scope = #{assignScope}
+          AND id IN <foreach collection="menuIds" item="menuId" open="(" separator="," close=")">#{menuId}</foreach>
+    </select>
+
+    <select id="selectActiveMenuIdsByAssignScope" resultType="java.lang.String">
+        SELECT id FROM sys_menu
+        WHERE deleted = 0 AND status = '0' AND assign_scope = #{assignScope}
+        ORDER BY sort_no ASC, id ASC
+    </select>
+
+    <select id="selectActivePermissionCodesByAssignScope" resultType="java.lang.String">
+        SELECT DISTINCT permission_code FROM sys_menu
+        WHERE deleted = 0 AND status = '0' AND assign_scope = #{assignScope}
+          AND permission_code IS NOT NULL AND permission_code != ''
+        ORDER BY permission_code
+    </select>
+
+    <select id="countRootMenusByProduct" resultType="long">
+        SELECT COUNT(1) FROM sys_menu
+        WHERE deleted = 0 AND parent_id = '0' AND menu_type = 'M'
+          AND product_code = #{productCode}
+        <if test="excludeId != null and excludeId != ''">
+            AND id != #{excludeId}
+        </if>
+    </select>
+
+    <select id="countByProductCode" resultType="long">
+        SELECT COUNT(1) FROM sys_menu
+        WHERE deleted = 0 AND product_code = #{productCode}
+    </select>
+
+</mapper>

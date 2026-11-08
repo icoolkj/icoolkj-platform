@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.workflow.mapper.WfTaskActionMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.workflow.domain.WfTaskActionEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="process_instance_id" property="processInstanceId"/>
+        <result column="task_id" property="taskId"/>
+        <result column="task_definition_key" property="taskDefinitionKey"/>
+        <result column="action_type" property="actionType"/>
+        <result column="from_user_id" property="fromUserId"/>
+        <result column="to_user_id" property="toUserId"/>
+        <result column="comment" property="comment"/>
+        <result column="payload_json" property="payloadJson"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, process_instance_id, task_id, task_definition_key, action_type,
+        from_user_id, to_user_id, comment, payload_json,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <insert id="insert" parameterType="com.icoolkj.platform.workflow.domain.WfTaskActionEntity">
+        INSERT INTO wf_task_action (
+            id, tenant_id, process_instance_id, task_id, task_definition_key, action_type,
+            from_user_id, to_user_id, comment, payload_json,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{processInstanceId}, #{taskId}, #{taskDefinitionKey}, #{actionType},
+            #{fromUserId}, #{toUserId}, #{comment}, #{payloadJson},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <select id="selectByProcessInstanceId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_task_action
+        WHERE process_instance_id = #{processInstanceId}
+          AND deleted = 0
+        ORDER BY created_at ASC, id ASC
+    </select>
+
+    <select id="selectAddSignHandoffsByFromUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_task_action
+        WHERE deleted = 0
+          AND from_user_id = #{fromUserId}
+          AND (
+                (action_type = 'add_sign_after' AND payload_json LIKE '%"phase":"handoff"%')
+             OR (action_type = 'add_sign_before' AND payload_json LIKE '%"phase":"return"%')
+          )
+        ORDER BY created_at DESC, id DESC
+    </select>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileProfileRuleMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileProfileRuleEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="profile_code" property="profileCode"/>
+        <result column="allowed_exts" property="allowedExts"/>
+        <result column="allowed_content_types" property="allowedContentTypes"/>
+        <result column="required" property="required"/>
+        <result column="min_num" property="minNum"/>
+        <result column="max_num" property="maxNum"/>
+        <result column="min_size_bytes" property="minSizeBytes"/>
+        <result column="max_size_bytes" property="maxSizeBytes"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, profile_code, allowed_exts, allowed_content_types, required, min_num, max_num,
+        min_size_bytes, max_size_bytes, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectByTenantAndCode" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_profile_rule
+        where deleted = 0 and tenant_id = #{tenantId} and profile_code = #{profileCode}
+        limit 1
+    </select>
+
+    <select id="selectByTenant" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_profile_rule
+        where deleted = 0 and tenant_id = #{tenantId}
+        order by sort_no asc, profile_code asc
+    </select>
+
+    <insert id="insert">
+        insert into infra_file_profile_rule (
+            id, tenant_id, profile_code, allowed_exts, allowed_content_types, required, min_num, max_num,
+            min_size_bytes, max_size_bytes, sort_no, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) values (
+            #{id}, #{tenantId}, #{profileCode}, #{allowedExts}, #{allowedContentTypes}, #{required}, #{minNum}, #{maxNum},
+            #{minSizeBytes}, #{maxSizeBytes}, #{sortNo}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        update infra_file_profile_rule
+        set allowed_exts = #{allowedExts},
+            allowed_content_types = #{allowedContentTypes},
+            required = #{required},
+            min_num = #{minNum},
+            max_num = #{maxNum},
+            min_size_bytes = #{minSizeBytes},
+            max_size_bytes = #{maxSizeBytes},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        where id = #{id} and deleted = 0
+    </update>
+
+    <update id="logicalDeleteById">
+        update infra_file_profile_rule set deleted = 1, updated_at = now(3) where id = #{id} and deleted = 0
+    </update>
+
+    <delete id="deleteByTenantAndCode">
+        delete from infra_file_profile_rule
+        where tenant_id = #{tenantId} and profile_code = #{profileCode}
+    </delete>
+</mapper>

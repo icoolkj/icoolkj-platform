@@ -1,0 +1,46 @@
+{
+  "page": {
+    "title": "Binding Policies",
+    "description": "Configure how biz types bind to workflow models (platform-level)",
+    "addTitle": "New Binding Policy",
+    "editTitle": "Edit Binding Policy",
+    "deleteConfirm": "Delete this binding policy?",
+    "allowOverrideHint": "Applies when platform_mandatory: whether tenants may override approver rules"
+  },
+  "fields": {
+    "bizType": {
+      "label": "Business Type",
+      "placeholder": "e.g. sys_notice",
+      "validation": {
+        "required": "Business type is required",
+        "maxLength": "Business type must not exceed {max} characters"
+      }
+    },
+    "bindingMode": {
+      "label": "Binding Mode",
+      "placeholder": "Select binding mode",
+      "validation": { "required": "Binding mode is required" }
+    },
+    "allowTenantApproverOverride": {
+      "label": "Allow Tenant Approver Override",
+      "placeholder": "Select",
+      "validation": { "required": "Please select whether tenant override is allowed" }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Optional remark",
+      "validation": { "maxLength": "Remark must not exceed {max} characters" }
+    },
+    "id": { "validation": { "required": "Policy ID is required" } }
+  },
+  "meta": {
+    "businessName": "workflowBizBindingPolicy",
+    "apiModule": "workflow",
+    "functionName": "Binding Policies",
+    "constraints": {
+      "bizType": { "required": true, "maxLength": 64 },
+      "bindingMode": { "required": true },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

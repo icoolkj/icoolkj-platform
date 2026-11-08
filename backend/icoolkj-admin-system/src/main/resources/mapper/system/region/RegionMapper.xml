@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.region.mapper.RegionMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.region.domain.RegionEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="ancestors" property="ancestors"/>
+        <result column="region_code" property="regionCode"/>
+        <result column="region_name" property="regionName"/>
+        <result column="region_level" property="regionLevel"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, parent_id, ancestors, region_code, region_name, region_level,
+        sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectAllActive" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        WHERE deleted = 0 AND status = '0'
+        ORDER BY region_level ASC, sort_no ASC, region_code ASC
+    </select>
+
+    <select id="selectSubtree" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        WHERE deleted = 0 AND status = '0'
+          AND (id = #{rootRegionId} OR FIND_IN_SET(#{rootRegionId}, ancestors))
+        ORDER BY region_level ASC, sort_no ASC, region_code ASC
+    </select>
+
+    <select id="selectSelectableRoots" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        WHERE deleted = 0 AND status = '0'
+          AND region_level IN
+          <foreach collection="levels" item="level" open="(" separator="," close=")">
+            #{level}
+          </foreach>
+        ORDER BY region_level ASC, sort_no ASC, region_code ASC
+    </select>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="regionName != null and regionName != ''">AND region_name like concat('%', #{regionName}, '%')</if>
+            <if test="regionCode != null and regionCode != ''">AND region_code like concat('%', #{regionCode}, '%')</if>
+            <if test="regionLevel != null and regionLevel != ''">AND region_level = #{regionLevel}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="parentId != null and parentId != ''">AND parent_id = #{parentId}</if>
+        </where>
+    </sql>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        <include refid="Query_Where"/>
+        ORDER BY region_level ASC, sort_no ASC, region_code ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_region
+        <include refid="Query_Where"/>
+    </select>
+
+    <select id="selectByRegionCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        WHERE region_code = #{regionCode} AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectChildren" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_region
+        WHERE parent_id = #{parentId} AND deleted = 0
+        ORDER BY sort_no ASC, region_code ASC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_region (<include refid="Base_Column_List"/>)
+        VALUES (#{id}, #{tenantId}, #{parentId}, #{ancestors}, #{regionCode}, #{regionName}, #{regionLevel},
+                #{sortNo}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_region
+        <set>
+            parent_id = #{parentId},
+            ancestors = #{ancestors},
+            region_code = #{regionCode},
+            region_name = #{regionName},
+            region_level = #{regionLevel},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <select id="countTenantsByRootInSubtree" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_tenant t
+        INNER JOIN sys_region r ON r.id = t.root_region_id AND r.deleted = 0
+        WHERE t.deleted = 0
+          AND (r.id = #{regionId} OR FIND_IN_SET(#{regionId}, r.ancestors))
+    </select>
+
+</mapper>

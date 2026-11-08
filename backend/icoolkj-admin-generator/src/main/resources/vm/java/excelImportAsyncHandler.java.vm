@@ -1,0 +1,44 @@
+package ${packageName}.excel;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.icoolkj.platform.framework.excel.ExcelImportResult;
+import com.icoolkj.platform.infra.excel.AbstractExcelImportAsyncHandler;
+import com.icoolkj.platform.infra.service.InfraFileService;
+import ${packageName}.service.${ClassName}Service;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+/**
+ * Async Excel import for ${functionName} ({@code taskType=excel.import.${businessName}}).
+ * {@code request_param} JSON: {@code {"fileId":"..."}}.
+ */
+@Component
+public class ${ClassName}ExcelImportAsyncHandler extends AbstractExcelImportAsyncHandler<${ClassName}ImportRow> {
+
+    public static final String TASK_TYPE = "excel.import.${businessName}";
+
+    private final ${ClassName}Service ${className}Service;
+
+    public ${ClassName}ExcelImportAsyncHandler(InfraFileService infraFileService,
+                                               ${ClassName}Service ${className}Service,
+                                               ObjectMapper objectMapper) {
+        super(infraFileService, objectMapper);
+        this.${className}Service = ${className}Service;
+    }
+
+    @Override
+    public String taskType() {
+        return TASK_TYPE;
+    }
+
+    @Override
+    protected Class<${ClassName}ImportRow> importRowType() {
+        return ${ClassName}ImportRow.class;
+    }
+
+    @Override
+    protected ExcelImportResult importRows(List<${ClassName}ImportRow> rows) {
+        return ${className}Service.importRows(rows);
+    }
+}

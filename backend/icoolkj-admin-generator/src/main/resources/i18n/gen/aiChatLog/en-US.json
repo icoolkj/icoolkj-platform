@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "AI Chat Logs",
+    "description": "AI chat session audit with full message history",
+    "addTitle": "Add",
+    "editTitle": "Edit",
+    "deleteConfirm": "Delete {count} selected row(s)?",
+    "logDetail": "Detail",
+    "newChat": "New Chat",
+    "roleUser": "You",
+    "roleAssistant": "AI",
+    "chatLogEmptyHint": "No chat logs yet. Start a conversation in AI Chat first"
+  },
+  "fields": {
+    "title": {
+      "label": "Summary",
+      "placeholder": "Enter summary"
+    },
+    "operatorName": {
+      "label": "Operator"
+    },
+    "updatedAt": {
+      "label": "Updated At"
+    },
+    "createdAt": {
+      "label": "Created At"
+    }
+  },
+  "meta": {
+    "businessName": "aiChatLog",
+    "apiModule": "tool",
+    "functionName": "AI Chat Logs",
+    "constraints": {}
+  }
+}

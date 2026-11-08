@@ -1,0 +1,228 @@
+﻿{
+  "page": {
+    "title": "File Management",
+    "description": "Manage platform and business attachments with upload, preview and download",
+    "addTitle": "Add File",
+    "editTitle": "Edit File",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "upload": "Upload",
+    "batchDelete": "Batch Delete",
+    "uploadTitle": "Upload File",
+    "uploadHint": "Click or drag a file here to upload",
+    "uploadSingleHint": "Single file; storage ceiling {size} MB (when a biz type is selected, that upload profile’s size/type rules apply)",
+    "uploadSingleOnly": "Only one file can be uploaded at a time",
+    "uploadSizeExceeded": "File size must not exceed {size} MB",
+    "uploadBizType": "Biz Type",
+    "uploadBizTypePlaceholder": "Select upload profile (profileCode)",
+    "uploadBizTypeHint": "bizType must be an enabled upload profile code; type and size are validated against that profile.",
+    "bizTypeRequired": "Please select a biz type (upload profile)",
+    "uploadProfileEmpty": "No enabled upload profiles. Configure them in File Config Center first.",
+    "uploadProfileExts": "Allowed extensions: {exts}",
+    "uploadProfileMaxSize": "Max size: {size}",
+    "storageLocal": "Local",
+    "storageMinio": "MinIO",
+    "keywordPlaceholder": "Search by file name",
+    "storageLocation": "Storage",
+    "storageEngine": "Engine",
+    "thumbnail": "Type",
+    "preview": "Preview",
+    "detail": "Detail",
+    "download": "Download",
+    "detailTitle": "File Detail",
+    "referenceCount": "References",
+    "refsTitle": "Business References",
+    "refField": "Ref Field",
+    "deleteOneConfirm": "Delete file \"{name}\"?",
+    "deleteBatchConfirm": "Delete {count} selected file(s)?",
+    "previewFullscreen": "Fullscreen",
+    "previewExitFullscreen": "Exit fullscreen",
+    "previewNewTab": "Open in new tab",
+    "previewFit": "Fit to window",
+    "previewZoomIn": "Zoom in",
+    "previewZoomOut": "Zoom out"
+  },
+  "fields": {
+    "bizType": {
+      "label": "Biz Type",
+      "placeholder": "Select or enter biz type (upload profile code)",
+      "validation": {
+        "required": "Please select a biz type (upload profile)",
+        "maxLength": "Biz Type must not exceed 50 characters"
+      }
+    },
+    "bizId": {
+      "label": "Biz ID",
+      "placeholder": "Please enter Biz ID",
+      "validation": {
+        "maxLength": "Biz Id must not exceed 20 characters"
+      }
+    },
+    "originalName": {
+      "label": "Original Name",
+      "placeholder": "Please enter Original Name",
+      "validation": {
+        "required": "Original Name is required",
+        "maxLength": "Original Name must not exceed 255 characters"
+      }
+    },
+    "fileExt": {
+      "label": "Extension",
+      "placeholder": "Please enter File Ext",
+      "validation": {
+        "maxLength": "File Ext must not exceed 20 characters"
+      }
+    },
+    "fileSize": {
+      "label": "File Size",
+      "placeholder": "Please enter File Size",
+      "validation": {
+        "required": "File Size is required"
+      }
+    },
+    "storageType": {
+      "label": "Storage Type",
+      "placeholder": "Please select Storage Type",
+      "validation": {
+        "required": "Storage Type is required",
+        "maxLength": "Storage Type must not exceed 20 characters"
+      }
+    },
+    "userId": {
+      "label": "Owner User",
+      "placeholder": "Please enter owner user",
+      "validation": {
+        "maxLength": "Owner user must not exceed 20 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At",
+      "placeholder": "Please select created at",
+      "validation": {
+        "required": "Created at is required"
+      }
+    },
+    "tenantId": {
+      "label": "Tenant Id",
+      "placeholder": "Please enter Tenant Id",
+      "validation": {
+        "required": "Tenant Id is required",
+        "maxLength": "Tenant Id must not exceed 20 characters"
+      }
+    },
+    "fileName": {
+      "label": "File Name",
+      "placeholder": "Please enter File Name",
+      "validation": {
+        "required": "File Name is required",
+        "maxLength": "File Name must not exceed 255 characters"
+      }
+    },
+    "contentType": {
+      "label": "Content Type",
+      "placeholder": "Please select Content Type",
+      "validation": {
+        "maxLength": "Content Type must not exceed 100 characters"
+      }
+    },
+    "bucketName": {
+      "label": "Bucket Name",
+      "placeholder": "Please enter Bucket Name",
+      "validation": {
+        "required": "Bucket Name is required",
+        "maxLength": "Bucket Name must not exceed 100 characters"
+      }
+    },
+    "objectKey": {
+      "label": "Object Key",
+      "placeholder": "Please enter Object Key",
+      "validation": {
+        "required": "Object Key is required",
+        "maxLength": "Object Key must not exceed 255 characters"
+      }
+    },
+    "fileUrl": {
+      "label": "File Url",
+      "placeholder": "Please enter File Url",
+      "validation": {
+        "maxLength": "File Url must not exceed 500 characters"
+      }
+    },
+    "md5": {
+      "label": "Md5",
+      "placeholder": "Please enter Md5",
+      "validation": {
+        "maxLength": "Md5 must not exceed 64 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "file",
+    "apiModule": "infra",
+    "functionName": "File",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "bizType": {
+        "maxLength": 50
+      },
+      "bizId": {
+        "maxLength": 20
+      },
+      "originalName": {
+        "required": true,
+        "maxLength": 255
+      },
+      "fileName": {
+        "required": true,
+        "maxLength": 255
+      },
+      "fileExt": {
+        "maxLength": 20
+      },
+      "contentType": {
+        "maxLength": 100
+      },
+      "fileSize": {
+        "required": true
+      },
+      "storageType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "bucketName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "objectKey": {
+        "required": true,
+        "maxLength": 255
+      },
+      "fileUrl": {
+        "maxLength": 500
+      },
+      "md5": {
+        "maxLength": 64
+      },
+      "userId": {
+        "maxLength": 20
+      },
+      "createdAt": {
+        "required": true
+      },
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

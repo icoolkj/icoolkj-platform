@@ -1,0 +1,124 @@
+{
+  "page": {
+    "title": "IP访问规则表",
+    "description": "管理IP访问规则表，支持新增、修改与删除",
+    "addTitle": "新增IP访问规则表",
+    "editTitle": "修改IP访问规则表",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用"
+  },
+  "fields": {
+    "ruleName": {
+      "label": "规则名称",
+      "placeholder": "请输入规则名称",
+      "validation": {
+        "required": "请输入规则名称",
+        "maxLength": "规则名称长度不能超过100"
+      }
+    },
+    "ipAddress": {
+      "label": "IP地址或CIDR网段",
+      "placeholder": "请输入IP地址或CIDR网段",
+      "validation": {
+        "required": "请输入IP地址或CIDR网段",
+        "maxLength": "IP地址或CIDR网段长度不能超过255"
+      }
+    },
+    "matchType": {
+      "label": "匹配类型",
+      "placeholder": "请选择匹配类型",
+      "validation": {
+        "required": "请选择匹配类型",
+        "maxLength": "匹配类型长度不能超过1"
+      }
+    },
+    "ruleType": {
+      "label": "规则类型",
+      "placeholder": "请选择规则类型",
+      "validation": {
+        "required": "请选择规则类型",
+        "maxLength": "规则类型长度不能超过1"
+      }
+    },
+    "applyScope": {
+      "label": "应用范围",
+      "placeholder": "请选择应用范围",
+      "validation": {
+        "required": "请选择应用范围",
+        "maxLength": "应用范围长度不能超过1"
+      }
+    },
+    "priorityNo": {
+      "label": "优先级",
+      "placeholder": "请输入优先级",
+      "validation": {
+        "required": "请输入优先级"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "startAt": {
+      "label": "生效开始时间",
+      "placeholder": "请选择生效开始时间",
+      "validation": {}
+    },
+    "endAt": {
+      "label": "生效结束时间",
+      "placeholder": "请选择生效结束时间",
+      "validation": {}
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "ipAccessRule",
+    "apiModule": "system",
+    "functionName": "IP访问规则表",
+    "constraints": {
+      "ruleName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "ipAddress": {
+        "required": true,
+        "maxLength": 255
+      },
+      "matchType": {
+        "required": true,
+        "maxLength": 1
+      },
+      "ruleType": {
+        "required": true,
+        "maxLength": 1
+      },
+      "applyScope": {
+        "required": true,
+        "maxLength": 1
+      },
+      "priorityNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "startAt": {},
+      "endAt": {},
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

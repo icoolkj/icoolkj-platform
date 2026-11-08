@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "businessName": "online",
+    "apiModule": "monitor",
+    "backendModule": "system",
+    "permissionPrefix": "monitor:online",
+    "className": "OnlineUser"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 2,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "username",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "tenantCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "username",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "tenantCode",
+        "component": "text",
+        "width": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "userId",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "sessionId",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "datetime",
+        "minWidth": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 120
+    }
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "forceLogout",
+        "labelKey": "forceLogout",
+        "handler": "monitor.online.forceLogout",
+        "permKey": "forceLogout",
+        "type": "danger"
+      }
+    ]
+  }
+}

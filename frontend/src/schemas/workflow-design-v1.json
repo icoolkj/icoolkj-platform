@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icoolkj.local/schemas/workflow-design-v1.json",
+  "title": "Icoolkj Workflow Design Document",
+  "description": "竖向审批流 JSON 权威模型（schemaVersion=1）。BPMN XML 仅作 Flowable 部署产物。",
+  "type": "object",
+  "required": ["schemaVersion", "startAcl", "behavior", "notify", "design"],
+  "additionalProperties": true,
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "startAcl": {
+      "type": "object",
+      "properties": {
+        "deptIds": { "type": "array", "items": { "type": "string" } },
+        "roleCodes": { "type": "array", "items": { "type": "string" } },
+        "userIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "behavior": {
+      "type": "object",
+      "properties": {
+        "titleTemplate": { "type": "string" },
+        "summaryTemplate": { "type": "string" },
+        "allowWithdraw": { "type": "boolean" },
+        "commentRequired": { "type": "boolean" },
+        "autoDedup": { "type": "boolean" }
+      }
+    },
+    "notify": {
+      "type": "object",
+      "properties": {
+        "onReturn": { "type": "boolean" },
+        "onReject": { "type": "boolean" },
+        "onTodo": { "type": "boolean" },
+        "onCc": { "type": "boolean" },
+        "onComplete": { "type": "boolean" },
+        "onTimeout": { "type": "boolean" },
+        "onUrge": { "type": "boolean" }
+      }
+    },
+    "design": {
+      "type": "object",
+      "required": ["schemaVersion", "nodes"],
+      "properties": {
+        "schemaVersion": { "const": 1 },
+        "nodes": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/node" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "branch": {
+      "type": "object",
+      "required": ["id", "nodes"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "expression": { "type": "string" },
+        "isDefault": { "type": "boolean" },
+        "nodes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/leafNode" }
+        }
+      }
+    },
+    "leafNode": {
+      "type": "object",
+      "required": [
+        "taskDefinitionKey",
+        "name",
+        "variableName",
+        "strategyType",
+        "strategyConfig",
+        "resolveScope",
+        "sortNo"
+      ],
+      "properties": {
+        "nodeType": { "enum": ["approve", "cc"] },
+        "taskDefinitionKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,63}$"
+        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "variableName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,63}$"
+        },
+        "strategyType": {
+          "enum": ["role", "starter_dept_role", "fixed_user", "expression"]
+        },
+        "strategyConfig": { "type": "string" },
+        "resolveScope": { "type": "string" },
+        "sortNo": { "type": "integer", "minimum": 1 },
+        "passMode": { "enum": ["sequential", "sequentialAll", "any", "all"] },
+        "assignee": {
+          "type": "object",
+          "required": ["strategyType"],
+          "properties": {
+            "strategyType": {
+              "enum": ["role", "starter_dept_role", "fixed_user", "expression"]
+            },
+            "roleCodes": { "type": "array", "items": { "type": "string" } },
+            "userId": { "type": "string" },
+            "expr": { "type": "string" },
+            "resolveScope": { "type": "string" }
+          }
+        }
+      }
+    },
+    "node": {
+      "type": "object",
+      "required": [
+        "taskDefinitionKey",
+        "name",
+        "variableName",
+        "strategyType",
+        "strategyConfig",
+        "resolveScope",
+        "sortNo"
+      ],
+      "properties": {
+        "nodeType": {
+          "enum": [
+            "approve",
+            "cc",
+            "condition",
+            "parallel",
+            "inclusive",
+            "delay",
+            "service",
+            "subprocess"
+          ]
+        },
+        "taskDefinitionKey": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,63}$"
+        },
+        "name": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "variableName": {
+          "type": "string",
+          "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,63}$"
+        },
+        "strategyType": {
+          "enum": ["role", "starter_dept_role", "fixed_user", "expression"]
+        },
+        "strategyConfig": { "type": "string" },
+        "resolveScope": { "type": "string" },
+        "sortNo": { "type": "integer", "minimum": 1 },
+        "conditionExpression": { "type": "string" },
+        "passMode": { "enum": ["sequential", "sequentialAll", "any", "all"] },
+        "branches": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/branch" }
+        },
+        "assignee": {
+          "type": "object",
+          "required": ["strategyType"],
+          "properties": {
+            "strategyType": {
+              "enum": ["role", "starter_dept_role", "fixed_user", "expression"]
+            },
+            "roleCodes": { "type": "array", "items": { "type": "string" } },
+            "userId": { "type": "string" },
+            "expr": { "type": "string" },
+            "resolveScope": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

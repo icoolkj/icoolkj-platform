@@ -1,0 +1,24 @@
+{
+  "page": {
+    "title": "File Catalogs",
+    "description": "Material catalogs: which upload slots a business scene needs (orchestration only; not download ACL)",
+    "add": "Add catalog",
+    "edit": "Edit",
+    "delete": "Delete",
+    "manageItems": "Manage slots",
+    "deleteConfirm": "Delete catalog \"{code}\"?",
+    "saveSuccess": "Saved",
+    "deleteSuccess": "Deleted",
+    "formTitle": "Material catalog",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "platformOnlyHint": "Catalog structure is platform-only; configure download policies under Access Policies by slot",
+    "itemCount": "Slots"
+  },
+  "fields": {
+    "catalogCode": { "label": "Catalog code", "placeholder": "e.g. brand_logo", "required": "Catalog code is required" },
+    "catalogName": { "label": "Name", "placeholder": "Display name", "required": "Name is required" },
+    "status": { "label": "Status" },
+    "remark": { "label": "Remark" }
+  }
+}

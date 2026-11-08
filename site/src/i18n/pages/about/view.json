@@ -1,0 +1,12 @@
+{
+  "page": {
+    "layout": "marketing-simple",
+    "i18nPrefix": "about"
+  },
+  "sections": [
+    {
+      "id": "contact",
+      "type": "about-contact"
+    }
+  ]
+}

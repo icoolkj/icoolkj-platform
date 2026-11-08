@@ -1,0 +1,137 @@
+specVersion: "1.0"
+pageKey: user
+layout: standard-crud
+vueVariant: userExtended
+
+meta:
+  apiModule: system
+  backendModule: system
+  permissionPrefix: system:user
+  className: User
+
+entity:
+  tableName: sys_user
+  businessName: user
+  functionName: 用户
+
+extensions:
+  # 编译后写入 view.json.extensions；handler/dialog 必须已在 gen/blocks 注册
+  rowActions:
+    - id: edit
+      builtin: edit
+      permKey: update
+    - id: assignRoles
+      labelKey: assignRoles
+      permKey: update
+      dialog: GenUserRoleDialog
+    - id: resetPassword
+      labelKey: resetPassword
+      permKey: resetPassword
+      type: warning
+      handler: user.resetPassword
+    - id: delete
+      builtin: delete
+      permKey: delete
+      type: danger
+  dialogs:
+    - GenUserRoleDialog
+  treeSources:
+    dept:
+      apiKey: pageDept
+      parentField: parentId
+      rootValue: "0"
+      labelField: deptName
+      valueField: id
+      rootLabelKey: treeRoot
+
+viewDefaults:
+  query:
+    maxVisible: 4
+    collapsible: true
+  form:
+    mode: dialog
+    dialogWidth: 860
+    labelWidth: 100
+    closeOnClickModal: false
+    closeOnPressEscape: false
+  table:
+    actions:
+      edit: true
+      delete: true
+      width: 240
+
+fields:
+  # 与 runtime frontend/src/i18n/gen/user/view.json 交叉对齐（金样例校验：spec ⊆ view）
+  - javaField: username
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+    disabledOnEdit: true
+  - javaField: nickname
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: password
+    isInsert: true
+    htmlType: password
+    insertOnly: true
+  - javaField: phone
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: email
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: deptId
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: deptName
+    isList: true
+  - javaField: status
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: radio
+    dictType: sys_common_status
+  - javaField: remark
+    isInsert: true
+    isEdit: true
+    htmlType: textarea
+  - javaField: realName
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: gender
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: radio
+    dictType: sys_gender
+  - javaField: avatarFileId
+    isInsert: true
+    isEdit: true
+  - javaField: avatarUrl
+    isList: true
+  - javaField: createdAt
+    isList: true
+    htmlType: datetime

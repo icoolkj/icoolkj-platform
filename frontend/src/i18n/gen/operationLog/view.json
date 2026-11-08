@@ -1,0 +1,283 @@
+{
+  "meta": {
+    "businessName": "operationLog",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "monitor:operationLog",
+    "className": "OperationLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "moduleName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "operationStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_operation_status",
+        "width": 140
+      },
+      {
+        "field": "businessType",
+        "component": "select",
+        "queryType": "EQ",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "moduleName",
+        "component": "audit-i18n",
+        "auditCategory": "modules",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operatorName",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operationUrl",
+        "component": "text",
+        "minWidth": 220,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operationIp",
+        "component": "text",
+        "width": 140,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operationStatus",
+        "component": "dict-tag",
+        "dictType": "sys_operation_status",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "operationAt",
+        "component": "text",
+        "width": 170,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "traceId",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "businessType",
+        "component": "audit-i18n",
+        "auditCategory": "businessTypes",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "method",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "requestMethod",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operatorId",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operationLocation",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "requestParam",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "responseResult",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "errorMessage",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "costTime",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "traceId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "moduleName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "businessType",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "method",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "requestMethod",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operatorId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operatorName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operationUrl",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operationIp",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operationLocation",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "requestParam",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "responseResult",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operationStatus",
+        "component": "radio",
+        "dictType": "sys_operation_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "errorMessage",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "costTime",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "operationAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      }
+    ]
+  },
+  "extensions": {
+    "toolbarActions": [
+      {
+        "id": "export",
+        "builtin": "export",
+        "permKey": "export",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "businessName": "oaLeave",
+    "apiModule": "oa",
+    "backendModule": "oa",
+    "permissionPrefix": "oa:leave",
+    "className": "OaLeave"
+  },
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      { "field": "instanceTitle", "component": "input", "queryType": "LIKE", "width": 200 },
+      {
+        "field": "leaveType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "oa_leave_type",
+        "width": 140
+      },
+      {
+        "field": "approveStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "oa_approve_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "instanceTitle",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "leaveType",
+        "component": "dict-tag",
+        "dictType": "oa_leave_type",
+        "width": 100,
+        "align": "center"
+      },
+      { "field": "startDate", "component": "text", "width": 120, "align": "center" },
+      { "field": "endDate", "component": "text", "width": 120, "align": "center" },
+      { "field": "leaveDays", "component": "text", "width": 90, "align": "center" },
+      {
+        "field": "approveStatus",
+        "component": "dict-tag",
+        "dictType": "oa_approve_status",
+        "width": 100,
+        "align": "center"
+      },
+      { "field": "submittedAt", "component": "datetime", "width": 170, "align": "center" }
+    ],
+    "actions": { "edit": true, "delete": true, "width": 280 }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 560,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "leaveType",
+        "component": "select",
+        "dictType": "oa_leave_type",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      { "field": "startDate", "component": "date", "insert": true, "edit": true, "span": 24 },
+      { "field": "endDate", "component": "date", "insert": true, "edit": true, "span": 24 },
+      {
+        "field": "leaveDays",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "min": 0
+      },
+      {
+        "field": "reason",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 3,
+        "maxLength": 500
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2,
+        "maxLength": 500
+      }
+    ]
+  }
+}

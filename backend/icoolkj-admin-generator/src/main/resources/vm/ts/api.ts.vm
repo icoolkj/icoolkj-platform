@@ -1,0 +1,90 @@
+/** AUTO-GENERATED — ${functionName} API */
+import request from '@/utils/request'
+import { defineGenCrudResource, wrapExportFileAsync, wrapImportFileAsync } from '@/components/gen/registry/crud-resources/helpers'
+import type { ApiResponse, PageResult } from '@/types/common'
+import type {
+  ${ClassName}Form,
+  ${ClassName}PageQuery,
+  ${ClassName}VO,
+} from '@/types/${apiModule}/${businessName}'
+
+const BASE = '${routePath}'
+
+export function page${ClassName}(params: ${ClassName}PageQuery) {
+  return request.get<ApiResponse<PageResult<${ClassName}VO>>>(`${BASE}/page`, { params })
+}
+
+export function get${ClassName}(id: string) {
+  return request.get<ApiResponse<${ClassName}VO>>(`${BASE}/${id}`)
+}
+
+export function create${ClassName}(data: ${ClassName}Form) {
+  return request.post<ApiResponse<string>>(`${BASE}/create`, data)
+}
+
+export function update${ClassName}(data: ${ClassName}Form) {
+  return request.put<ApiResponse<void>>(`${BASE}/update`, data)
+}
+
+export function delete${ClassName}(id: string) {
+  return request.delete<ApiResponse<void>>(`${BASE}/${id}`)
+}
+
+#if($hasExport)
+/** Async export — returns taskId; poll GET /infra/asyncTask/mine/{id} then download staged file. */
+export function export${ClassName}Async(params: ${ClassName}PageQuery) {
+  return request.post<ApiResponse<{ taskId: string }>>(`${BASE}/export-async`, null, { params })
+}
+
+#end
+#if($hasImport)
+/** Sync import — scripts / fallback when async is disabled. Prefer {@link import${ClassName}Async}. */
+export function import${ClassName}(file: File) {
+  const formData = new FormData()
+  formData.append('file', file)
+  return request.post<ApiResponse<import('@/types/common').ExcelImportResult>>(`${BASE}/import`, formData)
+}
+
+export function import${ClassName}Async(file: File) {
+  const formData = new FormData()
+  formData.append('file', file)
+  return request.post<ApiResponse<{ taskId: string }>>(`${BASE}/import-async`, formData)
+}
+
+#end
+export const PERM_${ClassName} = {
+  view: '${permissionPrefix}:view',
+  list: '${permissionPrefix}:list',
+  add: '${permissionPrefix}:add',
+  update: '${permissionPrefix}:update',
+  delete: '${permissionPrefix}:delete',
+#if($hasExport)
+  export: '${permissionPrefix}:export',
+#end
+#if($hasImport)
+  import: '${permissionPrefix}:import',
+#end
+}
+
+/** @deprecated use PERM_${ClassName} */
+export const ${permAlias} = PERM_${ClassName}
+
+export const GEN_RESOURCE_KEY = '${apiModule}.${businessName}' as const
+
+export const genCrudResource = defineGenCrudResource(PERM_${ClassName}, {
+  page: page${ClassName},
+  get: get${ClassName},
+  create: create${ClassName},
+  update: update${ClassName},
+  delete: delete${ClassName},
+#if($hasExport)
+  exportFileAsync: wrapExportFileAsync(export${ClassName}Async),
+#end
+#if($hasImport)
+  importFileAsync: wrapImportFileAsync(import${ClassName}Async),
+  importFile: async (file: File) => {
+    const res = await import${ClassName}(file)
+    return res.data.data
+  },
+#end
+})

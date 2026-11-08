@@ -1,0 +1,18 @@
+{
+  "page": {
+    "layout": "marketing-docs",
+    "i18nPrefix": "docs"
+  },
+  "sections": [
+    {
+      "id": "hub",
+      "type": "docs-hub"
+    }
+  ],
+  "related": [
+    { "id": "product", "to": "/product", "labelKey": "related.product" },
+    { "id": "license", "to": "/license", "labelKey": "related.license" },
+    { "id": "delivery", "to": "/delivery", "labelKey": "related.delivery" },
+    { "id": "about", "to": "/about", "labelKey": "related.about" }
+  ]
+}

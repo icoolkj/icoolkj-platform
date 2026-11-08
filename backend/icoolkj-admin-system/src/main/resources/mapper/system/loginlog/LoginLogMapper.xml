@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.loginlog.mapper.LoginLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.loginlog.domain.LoginLogEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="username" property="username"/>
+        <result column="login_type" property="loginType"/>
+        <result column="login_status" property="loginStatus"/>
+        <result column="message" property="message"/>
+        <result column="ip" property="ip"/>
+        <result column="location" property="location"/>
+        <result column="user_agent" property="userAgent"/>
+        <result column="browser" property="browser"/>
+        <result column="os" property="os"/>
+        <result column="login_at" property="loginAt"/>
+        <result column="prev_hash" property="prevHash"/>
+        <result column="row_hash" property="rowHash"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, username, login_type, login_status, message, ip, location, user_agent, browser, os, login_at, prev_hash, row_hash
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="username != null and username != ''">AND username LIKE CONCAT('%', #{username}, '%')</if>
+            <if test="loginStatus != null and loginStatus != ''">AND login_status = #{loginStatus}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_login_log
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_login_log
+        <include refid="Query_Where"/>
+        ORDER BY login_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_login_log
+        <include refid="Query_Where"/>
+        ORDER BY login_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_login_log
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_login_log (id, tenant_id, username, login_type, login_status, message, ip, location, user_agent, browser, os, login_at, prev_hash, row_hash)
+        VALUES (#{id}, #{tenantId}, #{username}, #{loginType}, #{loginStatus}, #{message}, #{ip}, #{location}, #{userAgent}, #{browser}, #{os}, #{loginAt}, #{prevHash}, #{rowHash})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_login_log
+        <set>
+            tenant_id = #{tenantId},
+            username = #{username},
+            login_type = #{loginType},
+            login_status = #{loginStatus},
+            message = #{message},
+            ip = #{ip},
+            location = #{location},
+            user_agent = #{userAgent},
+            browser = #{browser},
+            os = #{os},
+            login_at = #{loginAt}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM sys_login_log WHERE id = #{id}
+    </delete>
+
+    <delete id="purgeBefore">
+        DELETE FROM sys_login_log WHERE login_at &lt; #{before}
+    </delete>
+
+    <select id="selectLatestRowHash" resultType="string">
+        SELECT row_hash FROM sys_login_log
+        WHERE tenant_id = #{tenantId} AND row_hash IS NOT NULL AND row_hash != ''
+        ORDER BY login_at DESC, id DESC
+        LIMIT 1
+    </select>
+
+    <insert id="archiveBefore">
+        INSERT INTO sys_login_log_archive (
+          id, tenant_id, username, login_type, login_status, message, ip, location, user_agent, browser, os, login_at, prev_hash, row_hash, archived_at
+        )
+        SELECT id, tenant_id, username, login_type, login_status, message, ip, location, user_agent, browser, os, login_at, prev_hash, row_hash, NOW(3)
+        FROM sys_login_log
+        WHERE login_at &lt; #{before}
+    </insert>
+
+    <delete id="purgeArchiveBefore">
+        DELETE FROM sys_login_log_archive WHERE archived_at &lt; #{before}
+    </delete>
+
+    <select id="selectTenantIdsBefore" resultType="string">
+        SELECT DISTINCT tenant_id
+        FROM sys_login_log
+        WHERE login_at &lt; #{before}
+    </select>
+
+    <select id="selectHashedByTenantOrdered" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_login_log
+        WHERE tenant_id = #{tenantId}
+          AND row_hash IS NOT NULL
+          AND row_hash != ''
+        ORDER BY id ASC
+    </select>
+
+    <update id="updateHashes">
+        UPDATE sys_login_log
+        SET prev_hash = #{prevHash},
+            row_hash = #{rowHash}
+        WHERE id = #{id}
+    </update>
+
+</mapper>

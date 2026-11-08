@@ -1,0 +1,270 @@
+﻿{
+  "meta": {
+    "businessName": "file",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:file",
+    "className": "InfraFile"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "originalName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "bizType",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 180
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "originalName",
+        "component": "text",
+        "minWidth": 220,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "fileExt",
+        "component": "text",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "fileSize",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "align": "right",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "storageType",
+        "component": "dict-tag",
+        "dictType": "infra_storage_type",
+        "width": 110,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bizType",
+        "component": "text",
+        "width": 130,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bizId",
+        "component": "text",
+        "width": 200,
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "userId",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "tenantId",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "fileName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "contentType",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bucketName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "objectKey",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "fileUrl",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "md5",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "tenantId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "bizType",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "bizId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "originalName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "fileName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "fileExt",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "contentType",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "fileSize",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "storageType",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "bucketName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "objectKey",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "fileUrl",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "md5",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "userId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "createdAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  }
+}

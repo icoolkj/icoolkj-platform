@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icoolkj.local/schemas/gen-i18n.schema.json",
+  "title": "GenI18nMessages",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "page": {
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "fields": {
+      "type": "object",
+      "additionalProperties": { "$ref": "#/$defs/fieldMessages" }
+    },
+    "meta": { "$ref": "#/$defs/i18nMeta" }
+  },
+  "$defs": {
+    "fieldValidation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "string" },
+        "maxLength": { "type": "string" },
+        "minLength": { "type": "string" },
+        "max": { "type": "string" },
+        "min": { "type": "string" }
+      }
+    },
+    "fieldMessages": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "label": { "type": "string" },
+        "placeholder": { "type": "string" },
+        "validation": { "$ref": "#/$defs/fieldValidation" }
+      }
+    },
+    "fieldConstraints": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "required": { "type": "boolean" },
+        "maxLength": { "type": "number" },
+        "minLength": { "type": "number" },
+        "max": { "type": "number" },
+        "min": { "type": "number" }
+      }
+    },
+    "i18nMeta": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "businessName": { "type": "string" },
+        "apiModule": { "type": "string" },
+        "functionName": { "type": "string" },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/fieldConstraints" }
+        }
+      }
+    }
+  }
+}

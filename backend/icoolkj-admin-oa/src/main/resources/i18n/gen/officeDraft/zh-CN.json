@@ -1,0 +1,26 @@
+{
+  "page": {
+    "title": "我的草稿",
+    "description": "OA 可编辑单据（草稿、驳回、撤回、退回）：修改、提交、关闭",
+    "viewDetail": "查看",
+    "deleteConfirm": "确认删除该草稿？",
+    "closeInstance": "关闭",
+    "closeConfirm": "确认关闭？关闭后不可再编辑或删除，但仍可查看流转记录。",
+    "closeSuccess": "已关闭",
+    "submitApprove": "提交审批",
+    "submitSuccess": "已提交审批",
+    "unsupported": "该业务暂不支持在此办理"
+  },
+  "fields": {
+    "instanceTitle": { "label": "标题", "placeholder": "请输入标题" },
+    "categoryCode": { "label": "业务类型", "placeholder": "请选择业务类型" },
+    "approveStatus": { "label": "状态", "placeholder": "请选择状态" },
+    "updatedAt": { "label": "更新时间" },
+    "createdAt": { "label": "创建时间" }
+  },
+  "meta": {
+    "businessName": "officeDraft",
+    "apiModule": "oa",
+    "functionName": "我的草稿"
+  }
+}

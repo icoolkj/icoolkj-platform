@@ -1,0 +1,42 @@
+{
+  "page": {
+    "title": "工作台",
+    "description": "租户运营概览，查看组织数据、公告与轮播动态。",
+    "welcome": "用户",
+    "greetingMorning": "早上好，{name}",
+    "greetingAfternoon": "下午好，{name}",
+    "greetingEvening": "晚上好，{name}",
+    "greetingNight": "夜深了，{name}",
+    "statTenants": "租户总数",
+    "statUsers": "用户总数",
+    "statDepts": "部门总数",
+    "statRoles": "角色总数",
+    "statPosts": "岗位总数",
+    "statTodayLogins": "今日登录",
+    "recentLogins": "访问记录",
+    "recentOperations": "操作记录",
+    "more": "更多",
+    "opSuccess": "成功",
+    "opFailed": "失败",
+    "bannerTitle": "轮播图",
+    "noBanner": "暂无轮播图",
+    "quickLinks": "快捷入口",
+    "quickUsers": "用户管理",
+    "quickRoles": "角色管理",
+    "quickNotices": "公告管理",
+    "quickSiteMessages": "站内消息",
+    "tenantInfo": "租户信息",
+    "tenantName": "租户名称",
+    "tenantCode": "租户编码",
+    "scopeLabel": "当前视角",
+    "scopePlatform": "平台运营",
+    "scopeTenant": "租户业务",
+    "platformTenantLabel": "平台 · {name}",
+    "unreadMessages": "未读站内信"
+  },
+  "meta": {
+    "businessName": "workbench",
+    "apiModule": "dashboard",
+    "functionName": "工作台"
+  }
+}

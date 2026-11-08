@@ -1,0 +1,19 @@
+{
+  "page": {
+    "title": "Online Users",
+    "description": "Active login sessions. Force-logout applies to this tenant (platform operators see all).",
+    "username": "Username",
+    "usernamePlaceholder": "Filter by username",
+    "tenantCode": "Tenant code",
+    "tenantCodePlaceholder": "Filter by tenant code",
+    "sessionId": "Session ID",
+    "userId": "User ID",
+    "loginAt": "Signed in at",
+    "forceLogout": "Force logout",
+    "forceLogoutConfirm": "Force logout this session? The user must sign in again.",
+    "forceLogoutSuccess": "Session terminated",
+    "forceLogoutSelf": "This session belongs to your account; affected clients must sign in again",
+    "empty": "No active sessions",
+    "totalCount": "{count} session(s)"
+  }
+}

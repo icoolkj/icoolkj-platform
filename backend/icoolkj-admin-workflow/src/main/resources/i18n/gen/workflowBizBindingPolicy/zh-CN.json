@@ -1,0 +1,46 @@
+{
+  "page": {
+    "title": "绑定策略",
+    "description": "配置业务类型与流程模型的绑定方式（平台级）",
+    "addTitle": "新建绑定策略",
+    "editTitle": "编辑绑定策略",
+    "deleteConfirm": "确认删除该绑定策略？",
+    "allowOverrideHint": "仅 platform_mandatory 时生效：租户是否可覆盖审批人规则"
+  },
+  "fields": {
+    "bizType": {
+      "label": "业务类型",
+      "placeholder": "如 sys_notice",
+      "validation": {
+        "required": "请输入业务类型",
+        "maxLength": "业务类型长度不能超过 {max} 个字符"
+      }
+    },
+    "bindingMode": {
+      "label": "绑定模式",
+      "placeholder": "请选择绑定模式",
+      "validation": { "required": "请选择绑定模式" }
+    },
+    "allowTenantApproverOverride": {
+      "label": "允许租户覆盖审批人",
+      "placeholder": "请选择",
+      "validation": { "required": "请选择是否允许租户覆盖审批人" }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "可选备注",
+      "validation": { "maxLength": "备注长度不能超过 {max} 个字符" }
+    },
+    "id": { "validation": { "required": "缺少策略 ID" } }
+  },
+  "meta": {
+    "businessName": "workflowBizBindingPolicy",
+    "apiModule": "workflow",
+    "functionName": "绑定策略",
+    "constraints": {
+      "bizType": { "required": true, "maxLength": 64 },
+      "bindingMode": { "required": true },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

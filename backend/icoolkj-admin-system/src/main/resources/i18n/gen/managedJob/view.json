@@ -1,0 +1,164 @@
+{
+  "meta": {
+    "businessName": "managedJob",
+    "apiModule": "monitor",
+    "backendModule": "system",
+    "permissionPrefix": "monitor:job",
+    "className": "ManagedJob"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": false,
+    "fields": [
+      {
+        "field": "jobCode",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 180
+      },
+      {
+        "field": "jobName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 180
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_job_status",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "jobName",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "jobCode",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "cronExpression",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_job_status",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "lastStatus",
+        "component": "dict-tag",
+        "dictType": "sys_job_run_status",
+        "width": 110,
+        "align": "center"
+      },
+      {
+        "field": "lastMessage",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "lastTriggerAt",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 280
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 480,
+    "labelWidth": 120,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "cronExpression",
+        "component": "input",
+        "insert": false,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_job_status",
+        "insert": false,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "allowConcurrent",
+        "component": "radio",
+        "dictType": "sys_bool",
+        "insert": false,
+        "edit": true,
+        "span": 24,
+        "defaultValue": "0"
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": false,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "run",
+        "labelKey": "run",
+        "permKey": "run",
+        "type": "primary",
+        "handler": "managedJob.run",
+        "showWhen": { "field": "status", "values": ["0"] }
+      },
+      {
+        "id": "edit",
+        "builtin": "edit",
+        "permKey": "update"
+      },
+      {
+        "id": "pause",
+        "labelKey": "pause",
+        "permKey": "update",
+        "type": "warning",
+        "handler": "managedJob.pause",
+        "showWhen": { "field": "status", "values": ["0"] }
+      },
+      {
+        "id": "resume",
+        "labelKey": "resume",
+        "permKey": "update",
+        "type": "success",
+        "handler": "managedJob.resume",
+        "showWhen": { "field": "status", "values": ["1"] }
+      }
+    ]
+  }
+}

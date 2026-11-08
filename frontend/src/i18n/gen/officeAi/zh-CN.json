@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "办公助手",
+    "description": "用自然语言查询本人待办与已发申请，数据仅限当前登录账号",
+    "skillsTitle": "快捷技能",
+    "skillsEmpty": "暂无可用技能（缺少待办或已发申请权限）",
+    "skillDenied": "无权限",
+    "chatTitle": "对话",
+    "welcomeTitle": "你好，我是办公助手",
+    "welcomeHint": "点选下方技能，或直接输入问题。我只会查询你自己的待办与申请。",
+    "inputPlaceholder": "问我：还有哪些待办？最近发起的申请进展如何？",
+    "send": "发送",
+    "clear": "新对话",
+    "thinking": "正在查询…",
+    "usedSkills": "已调用",
+    "hintTodo": "查我的待办",
+    "hintSubmitted": "查我发起的",
+    "emptyReply": "暂无回复",
+    "roleUser": "我",
+    "roleAssistant": "助手",
+    "composerTip": "Enter 发送 · Shift+Enter 换行",
+    "historyTitle": "历史对话",
+    "historyEmpty": "暂无历史",
+    "untitledSession": "新对话",
+    "deleteSession": "删除",
+    "deleteSessionConfirm": "确定删除该对话吗？删除后不可恢复。"
+  },
+  "meta": {
+    "businessName": "officeAi",
+    "apiModule": "oa",
+    "functionName": "办公助手"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "page": {
+    "title": "Notices",
+    "description": "Manage platform notices with cover, rich content, publish locations and sort order",
+    "addTitle": "Add Notice",
+    "editTitle": "Edit Notice",
+    "detailTitle": "Notice Detail",
+    "detailAction": "View",
+    "batchDelete": "Batch Delete",
+    "batchDeleteConfirm": "Delete {count} selected notice(s)?",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "upload": "Upload Cover",
+    "uploadHint": "jpg/png/webp, 16:9 recommended",
+    "coverImageRequired": "Please select an image file",
+    "boardTitle": "Announcements",
+    "boardEmpty": "No announcements",
+    "boardDetailTitle": "Announcement Detail",
+    "richEditorImageRequired": "Please select an image file",
+    "richEditorVideoRequired": "Please select a video file",
+    "richEditorUploadFailed": "Image upload failed",
+    "richEditorVideoUploadFailed": "Video upload failed",
+    "submitApprove": "Submit for Approval",
+    "submitApproveConfirm": "Submit this notice for approval?",
+    "withdrawApprove": "Withdraw",
+    "withdrawApproveConfirm": "Withdraw this notice from approval?",
+    "closeAction": "Close",
+    "closeConfirm": "Close this notice? It cannot be edited or deleted afterwards; approval history is kept.",
+    "closeSuccess": "Closed",
+    "publishAction": "Publish",
+    "publishConfirm": "Publish this notice? It will be visible on the portal.",
+    "publishSuccess": "Published",
+    "unpublishAction": "Unpublish",
+    "unpublishConfirm": "Unpublish this notice? It will be hidden from the portal.",
+    "unpublishSuccess": "Unpublished"
+  },
+  "fields": {
+    "noticeTitle": {
+      "label": "Title",
+      "placeholder": "Enter title",
+      "validation": {
+        "required": "Title is required",
+        "maxLength": "Title must be at most {max} characters"
+      }
+    },
+    "noticeType": {
+      "label": "Type",
+      "placeholder": "Select type",
+      "validation": {
+        "required": "Type is required",
+        "maxLength": "Invalid type"
+      }
+    },
+    "coverFileId": {
+      "label": "Cover",
+      "placeholder": "Upload cover image"
+    },
+    "coverPreviewUrl": {
+      "label": "Cover"
+    },
+    "noticeContent": {
+      "label": "Content",
+      "placeholder": "Enter content",
+      "validation": {
+        "required": "Content is required",
+        "maxLength": "Content is too long"
+      }
+    },
+    "noticeSummary": {
+      "label": "Summary",
+      "placeholder": "Enter summary",
+      "validation": {
+        "required": "Summary is required",
+        "maxLength": "Summary must be at most {max} characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Enter sort order",
+      "validation": {
+        "required": "Sort order is required"
+      }
+    },
+    "publishLocations": {
+      "label": "Publish To",
+      "placeholder": "Select publish locations",
+      "validation": {
+        "required": "Select at least one location",
+        "maxLength": "Invalid publish locations"
+      }
+    },
+    "publishLocation": {
+      "label": "Publish To",
+      "placeholder": "Select location"
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Invalid status"
+      }
+    },
+    "publishStatus": {
+      "label": "Approval Status",
+      "placeholder": "Select approval status"
+    },
+    "approveStatus": {
+      "label": "Approval Status",
+      "placeholder": "Select approval status"
+    },
+    "releaseStatus": {
+      "label": "Release Status",
+      "placeholder": "Select release status"
+    },
+    "processInstanceId": {
+      "label": "Process Instance"
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Enter remark",
+      "validation": {
+        "maxLength": "Remark must be at most {max} characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "ids": {
+      "validation": {
+        "required": "Select records to delete"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "notice",
+    "apiModule": "system",
+    "functionName": "Notices",
+    "constraints": {
+      "noticeTitle": { "required": true, "maxLength": 200 },
+      "noticeType": { "required": true, "maxLength": 1 },
+      "noticeContent": { "required": true },
+      "noticeSummary": { "required": true, "maxLength": 60 },
+      "sortNo": { "required": true },
+      "publishLocations": { "required": true, "maxLength": 100 },
+      "status": { "required": true, "maxLength": 1 },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

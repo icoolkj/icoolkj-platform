@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "businessName": "asyncTask",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:asyncTask",
+    "className": "AsyncTask"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "taskType",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 200
+      },
+      {
+        "field": "taskStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "infra_async_task_status",
+        "width": 140
+      },
+      {
+        "field": "taskName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "taskName",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "taskType",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bizType",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bizId",
+        "component": "text",
+        "width": 150,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "taskStatus",
+        "component": "dict-tag",
+        "dictType": "infra_async_task_status",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "retryCount",
+        "component": "text",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "minWidth": 170,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 140
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 760,
+    "labelWidth": 120,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": []
+  },
+  "detailDialog": {
+    "dialogWidth": 860,
+    "labelWidth": 120,
+    "column": 2,
+    "fields": [
+      { "field": "taskName", "component": "text", "span": 2 },
+      { "field": "taskType", "component": "text" },
+      {
+        "field": "taskStatus",
+        "component": "dict-tag",
+        "dictType": "infra_async_task_status"
+      },
+      { "field": "bizType", "component": "text" },
+      { "field": "bizId", "component": "text" },
+      { "field": "retryCount", "component": "text" },
+      { "field": "maxRetryCount", "component": "text" },
+      { "field": "requeueCount", "component": "text" },
+      { "field": "userId", "component": "text" },
+      { "field": "startedAt", "component": "datetime" },
+      { "field": "finishedAt", "component": "datetime" },
+      { "field": "createdAt", "component": "datetime" },
+      { "field": "tenantId", "component": "text" },
+      { "field": "requestParam", "component": "json", "span": 2 },
+      { "field": "resultData", "component": "json", "span": 2 },
+      { "field": "errorMessage", "component": "async-task-error", "span": 2 }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "detail",
+        "builtin": "detail",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "deleteTerminal",
+        "builtin": "delete",
+        "type": "danger",
+        "allowOnReadOnly": true,
+        "permKey": "delete",
+        "showWhen": {
+          "field": "taskStatus",
+          "values": ["2", "3", "4"]
+        }
+      }
+    ]
+  }
+}

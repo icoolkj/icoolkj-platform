@@ -1,0 +1,226 @@
+/**
+ * 竖向流程图 / 设计器共用「温和暖色」色板。
+ * 介于刺眼高饱和与过淡雾面之间：暖而不燥、清而不灰。
+ */
+.vfd-stage {
+  --vfd-approve: #e8a35c;
+  --vfd-cc: #5ba8c4;
+  --vfd-condition: #5ea87a;
+  --vfd-inclusive: #4fad9a;
+  --vfd-parallel: #d47a7a;
+  --vfd-delay: #e09658;
+  --vfd-service: #5f9fc0;
+  --vfd-subprocess: #d0b04e;
+  --vfd-start: #d9a05a;
+  /* 连线：比画布更深一档，保证连续可读 */
+  --vfd-wire: #c4a07a;
+  --vfd-wire-w: 2.5px;
+  --vfd-wire-halo: #f7efe4;
+  --vfd-muted: #9a8570;
+  --vfd-ink: #54483c;
+  --vfd-card: #fffcf9;
+  --vfd-dot: #e8d4bc;
+  --vfd-stage-from: #fbf7f2;
+  --vfd-stage-to: #f6eee4;
+  --vfd-merge-bg: #faf4ec;
+  --vfd-merge-border: #e6d2b8;
+  --vfd-current-ring: #d4924a;
+  --vfd-current-glow: rgb(212 146 74 / 26%);
+  --vfd-lane-yes: #4f9a6a;
+  --vfd-lane-yes-soft: rgb(79 154 106 / 16%);
+  --vfd-lane-par: #c46a6a;
+  --vfd-lane-par-soft: rgb(196 106 106 / 14%);
+
+  border-radius: 16px;
+  background:
+    radial-gradient(circle at 1px 1px, var(--vfd-dot) 1px, transparent 0) 0 0 / 18px 18px,
+    linear-gradient(180deg, var(--vfd-stage-from) 0%, var(--vfd-stage-to) 100%);
+  padding: 28px 16px 36px;
+  min-height: 360px;
+  overflow: auto;
+}
+
+.vfd-stage .vfd-node {
+  background: var(--vfd-card);
+  box-shadow:
+    0 1px 2px rgb(120 90 60 / 6%),
+    0 5px 14px rgb(120 90 60 / 8%);
+}
+
+.vfd-stage .vfd-node-meta,
+.vfd-stage .vfd-end,
+.vfd-stage .vfd-fork-merge {
+  color: var(--vfd-muted);
+}
+
+.vfd-stage .vfd-node-assignee {
+  color: var(--vfd-ink);
+}
+
+.vfd-stage .vfd-link,
+.vfd-stage .vfd-fork-stem,
+.vfd-stage .vfd-lane-tail,
+.vfd-stage .vfd-fork-merge-wire {
+  background: var(--vfd-wire);
+  width: var(--vfd-wire-w);
+}
+
+.vfd-stage .vfd-fork {
+  --vfd-wire: #c4a07a;
+}
+
+.vfd-stage .vfd-fork-rail::before,
+.vfd-stage .vfd-fork-rail--split::after,
+.vfd-stage .vfd-fork-rail--join::after,
+.vfd-stage .vfd-lane::before {
+  background: var(--vfd-wire);
+}
+
+.vfd-stage .vfd-fork-rail::before {
+  height: var(--vfd-wire-w);
+  border-radius: 999px;
+}
+
+.vfd-stage .vfd-fork-rail--split::after,
+.vfd-stage .vfd-fork-rail--join::after,
+.vfd-stage .vfd-lane::before {
+  width: var(--vfd-wire-w);
+}
+
+/* 只读图同样保证主链居中 */
+.vfd-stage .vfd-flow {
+  align-items: center;
+}
+
+.vfd-stage .vfd-fork-merge {
+  background: var(--vfd-merge-bg);
+  border-color: var(--vfd-merge-border);
+}
+
+.vfd-stage .vfd-node.is-active {
+  outline: 2px solid var(--vfd-current-ring);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px var(--vfd-current-glow);
+}
+
+.vfd-stage .vfd-lane-cap {
+  border-color: color-mix(in srgb, var(--vfd-lane-yes) 36%, transparent);
+}
+
+.vfd-stage .vfd-lane-title {
+  color: var(--vfd-lane-yes);
+}
+
+.vfd-stage .vfd-lane-pri {
+  color: var(--vfd-lane-yes);
+  background: var(--vfd-lane-yes-soft);
+}
+
+.vfd-stage .vfd-lane--parallel .vfd-lane-cap {
+  border-color: color-mix(in srgb, var(--vfd-lane-par) 34%, transparent);
+}
+
+.vfd-stage .vfd-lane--parallel .vfd-lane-title {
+  color: var(--vfd-lane-par);
+}
+
+.vfd-stage .vfd-lane--default .vfd-lane-cap {
+  background: #faf6f1;
+  border-style: dashed;
+  border-color: rgb(226 203 176 / 88%);
+}
+
+.vfd-stage .vfd-lane--default .vfd-lane-title {
+  color: var(--vfd-muted);
+}
+
+.vfd-stage .vfd-lane-badge--default {
+  background: rgb(212 146 74 / 12%);
+  color: #a67a42;
+  border: 1px dashed #d9b88a;
+}
+
+.vfd-stage .vfd-lane-expr--default {
+  color: var(--vfd-muted);
+}
+
+/* 节点头：实色 + 极轻明暗，保持温和但不发灰 */
+.vfd-stage .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-approve) 88%, #fff) 0%,
+    var(--vfd-approve) 100%
+  );
+}
+
+.vfd-stage .vfd-node--start .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-start) 88%, #fff) 0%,
+    var(--vfd-start) 100%
+  );
+}
+
+.vfd-stage .vfd-node--approve .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-approve) 88%, #fff) 0%,
+    var(--vfd-approve) 100%
+  );
+}
+
+.vfd-stage .vfd-node--cc .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-cc) 88%, #fff) 0%,
+    var(--vfd-cc) 100%
+  );
+}
+
+.vfd-stage .vfd-node--condition .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-condition) 88%, #fff) 0%,
+    var(--vfd-condition) 100%
+  );
+}
+
+.vfd-stage .vfd-node--inclusive .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-inclusive) 88%, #fff) 0%,
+    var(--vfd-inclusive) 100%
+  );
+}
+
+.vfd-stage .vfd-node--parallel .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-parallel) 88%, #fff) 0%,
+    var(--vfd-parallel) 100%
+  );
+}
+
+.vfd-stage .vfd-node--delay .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-delay) 88%, #fff) 0%,
+    var(--vfd-delay) 100%
+  );
+}
+
+.vfd-stage .vfd-node--service .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-service) 88%, #fff) 0%,
+    var(--vfd-service) 100%
+  );
+}
+
+.vfd-stage .vfd-node--subprocess .vfd-node-hd {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--vfd-subprocess) 88%, #fff) 0%,
+    var(--vfd-subprocess) 100%
+  );
+}

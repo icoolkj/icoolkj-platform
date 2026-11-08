@@ -1,0 +1,33 @@
+{
+  "page": {
+    "title": "Office Assistant",
+    "description": "Ask in natural language about your todos and submitted applications (scoped to your login)",
+    "skillsTitle": "Quick skills",
+    "skillsEmpty": "No skills available (missing todo or submitted permission)",
+    "skillDenied": "No access",
+    "chatTitle": "Chat",
+    "welcomeTitle": "Hi, I'm your office assistant",
+    "welcomeHint": "Pick a skill below or type a question. I only query your own todos and applications.",
+    "inputPlaceholder": "Ask: What's still pending? How are my recent applications?",
+    "send": "Send",
+    "clear": "New chat",
+    "thinking": "Looking up…",
+    "usedSkills": "Used",
+    "hintTodo": "My todos",
+    "hintSubmitted": "My submissions",
+    "emptyReply": "No reply",
+    "roleUser": "You",
+    "roleAssistant": "Assistant",
+    "composerTip": "Enter to send · Shift+Enter for newline",
+    "historyTitle": "History",
+    "historyEmpty": "No conversations yet",
+    "untitledSession": "New chat",
+    "deleteSession": "Delete",
+    "deleteSessionConfirm": "Delete this conversation? This cannot be undone."
+  },
+  "meta": {
+    "businessName": "officeAi",
+    "apiModule": "oa",
+    "functionName": "Office Assistant"
+  }
+}

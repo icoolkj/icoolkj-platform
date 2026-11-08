@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.notice.mapper.NoticeMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.notice.domain.NoticeEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="notice_title" property="noticeTitle"/>
+        <result column="notice_type" property="noticeType"/>
+        <result column="cover_file_id" property="coverFileId"/>
+        <result column="notice_content" property="noticeContent"/>
+        <result column="notice_summary" property="noticeSummary"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="publish_locations" property="publishLocations"/>
+        <result column="approve_status" property="approveStatus"/>
+        <result column="process_instance_id" property="processInstanceId"/>
+        <result column="process_definition_key" property="processDefinitionKey"/>
+        <result column="starter_user_id" property="starterUserId"/>
+        <result column="submitted_at" property="submittedAt"/>
+        <result column="finished_at" property="finishedAt"/>
+        <result column="release_status" property="releaseStatus"/>
+        <result column="published_at" property="publishedAt"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+        <result column="cover_preview_url" property="coverPreviewUrl"/>
+    </resultMap>
+
+    <sql id="List_Column_List">
+        n.id, n.tenant_id, n.notice_title, n.notice_type, n.cover_file_id,
+        n.notice_summary, n.sort_no, n.publish_locations, n.approve_status, n.release_status,
+        n.process_instance_id, n.status, n.remark,
+        n.created_by, n.created_at, n.updated_by, n.updated_at, n.deleted
+    </sql>
+
+    <sql id="Base_Column_List">
+        n.id, n.tenant_id, n.notice_title, n.notice_type, n.cover_file_id, n.notice_content,
+        n.notice_summary, n.sort_no, n.publish_locations, n.approve_status,
+        n.process_instance_id, n.process_definition_key, n.starter_user_id, n.submitted_at,
+        n.finished_at, n.release_status, n.published_at,
+        n.status, n.remark,
+        n.created_by, n.created_at, n.updated_by, n.updated_at, n.deleted
+    </sql>
+
+    <sql id="From_Join">
+        FROM sys_notice n
+        LEFT JOIN infra_file f ON f.id = n.cover_file_id AND f.deleted = 0
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            n.deleted = 0
+            <if test="noticeTitle != null and noticeTitle != ''">
+                AND n.notice_title like concat('%', #{noticeTitle}, '%')
+            </if>
+            <if test="noticeType != null and noticeType != ''">AND n.notice_type = #{noticeType}</if>
+            <if test='publishLocation != null and publishLocation != ""'>
+                AND FIND_IN_SET(#{publishLocation}, n.publish_locations)
+            </if>
+            <if test="status != null and status != ''">AND n.status = #{status}</if>
+            <if test="approveStatus != null and approveStatus != ''">AND n.approve_status = #{approveStatus}</if>
+            <if test="releaseStatus != null and releaseStatus != ''">AND n.release_status = #{releaseStatus}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, f.file_url AS cover_preview_url
+        <include refid="From_Join"/>
+        WHERE n.id = #{id} AND n.deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, f.file_url AS cover_preview_url
+        <include refid="From_Join"/>
+        <include refid="Query_Where"/>
+        ORDER BY n.sort_no ASC, n.created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="List_Column_List"/>, f.file_url AS cover_preview_url
+        <include refid="From_Join"/>
+        <include refid="Query_Where"/>
+        ORDER BY n.sort_no ASC, n.created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1)
+        <include refid="From_Join"/>
+        <include refid="Query_Where"/>
+    </select>
+
+    <select id="selectPublished" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, f.file_url AS cover_preview_url
+        <include refid="From_Join"/>
+        WHERE n.deleted = 0
+          AND n.status = '0'
+          AND n.approve_status = 'approved'
+          AND n.release_status = 'published'
+          AND (n.tenant_id = #{tenantId} OR n.tenant_id = '0')
+          AND FIND_IN_SET(#{publishLocation}, n.publish_locations)
+        ORDER BY n.sort_no ASC, n.created_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectPublishedById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, f.file_url AS cover_preview_url
+        <include refid="From_Join"/>
+        WHERE n.id = #{id}
+          AND n.deleted = 0
+          AND n.approve_status = 'approved'
+          AND n.release_status = 'published'
+          AND (n.tenant_id = #{tenantId} OR n.tenant_id = '0')
+    </select>
+
+    <select id="countByCoverFileId" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_notice
+        WHERE deleted = 0 AND cover_file_id = #{coverFileId}
+    </select>
+
+    <select id="countPublishedFileUsage" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_notice n
+        WHERE n.deleted = 0
+          AND n.status = '0'
+          AND n.approve_status = 'approved'
+          AND n.release_status = 'published'
+          AND (n.tenant_id = #{tenantId} OR n.tenant_id = '0')
+          AND (
+            n.cover_file_id = #{fileId}
+            OR n.notice_content LIKE concat('%/infra/file/', #{fileId}, '/download%')
+          )
+    </select>
+
+    <select id="selectApprovingProcessInstanceIdsByFileId" resultType="string">
+        SELECT process_instance_id
+        FROM sys_notice
+        WHERE deleted = 0
+          AND approve_status = 'running'
+          AND process_instance_id IS NOT NULL
+          AND process_instance_id != ''
+          AND (
+            cover_file_id = #{fileId}
+            OR notice_content LIKE concat('%/infra/file/', #{fileId}, '/download%')
+            OR notice_content LIKE concat('%/system/notice/content-file/', #{fileId}, '/download%')
+          )
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_notice (
+            id, tenant_id, notice_title, notice_type, cover_file_id, notice_content, notice_summary,
+            sort_no, publish_locations, approve_status, process_instance_id, process_definition_key,
+            starter_user_id, submitted_at, finished_at, release_status, published_at, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{noticeTitle}, #{noticeType}, #{coverFileId}, #{noticeContent}, #{noticeSummary},
+            #{sortNo}, #{publishLocations}, #{approveStatus}, #{processInstanceId}, #{processDefinitionKey},
+            #{starterUserId}, #{submittedAt}, #{finishedAt}, #{releaseStatus}, #{publishedAt}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_notice
+        <set>
+            notice_title = #{noticeTitle},
+            notice_type = #{noticeType},
+            cover_file_id = #{coverFileId},
+            notice_content = #{noticeContent},
+            notice_summary = #{noticeSummary},
+            sort_no = #{sortNo},
+            publish_locations = #{publishLocations},
+            approve_status = #{approveStatus},
+            process_instance_id = #{processInstanceId},
+            process_definition_key = #{processDefinitionKey},
+            starter_user_id = #{starterUserId},
+            submitted_at = #{submittedAt},
+            finished_at = #{finishedAt},
+            release_status = #{releaseStatus},
+            published_at = #{publishedAt},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="updateApproveFields">
+        UPDATE sys_notice SET
+            approve_status = #{approveStatus},
+            process_instance_id = #{processInstanceId},
+            finished_at = #{finishedAt},
+            updated_at = NOW(3)
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_notice SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <update id="deleteByIds">
+        UPDATE sys_notice SET deleted = 1
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

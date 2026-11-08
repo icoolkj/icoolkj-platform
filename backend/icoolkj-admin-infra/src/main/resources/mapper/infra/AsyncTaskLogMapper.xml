@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.AsyncTaskLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.AsyncTaskLogEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="task_id" property="taskId"/>
+        <result column="log_level" property="logLevel"/>
+        <result column="log_content" property="logContent"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, task_id, log_level, log_content, created_at
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="taskId != null and taskId != ''">AND task_id = #{taskId}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task_log
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task_log
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task_log
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM infra_async_task_log
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO infra_async_task_log (id, tenant_id, task_id, log_level, log_content, created_at)
+        VALUES (#{id}, #{tenantId}, #{taskId}, #{logLevel}, #{logContent}, #{createdAt})
+    </insert>
+
+    <update id="updateById">
+        UPDATE infra_async_task_log
+        SET tenant_id = #{tenantId},
+            task_id = #{taskId},
+            log_level = #{logLevel},
+            log_content = #{logContent}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM infra_async_task_log WHERE id = #{id}
+    </delete>
+
+</mapper>

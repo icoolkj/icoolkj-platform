@@ -1,0 +1,115 @@
+{
+  "meta": {
+    "businessName": "officeSubmitted",
+    "apiModule": "workflow",
+    "backendModule": "workflow",
+    "permissionPrefix": "workflow:submitted",
+    "className": "OfficeSubmitted"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "bizTitle",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "bizType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 160
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_instance_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "bizTitle",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bizType",
+        "component": "dict-tag",
+        "dictType": "wf_biz_type",
+        "width": 120,
+        "align": "center"
+      },
+      {
+        "field": "processDefinitionName",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "wf_instance_status",
+        "width": 110,
+        "align": "center"
+      },
+      {
+        "field": "bizApproveStatus",
+        "component": "dict-tag",
+        "dictType": "wf_biz_approve_status",
+        "width": 110,
+        "align": "center"
+      },
+      {
+        "field": "startTime",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "endTime",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 140
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "fields": []
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "view",
+        "labelKey": "viewDetail",
+        "handler": "officeSubmitted.view",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "withdraw",
+        "labelKey": "withdrawApprove",
+        "permKey": "cancel",
+        "type": "warning",
+        "handler": "officeSubmitted.withdraw",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

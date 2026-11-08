@@ -1,0 +1,315 @@
+﻿{
+  "meta": {
+    "businessName": "menu",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:menu",
+    "className": "Menu"
+  },
+  "page": {
+    "layout": "tree-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "menuName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "menuType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_menu_type",
+        "width": 120
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      },
+      {
+        "field": "productCode",
+        "component": "select",
+        "queryType": "EQ",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "menuName",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "productCode",
+        "component": "dict-tag",
+        "width": 110,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "menuType",
+        "component": "dict-tag",
+        "dictType": "sys_menu_type",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "routePath",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "componentPath",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "permissionCode",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "icon",
+        "component": "icon",
+        "width": 72,
+        "minWidth": 72,
+        "align": "center"
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "assignScope",
+        "component": "dict-tag",
+        "dictType": "sys_menu_assign_scope",
+        "width": 110,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "parentId",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "routeName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "visible",
+        "component": "dict-tag",
+        "dictType": "sys_visible_status",
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "isExternal",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "isCache",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 160
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 110,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "parentId",
+        "component": "tree-select",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "treeSource": "self",
+        "treeLabelField": "menuName",
+        "treeValueField": "id"
+      },
+      {
+        "field": "menuType",
+        "component": "radio",
+        "dictType": "sys_menu_type",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "menuName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "menuNameEn",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "routePath",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "componentPath",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "permissionCode",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "icon",
+        "component": "icon-picker",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "sortNo",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "min": 0
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "assignScope",
+        "component": "radio",
+        "dictType": "sys_menu_assign_scope",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "productCode",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      },
+      {
+        "field": "routeName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "visible",
+        "component": "radio",
+        "dictType": "sys_visible_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "isExternal",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "isCache",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      }
+    ]
+  },
+  "tree": {
+    "parentField": "parentId",
+    "rootValue": "0",
+    "rowKey": "id",
+    "labelField": "menuName",
+    "pageSize": 10000,
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 220,
+      "addChild": true,
+      "addChildExclude": {
+        "field": "menuType",
+        "values": ["F"]
+      },
+      "expandCollapse": true
+    }
+  }
+}

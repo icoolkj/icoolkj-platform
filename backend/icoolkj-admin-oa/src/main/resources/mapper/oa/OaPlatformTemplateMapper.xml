@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaPlatformTemplateMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaPlatformTemplateEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="category_code" property="categoryCode"/>
+        <result column="template_code" property="templateCode"/>
+        <result column="template_name" property="templateName"/>
+        <result column="wf_model_id" property="wfModelId"/>
+        <result column="latest_version_no" property="latestVersionNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, category_code, template_code, template_name, wf_model_id, latest_version_no,
+        status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="scopeTenantId != null and scopeTenantId != ''">AND tenant_id = #{scopeTenantId}</if>
+            <if test="categoryCode != null and categoryCode != ''">AND category_code = #{categoryCode}</if>
+            <if test="templateCode != null and templateCode != ''">AND template_code like concat('%', #{templateCode}, '%')</if>
+            <if test="templateName != null and templateName != ''">AND template_name like concat('%', #{templateName}, '%')</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByCategoryCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template
+        WHERE tenant_id = #{tenantId} AND category_code = #{categoryCode} AND deleted = 0 LIMIT 1
+    </select>
+
+    <select id="selectByTemplateCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template
+        WHERE tenant_id = #{tenantId} AND template_code = #{templateCode} AND deleted = 0 LIMIT 1
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template
+        <include refid="Query_Where"/> ORDER BY created_at DESC LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM oa_platform_template <include refid="Query_Where"/>
+    </select>
+
+    <select id="selectPublishedOptions" resultType="com.icoolkj.platform.oa.vo.OaPlatformTemplateOptionVO">
+        SELECT t.id, t.category_code AS categoryCode, t.template_code AS templateCode,
+               t.template_name AS templateName, t.latest_version_no AS latestVersionNo,
+               v.id AS publishedVersionId
+        FROM oa_platform_template t
+        INNER JOIN oa_platform_template_version v ON v.template_id = t.id AND v.deleted = 0 AND v.version_status = 'published'
+        WHERE t.tenant_id = #{tenantId} AND t.deleted = 0 AND t.status = '0' AND t.latest_version_no > 0
+        ORDER BY t.category_code ASC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO oa_platform_template (
+            id, tenant_id, category_code, template_code, template_name, wf_model_id, latest_version_no,
+            status, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{categoryCode}, #{templateCode}, #{templateName}, #{wfModelId}, #{latestVersionNo},
+            #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE oa_platform_template
+        <set>
+            template_name = #{templateName},
+            wf_model_id = #{wfModelId},
+            latest_version_no = #{latestVersionNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+</mapper>

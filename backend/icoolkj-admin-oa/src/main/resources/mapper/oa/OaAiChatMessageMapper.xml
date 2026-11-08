@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaAiChatMessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaAiChatMessageEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="session_id" property="sessionId"/>
+        <result column="role" property="role"/>
+        <result column="content" property="content"/>
+        <result column="used_skills_json" property="usedSkillsJson"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, session_id, role, content, used_skills_json,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM oa_ai_chat_message
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM oa_ai_chat_message
+        <where>
+            deleted = 0
+            <if test="sessionId != null and sessionId != ''">AND session_id = #{sessionId}</if>
+            <if test="role != null and role != ''">AND role = #{role}</if>
+        </where>
+        ORDER BY created_at ASC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO oa_ai_chat_message (
+            id, tenant_id, session_id, role, content, used_skills_json,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{sessionId}, #{role}, #{content}, #{usedSkillsJson},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE oa_ai_chat_message
+        <set>
+            role = #{role},
+            content = #{content},
+            used_skills_json = #{usedSkillsJson},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE oa_ai_chat_message SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectBySessionId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM oa_ai_chat_message
+        WHERE deleted = 0 AND session_id = #{sessionId}
+        ORDER BY created_at ASC, id ASC
+    </select>
+
+    <select id="selectLatestBySessionId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM (
+            SELECT <include refid="Base_Column_List"/>
+            FROM oa_ai_chat_message
+            WHERE deleted = 0 AND session_id = #{sessionId}
+            ORDER BY created_at DESC, id DESC
+            LIMIT #{limit}
+        ) t
+        ORDER BY created_at ASC, id ASC
+    </select>
+
+    <update id="softDeleteBySessionId">
+        UPDATE oa_ai_chat_message SET deleted = 1 WHERE session_id = #{sessionId} AND deleted = 0
+    </update>
+
+</mapper>

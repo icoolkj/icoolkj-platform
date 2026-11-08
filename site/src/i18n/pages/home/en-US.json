@@ -1,0 +1,97 @@
+{
+  "home": {
+    "brand": "iCoolKJ Platform",
+    "headline": "A Source Available admin framework for study and research",
+    "subhead": "Multi-tenant, permissions, workflow, and codegen—built to ship SaaS and internal systems faster.",
+    "ctaPrimary": "Licence & getting started",
+    "ctaSecondary": "Open Console",
+    "ctaBand": {
+      "title": "Read the source, then run it locally",
+      "body": "Read the full source and architecture docs, then run and debug in an isolated local environment.",
+      "primary": "Licence & getting started",
+      "secondary": "Open Console"
+    },
+    "lines": {
+      "eyebrow": "Product lines",
+      "title": "Three pillars, one delivery path",
+      "lead": "Unlike kitchen-sink scaffolds, this is a complete, runnable admin and office-process foundation.",
+      "items": {
+        "foundation": {
+          "title": "Enterprise admin foundation",
+          "body": "Multi-tenant, org, RBAC, dictionaries, audit, and security policies—ready to govern.",
+          "points": [
+            "Clear platform vs tenant boundaries",
+            "Menu and button-level RBAC",
+            "Login security and operation audit"
+          ],
+          "linkText": "See capabilities"
+        },
+        "oa": {
+          "title": "OA & workflow",
+          "body": "Flowable design plus tenant office configuration for real approval workloads.",
+          "points": [
+            "Online process design",
+            "Todo / submitted / approve loop",
+            "Platform templates synced to tenants"
+          ],
+          "linkText": "Read capabilities"
+        },
+        "codegen": {
+          "title": "Engineering & codegen",
+          "body": "Consistent structure and CRUD generation—extend modules by convention, not from scratch.",
+          "points": [
+            "view.json / page-spec driven",
+            "Aligned frontend and backend generation",
+            "A skeleton built to last"
+          ],
+          "linkText": "Platform overview"
+        }
+      }
+    },
+    "caps": {
+      "eyebrow": "Capabilities",
+      "title": "Delivery-oriented capability matrix",
+      "hint": "Read full docs"
+    },
+    "values": {
+      "eyebrow": "Why us",
+      "title": "Why a framework foundation",
+      "items": {
+        "reuse": {
+          "title": "One foundation, many projects",
+          "body": "Separate platform capabilities from business modules—stop rebuilding admin stacks from scratch."
+        },
+        "govern": {
+          "title": "Governable out of the box",
+          "body": "Tenants, orgs, menus, security policies, and audit trails ready for delivery."
+        },
+        "license": {
+          "title": "Non-commercial study and research licence",
+          "body": "Source is public for learning and research. Commercial use is prohibited without a separate written licence."
+        }
+      }
+    },
+    "path": {
+      "eyebrow": "Learning path",
+      "title": "From discovery to go-live",
+      "lead": "Primary path: read the source, run it locally, study the design. Any commercial use requires a separate written licence.",
+      "items": {
+        "fit": {
+          "title": "Check fit",
+          "body": "Confirm multi-tenant, permissions, workflow, and codegen match your admin scenario.",
+          "linkText": "Capabilities"
+        },
+        "license": {
+          "title": "Read the licence",
+          "body": "Obtain usage rights and agreed documentation/updates, then deploy your environment.",
+          "linkText": "Licence"
+        },
+        "deploy": {
+          "title": "Deploy & extend",
+          "body": "Initialize and grow business modules on the foundation—optionally with delivery partners.",
+          "linkText": "Delivery"
+        }
+      }
+    }
+  }
+}

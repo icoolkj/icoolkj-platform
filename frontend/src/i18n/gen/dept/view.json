@@ -1,0 +1,203 @@
+﻿{
+  "meta": {
+    "businessName": "dept",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:dept",
+    "className": "Dept"
+  },
+  "page": {
+    "layout": "tree-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "deptName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "deptCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "deptName",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "deptCode",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "minWidth": 80,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "minWidth": 90,
+        "align": "center"
+      },
+      {
+        "field": "leaderName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "phone",
+        "component": "text",
+        "width": 130,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "email",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 220
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 640,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "createDefaults": {
+      "parentId": "0",
+      "sortNo": 0,
+      "status": "0"
+    },
+    "fields": [
+      {
+        "field": "parentId",
+        "component": "tree-select",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "treeSource": "self",
+        "treeLabelField": "deptName",
+        "treeValueField": "id"
+      },
+      {
+        "field": "deptName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "deptCode",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "leaderName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "phone",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "email",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "sortNo",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 12,
+        "min": 0
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  },
+  "tree": {
+    "parentField": "parentId",
+    "rootValue": "0",
+    "rowKey": "id",
+    "labelField": "deptName",
+    "sortField": "sortNo",
+    "pageSize": 10000,
+    "defaultExpandAll": true,
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "addChild": true,
+      "width": 220
+    }
+  }
+}

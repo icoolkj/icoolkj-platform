@@ -1,0 +1,133 @@
+{
+  "page": {
+    "title": "Login Log Management",
+    "description": "Manage login log records",
+    "addTitle": "Add Login Log",
+    "editTitle": "Edit Login Log",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "loginStatusSuccess": "Success",
+    "loginStatusFail": "Failed",
+    "exportFileName": "Login Logs",
+    "exportAsyncTaskName": "Login Log Excel Export",
+    "exportSheetName": "Login Logs",
+    "clear": "Clear",
+    "clearConfirm": "Clear all logs? This cannot be undone."
+  },
+  "fields": {
+    "username": {
+      "label": "Username",
+      "placeholder": "Please enter Username",
+      "validation": {
+        "required": "Username is required",
+        "maxLength": "Username must not exceed 50 characters"
+      }
+    },
+    "loginStatus": {
+      "label": "Login Status",
+      "placeholder": "Please select Login Status",
+      "validation": {
+        "required": "Login Status is required",
+        "maxLength": "Login Status must not exceed 1 characters"
+      }
+    },
+    "ip": {
+      "label": "IP",
+      "placeholder": "Please enter Ip",
+      "validation": {
+        "maxLength": "Ip must not exceed 64 characters"
+      }
+    },
+    "message": {
+      "label": "Message",
+      "placeholder": "Please enter Message",
+      "validation": {
+        "maxLength": "Message must not exceed 500 characters"
+      }
+    },
+    "loginAt": {
+      "label": "Login Time",
+      "placeholder": "Please select Login At",
+      "validation": {
+        "required": "Login At is required"
+      }
+    },
+    "loginType": {
+      "label": "Login Type",
+      "placeholder": "Please select Login Type",
+      "validation": {
+        "required": "Login Type is required",
+        "maxLength": "Login Type must not exceed 20 characters"
+      }
+    },
+    "location": {
+      "label": "Location",
+      "placeholder": "Please enter Location",
+      "validation": {
+        "maxLength": "Location must not exceed 255 characters"
+      }
+    },
+    "userAgent": {
+      "label": "User Agent",
+      "placeholder": "Please enter User Agent",
+      "validation": {
+        "maxLength": "User Agent must not exceed 500 characters"
+      }
+    },
+    "browser": {
+      "label": "Browser",
+      "placeholder": "Please enter Browser",
+      "validation": {
+        "maxLength": "Browser must not exceed 100 characters"
+      }
+    },
+    "os": {
+      "label": "Os",
+      "placeholder": "Please enter Os",
+      "validation": {
+        "maxLength": "Os must not exceed 100 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "loginLog",
+    "apiModule": "system",
+    "functionName": "Login Log",
+    "constraints": {
+      "username": {
+        "required": true,
+        "maxLength": 50
+      },
+      "loginType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "loginStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "message": {
+        "maxLength": 500
+      },
+      "ip": {
+        "maxLength": 64
+      },
+      "location": {
+        "maxLength": 255
+      },
+      "userAgent": {
+        "maxLength": 500
+      },
+      "browser": {
+        "maxLength": 100
+      },
+      "os": {
+        "maxLength": 100
+      },
+      "loginAt": {
+        "required": true
+      }
+    }
+  }
+}

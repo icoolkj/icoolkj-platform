@@ -1,0 +1,100 @@
+{
+  "page": {
+    "title": "区划管理",
+    "description": "国标行政区划（平台维护，支持增删改）",
+    "addTitle": "新增区划",
+    "editTitle": "修改区划",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "treeRoot": "顶级区划",
+    "addChild": "新增下级"
+  },
+  "fields": {
+    "regionName": {
+      "label": "区划名称",
+      "placeholder": "请输入区划名称",
+      "validation": {
+        "required": "请输入区划名称",
+        "maxLength": "区划名称长度不能超过100"
+      }
+    },
+    "regionCode": {
+      "label": "区划编码",
+      "placeholder": "请输入国标区划代码",
+      "validation": {
+        "required": "请输入区划编码",
+        "maxLength": "区划编码长度不能超过12"
+      }
+    },
+    "regionLevel": {
+      "label": "区划级别",
+      "placeholder": "请选择区划级别",
+      "validation": {
+        "required": "请选择区划级别",
+        "maxLength": "区划级别长度不能超过1"
+      }
+    },
+    "parentId": {
+      "label": "上级区划",
+      "placeholder": "请选择上级区划",
+      "validation": {
+        "required": "请选择上级区划",
+        "maxLength": "上级区划长度不能超过20"
+      }
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序",
+      "validation": {
+        "required": "请输入排序"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "region",
+    "apiModule": "system",
+    "functionName": "区划",
+    "constraints": {
+      "regionName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "regionCode": {
+        "required": true,
+        "maxLength": 12
+      },
+      "regionLevel": {
+        "required": true,
+        "maxLength": 1
+      },
+      "parentId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

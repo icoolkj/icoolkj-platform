@@ -1,0 +1,94 @@
+{
+  "page": {
+    "title": "Message Management",
+    "description": "Manage message records",
+    "addTitle": "Add Message",
+    "editTitle": "Edit Message",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "refreshCache": "Refresh cache",
+    "refreshCacheSuccess": "Message cache refreshed",
+    "refreshCacheConfirm": "Refresh all i18n message caches?"
+  },
+  "fields": {
+    "messageKey": {
+      "label": "Message Key",
+      "placeholder": "Please enter Message Key",
+      "validation": {
+        "required": "Message Key is required",
+        "maxLength": "Message Key must not exceed 128 characters"
+      }
+    },
+    "locale": {
+      "label": "Locale",
+      "placeholder": "Please enter Locale",
+      "validation": {
+        "required": "Locale is required",
+        "maxLength": "Locale must not exceed 16 characters"
+      }
+    },
+    "messageValue": {
+      "label": "Message Value",
+      "placeholder": "Please enter Message Value",
+      "validation": {
+        "required": "Message Value is required",
+        "maxLength": "Message Value must not exceed 65535 characters"
+      }
+    },
+    "module": {
+      "label": "Module",
+      "placeholder": "Please enter Module",
+      "validation": {
+        "required": "Module is required",
+        "maxLength": "Module must not exceed 64 characters"
+      }
+    },
+    "scope": {
+      "label": "Scope",
+      "placeholder": "Please enter Scope",
+      "validation": {
+        "required": "Scope is required",
+        "maxLength": "Scope must not exceed 16 characters",
+        "invalid": "Invalid scope"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 256 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "i18nMessage",
+    "apiModule": "system",
+    "functionName": "Message",
+    "constraints": {
+      "messageKey": {
+        "required": true,
+        "maxLength": 128
+      },
+      "locale": {
+        "required": true,
+        "maxLength": 16
+      },
+      "messageValue": {
+        "required": true,
+        "maxLength": 65535
+      },
+      "module": {
+        "required": true,
+        "maxLength": 64
+      },
+      "scope": {
+        "required": true,
+        "maxLength": 16
+      },
+      "remark": {
+        "maxLength": 256
+      }
+    }
+  }
+}

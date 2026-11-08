@@ -1,0 +1,271 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+  forward-headers-strategy: framework
+  # 默认 8KB；平台运营 JWT 含大量权限时易超限，上传等请求直接 400 Request header is too large
+  max-http-request-header-size: 64KB
+  compression:
+    enabled: true
+    mime-types: application/json,application/xml,text/html,text/xml,text/plain,text/css,text/javascript,application/javascript
+    min-response-size: 1024
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 300
+      min-spare: 20
+    accept-count: 100
+    max-connections: 8192
+
+spring:
+  application:
+    name: icoolkj-admin-api
+  aop:
+    proxy-target-class: true
+  profiles:
+    active: dev
+  config:
+    import:
+      - classpath:application-icoolkj-shared.yml
+      - optional:classpath:application-icoolkj-shared-${spring.profiles.active}.yml
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+    serialization:
+      write-dates-as-timestamps: false
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+  web:
+    resources:
+      add-mappings: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+  threads:
+    virtual:
+      enabled: false
+
+  main:
+    allow-circular-references: false
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    tags-sorter: alpha
+    operations-sorter: alpha
+  default-flat-param-object: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+icoolkj:
+  security:
+    enabled: true
+    ignore-urls:
+      - /auth/login
+      - /auth/refresh
+      - /auth/mfa/verify
+      - /auth/captcha
+      - /auth/password-public-key
+      - /auth/login-brand
+      - /auth/login-brand/asset
+      - /auth/login-brand/chrome
+      - /auth/login-brand/logo
+      - /auth/login-brand/qr
+      - /auth/login-brand/favicon
+      - /system/config/bootstrap
+      - /system/i18n/bootstrap
+      - /system/i18n/messages
+      - /error
+      - /swagger-ui/**
+      - /v3/api-docs/**
+      - /actuator/health
+    password:
+      bcrypt-strength: 10
+    password-transport:
+      enabled: true
+      allow-plaintext: false
+      max-skew-seconds: 120
+    login:
+      max-retry-count: 5
+      lock-minutes: 15
+      allow-multi-login: true
+      single-login-kickout-oldest: true
+      require-captcha: false
+    cors:
+      # Empty = same-origin / reverse-proxy only (no *). Prod: set frontend origin(s).
+      allowed-origins: []
+      allow-credentials: true
+      max-age-seconds: 3600
+
+  id:
+    worker-id: 1
+    datacenter-id: 1
+
+  tenant:
+    ignore-urls:
+      - /auth/login
+      - /auth/refresh
+      - /auth/mfa/verify
+      - /auth/captcha
+      - /auth/password-public-key
+      - /auth/login-brand
+      - /auth/login-brand/asset
+      - /auth/login-brand/chrome
+      - /auth/login-brand/logo
+      - /auth/login-brand/qr
+      - /auth/login-brand/favicon
+      - /system/config/bootstrap
+      - /system/i18n/bootstrap
+      - /system/i18n/messages
+
+  storage:
+    provider: local
+    local-root: ./data/upload
+    enabled-providers: local,minio
+    max-file-size-mb: 100
+    allowed-extensions:
+    blocked-extensions: exe,bat,sh,cmd,com,msi
+    bucket: icoolkj
+    domain: http://127.0.0.1:9000
+    access-key: ${MINIO_ACCESS_KEY:}
+    secret-key: ${MINIO_SECRET_KEY:}
+    endpoint: http://127.0.0.1:9000
+    region: cn-east-1
+    path-style-access: true
+    signed-url-expire-seconds: 3600
+    security:
+      require-biz-type: true
+      content-sniff-enabled: true
+      verify-md5-on-download: true
+      malware-scan:
+        enabled: false
+        engine: clamav
+        clamav-host: 127.0.0.1
+        clamav-port: 3310
+        connect-timeout-ms: 3000
+        read-timeout-ms: 60000
+        fail-closed: true
+      encryption:
+        enabled: true
+        minio-sse-s3: false
+      rate-limit:
+        enabled: true
+        max-uploads-per-minute: 30
+      watermark:
+        enabled: false
+        text: iCoolKJ
+        min-sensitivity: "2"
+      minio-acl:
+        inspect-on-startup: true
+        fail-on-public-read: false
+      download-guard:
+        enabled: true
+        sensitive-min-level: "3"
+        sensitive-permission: infra:file:download:sensitive
+
+  provider:
+    sms:
+      enabled: false
+      default-channel: aliyun
+      aliyun:
+        access-key-id:
+        access-key-secret:
+        sign-name:
+      huawei:
+        app-key:
+        app-secret:
+        sender:
+    mail:
+      enabled: false
+      host:
+      port: 465
+      username:
+      password:
+      protocol: smtps
+      default-from:
+    ocr:
+      enabled: false
+      default-channel: baidu
+      baidu:
+        api-key:
+        secret-key:
+    sign:
+      enabled: false
+      default-channel: esign
+      esign:
+        app-id:
+        app-secret:
+        host:
+
+  logging:
+    retention:
+      login-log-days: 180
+      operation-log-days: 180
+      api-access-log-days: 90
+      archive-login-log-days: 365
+      archive-operation-log-days: 365
+      archive-api-access-log-days: 180
+
+  web:
+    trace-id-header: X-Trace-Id
+    response-advice:
+      enabled: true
+
+  workflow:
+    bootstrap:
+      # 主路径：DB 种子 bpmn_xml/design_json → Flowable；classpath 仅为应急
+      classpath-deploy-enabled: false
+      model-sync-enabled: true
+      classpath-fallback-enabled: false
+      # 应急开启 classpath-deploy / classpath-fallback 时使用
+      classpath-resources:
+        - processes/notice_publish.bpmn20.xml
+        - processes/oa_leave.bpmn20.xml
+
+# Flowable 流程引擎（与业务库同库，ACT_* 表由引擎自动维护）
+flowable:
+  # 必须用字符串；YAML 布尔 true 绑定到 Flowable String 属性时可能失效
+  database-schema-update: "true"
+  async-executor-activate: true
+  history-level: audit
+  process:
+    definition-cache-limit: 256
+  check-process-definitions: false
+  # Phase 1 只用 BPMN 流程，关闭其余引擎（避免 Event Registry 空库 schema 升级失败）
+  eventregistry:
+    enabled: false
+  idm:
+    enabled: false
+  app:
+    enabled: false
+  cmmn:
+    enabled: false
+  dmn:
+    enabled: false

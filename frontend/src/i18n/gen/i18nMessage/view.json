@@ -1,0 +1,137 @@
+﻿{
+  "meta": {
+    "businessName": "i18nMessage",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:i18nMessage",
+    "className": "I18nMessage"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "messageKey",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "locale",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 140
+      },
+      {
+        "field": "module",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "messageKey",
+        "component": "text",
+        "minWidth": 220,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "locale",
+        "component": "text",
+        "width": 100,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "messageValue",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "module",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "scope",
+        "component": "text",
+        "width": 100,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 160
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "messageKey",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "locale",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "messageValue",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 4
+      },
+      {
+        "field": "module",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "scope",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  }
+}

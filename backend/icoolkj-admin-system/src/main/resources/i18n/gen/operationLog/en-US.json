@@ -1,0 +1,254 @@
+{
+  "page": {
+    "title": "Operation Log Management",
+    "description": "Manage operation log records",
+    "addTitle": "Add Operation Log",
+    "editTitle": "Edit Operation Log",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "statusSuccess": "Success",
+    "statusFail": "Failed",
+    "exportFileName": "Operation Logs",
+    "exportAsyncTaskName": "Operation Log Excel Export",
+    "exportSheetName": "Operation Logs",
+    "clear": "Clear",
+    "clearConfirm": "Clear all logs? This cannot be undone."
+  },
+  "audit": {
+    "modules": {
+      "Auth": "Auth",
+      "User Profile": "User Profile",
+      "User Preference": "User Preference",
+      "System User": "System User",
+      "System Role": "System Role",
+      "System Menu": "System Menu",
+      "System Dept": "System Dept",
+      "System Post": "System Post",
+      "System Dict Type": "System Dict Type",
+      "System Dict Item": "System Dict Item",
+      "System Config": "System Config",
+      "System Notice": "System Notice",
+      "System Banner": "System Banner",
+      "System Region": "System Region",
+      "System I18n Message": "System I18n Message",
+      "System I18n Locale": "System I18n Locale",
+      "Site Message": "Site Message",
+      "Site Message Inbox": "Site Message Inbox",
+      "Tenant": "Tenant",
+      "Ip Access Rule": "IP Access Rule",
+      "Infra Async Task": "Infra Async Task",
+      "InfraFile": "Infra File",
+      "DatabaseBackup": "Database Backup",
+      "Code Generator": "Code Generator",
+      "Code Generator View": "Code Generator View",
+      "Code Generator I18n": "Code Generator I18n",
+      "AI Chat": "AI Chat",
+      "AI Config": "AI Config",
+      "AI DDL Log": "AI DDL Log",
+      "Page Spec AI": "Page Spec AI"
+    },
+    "businessTypes": {
+      "CREATE": "Create",
+      "UPDATE": "Update",
+      "DELETE": "Delete",
+      "EXPORT": "Export",
+      "LOGOUT": "Logout",
+      "REFRESH_CACHE": "Refresh Cache",
+      "ASSIGN_ROLE": "Assign Role",
+      "ASSIGN_MENU": "Assign Menu",
+      "INSERT": "Insert",
+      "IMPORT": "Import",
+      "GENERATE_CODE": "Generate Code",
+      "SYNC_DB": "Sync Database",
+      "SAVE": "Save",
+      "SYNC": "Sync",
+      "RESTORE_BASELINE": "Restore Baseline",
+      "COPY": "Copy",
+      "TEST": "Test",
+      "CREATE_SESSION": "Create Session",
+      "SEND": "Send",
+      "ARCHIVE": "Archive",
+      "OTHER": "Other",
+      "PREPARE_TABLE": "Prepare Table",
+      "DESIGN_CREATE_DDL": "Design Create DDL",
+      "DESIGN_ALTER_DDL": "Design Alter DDL",
+      "EXECUTE_DDL": "Execute DDL",
+      "DESIGN_TABLE": "Design Table",
+      "CREATE_TABLE": "Create Table",
+      "DESIGN_ALTER_TABLE": "Design Alter Table",
+      "APPLY_ALTER_TABLE": "Apply Alter Table",
+      "ANALYZE": "Analyze",
+      "PUBLISH": "Publish",
+      "GENERATE": "Generate",
+      "COMPILE": "Compile"
+    }
+  },
+  "fields": {
+    "moduleName": {
+      "label": "Module",
+      "placeholder": "Please enter Module",
+      "validation": {
+        "maxLength": "Module Name must not exceed 100 characters"
+      }
+    },
+    "operatorName": {
+      "label": "Operator",
+      "placeholder": "Please enter Operator Name",
+      "validation": {
+        "maxLength": "Operator Name must not exceed 50 characters"
+      }
+    },
+    "operationUrl": {
+      "label": "URL",
+      "placeholder": "Please enter Operation Url",
+      "validation": {
+        "maxLength": "Operation Url must not exceed 255 characters"
+      }
+    },
+    "operationIp": {
+      "label": "IP",
+      "placeholder": "Please enter Operation Ip",
+      "validation": {
+        "maxLength": "Operation Ip must not exceed 64 characters"
+      }
+    },
+    "operationStatus": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Operation Status is required",
+        "maxLength": "Operation Status must not exceed 1 characters"
+      }
+    },
+    "operationAt": {
+      "label": "Time",
+      "placeholder": "Please select Operation At",
+      "validation": {
+        "required": "Operation At is required"
+      }
+    },
+    "traceId": {
+      "label": "Trace Id",
+      "placeholder": "Please enter Trace Id",
+      "validation": {
+        "maxLength": "Trace Id must not exceed 64 characters"
+      }
+    },
+    "businessType": {
+      "label": "Business Type",
+      "placeholder": "Please select Business Type",
+      "validation": {
+        "maxLength": "Business Type must not exceed 50 characters"
+      }
+    },
+    "method": {
+      "label": "Method",
+      "placeholder": "Please enter Method",
+      "validation": {
+        "maxLength": "Method must not exceed 255 characters"
+      }
+    },
+    "requestMethod": {
+      "label": "Request Method",
+      "placeholder": "Please enter Request Method",
+      "validation": {
+        "maxLength": "Request Method must not exceed 20 characters"
+      }
+    },
+    "operatorId": {
+      "label": "Operator Id",
+      "placeholder": "Please enter Operator Id",
+      "validation": {
+        "maxLength": "Operator Id must not exceed 20 characters"
+      }
+    },
+    "operationLocation": {
+      "label": "Operation Location",
+      "placeholder": "Please enter Operation Location",
+      "validation": {
+        "maxLength": "Operation Location must not exceed 255 characters"
+      }
+    },
+    "requestParam": {
+      "label": "Request Param",
+      "placeholder": "Please enter Request Param",
+      "validation": {
+        "maxLength": "Request Param must not exceed 65535 characters"
+      }
+    },
+    "responseResult": {
+      "label": "Response Result",
+      "placeholder": "Please enter Response Result",
+      "validation": {
+        "maxLength": "Response Result must not exceed 65535 characters"
+      }
+    },
+    "errorMessage": {
+      "label": "Error Message",
+      "placeholder": "Please enter Error Message",
+      "validation": {
+        "maxLength": "Error Message must not exceed 65535 characters"
+      }
+    },
+    "costTime": {
+      "label": "Cost Time",
+      "placeholder": "Please enter Cost Time",
+      "validation": {}
+    }
+  },
+  "meta": {
+    "businessName": "operationLog",
+    "apiModule": "system",
+    "functionName": "Operation Log",
+    "constraints": {
+      "traceId": {
+        "maxLength": 64
+      },
+      "moduleName": {
+        "maxLength": 100
+      },
+      "businessType": {
+        "maxLength": 50
+      },
+      "method": {
+        "maxLength": 255
+      },
+      "requestMethod": {
+        "maxLength": 20
+      },
+      "operatorId": {
+        "maxLength": 20
+      },
+      "operatorName": {
+        "maxLength": 50
+      },
+      "operationUrl": {
+        "maxLength": 255
+      },
+      "operationIp": {
+        "maxLength": 64
+      },
+      "operationLocation": {
+        "maxLength": 255
+      },
+      "requestParam": {
+        "maxLength": 65535
+      },
+      "responseResult": {
+        "maxLength": 65535
+      },
+      "operationStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "errorMessage": {
+        "maxLength": 65535
+      },
+      "costTime": {},
+      "operationAt": {
+        "required": true
+      }
+    }
+  }
+}

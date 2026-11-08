@@ -1,0 +1,82 @@
+{
+  "page": {
+    "title": "站点品牌",
+    "description": "统一维护平台与租户 OEM：产品名、Logo、版权与登录相关素材。租户未覆盖时继承平台默认。上传类型/大小/必传等由文件槽位配置决定。",
+    "save": "保存",
+    "resetOverride": "恢复平台默认",
+    "resetConfirm": "确认清除本租户品牌覆盖并回退到平台默认？",
+    "loadFailed": "加载品牌配置失败",
+    "saveSuccess": "品牌已保存",
+    "resetSuccess": "已恢复平台默认品牌",
+    "targetTenant": "维护对象",
+    "platformTenant": "平台（platform）",
+    "tenantOverrideHint": "当前为租户覆盖配置，登录页将优先使用本租户品牌。",
+    "tenantInheritHint": "当前继承平台默认品牌；保存后将生成本租户覆盖。",
+    "sectionBasic": "基础信息",
+    "sectionLogo": "Logo 规格",
+    "sectionCopyright": "版权与联系",
+    "sectionQr": "二维码",
+    "productName": "产品名称",
+    "productNameZh": "产品名称（中文）",
+    "productNameEn": "产品名称（英文）",
+    "copyrightBrand": "版权品牌",
+    "icpNo": "备案号",
+    "icpUrl": "备案链接",
+    "domain": "站点域名",
+    "siteUrl": "站点 URL",
+    "email": "联系邮箱",
+    "contactName": "联系人",
+    "contactPhone": "联系人电话",
+    "upload": "上传图片",
+    "catalogLoadHint": "未能加载 view.json 中配置的文件目录。请在「基础设施 → 文件配置中心」配置目录槽位后重试。",
+    "catalogEmpty": "目录暂无启用槽位（或均已停用），请先在文件配置中心绑定并启用",
+    "assetLabelPlaceholder": "说明文案（可选）"
+  },
+  "fields": {
+    "productNameZh": {
+      "label": "产品名称（中文）",
+      "placeholder": "请输入中文产品名称"
+    },
+    "productNameEn": {
+      "label": "产品名称（英文）",
+      "placeholder": "请输入英文产品名称"
+    },
+    "copyrightBrand": {
+      "label": "版权品牌",
+      "placeholder": "请输入版权品牌"
+    },
+    "icpNo": {
+      "label": "备案号",
+      "placeholder": "请输入备案号"
+    },
+    "icpUrl": {
+      "label": "备案链接",
+      "placeholder": "请输入备案链接"
+    },
+    "domain": {
+      "label": "站点域名",
+      "placeholder": "请输入站点域名"
+    },
+    "siteUrl": {
+      "label": "站点 URL",
+      "placeholder": "请输入站点 URL"
+    },
+    "email": {
+      "label": "联系邮箱",
+      "placeholder": "请输入联系邮箱"
+    },
+    "contactName": {
+      "label": "联系人",
+      "placeholder": "请输入联系人"
+    },
+    "contactPhone": {
+      "label": "联系人电话",
+      "placeholder": "请输入联系人电话"
+    }
+  },
+  "meta": {
+    "businessName": "brandPack",
+    "apiModule": "system",
+    "functionName": "站点品牌"
+  }
+}

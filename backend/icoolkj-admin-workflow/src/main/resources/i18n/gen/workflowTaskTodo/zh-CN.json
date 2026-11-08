@@ -1,0 +1,21 @@
+{
+  "page": {
+    "title": "我的待办",
+    "description": "当前用户待处理的审批任务",
+    "approveAction": "审批",
+    "missingFormRoute": "该任务未配置审批表单路由，请在流程模型中设置 formRoute"
+  },
+  "fields": {
+    "bizTitle": { "label": "业务标题", "placeholder": "请输入业务标题" },
+    "bizType": { "label": "业务类型", "placeholder": "请选择业务类型" },
+    "taskName": { "label": "当前节点", "placeholder": "请输入节点名称" },
+    "processDefinitionName": { "label": "流程名称" },
+    "starterUserName": { "label": "发起人" },
+    "createTime": { "label": "到达时间" }
+  },
+  "meta": {
+    "businessName": "workflowTaskTodo",
+    "apiModule": "workflow",
+    "functionName": "我的待办"
+  }
+}

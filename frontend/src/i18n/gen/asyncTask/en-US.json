@@ -1,0 +1,157 @@
+{
+  "page": {
+    "title": "Async Task Management",
+    "description": "View user async task status and results; only succeeded/failed/cancelled can be deleted. Audit trail: Operation Logs",
+    "detail": "Detail",
+    "addTitle": "Add Async Task",
+    "editTitle": "Edit Async Task",
+    "deleteConfirm": "Delete this terminal task?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled"
+  },
+  "fields": {
+    "taskType": {
+      "label": "Task Type",
+      "placeholder": "Please enter Task Type",
+      "validation": {
+        "required": "Task Type is required",
+        "maxLength": "Task Type must not exceed 50 characters"
+      }
+    },
+    "taskName": {
+      "label": "Task Name",
+      "placeholder": "Please enter Task Name",
+      "validation": {
+        "required": "Task Name is required",
+        "maxLength": "Task Name must not exceed 100 characters"
+      }
+    },
+    "bizType": {
+      "label": "Biz Type",
+      "placeholder": "Please enter Biz Type",
+      "validation": {
+        "maxLength": "Biz Type must not exceed 50 characters"
+      }
+    },
+    "bizId": {
+      "label": "Biz ID",
+      "placeholder": "Please enter Biz ID",
+      "validation": {
+        "maxLength": "Biz ID must not exceed 20 characters"
+      }
+    },
+    "taskStatus": {
+      "label": "Task Status",
+      "placeholder": "Please select Task Status",
+      "validation": {
+        "required": "Task Status is required",
+        "maxLength": "Task Status must not exceed 1 characters"
+      }
+    },
+    "requestParam": {
+      "label": "Request Param",
+      "placeholder": "Please enter Request Param",
+      "validation": {
+        "maxLength": "Request Param must not exceed 65535 characters"
+      }
+    },
+    "resultData": {
+      "label": "Result Data",
+      "placeholder": "Please enter Result Data",
+      "validation": {
+        "maxLength": "Result Data must not exceed 65535 characters"
+      }
+    },
+    "errorMessage": {
+      "label": "Error Message",
+      "placeholder": "Please enter Error Message",
+      "validation": {
+        "maxLength": "Error Message must not exceed 65535 characters"
+      }
+    },
+    "retryCount": {
+      "label": "Retry Count",
+      "placeholder": "Please enter Retry Count",
+      "validation": {
+        "required": "Retry Count is required"
+      }
+    },
+    "maxRetryCount": {
+      "label": "Max Retry Count",
+      "placeholder": "Please enter Max Retry Count",
+      "validation": {
+        "required": "Max Retry Count is required"
+      }
+    },
+    "requeueCount": {
+      "label": "Requeue Count"
+    },
+    "startedAt": {
+      "label": "Started At",
+      "placeholder": "Please select Started At",
+      "validation": {}
+    },
+    "finishedAt": {
+      "label": "Finished At",
+      "placeholder": "Please select Finished At",
+      "validation": {}
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "tenantId": {
+      "label": "Tenant Id",
+      "placeholder": "Please enter Tenant Id",
+      "validation": {
+        "required": "Tenant Id is required",
+        "maxLength": "Tenant Id must not exceed 20 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "asyncTask",
+    "apiModule": "infra",
+    "functionName": "Async Task",
+    "constraints": {
+      "taskType": {
+        "required": true,
+        "maxLength": 50
+      },
+      "taskName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "bizType": {
+        "maxLength": 50
+      },
+      "bizId": {
+        "maxLength": 20
+      },
+      "taskStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "requestParam": {
+        "maxLength": 65535
+      },
+      "resultData": {
+        "maxLength": 65535
+      },
+      "errorMessage": {
+        "maxLength": 65535
+      },
+      "retryCount": {
+        "required": true
+      },
+      "maxRetryCount": {
+        "required": true
+      },
+      "startedAt": {},
+      "finishedAt": {}
+    }
+  }
+}

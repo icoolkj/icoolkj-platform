@@ -1,0 +1,64 @@
+{
+  "page": {
+    "title": "Attachment Demo",
+    "description": "Closed-loop sample: business table + view.json fileCatalogs + CatalogAttachmentManager + syncBizFileRefs. Follow this page for real features.",
+    "addTitle": "Add attachment demo",
+    "editTitle": "Edit attachment demo",
+    "detailTitle": "Attachment demo detail",
+    "detailAction": "Detail",
+    "batchDelete": "Batch delete",
+    "batchDeleteConfirm": "Delete {count} selected record(s)?",
+    "deleteConfirm": "Delete this record?",
+    "sectionAttachments": "Attachments",
+    "attachmentCatalogName": "Attachment",
+    "attachmentCatalogRequirements": "Requirements",
+    "attachmentCatalogFiles": "Files",
+    "attachmentRequired": "Please upload required attachment(s): {names}",
+    "upload": "Upload",
+    "guideTitle": "Dev checklist",
+    "guideBody": "1) Declare fileCatalogs in view.json; 2) Use CatalogAttachmentManager in the form; 3) Persist assets on the business row; 4) Backend syncBizFileRefs / releaseBizFiles on delete."
+  },
+  "fields": {
+    "title": {
+      "label": "Title",
+      "placeholder": "Enter title",
+      "validation": {
+        "required": "Title is required",
+        "maxLength": "Title must be at most {max} characters"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Optional remark",
+      "validation": {
+        "maxLength": "Remark must be at most {max} characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "id": {
+      "label": "ID",
+      "validation": {
+        "required": "ID is required"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "attachmentDemo",
+    "apiModule": "infra",
+    "functionName": "Attachment Demo",
+    "constraints": {
+      "title": { "required": true, "maxLength": 200 },
+      "status": { "required": true },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "page": {
+    "title": "轮播图管理",
+    "description": "管理平台轮播图，支持多位置展示与点击跳转配置",
+    "addTitle": "新增轮播图",
+    "editTitle": "编辑轮播图",
+    "batchDelete": "批量删除",
+    "batchDeleteConfirm": "确认删除选中的 {count} 条轮播图？",
+    "deleteConfirm": "确认删除该轮播图？",
+    "upload": "上传图片",
+    "uploadHint": "支持 jpg/png/webp，建议宽高比 16:9",
+    "coverImageRequired": "请选择图片文件",
+    "positionConfigTitle": "位置配置",
+    "clickEnabled": "启用",
+    "clickDisabled": "禁用",
+    "clickEvent": "点击事件",
+    "linkType": "跳转方式",
+    "linkUrl": "URL",
+    "linkUrlPlaceholder": "请输入 URL 或路由地址",
+    "positionColumn": "位置",
+    "displayPositionsRequired": "请至少选择一个展示位置"
+  },
+  "fields": {
+    "bannerTitle": {
+      "label": "标题",
+      "placeholder": "请输入标题",
+      "validation": {
+        "required": "请输入标题",
+        "maxLength": "标题长度不能超过 {max} 个字符"
+      }
+    },
+    "imageFileId": {
+      "label": "图片",
+      "placeholder": "请上传图片",
+      "validation": {
+        "required": "请上传图片"
+      }
+    },
+    "imagePreviewUrl": {
+      "label": "图片"
+    },
+    "displayPositions": {
+      "label": "展示位置",
+      "placeholder": "请选择展示位置",
+      "validation": {
+        "required": "请选择展示位置",
+        "maxLength": "展示位置无效"
+      }
+    },
+    "displayPosition": {
+      "label": "展示位置",
+      "placeholder": "请选择展示位置",
+      "validation": {
+        "required": "请选择展示位置"
+      }
+    },
+    "positionConfig": {
+      "label": "位置配置"
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序号",
+      "validation": {
+        "required": "请输入排序号"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过 {max} 个字符"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "ids": {
+      "validation": {
+        "required": "请选择要删除的记录"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "banner",
+    "apiModule": "system",
+    "functionName": "轮播图",
+    "constraints": {
+      "bannerTitle": { "required": true, "maxLength": 200 },
+      "imageFileId": { "required": true, "maxLength": 20 },
+      "displayPositions": { "required": true, "maxLength": 100 },
+      "positionConfig": { "maxLength": 65535 },
+      "sortNo": { "required": true },
+      "status": { "required": true, "maxLength": 1 },
+      "remark": { "maxLength": 500 },
+      "displayPosition": { "required": true }
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "page": {
+    "title": "Products",
+    "description": "Manage console shell products: code, name, icon and sort order. Configure menus separately in Menu Management.",
+    "addTitle": "Add Product",
+    "editTitle": "Edit Product",
+    "deleteConfirm": "Delete selected {count} item(s)?"
+  },
+  "fields": {
+    "code": {
+      "label": "Product Code",
+      "placeholder": "Lowercase, e.g. geo, crm",
+      "validation": {
+        "required": "Product code is required",
+        "maxLength": "Product code must be at most 32 characters",
+        "pattern": "Must start with a letter; only lowercase letters, digits and underscore"
+      }
+    },
+    "name": {
+      "label": "Name",
+      "placeholder": "Chinese name",
+      "validation": {
+        "required": "Name is required",
+        "maxLength": "Name must be at most 50 characters"
+      }
+    },
+    "nameEn": {
+      "label": "English Name",
+      "placeholder": "English name (optional)",
+      "validation": {
+        "maxLength": "English name must be at most 50 characters"
+      }
+    },
+    "icon": {
+      "label": "Icon",
+      "placeholder": "Element Plus icon name"
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Business products 1–49; built-ins 50–89; platform 90+",
+      "validation": {
+        "required": "Sort order is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "After creating a product, configure overview and menus in Menu Management",
+      "validation": {
+        "maxLength": "Remark must be at most 500 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    }
+  },
+  "meta": {
+    "businessName": "product",
+    "apiModule": "system",
+    "functionName": "Product",
+    "constraints": {
+      "code": {
+        "required": true,
+        "maxLength": 32,
+        "pattern": "^[a-z][a-z0-9_]{0,30}$"
+      },
+      "name": {
+        "required": true,
+        "maxLength": 50
+      },
+      "nameEn": {
+        "maxLength": 50
+      },
+      "icon": {
+        "maxLength": 100
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

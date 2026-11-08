@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaInstanceDataMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaInstanceDataEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="instance_id" property="instanceId"/>
+        <result column="form_data" property="formData"/>
+        <result column="content_text" property="contentText"/>
+        <result column="field_snapshot_json" property="fieldSnapshotJson"/>
+        <result column="layout_snapshot_json" property="layoutSnapshotJson"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectByInstanceId" resultMap="BaseResultMap">
+        SELECT id, tenant_id, instance_id, form_data, content_text, field_snapshot_json, layout_snapshot_json,
+               created_by, created_at, updated_by, updated_at, deleted
+        FROM oa_instance_data WHERE instance_id = #{instanceId} AND deleted = 0 LIMIT 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO oa_instance_data (
+            id, tenant_id, instance_id, form_data, content_text, field_snapshot_json, layout_snapshot_json,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{instanceId}, CAST(#{formData} AS JSON), #{contentText}, #{fieldSnapshotJson},
+            #{layoutSnapshotJson},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE oa_instance_data SET
+            form_data = CAST(#{formData} AS JSON),
+            content_text = #{contentText},
+            field_snapshot_json = #{fieldSnapshotJson},
+            layout_snapshot_json = #{layoutSnapshotJson},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteByInstanceId">
+        UPDATE oa_instance_data SET deleted = 1, updated_at = NOW(3)
+        WHERE instance_id = #{instanceId} AND deleted = 0
+    </update>
+</mapper>

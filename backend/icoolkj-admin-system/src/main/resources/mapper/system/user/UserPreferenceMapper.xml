@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.user.mapper.UserPreferenceMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.user.domain.UserPreferenceEntity">
+        <id column="tenant_id" property="tenantId"/>
+        <id column="user_id" property="userId"/>
+        <id column="pref_key" property="prefKey"/>
+        <result column="pref_value" property="prefValue"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        SELECT tenant_id, user_id, pref_key, pref_value, updated_at
+        FROM sys_user_preference
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id="selectByUserAndKey" resultMap="BaseResultMap">
+        SELECT tenant_id, user_id, pref_key, pref_value, updated_at
+        FROM sys_user_preference
+        WHERE user_id = #{userId} AND pref_key = #{prefKey}
+    </select>
+
+    <insert id="upsert">
+        INSERT INTO sys_user_preference (tenant_id, user_id, pref_key, pref_value, updated_at)
+        VALUES (#{tenantId}, #{userId}, #{prefKey}, #{prefValue}, now(3))
+        ON DUPLICATE KEY UPDATE
+            pref_value = VALUES(pref_value),
+            updated_at = now(3)
+    </insert>
+
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.AttachmentDemoMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.AttachmentDemoEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="title" property="title"/>
+        <result column="assets_json" property="assetsJson"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        d.id, d.tenant_id, d.title, d.assets_json, d.status, d.remark,
+        d.created_by, d.created_at, d.updated_by, d.updated_at, d.deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            d.deleted = 0
+            <if test="title != null and title != ''">
+                AND d.title like concat('%', #{title}, '%')
+            </if>
+            <if test="status != null and status != ''">AND d.status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_attachment_demo d
+        WHERE d.id = #{id} AND d.deleted = 0
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_attachment_demo d
+        <include refid="Query_Where"/>
+        ORDER BY d.created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1)
+        FROM infra_attachment_demo d
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO infra_attachment_demo (
+            id, tenant_id, title, assets_json, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{title}, #{assetsJson}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE infra_attachment_demo
+        <set>
+            title = #{title},
+            assets_json = #{assetsJson},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+</mapper>

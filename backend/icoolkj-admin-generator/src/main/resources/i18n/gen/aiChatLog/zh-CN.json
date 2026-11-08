@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "AI 对话记录",
+    "description": "AI 对话会话记录，支持查看完整消息",
+    "addTitle": "新增",
+    "editTitle": "修改",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "logDetail": "详情",
+    "newChat": "新对话",
+    "roleUser": "我",
+    "roleAssistant": "AI",
+    "chatLogEmptyHint": "暂无对话记录，请先在「AI 会话交流」中开始对话"
+  },
+  "fields": {
+    "title": {
+      "label": "摘要",
+      "placeholder": "请输入摘要"
+    },
+    "operatorName": {
+      "label": "操作人"
+    },
+    "updatedAt": {
+      "label": "更新时间"
+    },
+    "createdAt": {
+      "label": "创建时间"
+    }
+  },
+  "meta": {
+    "businessName": "aiChatLog",
+    "apiModule": "tool",
+    "functionName": "AI 对话记录",
+    "constraints": {}
+  }
+}

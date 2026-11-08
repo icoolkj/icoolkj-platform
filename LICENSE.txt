@@ -1,0 +1,509 @@
+================================================================================
+iCoolKJ Platform 非商业学习研究许可证
+iCoolKJ Platform Non-Commercial Study and Research License
+Version 1.0  |  SPDX: LicenseRef-iCoolKJ-NonCommercial-1.0
+Effective date / 生效日期: 2026-11-08
+================================================================================
+
+Copyright (c) icoolkj. All rights not expressly granted herein are reserved.
+
+  Author / 作者        : icoolkj
+  Email / 邮箱         : icoolkj@163.com
+  QQ                   : 594047667
+  Website / 网站       : https://icoolkj.com
+
+
+--------------------------------------------------------------------------------
+重要声明 / IMPORTANT NOTICE
+--------------------------------------------------------------------------------
+
+本许可证**不是**开源许可证，未通过 OSI（Open Source Initiative）认证，不属于
+OSI 批准的任何开源许可证。本项目属于「源码公开 / Source Available」，即源代码
+向公众可见并附带有限使用授权，但不满足《开源定义》(Open Source Definition)
+第 6 条「不得歧视应用领域」的要求，因为它明确禁止商业使用。
+
+本软件不得被描述为 "Open Source"、"开源软件" 或 "OSI-approved"。对外描述应使用
+「源码公开」「非商业学习研究许可」「Source Available」等表述。
+
+This is NOT an Open Source license. It is not approved by the Open Source
+Initiative (OSI) and does not conform to the Open Source Definition, because
+Clause 6 ("No Discrimination Against Fields of Endeavor") prohibits restrictions
+on commercial use, whereas this license expressly prohibits it. This project is
+"Source Available": the source code is publicly visible under a limited grant.
+Do not describe the Software as "Open Source" or "OSI-approved".
+
+在继续使用、复制、修改或分发本软件前，请完整阅读本许可证。使用本软件即表示
+你已阅读、理解并同意受本许可证全部条款约束；若不同意，不得使用本软件。
+
+BY USING, COPYING, MODIFYING OR DISTRIBUTING THE SOFTWARE, YOU ACCEPT AND AGREE
+TO BE BOUND BY ALL TERMS OF THIS LICENSE. IF YOU DO NOT AGREE, DO NOT USE IT.
+
+
+================================================================================
+中文正文（第 1 - 12 条）
+================================================================================
+
+第 1 条  定义
+
+1.1 「本软件」指 iCoolKJ Platform 仓库中的全部源代码、目标代码、数据库脚本、
+    配置文件、文档、脚本、模板、示例及其后续由权利人发布的更新，以及其任何
+    部分。
+
+1.2 「衍生作品」指基于本软件的全部或部分进行修改、翻译、改编、扩展、重组、
+    拼接或以其为素材形成的作品。
+
+1.3 「商业用途」指任何以营利、降低经营成本、支撑经营活动或对外提供产品与
+    服务为目的的使用，无论是否实际收费、无论使用主体是否为营利组织。包括
+    但不限于：
+
+    (a) 将本软件或衍生作品部署到生产环境、准生产环境，或用于处理真实业务
+        数据（包括企业内部自用、内部管理系统、内部办公系统）；
+    (b) 将本软件或衍生作品作为产品、组件、模板、脚手架、技术底座交付或
+        提供给任何第三方，包括客户、关联公司、外包方与合作伙伴；
+    (c) 以本软件或衍生作品对外提供托管、SaaS、PaaS、运维、咨询、实施、
+        定制开发、技术支持等有偿或有商业对价的服务；
+    (d) 在收费培训、商业课程、付费内容、企业内训中将本软件作为主要教学
+        或演示材料；
+    (e) 将本软件用于政府采购、企业信息化项目、投标、验收交付，或任何
+        存在商业对价的项目；
+    (f) 出售、出租、订阅、再许可本软件或衍生作品，或通过广告、引流、
+        会员、数据变现等方式获取商业利益；
+    (g) 将本软件或其输出用于训练、微调或构建对外提供商业服务的模型、
+        数据集或代码生成产品。
+
+1.4 「非商业用途」指纯粹以学习、研究、教学为目的的使用，且必须**同时**
+    满足下列全部条件：
+      - 不承载真实业务数据，不接入生产系统；
+      - 不向软件使用者以外的任何第三方提供产品或服务；
+      - 不产生任何直接或间接收入、对价或商业利益；
+      - 不以营利组织的经营目的组织实施。
+
+    为免疑义，下列情形在同时满足上述条件时属于非商业用途：个人在本地或
+    隔离环境中安装、运行、阅读、调试和修改源码；高校与科研机构在无非商业
+    经费支持下的学术研究与课堂教学；个人在论文、技术博客、公益分享中署名
+    引用；组织内部为技术选型进行的临时概念验证（PoC），期限不超过 90 天且
+    到期后删除全部副本。
+
+1.5 「权利人」指本文件首部署名的著作权人 icoolkj 及其合法继受人。
+
+
+第 2 条  授权授予（允许的行为）
+
+2.1 在第 1.4 条所述非商业用途范围内，并在你遵守本许可证全部条款的前提下，
+    权利人授予你一项免费的、非独占的、不可转让的、不可再许可的、可撤销的
+    权利，允许你：
+
+    (a) 下载、获取、阅读和运行本软件（仅限本地或隔离的非生产环境）；
+    (b) 为学习、研究、教学目的修改本软件并创建衍生作品；
+    (c) 为学习、研究、教学目的复制本软件及衍生作品的副本；
+    (d) 依照第 4 条向他人提供本软件或衍生作品。
+
+2.2 本条授予的权利**不包含**任何商业用途。任何商业用途均适用第 8 条。
+
+
+第 3 条  禁止事项
+
+3.1 你不得将本软件或衍生作品用于第 1.3 条定义的任何商业用途。
+
+3.2 你不得删除、遮掩、篡改本软件中的版权声明、本许可证、NOTICE 文件、
+    作者署名、联系方式或任何权利管理信息。
+
+3.3 你不得出售、出租、出借、质押、再许可、转让本许可证或依据本许可证
+    获得的任何权利，也不得宣称自己为权利人或授权代理人。
+
+3.4 你不得对本软件或其衍生作品施加任何与本许可证冲突的附加限制，不得
+    诱导或协助他人规避本许可证条款，不得通过技术手段隐藏使用来源。
+
+3.5 你不得使用权利人的名称、商标、商号、域名、Logo、产品名称或视觉标识
+    为你的产品、服务、文章或活动背书、宣传或造成混淆。
+
+3.6 你不得将本软件用于任何违反中华人民共和国法律、侵犯他人合法权益、
+    或危害网络安全与数据安全的活动。
+
+
+第 4 条  分发与衍生作品
+
+4.1 允许出于非商业目的分发本软件或衍生作品的原始副本或修改副本，但必须
+    同时满足以下全部条件：
+
+    (a) 随每一副本提供本许可证完整未经修改的文本及 NOTICE.txt；
+    (b) 保留全部原有版权、作者、联系方式与许可声明；
+    (c) 对修改过的文件作显著标记，注明修改事实与日期；
+    (d) 不得就分发本身收取任何费用或对价（可收取不高于实际介质与传输
+        成本的费用）；
+    (e) 使接收方明确知悉其同样受本许可证约束，且不得附加额外限制；
+    (f) 明确标注本软件为「源码公开 / 非商业学习研究许可」，不得使用
+        「开源 / Open Source」「MIT」「Apache」「GPL」等易引起误解的表述。
+
+4.2 任何衍生作品整体继续适用本许可证，且同样禁止商业使用。你对自己的
+    修改部分享有著作权，但行使该著作权不得突破本许可证对本软件的限制。
+
+4.3 你不得以 fork、镜像、打包、合集、依赖库、代码生成模板等任何形式，
+    使第三方得以绕过本许可证或直接获得商业可用版本。
+
+
+第 5 条  署名与声明保留
+
+5.1 在任何副本、衍生作品或对外展示（包括论文、博客、演示、课程材料）中，
+    你须以合理显著的方式保留以下信息：
+
+        iCoolKJ Platform
+        Copyright (c) icoolkj  |  https://icoolkj.com
+        Licensed under iCoolKJ Non-Commercial Study and Research License v1.0
+        (Source Available, NOT Open Source)
+
+5.2 本条义务不因本许可证终止而免除。
+
+
+第 6 条  商标与品牌
+
+6.1 本许可证不授予任何商标权、商号权、域名权或外观设计权。「iCoolKJ」、
+    「icoolkj.com」及相关 Logo、视觉资产、品牌文案均由权利人保留。
+
+6.2 未经权利人事先书面同意，不得以任何方式使用上述标识，包括但不限于
+    用于产品命名、网站标题、域名、社交媒体账号、宣传物料、搜索关键词。
+
+
+第 7 条  贡献
+
+7.1 若你向本项目提交问题反馈、补丁、代码、文档或其他贡献，即表示你保证
+    对该贡献拥有合法权利，并同意无偿地按本许可证的相同条款向权利人及
+    后续接收方授权使用、复制、修改与分发该贡献。
+
+7.2 你不得提交含有真实密钥、口令、生产数据、个人信息或第三方受限代码的
+    贡献。详见 CONTRIBUTING.md。
+
+7.3 权利人无义务接受、合并或回应任何贡献，也无义务提供维护、更新或支持。
+
+
+第 8 条  商业授权
+
+8.1 第 1.3 条列举的任何商业用途，均须在使用前获得权利人的**书面**授权，
+    并另行签署商业许可协议、缴纳相应费用（如适用）。
+
+8.2 商业授权申请请通过本文件首部的邮箱或 QQ 联系权利人。口头说明、
+    邮件往来中的非正式表述、沉默或未回复，均不构成授权。
+
+8.3 未获书面授权而实施商业使用的，构成著作权侵权，本许可证授予的全部
+    权利自该行为发生之日起自动终止（第 11 条），权利人保留追究停止侵害、
+    赔偿损失、消除影响等法律责任的全部权利。
+
+8.4 本许可证不构成对未来商业授权条款、价格或可获得性的任何承诺。
+
+
+第 9 条  无担保
+
+9.1 本软件按「现状」（AS IS）提供，权利人不作任何明示或默示的担保，
+    包括但不限于所有权、不侵权、适销性、特定用途适用性、安全性、准确性、
+    可用性及无缺陷的担保。
+
+9.2 权利人不保证本软件符合任何等级保护、行业监管或合规要求，也不保证
+    本软件适用于生产环境。你不应将本软件用于生产、医疗、金融、政务、
+    关键基础设施或任何可能造成人身、财产或数据损失的场景。
+
+
+第 10 条  责任限制
+
+10.1 在适用法律允许的最大范围内，权利人及贡献者不对因使用或无法使用
+     本软件而产生的任何直接、间接、 incidental、特殊、惩罚性或后果性
+     损失承担责任，包括利润损失、数据丢失、业务中断、商誉损失，即使已
+     被告知此类损害的可能性。
+
+10.2 本条不适用于法律明文规定不得免除或限制的责任。
+
+
+第 11 条  终止
+
+11.1 你违反本许可证任一条款时，本许可证授予的权利自动终止，无需权利人
+     另行通知。
+
+11.2 终止后你须立即停止一切使用，并删除或按权利人要求销毁持有的全部
+     副本与衍生作品；第 5 条、第 9 条、第 10 条及本条继续有效。
+
+11.3 权利人保留随时修订本许可证的权利。修订仅向未来生效，不影响修订前
+     已合法取得的副本；继续使用更新版本视为接受修订后的条款。
+
+
+第 12 条  一般条款
+
+12.1 可分割性：若某一条款被认定为无效或不可执行，其余条款继续有效。
+
+12.2 完整协议：本许可证构成你就本软件与权利人之间的完整约定，取代此前
+     一切口头或书面沟通。任何变更须以权利人签署的书面文件为准。
+
+12.3 权利不放弃：权利人未行使或迟延行使任何权利，不构成对该权利的放弃。
+
+12.4 适用法律与争议解决：本许可证适用中华人民共和国大陆地区法律（不含
+     冲突法规则）。因本许可证引起的争议，双方应先友好协商；协商不成的，
+     提交权利人所在地有管辖权的人民法院诉讼解决。
+
+12.5 语言：本许可证以中英双语书就，两种文本应作一致解释；如存在歧义或
+     不一致，以中文文本为准。
+
+12.6 联系：许可咨询、商业授权、侵权举报与合规问询，请联系：
+         icoolkj <icoolkj@163.com>  |  QQ 594047667  |  https://icoolkj.com
+
+
+================================================================================
+English Version (Clauses 1 - 12)
+================================================================================
+
+Clause 1  Definitions
+
+1.1 "Software" means all source code, object code, database scripts,
+    configuration, documentation, scripts, templates and samples in the
+    iCoolKJ Platform repository, together with updates published by the
+    Licensor, and any portion thereof.
+
+1.2 "Derivative Work" means any work created by modifying, translating,
+    adapting, extending, rearranging or combining the Software, in whole
+    or in part.
+
+1.3 "Commercial Use" means any use made for profit, for reducing operating
+    costs, for supporting business operations, or for delivering products or
+    services to others, whether or not a fee is charged and whether or not
+    the user is a for-profit entity. It includes, without limitation:
+
+    (a) deploying the Software or a Derivative Work in a production or
+        pre-production environment, or using it to process real business
+        data (including internal-only use, internal management systems and
+        internal office systems);
+    (b) delivering or making available the Software or a Derivative Work
+        as a product, component, template, scaffold or foundation to any
+        third party, including customers, affiliates, contractors and
+        partners;
+    (c) providing hosting, SaaS, PaaS, operations, consulting,
+        implementation, custom development or technical support built on
+        the Software, for a fee or other commercial consideration;
+    (d) using the Software as primary teaching or demonstration material
+        in paid training, commercial courses, paid content or corporate
+        in-house training;
+    (e) using the Software in government procurement, enterprise IT
+        projects, tenders, acceptance deliverables, or any project with
+        commercial consideration;
+    (f) selling, renting, sublicensing or transferring the Software or
+        Derivative Works, or deriving commercial benefit through
+        advertising, traffic, subscriptions or data monetisation;
+    (g) using the Software or its output to train, fine-tune or build
+        models, datasets or code-generation products offered commercially.
+
+1.4 "Non-Commercial Use" means use solely for study, research or teaching
+    that meets ALL of the following conditions: it does not process real
+    business data or connect to production systems; it provides no product
+    or service to third parties; it generates no direct or indirect revenue,
+    consideration or commercial benefit; and it is not organised for the
+    business purposes of a for-profit entity. For the avoidance of doubt,
+    the following qualify when those conditions are met: personal local or
+    sandboxed installation, execution, reading, debugging and modification;
+    academic research and classroom teaching at educational or research
+    institutions without commercial sponsorship; attributed quotations in
+    papers, technical blogs and community talks; and temporary internal
+    proof-of-concept evaluations not exceeding 90 days, after which all
+    copies must be deleted.
+
+1.5 "Licensor" means the copyright holder identified at the head of this
+    file, icoolkj, and its lawful successors.
+
+
+Clause 2  Grant of License (Permitted Acts)
+
+2.1 Subject to your full compliance with this License and solely for the
+    Non-Commercial Use defined in Clause 1.4, the Licensor grants you a
+    free, non-exclusive, non-transferable, non-sublicensable, revocable
+    right to:
+
+    (a) download, obtain, read and run the Software, in a local or isolated
+        non-production environment only;
+    (b) modify the Software and create Derivative Works for study, research
+        or teaching;
+    (c) make copies of the Software and Derivative Works for such purposes;
+    (d) distribute the Software or Derivative Works under Clause 4.
+
+2.2 No Commercial Use is granted under this Clause. All Commercial Use is
+    governed by Clause 8.
+
+
+Clause 3  Prohibitions
+
+3.1 You must not use the Software or any Derivative Work for any Commercial
+    Use as defined in Clause 1.3.
+
+3.2 You must not remove, obscure or alter any copyright notice, this
+    License, the NOTICE file, author attribution, contact details or other
+    rights-management information.
+
+3.3 You must not sell, rent, lend, pledge, sublicense or transfer this
+    License or any right granted under it, and must not represent yourself
+    as the Licensor or its authorised agent.
+
+3.4 You must not impose additional restrictions inconsistent with this
+    License, induce or assist others in circumventing it, or conceal the
+    origin of the Software by technical means.
+
+3.5 You must not use the Licensor's name, trademarks, trade names, domain
+    names, logos, product names or visual identifiers to endorse, promote
+    or create confusion about your products, services, articles or events.
+
+3.6 You must not use the Software in violation of the laws of the People's
+    Republic of China, in infringement of others' lawful rights, or in ways
+    that endanger network or data security.
+
+
+Clause 4  Redistribution and Derivative Works
+
+4.1 You may distribute verbatim or modified copies of the Software or
+    Derivative Works for non-commercial purposes, provided that ALL of the
+    following conditions are met:
+
+    (a) each copy is accompanied by the complete, unmodified text of this
+        License and the NOTICE.txt file;
+    (b) all original copyright, author, contact and license notices are
+        retained;
+    (c) modified files are prominently marked with the fact and date of
+        modification;
+    (d) no fee or consideration is charged for the distribution itself
+        (charges not exceeding actual media and transmission cost are
+        permitted);
+    (e) recipients are clearly informed that they are bound by this License,
+        and no additional restrictions are imposed;
+    (f) the Software is clearly labelled "Source Available / Non-Commercial
+        Study and Research License", and is NOT described with misleading
+        terms such as "Open Source", "MIT", "Apache" or "GPL".
+
+4.2 Every Derivative Work as a whole remains subject to this License and
+    remains prohibited from Commercial Use. You retain copyright in your
+    own modifications, but exercising it must not circumvent the
+    restrictions this License places on the Software.
+
+4.3 You must not use forks, mirrors, bundles, collections, dependency
+    packages or code-generation templates to enable third parties to bypass
+    this License or obtain a commercially usable version.
+
+
+Clause 5  Attribution and Notice Retention
+
+5.1 Every copy, Derivative Work or public presentation (including papers,
+    blogs, demos and course materials) must prominently retain:
+
+        iCoolKJ Platform
+        Copyright (c) icoolkj  |  https://icoolkj.com
+        Licensed under iCoolKJ Non-Commercial Study and Research License v1.0
+        (Source Available, NOT Open Source)
+
+5.2 This obligation survives termination of this License.
+
+
+Clause 6  Trademarks and Branding
+
+6.1 This License grants no trademark, trade name, domain name or design
+    rights. "iCoolKJ", "icoolkj.com" and related logos, visual assets and
+    brand copy are reserved to the Licensor.
+
+6.2 You may not use any of the above in product names, site titles, domain
+    names, social accounts, promotional material or search keywords without
+    the Licensor's prior written consent.
+
+
+Clause 7  Contributions
+
+7.1 By submitting issues, patches, code, documentation or other
+    contributions, you warrant that you hold the lawful rights to them and
+    agree to license them to the Licensor and downstream recipients under
+    the same terms as this License, free of charge.
+
+7.2 You must not submit real credentials, production data, personal
+    information or third-party restricted code. See CONTRIBUTING.md.
+
+7.3 The Licensor has no obligation to accept, merge or respond to any
+    contribution, nor to provide maintenance, updates or support.
+
+
+Clause 8  Commercial Licensing
+
+8.1 Any Commercial Use listed in Clause 1.3 requires the Licensor's prior
+    WRITTEN authorisation and a separate commercial license agreement,
+    with fees if applicable.
+
+8.2 Requests should be sent to the email or QQ listed at the head of this
+    file. Informal remarks, silence or non-response do not constitute a
+    grant.
+
+8.3 Commercial Use without written authorisation constitutes copyright
+    infringement; all rights granted under this License terminate
+    automatically from the date of that act (Clause 11), and the Licensor
+    reserves all remedies including injunctive relief and damages.
+
+8.4 This License makes no commitment as to the future terms, pricing or
+    availability of any commercial license.
+
+
+Clause 9  No Warranty
+
+9.1 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF TITLE,
+    NON-INFRINGEMENT, MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+    SECURITY, ACCURACY, AVAILABILITY AND ABSENCE OF DEFECTS.
+
+9.2 The Licensor does not warrant compliance with any regulatory, security
+    classification or industry standard, nor suitability for production.
+    You must not use the Software in production, medical, financial,
+    governmental or critical-infrastructure contexts, or in any context
+    where failure could cause personal, property or data loss.
+
+
+Clause 10  Limitation of Liability
+
+10.1 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE LICENSOR AND
+     CONTRIBUTORS SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+     SPECIAL, PUNITIVE OR CONSEQUENTIAL DAMAGES ARISING FROM THE USE OR
+     INABILITY TO USE THE SOFTWARE, INCLUDING LOSS OF PROFITS, DATA,
+     BUSINESS INTERRUPTION OR GOODWILL, EVEN IF ADVISED OF SUCH DAMAGES.
+
+10.2 This Clause does not exclude liability that cannot lawfully be
+     excluded or limited.
+
+
+Clause 11  Termination
+
+11.1 Any breach of this License automatically terminates the rights granted,
+     without further notice.
+
+11.2 Upon termination you must immediately cease all use and delete or, if
+     requested, destroy all copies and Derivative Works. Clauses 5, 9, 10
+     and this Clause survive.
+
+11.3 The Licensor may revise this License at any time. Revisions apply
+     prospectively only and do not affect copies lawfully obtained before
+     the revision; continued use of an updated version constitutes
+     acceptance of the revised terms.
+
+
+Clause 12  General
+
+12.1 Severability: if any provision is held invalid or unenforceable, the
+     remaining provisions remain in effect.
+
+12.2 Entire agreement: this License is the complete agreement between you
+     and the Licensor concerning the Software and supersedes all prior
+     communications. Amendments require a writing signed by the Licensor.
+
+12.3 No waiver: failure or delay in exercising a right is not a waiver.
+
+12.4 Governing law and disputes: this License is governed by the laws of
+     the mainland of the People's Republic of China, without regard to
+     conflict-of-laws rules. Disputes shall first be resolved through
+     friendly consultation; failing that, they shall be submitted to the
+     competent court at the Licensor's domicile.
+
+12.5 Language: this License is executed in Chinese and English, to be
+     interpreted consistently. In case of ambiguity or inconsistency, the
+     Chinese text prevails.
+
+12.6 Contact: for licensing enquiries, commercial authorisation,
+     infringement reports and compliance questions, contact
+     icoolkj <icoolkj@163.com>  |  QQ 594047667  |  https://icoolkj.com
+
+
+================================================================================
+END OF LICENSE / 许可证结束
+================================================================================

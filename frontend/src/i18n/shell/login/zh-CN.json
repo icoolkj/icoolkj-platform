@@ -1,0 +1,103 @@
+{
+  "brandSubtitle": "企业级多租户管理平台",
+  "brandTitle": "iCoolKJ 平台",
+  "copyrightIcpLabel": "备案号",
+  "copyrightDomainLabel": "域名",
+  "copyrightEmailLabel": "邮箱",
+  "brandIntro": "面向中后台的一站式底座，开箱即用权限、租户与代码生成能力。",
+  "feature1": "统一权限与租户隔离",
+  "feature1Desc": "平台 / 企业 / 单位多租户隔离，角色权限与数据范围一体管控",
+  "feature2": "Java + Vue 全栈代码生成",
+  "feature2Desc": "从表结构到前后端 CRUD 一键产出，缩短业务交付周期",
+  "feature3": "Element Plus 现代化管理界面",
+  "feature3Desc": "布局、主题与交互组件开箱可用，贴合管理后台习惯",
+  "testAccountsLink": "测试账号一览",
+  "qrWechatDefault": "扫码添加客服",
+  "qrOfficialDefault": "扫码关注公众号",
+  "qrDefault": "扫码关注",
+  "login": "登 录",
+  "password": "密码",
+  "passwordRequired": "请输入密码",
+  "subtitle": "请输入账号信息进入管理后台",
+  "tenantCode": "租户编码",
+  "tenantCodePlaceholder": "请输入租户编码",
+  "tenantCodeRequired": "请输入租户编码",
+  "title": "欢迎登录",
+  "username": "用户名",
+  "usernamePlaceholder": "请输入用户名",
+  "usernameRequired": "请输入用户名",
+  "rememberLogin": "记住登录信息",
+  "captcha": "验证码",
+  "captchaPlaceholder": "请输入验证码",
+  "captchaRefresh": "点击刷新",
+  "forceChangeTitle": "修改初始密码",
+  "forceChangeHint": "为保障账号安全，请先修改初始密码后再使用系统",
+  "passwordPolicyHint": "新密码至少 10 位，且须同时包含大写字母、小写字母、数字和特殊字符",
+  "forceChangeSubmit": "确认修改并重新登录",
+  "forceChangeLogout": "退出登录",
+  "forceChangeSuccess": "密码已修改，请使用新密码重新登录",
+  "oldPassword": "原密码",
+  "oldPasswordRequired": "请输入原密码",
+  "newPassword": "新密码",
+  "newPasswordRequired": "请输入新密码",
+  "newPasswordMin": "新密码长度不能少于 10 位",
+  "passwordRequireUpper": "新密码须包含至少一个大写字母",
+  "passwordRequireLower": "新密码须包含至少一个小写字母",
+  "passwordRequireNumber": "新密码须包含至少一个数字",
+  "passwordRequireSpecial": "新密码须包含至少一个特殊字符",
+  "confirmPassword": "确认新密码",
+  "confirmPasswordRequired": "请再次输入新密码",
+  "passwordMismatch": "两次输入的新密码不一致",
+  "mfaCode": "双因素验证码",
+  "mfaCodePlaceholder": "请输入 6 位验证码",
+  "mfaCodeRequired": "请输入 6 位验证码",
+  "mfaVerify": "验证并登录",
+  "mfaBack": "返回",
+  "mfaQrAlt": "MFA 二维码",
+  "forceEnrollTitle": "绑定双因素认证",
+  "forceEnrollHint": "当前账号策略要求绑定 TOTP 双因素认证后才能继续使用系统",
+  "forceEnrollScan": "请使用 Authenticator 扫描二维码，或手动添加下方密钥 URI",
+  "forceEnrollSubmit": "确认绑定",
+  "forceEnrollSuccess": "双因素认证已绑定",
+  "agreementPrefix": "我已阅读并同意",
+  "agreementLink": "《框架使用协议》",
+  "agreementRequired": "请先阅读并同意框架使用协议",
+  "agreementDialogTitle": "框架使用协议",
+  "agreementClose": "我知道了",
+  "agreementVersion": "版本 1.0",
+  "agreementIntro": "欢迎使用本管理平台（以下简称「本框架」或「本软件」）。在登录并使用前，请仔细阅读以下协议。一旦您勾选同意并登录，即视为已阅读、理解并接受本协议全部条款。",
+  "agreementSections": [
+    {
+      "title": "1. 定义与适用范围",
+      "body": "本协议适用于您通过授权获得的本框架及基于本框架部署的管理端、配套组件的使用权。授权范围、期限与支持级别以书面合同或授权文件为准；本协议为产品使用层面的补充说明。"
+    },
+    {
+      "title": "2. 许可与使用",
+      "body": "在合法授权范围内，您可部署、配置并基于本框架扩展业务模块。未经权利人书面许可，不得超出授权范围复制、转售、再许可、出租或以其他方式向第三方提供本框架源码或核心能力。"
+    },
+    {
+      "title": "3. 知识产权",
+      "body": "本框架及其文档、标识、设计与相关知识产权归权利人所有。您在底座之上自行开发的业务代码与数据归您所有，但不得主张对本框架本身的权利。"
+    },
+    {
+      "title": "4. 账号与安全",
+      "body": "您应妥善保管租户编码、账号与密码，并对账号下的操作负责。建议启用验证码、密码策略与双因素认证等安全能力；因账号保管不善导致的损失由您自行承担。"
+    },
+    {
+      "title": "5. 禁止行为",
+      "body": "禁止利用本框架从事违法违规活动；禁止试图绕过授权、安全控制或审计机制；禁止对本框架进行破解、逆向工程（法律强制允许的除外）或用于侵害他人合法权益。"
+    },
+    {
+      "title": "6. 免责与责任限制",
+      "body": "本框架按「现状」提供。在适用法律允许的最大范围内，权利人对因使用或无法使用本框架而导致的间接、附带或后果性损失不承担责任。法定不可排除的责任除外。"
+    },
+    {
+      "title": "7. 协议变更",
+      "body": "权利人可根据产品演进更新本协议，并在登录页或相关渠道公示。若您继续登录使用，视为接受更新后的条款；如不同意，请停止使用并联系授权方处理。"
+    },
+    {
+      "title": "8. 联系方式",
+      "body": "与授权、交付或本协议相关的问题，请通过系统页脚公示的联系邮箱或书面合同约定渠道沟通。"
+    }
+  ]
+}

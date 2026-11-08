@@ -1,0 +1,24 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[*.{js,cjs,mjs,ts,mts,cts,tsx,vue,json,yml,yaml,css,scss,html}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+charset = utf-8
+trim_trailing_whitespace = false
+
+[*.sql]
+charset = utf-8
+
+[*.properties]
+charset = utf-8
+
+[*.txt]
+charset = utf-8

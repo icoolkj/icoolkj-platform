@@ -1,0 +1,6 @@
+FROM eclipse-temurin:17-jre-jammy
+ENV TZ=Asia/Shanghai
+WORKDIR /app
+COPY icoolkj-admin-worker-1.0.0-SNAPSHOT.jar /app/app.jar
+EXPOSE 8081
+ENTRYPOINT ["java", "-Xms256m", "-Xmx512m", "-jar", "/app/app.jar"]

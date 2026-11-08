@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.generator.mapper.ToolAiLogMapper">
+
+    <resultMap id="InvokeLogMap" type="com.icoolkj.platform.generator.domain.ToolAiInvokeLog">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="trace_id" property="traceId"/>
+        <result column="provider_name" property="providerName"/>
+        <result column="model" property="model"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="biz_ref_id" property="bizRefId"/>
+        <result column="request_url" property="requestUrl"/>
+        <result column="response_status" property="responseStatus"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="cost_time" property="costTime"/>
+        <result column="user_prompt_preview" property="userPromptPreview"/>
+        <result column="response_preview" property="responsePreview"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="operator_name" property="operatorName"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <resultMap id="DdlRecordMap" type="com.icoolkj.platform.generator.domain.ToolAiDdlRecord">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="trace_id" property="traceId"/>
+        <result column="invoke_id" property="invokeId"/>
+        <result column="record_type" property="recordType"/>
+        <result column="api_module" property="apiModule"/>
+        <result column="target_table_name" property="targetTableName"/>
+        <result column="generated_summary" property="generatedSummary"/>
+        <result column="user_prompt_preview" property="userPromptPreview"/>
+        <result column="status" property="status"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="user_id" property="userId"/>
+        <result column="operator_name" property="operatorName"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="Invoke_List_Columns">
+        id, tenant_id, trace_id, provider_name, model, biz_type, biz_ref_id, request_url,
+        response_status, error_message, cost_time, user_prompt_preview, response_preview,
+        operator_id, operator_name, created_at
+    </sql>
+
+    <insert id="insertInvokeLog">
+        INSERT INTO tool_ai_invoke_log (
+            id, tenant_id, trace_id, provider_name, model, biz_type, biz_ref_id, request_url,
+            response_status, error_message, cost_time, user_prompt_preview, response_preview,
+            operator_id, operator_name, created_at
+        ) VALUES (
+            #{id}, #{tenantId}, #{traceId}, #{providerName}, #{model}, #{bizType}, #{bizRefId}, #{requestUrl},
+            #{responseStatus}, #{errorMessage}, #{costTime}, #{userPromptPreview}, #{responsePreview},
+            #{operatorId}, #{operatorName}, #{createdAt}
+        )
+    </insert>
+
+    <insert id="insertInvokeContent">
+        INSERT INTO tool_ai_invoke_content (invoke_id, system_prompt, user_message, response_content)
+        VALUES (#{invokeId}, #{systemPrompt}, #{userMessage}, #{responseContent})
+    </insert>
+
+    <select id="selectInvokeById" resultMap="InvokeLogMap">
+        SELECT <include refid="Invoke_List_Columns"/> FROM tool_ai_invoke_log WHERE id = #{id}
+    </select>
+
+    <select id="selectInvokeContentById" resultType="com.icoolkj.platform.generator.domain.ToolAiInvokeContent">
+        SELECT invoke_id, system_prompt, user_message, response_content
+        FROM tool_ai_invoke_content WHERE invoke_id = #{invokeId}
+    </select>
+
+    <sql id="Invoke_Query_Where">
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="bizType != null and bizType != ''">AND biz_type = #{bizType}</if>
+            <if test="responseStatus != null and responseStatus != ''">AND response_status = #{responseStatus}</if>
+            <if test="operatorName != null and operatorName != ''">AND operator_name LIKE CONCAT('%', #{operatorName}, '%')</if>
+        </where>
+    </sql>
+
+    <select id="countInvokeByQuery" resultType="long">
+        SELECT COUNT(1) FROM tool_ai_invoke_log <include refid="Invoke_Query_Where"/>
+    </select>
+
+    <select id="selectInvokePage" resultMap="InvokeLogMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Invoke_List_Columns"/>
+        FROM tool_ai_invoke_log
+        <include refid="Invoke_Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <update id="updateInvokeBizRefId">
+        UPDATE tool_ai_invoke_log SET biz_ref_id = #{bizRefId} WHERE id = #{id} AND (biz_ref_id IS NULL OR biz_ref_id = '')
+    </update>
+
+    <insert id="insertDdlRecord">
+        INSERT INTO tool_ai_ddl_record (
+            id, tenant_id, trace_id, invoke_id, record_type, api_module, target_table_name,
+            generated_summary, user_prompt_preview, status, operator_id, user_id, operator_name, created_at, updated_at
+        ) VALUES (
+            #{id}, #{tenantId}, #{traceId}, #{invokeId}, #{recordType}, #{apiModule}, #{targetTableName},
+            #{generatedSummary}, #{userPromptPreview}, #{status}, #{operatorId}, #{userId}, #{operatorName}, #{createdAt}, #{updatedAt}
+        )
+    </insert>
+
+    <insert id="insertDdlContent">
+        INSERT INTO tool_ai_ddl_content (ddl_record_id, user_prompt, generated_ddl, final_ddl)
+        VALUES (#{ddlRecordId}, #{userPrompt}, #{generatedDdl}, #{finalDdl})
+    </insert>
+
+    <update id="updateDdlStatus">
+        UPDATE tool_ai_ddl_record SET status = #{status}, updated_at = now(3) WHERE id = #{id}
+    </update>
+
+    <update id="updateDdlFinalContent">
+        UPDATE tool_ai_ddl_content SET final_ddl = #{finalDdl} WHERE ddl_record_id = #{ddlRecordId}
+    </update>
+
+    <select id="selectDdlById" resultMap="DdlRecordMap">
+        SELECT id, tenant_id, trace_id, invoke_id, record_type, api_module, target_table_name,
+               generated_summary, user_prompt_preview, status, operator_id, user_id, operator_name, created_at, updated_at
+        FROM tool_ai_ddl_record WHERE id = #{id}
+    </select>
+
+    <select id="selectDdlContentById" resultType="com.icoolkj.platform.generator.domain.ToolAiDdlContent">
+        SELECT ddl_record_id, user_prompt, generated_ddl, final_ddl
+        FROM tool_ai_ddl_content WHERE ddl_record_id = #{ddlRecordId}
+    </select>
+
+    <sql id="Ddl_Query_Where">
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="recordType != null and recordType != ''">AND record_type = #{recordType}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="targetTableName != null and targetTableName != ''">AND target_table_name LIKE CONCAT('%', #{targetTableName}, '%')</if>
+        </where>
+    </sql>
+
+    <select id="countDdlByQuery" resultType="long">
+        SELECT COUNT(1) FROM tool_ai_ddl_record <include refid="Ddl_Query_Where"/>
+    </select>
+
+    <select id="selectDdlPage" resultMap="DdlRecordMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT id, tenant_id, trace_id, invoke_id, record_type, api_module, target_table_name,
+               generated_summary, user_prompt_preview, status, operator_id, user_id, operator_name, created_at, updated_at
+        FROM tool_ai_ddl_record
+        <include refid="Ddl_Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+</mapper>

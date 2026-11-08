@@ -1,0 +1,4 @@
+# api dev-only overrides (shared dev loaded automatically)
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

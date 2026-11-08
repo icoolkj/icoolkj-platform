@@ -1,0 +1,66 @@
+specVersion: "1.0"
+pageKey: workflowTaskTodo
+layout: standard-crud
+vueVariant: workflowTaskList
+
+meta:
+  apiModule: workflow
+  backendModule: workflow
+  permissionPrefix: workflow:todo
+  className: WorkflowTaskTodo
+
+entity:
+  tableName: wf_task_todo_view
+  businessName: workflowTaskTodo
+  functionName: 我的待办
+
+extensions:
+  listApi: GET /workflow/task/todo/page
+  detailApi: GET /workflow/task/{taskId}
+  rowActions:
+    - approve
+  # 审批跳转由 WorkflowTaskVO.formRoute（wf_model.form_route）驱动，不在此硬编码
+  toolbarActions: []
+
+viewDefaults:
+  query:
+    maxVisible: 3
+    collapsible: true
+  table:
+    actions:
+      edit: false
+      delete: false
+      width: 120
+
+fields:
+  - javaField: bizTitle
+    columnComment: 业务标题
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    htmlType: input
+  - javaField: bizType
+    columnComment: 业务类型
+    isQuery: true
+    queryType: EQ
+    isList: true
+    htmlType: select
+    dictType: wf_biz_type
+  - javaField: processDefinitionName
+    columnComment: 流程名称
+    isList: true
+    htmlType: text
+  - javaField: taskName
+    columnComment: 当前节点
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    htmlType: input
+  - javaField: starterUserName
+    columnComment: 发起人
+    isList: true
+    htmlType: text
+  - javaField: createTime
+    columnComment: 到达时间
+    isList: true
+    htmlType: datetime

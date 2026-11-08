@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.i18n.mapper.I18nLocaleMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.i18n.domain.I18nLocaleEntity">
+        <id column="id" property="id"/>
+        <result column="locale_code" property="localeCode"/>
+        <result column="locale_name" property="localeName"/>
+        <result column="native_name" property="nativeName"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, locale_code, locale_name, native_name, sort_no, is_default, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="localeCode != null and localeCode != ''">AND locale_code like concat('%', #{localeCode}, '%')</if>
+            <if test="localeName != null and localeName != ''">AND locale_name like concat('%', #{localeName}, '%')</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_i18n_locale WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_i18n_locale WHERE locale_code = #{localeCode} AND deleted = 0 LIMIT 1
+    </select>
+
+    <select id="selectEnabled" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_locale
+        WHERE status = '0' AND deleted = 0
+        ORDER BY sort_no ASC, locale_code ASC
+    </select>
+
+    <select id="selectDefault" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_locale
+        WHERE is_default = 'Y' AND status = '0' AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_locale
+        <include refid="Query_Where"/>
+        ORDER BY sort_no ASC, locale_code ASC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_locale
+        <include refid="Query_Where"/>
+        ORDER BY sort_no ASC, locale_code ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_i18n_locale
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_i18n_locale (id, locale_code, locale_name, native_name, sort_no, is_default, status, remark, created_by, created_at, updated_by, updated_at, deleted)
+        VALUES (#{id}, #{localeCode}, #{localeName}, #{nativeName}, #{sortNo}, #{isDefault}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_i18n_locale
+        <set>
+            locale_code = #{localeCode},
+            locale_name = #{localeName},
+            native_name = #{nativeName},
+            sort_no = #{sortNo},
+            is_default = #{isDefault},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_i18n_locale SET deleted = 1, updated_at = now(3) WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="clearDefaultFlag">
+        UPDATE sys_i18n_locale SET is_default = 'N', updated_at = now(3) WHERE is_default = 'Y' AND deleted = 0
+    </update>
+
+</mapper>

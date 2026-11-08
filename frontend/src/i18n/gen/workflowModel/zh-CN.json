@@ -1,0 +1,125 @@
+{
+  "page": {
+    "title": "流程模型",
+    "description": "租户自治：同步平台模型目录 → 部署 BPMN → 在审批人规则中配置节点审批人",
+    "addTitle": "新建流程模型",
+    "editTitle": "编辑流程模型",
+    "deployAction": "部署",
+    "designAction": "流程设计",
+    "designTitle": "流程设计",
+    "deployTitle": "部署 BPMN",
+    "versionAction": "版本",
+    "versionTitle": "版本历史",
+    "deploySuccess": "部署成功",
+    "publishedYes": "是",
+    "publishedNo": "否",
+    "emptyVersion": "暂无版本记录",
+    "platformOwned": "平台",
+    "syncFromPlatform": "同步平台模型",
+    "syncTitle": "同步平台模型",
+    "syncHint": "同步后将复制平台示例 BPMN 并部署到本租户，可再修改图与审批人规则",
+    "syncBizType": "业务类型",
+    "syncModelKey": "模型标识",
+    "syncModelName": "模型名称",
+    "syncBindingMode": "绑定模式",
+    "syncStatus": "状态",
+    "syncSynced": "已同步",
+    "syncPending": "未同步",
+    "syncAction": "同步",
+    "syncSuccess": "同步成功"
+  },
+  "fields": {
+    "modelKey": {
+      "label": "模型标识",
+      "placeholder": "如 order_approve",
+      "validation": {
+        "required": "请输入模型标识",
+        "maxLength": "模型标识长度不能超过 {max} 个字符"
+      }
+    },
+    "modelName": {
+      "label": "模型名称",
+      "placeholder": "请输入模型名称",
+      "validation": {
+        "required": "请输入模型名称",
+        "maxLength": "模型名称长度不能超过 {max} 个字符"
+      }
+    },
+    "bizType": {
+      "label": "业务类型",
+      "placeholder": "如 sys_order",
+      "validation": {
+        "required": "请输入业务类型",
+        "maxLength": "业务类型长度不能超过 {max} 个字符"
+      }
+    },
+    "categoryName": {
+      "label": "分类",
+      "placeholder": "请输入分类",
+      "validation": {
+        "maxLength": "分类长度不能超过 {max} 个字符"
+      }
+    },
+    "categoryId": {
+      "validation": {
+        "maxLength": "分类 ID 长度不能超过 {max} 个字符"
+      }
+    },
+    "formType": {
+      "label": "表单类型",
+      "placeholder": "请选择表单类型",
+      "validation": {
+        "maxLength": "表单类型长度不能超过 {max} 个字符"
+      }
+    },
+    "formRoute": {
+      "label": "表单路由",
+      "placeholder": "/system/order/approve",
+      "validation": {
+        "maxLength": "表单路由长度不能超过 {max} 个字符"
+      }
+    },
+    "latestVersion": { "label": "当前版本" },
+    "status": {
+      "label": "状态",
+      "validation": {
+        "maxLength": "状态长度不能超过 {max} 个字符"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "备注",
+      "validation": {
+        "maxLength": "备注长度不能超过 {max} 个字符"
+      }
+    },
+    "bpmnXml": {
+      "label": "BPMN XML",
+      "placeholder": "粘贴 BPMN 2.0 XML",
+      "validation": {
+        "required": "请填写 BPMN XML"
+      }
+    },
+    "deployRemark": { "label": "部署备注", "placeholder": "请输入部署备注" },
+    "versionNo": { "label": "版本号" },
+    "published": { "label": "已发布" },
+    "deploymentId": { "label": "部署 ID" },
+    "versionRemark": { "label": "版本备注" }
+  },
+  "meta": {
+    "businessName": "workflowModel",
+    "apiModule": "workflow",
+    "functionName": "流程模型",
+    "constraints": {
+      "modelKey": { "required": true, "maxLength": 64 },
+      "modelName": { "required": true, "maxLength": 100 },
+      "bizType": { "required": true, "maxLength": 64 },
+      "categoryName": { "maxLength": 50 },
+      "formType": { "maxLength": 20 },
+      "formRoute": { "maxLength": 200 },
+      "status": { "maxLength": 1 },
+      "remark": { "maxLength": 500 },
+      "bpmnXml": { "required": true }
+    }
+  }
+}

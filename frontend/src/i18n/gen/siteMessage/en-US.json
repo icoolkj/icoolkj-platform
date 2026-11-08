@@ -1,0 +1,127 @@
+{
+  "page": {
+    "title": "Site Messages",
+    "description": "View and manage site messages you sent, by user, department, role, or all.",
+    "sendTitle": "Send Site Message",
+    "detailTitle": "Message Detail",
+    "detailTabContent": "Body",
+    "detailTabReceipt": "Receipt Status",
+    "readAtLabel": "Read At",
+    "sendSuccess": "Sent successfully",
+    "batchDelete": "Batch Delete",
+    "batchDeleteConfirm": "Delete {count} selected message(s)?",
+    "keywordPlaceholder": "Search by subject keyword",
+    "sendAction": "Send Message",
+    "detailAction": "Details",
+    "recipientUsers": "Users",
+    "recipientDepts": "Departments",
+    "recipientRoles": "Roles",
+    "recipientAll": "All Users",
+    "targetTenant": "Target Tenant",
+    "targetTenantPlaceholder": "Select target tenant",
+    "targetTenantRequired": "Please select a target tenant",
+    "targetTenantHint": "Platform accounts must pick target tenant(s) first. Recipient scope applies to the selected tenant(s), not your login tenant.",
+    "recipientAllHint": "All users means every active user in the target tenant, not every tenant on the platform.",
+    "multiTenantHint": "With multiple tenants, user/dept/role pickers group organization trees by tenant; one message is sent per tenant.",
+    "roleListTitle": "Roles",
+    "pickTenants": "Select Tenants",
+    "pickTenantsTitle": "Select Target Tenants",
+    "pickUsers": "Select Users",
+    "pickUsersTitle": "Select Users",
+    "pickDepts": "Select Departments",
+    "pickDeptsTitle": "Select Departments",
+    "pickRoles": "Select Roles",
+    "pickRolesTitle": "Select Roles",
+    "tenantSearchPlaceholder": "Search tenant name",
+    "userSearchPlaceholder": "Search username",
+    "roleSearchPlaceholder": "Search role name",
+    "selectedCount": "Selected",
+    "clearSelected": "Clear all",
+    "deptTreeTitle": "Organization",
+    "pendingListTitle": "Pending",
+    "selectedListTitle": "Selected",
+    "selectedEmptyText": "Nothing selected yet. Add from the list.",
+    "listCountUnit": "items",
+    "addCurrentPage": "Add current page",
+    "tenantNameLabel": "Tenant Name",
+    "tenantCodeLabel": "Tenant Code",
+    "tenantTypeLabel": "Tenant Type",
+    "userNicknameLabel": "Name",
+    "userAccountLabel": "Account",
+    "roleNameLabel": "Role Name",
+    "roleCodeLabel": "Role Code",
+    "selectUsers": "Select users",
+    "selectDepts": "Select departments",
+    "selectRoles": "Select roles"
+  },
+  "fields": {
+    "messageSubject": {
+      "label": "Subject",
+      "placeholder": "Enter subject",
+      "validation": {
+        "required": "Subject is required",
+        "maxLength": "Subject must be at most {max} characters"
+      }
+    },
+    "messageCategory": {
+      "label": "Category",
+      "placeholder": "Select category",
+      "validation": {
+        "required": "Category is required",
+        "maxLength": "Invalid category"
+      }
+    },
+    "messageContent": {
+      "label": "Body",
+      "placeholder": "Enter message body",
+      "validation": {
+        "required": "Body is required"
+      }
+    },
+    "recipientType": {
+      "label": "Recipients",
+      "placeholder": "Select recipient scope",
+      "validation": {
+        "required": "Recipient scope is required"
+      }
+    },
+    "senderName": {
+      "label": "Sender"
+    },
+    "sentAt": {
+      "label": "Sent At"
+    },
+    "recipientCount": {
+      "label": "Recipients"
+    },
+    "readStatus": {
+      "label": "Read Status",
+      "placeholder": "Select read status"
+    },
+    "userNickname": {
+      "label": "Name"
+    },
+    "username": {
+      "label": "Account"
+    },
+    "readAt": {
+      "label": "Read At"
+    },
+    "ids": {
+      "validation": {
+        "required": "Select records to delete"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "siteMessage",
+    "apiModule": "system",
+    "functionName": "Site Messages",
+    "constraints": {
+      "messageSubject": { "required": true, "maxLength": 200 },
+      "messageCategory": { "required": true, "maxLength": 20 },
+      "messageContent": { "required": true },
+      "recipientType": { "required": true }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "page": {
+    "title": "Leave Records",
+    "description": "Leave request records — create from Launch Center",
+    "addTitle": "New Leave",
+    "editTitle": "Edit Leave",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "submitApprove": "Submit",
+    "withdrawApprove": "Withdraw",
+    "submitSuccess": "Submitted for approval",
+    "withdrawSuccess": "Withdrawn",
+    "formSchemaEmpty": "No published leave template fields. Publish an approval template first."
+  },
+  "fields": {
+    "instanceTitle": { "label": "Title", "placeholder": "Enter title" },
+    "leaveType": {
+      "label": "Leave Type",
+      "placeholder": "Select leave type",
+      "validation": { "required": "Leave type is required" }
+    },
+    "startDate": {
+      "label": "Start Date",
+      "placeholder": "Select start date",
+      "validation": { "required": "Start date is required" }
+    },
+    "endDate": {
+      "label": "End Date",
+      "placeholder": "Select end date",
+      "validation": { "required": "End date is required" }
+    },
+    "leaveDays": {
+      "label": "Days",
+      "placeholder": "Enter days",
+      "validation": { "required": "Days is required" }
+    },
+    "reason": {
+      "label": "Reason",
+      "placeholder": "Enter reason",
+      "validation": {
+        "required": "Reason is required",
+        "maxLength": "Reason must be at most {max} characters"
+      }
+    },
+    "attachments": {
+      "label": "Attachments",
+      "placeholder": "Optional supporting files"
+    },
+    "approveStatus": { "label": "Status", "placeholder": "Select status" },
+    "submittedAt": { "label": "Submitted At" },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Optional remark",
+      "validation": { "maxLength": "Remark must be at most {max} characters" }
+    }
+  },
+  "meta": {
+    "businessName": "oaLeave",
+    "apiModule": "oa",
+    "functionName": "Leave Request",
+    "constraints": {
+      "leaveType": { "required": true, "maxLength": 32 },
+      "startDate": { "required": true, "maxLength": 32 },
+      "endDate": { "required": true, "maxLength": 32 },
+      "leaveDays": { "required": true },
+      "reason": { "required": true, "maxLength": 500 },
+      "attachments": { "required": false },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "apiModule": "system",
+    "labelKey": "toolGen.moduleSystem",
+    "tablePrefix": "sys_",
+    "backendModule": "system",
+    "baseType": "tenant",
+    "routePrefix": "/system",
+    "includeTenantColumn": true
+  },
+  {
+    "apiModule": "tenant",
+    "labelKey": "toolGen.moduleTenant",
+    "tablePrefix": "sys_",
+    "backendModule": "system",
+    "baseType": "base",
+    "routePrefix": "/tenant",
+    "includeTenantColumn": false
+  },
+  {
+    "apiModule": "infra",
+    "labelKey": "toolGen.moduleInfra",
+    "tablePrefix": "infra_",
+    "backendModule": "infra",
+    "baseType": "tenant",
+    "routePrefix": "/infra",
+    "includeTenantColumn": true
+  },
+  {
+    "apiModule": "biz",
+    "labelKey": "toolGen.moduleBiz",
+    "tablePrefix": "biz_",
+    "backendModule": "biz",
+    "baseType": "tenant",
+    "routePrefix": "/biz",
+    "includeTenantColumn": true
+  },
+  {
+    "apiModule": "oa",
+    "labelKey": "toolGen.moduleOa",
+    "tablePrefix": "oa_",
+    "backendModule": "oa",
+    "baseType": "tenant",
+    "routePrefix": "/oa",
+    "includeTenantColumn": true
+  }
+]

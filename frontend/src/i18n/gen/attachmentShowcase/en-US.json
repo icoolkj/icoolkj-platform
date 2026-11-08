@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "Attachment component showcase",
+    "description": "Scenario tabs driven by view.json; copy and catalog codes come from gen JSON.",
+    "pickTitle": "How to choose",
+    "pickRowSingleImage": "Single cover / logo → AttachmentManager mode=single variant=image",
+    "pickRowMultiList": "Multi-file list → AttachmentManager mode=multiple variant=list",
+    "pickRowCatalog": "Catalog slots table → CatalogAttachmentManager; codes from view.json fileCatalogs (sample catalog=attachment_demo). Full closed loop: menu Attachment Demo.",
+    "bizLoopHint": "Full business loop (table/save/ref sync/delete): Infra → File Config → Attachment Demo",
+    "pickRowWrappers": "Other single-image cases (e.g. banner) also use AttachmentManager — only swap bizType; do not introduce CoverImagePicker / OaFileUpload",
+    "pickRowSpecial": "Avatar crop / rich-text embed / admin storage upload → keep hand-written components",
+    "tabSingleImage": "1 · Single image",
+    "tabMultiList": "2 · Multi file list",
+    "tabCatalog": "3 · Catalog slots table",
+    "tabBannerImage": "4 · Banner image",
+    "tabSpecial": "5 · Special cases",
+    "whenSingleImage": "Notice cover: bizType=notice_cover, downloadScope=notice.",
+    "whenMultiList": "OA attachments, form file field, any multi-file list.",
+    "whenCatalog": "Business form driven by infra_file_catalog via view.json fileCatalogs.",
+    "whenBannerImage": "Banner etc.: bizType=banner_image, downloadScope=infra; same component as notice cover, different constants.",
+    "whenSpecial": "Special interactions that must not be replaced by AttachmentManager.",
+    "snippetSingleImage": "import { AttachmentManager, FILE_BIZ_NOTICE_COVER, FILE_DOWNLOAD_SCOPE_NOTICE } from '@/components/attachment'\n\n<AttachmentManager\n  v-model=\"form.coverFileId\"\n  v-model:preview-url=\"form.coverPreviewUrl\"\n  :biz-type=\"FILE_BIZ_NOTICE_COVER\"\n  :download-scope=\"FILE_DOWNLOAD_SCOPE_NOTICE\"\n  mode=\"single\"\n  variant=\"image\"\n/>",
+    "snippetMultiList": "import { AttachmentManager, FILE_BIZ_OA_INSTANCE, FILE_DOWNLOAD_SCOPE_INFRA } from '@/components/attachment'\n\n<AttachmentManager\n  v-model=\"form.fileIds\"\n  :biz-type=\"FILE_BIZ_OA_INSTANCE\"\n  :download-scope=\"FILE_DOWNLOAD_SCOPE_INFRA\"\n  mode=\"multiple\"\n  variant=\"list\"\n  :max-files=\"5\"\n/>",
+    "snippetCatalog": "import { CatalogAttachmentManager } from '@/components/attachment'\nimport viewConfig from '@/i18n/gen/yourBiz/view.json'\n\n// catalogCode from view.json fileCatalogs[].code\n<CatalogAttachmentManager\n  v-model=\"form.attachments\"\n  :catalog-code=\"viewConfig.fileCatalogs[0].code\"\n  :biz-id=\"form.id\"\n  @change=\"({ fileIds }) => (form.fileIds = fileIds)\"\n/>",
+    "snippetBannerImage": "import { AttachmentManager, FILE_BIZ_BANNER_IMAGE, FILE_DOWNLOAD_SCOPE_INFRA } from '@/components/attachment'\n\n<AttachmentManager\n  v-model=\"form.imageFileId\"\n  v-model:preview-url=\"form.imageUrl\"\n  :biz-type=\"FILE_BIZ_BANNER_IMAGE\"\n  :download-scope=\"FILE_DOWNLOAD_SCOPE_INFRA\"\n  mode=\"single\"\n  variant=\"image\"\n/>",
+    "snippetSpecial": "// AvatarPicker / RichTextEditor / FileUploadDialog / OaAttachmentPanel\n// See Special cases tab; do not force AttachmentManager",
+    "stateLabel": "Bound state",
+    "catalogCode": "Catalog",
+    "catalogPlaceholder": "Pick a code from view.json fileCatalogs",
+    "bizId": "bizId",
+    "bizIdHint": "Optional; writes file_ref when set",
+    "copySnippet": "Copy snippet",
+    "copied": "Copied",
+    "devTag": "DEV",
+    "specialAvatarName": "AvatarPicker",
+    "specialAvatarDesc": "Avatar crop + dedicated profile/user upload API.",
+    "specialRichTextName": "RichTextEditor",
+    "specialRichTextDesc": "Inline image/video in editor HTML; use FILE_BIZ_NOTICE_RICHTEXT.",
+    "specialFileUploadDialogName": "FileUploadDialog",
+    "specialFileUploadDialogDesc": "Infra admin storage upload (provider tabs); not for business forms.",
+    "specialOaPanelName": "OaAttachmentPanel",
+    "specialOaPanelDesc": "Read-only OA preview/download panel; not an uploader.",
+    "attachmentCatalogName": "Attachment",
+    "attachmentCatalogRequirements": "Requirements",
+    "attachmentCatalogFiles": "Files",
+    "componentAttachmentManager": "AttachmentManager",
+    "componentCatalogAttachmentManager": "CatalogAttachmentManager",
+    "componentWrappers": "(deprecated) CoverImagePicker / OaFileUpload"
+  },
+  "fields": {
+    "catalogCode": {
+      "label": "Catalog code",
+      "placeholder": "Select catalog code"
+    },
+    "bizId": {
+      "label": "Business id",
+      "placeholder": "Optional business id"
+    }
+  },
+  "meta": {
+    "businessName": "attachmentShowcase",
+    "apiModule": "infra",
+    "functionName": "Attachment component showcase"
+  }
+}

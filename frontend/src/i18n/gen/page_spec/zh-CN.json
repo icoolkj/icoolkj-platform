@@ -1,0 +1,11 @@
+{
+  "page": {
+    "defaultSummary": "基于表 {0} 的默认 CRUD 方案，可按需求用 AI 优化。"
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "page_spec",
+    "apiModule": "generator",
+    "functionName": "页面规格"
+  }
+}

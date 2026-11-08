@@ -1,0 +1,62 @@
+{
+  "page": {
+    "title": "Access Policies",
+    "description": "",
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "refresh": "Reload",
+    "showEffective": "Effective",
+    "showStored": "Stored",
+    "deleteConfirm": "Delete policy \"{pattern}\"?",
+    "saveSuccess": "Saved",
+    "deleteSuccess": "Deleted",
+    "refreshSuccess": "Reloaded",
+    "formTitle": "Policy",
+    "enabledYes": "On",
+    "enabledNo": "Off",
+    "emptyStored": "No data",
+    "emptyEffective": "No data",
+    "authModeSESSION": "Session",
+    "authModeANON": "Anon",
+    "authModeSESSION_OR_ANON": "Session or anon",
+    "tenantScopeOWN": "Own tenant",
+    "tenantScopeOWN_OR_PLATFORM": "Own or platform",
+    "visibilityALWAYS": "ALWAYS",
+    "visibilityCUSTOM": "CUSTOM",
+    "pinned": "Pinned",
+    "pinnedHint": "Read-only"
+  },
+  "fields": {
+    "bizTypePattern": {
+      "label": "Pattern",
+      "placeholder": "brand_* / notice_cover / *",
+      "validation": {
+        "required": "Required"
+      }
+    },
+    "authMode": { "label": "Auth" },
+    "tenantScope": { "label": "Tenant scope" },
+    "visibility": { "label": "Visibility" },
+    "anonPurposes": { "label": "Anon purposes", "placeholder": "LOGIN_BRAND" },
+    "permAnyOf": { "label": "Permissions", "placeholder": "CSV, empty = none" },
+    "sortNo": { "label": "Sort" },
+    "enabled": { "label": "Enabled" },
+    "remark": { "label": "Remark" }
+  },
+  "meta": {
+    "businessName": "fileAccessPolicy",
+    "apiModule": "infra",
+    "functionName": "Access Policies",
+    "constraints": {
+      "bizTypePattern": { "required": true, "maxLength": 64 },
+      "authMode": { "required": true, "maxLength": 32 },
+      "tenantScope": { "required": true, "maxLength": 32 },
+      "visibility": { "required": true, "maxLength": 32 },
+      "anonPurposes": { "maxLength": 128 },
+      "permAnyOf": { "maxLength": 256 },
+      "enabled": { "maxLength": 1 },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

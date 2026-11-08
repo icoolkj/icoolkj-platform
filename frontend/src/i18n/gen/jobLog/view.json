@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "businessName": "jobLog",
+    "apiModule": "monitor",
+    "backendModule": "system",
+    "permissionPrefix": "monitor:jobLog",
+    "className": "JobLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "jobCode",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 180
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_job_run_status",
+        "width": 140
+      },
+      {
+        "field": "triggerType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_job_trigger_type",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "jobCode",
+        "component": "text",
+        "minWidth": 150,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "triggerType",
+        "component": "dict-tag",
+        "dictType": "sys_job_trigger_type",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "triggerUserId",
+        "component": "text",
+        "width": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_job_run_status",
+        "width": 110,
+        "align": "center"
+      },
+      {
+        "field": "jobMessage",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "startedAt",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "finishedAt",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 90
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 640,
+    "labelWidth": 120,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": []
+  },
+  "detailDialog": {
+    "dialogWidth": 850,
+    "labelWidth": 120,
+    "column": 2,
+    "fields": [
+      { "field": "jobCode", "component": "text" },
+      {
+        "field": "triggerType",
+        "component": "dict-tag",
+        "dictType": "sys_job_trigger_type"
+      },
+      { "field": "triggerUserId", "component": "text" },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_job_run_status"
+      },
+      { "field": "jobMessage", "component": "text", "span": 2 },
+      { "field": "startedAt", "component": "datetime" },
+      { "field": "finishedAt", "component": "datetime" },
+      { "field": "requestParam", "component": "json", "span": 2 },
+      { "field": "resultSummary", "component": "json", "span": 2 },
+      { "field": "exceptionInfo", "component": "json", "span": 2 }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "detail",
+        "builtin": "detail",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

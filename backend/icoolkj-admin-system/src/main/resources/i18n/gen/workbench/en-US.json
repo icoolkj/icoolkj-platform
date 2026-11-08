@@ -1,0 +1,42 @@
+{
+  "page": {
+    "title": "Workplace",
+    "description": "Tenant overview with organization metrics, notices and banners.",
+    "welcome": "User",
+    "greetingMorning": "Good morning, {name}",
+    "greetingAfternoon": "Good afternoon, {name}",
+    "greetingEvening": "Good evening, {name}",
+    "greetingNight": "Good night, {name}",
+    "statTenants": "Tenants",
+    "statUsers": "Users",
+    "statDepts": "Departments",
+    "statRoles": "Roles",
+    "statPosts": "Posts",
+    "statTodayLogins": "Logins Today",
+    "recentLogins": "Recent Logins",
+    "recentOperations": "Recent Operations",
+    "more": "More",
+    "opSuccess": "Success",
+    "opFailed": "Failed",
+    "bannerTitle": "Banners",
+    "noBanner": "No banners",
+    "quickLinks": "Quick Links",
+    "quickUsers": "Users",
+    "quickRoles": "Roles",
+    "quickNotices": "Notices",
+    "quickSiteMessages": "Site Messages",
+    "tenantInfo": "Tenant Info",
+    "tenantName": "Tenant Name",
+    "tenantCode": "Tenant Code",
+    "scopeLabel": "Scope",
+    "scopePlatform": "Platform",
+    "scopeTenant": "Tenant",
+    "platformTenantLabel": "Platform · {name}",
+    "unreadMessages": "Unread Messages"
+  },
+  "meta": {
+    "businessName": "workbench",
+    "apiModule": "dashboard",
+    "functionName": "Workplace"
+  }
+}

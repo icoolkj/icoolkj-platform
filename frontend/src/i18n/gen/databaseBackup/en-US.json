@@ -1,0 +1,72 @@
+{
+  "page": {
+    "title": "Database Backup",
+    "description": "Inspect backup settings, run manual backups, and manage backup files. Scheduled jobs run in the worker process.",
+    "configTitle": "Backup Policy",
+    "tabFiles": "Backup Files",
+    "tabPolicy": "Backup Policy",
+    "saveConfig": "Save Settings",
+    "configSaved": "Backup policy saved",
+    "runNow": "Backup Now",
+    "download": "Download",
+    "delete": "Delete",
+    "runConfirm": "Run database backup now?",
+    "runSuccess": "Backup completed: {name}",
+    "deleteConfirm": "Delete backup file {name}?",
+    "hint": "Output dir / retention / compress → sys_config; enable + cron → sys_job. mysqldump path: application.yml (icoolkj.backup.mysqldump-command).",
+    "mysqldumpYamlHint": "From application.yml, read-only."
+  },
+  "fields": {
+    "fileName": {
+      "label": "File Name",
+      "placeholder": "Enter file name",
+      "validation": {}
+    },
+    "sizeText": {
+      "label": "Size",
+      "placeholder": "",
+      "validation": {}
+    },
+    "modifiedAt": {
+      "label": "Modified At",
+      "placeholder": "",
+      "validation": {}
+    },
+    "enabled": {
+      "label": "Scheduled Backup",
+      "placeholder": "",
+      "validation": {}
+    },
+    "cron": {
+      "label": "Cron Expression",
+      "placeholder": "",
+      "validation": {}
+    },
+    "outputDir": {
+      "label": "Output Directory",
+      "placeholder": "",
+      "validation": {}
+    },
+    "retentionDays": {
+      "label": "Retention Days",
+      "placeholder": "",
+      "validation": {}
+    },
+    "compress": {
+      "label": "Gzip Compress",
+      "placeholder": "",
+      "validation": {}
+    },
+    "mysqldumpCommand": {
+      "label": "mysqldump Command",
+      "placeholder": "",
+      "validation": {}
+    }
+  },
+  "meta": {
+    "businessName": "databaseBackup",
+    "apiModule": "infra",
+    "functionName": "Database Backup",
+    "constraints": {}
+  }
+}

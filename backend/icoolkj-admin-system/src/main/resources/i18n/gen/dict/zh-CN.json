@@ -1,0 +1,137 @@
+{
+  "page": {
+    "title": "字典管理",
+    "description": "管理字典类型与字典数据",
+    "addTitle": "新增字典",
+    "editTitle": "修改字典",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "masterPanel": "字典类型",
+    "detailPanel": "字典数据",
+    "selectMasterFirst": "请先选择字典类型",
+    "masterAddTitle": "新增字典类型",
+    "masterEditTitle": "修改字典类型",
+    "detailAddTitle": "新增字典数据",
+    "detailEditTitle": "修改字典数据"
+  },
+  "fields": {
+    "remark": {
+      "label": "备注",
+      "placeholder": "可选备注",
+      "validation": {
+        "maxLength": "备注长度不能超过 {max} 个字符"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态",
+        "maxLength": "状态长度不能超过 {max} 个字符"
+      }
+    },
+    "dictName": {
+      "label": "字典名称",
+      "placeholder": "请输入字典名称",
+      "validation": {
+        "required": "请输入字典名称",
+        "maxLength": "字典名称长度不能超过 {max} 个字符"
+      }
+    },
+    "dictType": {
+      "label": "字典类型",
+      "placeholder": "请输入字典类型编码，如 sys_gender",
+      "validation": {
+        "required": "请输入字典类型",
+        "maxLength": "字典类型长度不能超过 {max} 个字符"
+      }
+    },
+    "sortNo": {
+      "label": "显示顺序",
+      "placeholder": "请输入显示顺序",
+      "validation": {
+        "required": "请输入显示顺序"
+      }
+    },
+    "icon": {
+      "label": "图标",
+      "placeholder": "选择 Element Plus 图标（与菜单图标约定一致）",
+      "validation": {
+        "maxLength": "图标名长度不能超过 {max} 个字符"
+      }
+    },
+    "cssClass": {
+      "label": "样式类",
+      "placeholder": "可选 CSS 类名",
+      "validation": {
+        "maxLength": "样式类长度不能超过 {max} 个字符"
+      }
+    },
+    "dictLabel": {
+      "label": "字典标签",
+      "placeholder": "请输入字典标签",
+      "validation": {
+        "required": "请输入字典标签",
+        "maxLength": "字典标签长度不能超过 {max} 个字符"
+      }
+    },
+    "dictValue": {
+      "label": "字典值",
+      "placeholder": "请输入字典值",
+      "validation": {
+        "required": "请输入字典值",
+        "maxLength": "字典值长度不能超过 {max} 个字符"
+      }
+    },
+    "isDefault": {
+      "label": "是否默认",
+      "placeholder": "请选择是否默认",
+      "validation": {
+        "required": "请选择是否默认"
+      }
+    },
+    "listClass": {
+      "label": "回显样式",
+      "placeholder": "请选择表格回显样式",
+      "validation": {
+        "maxLength": "回显样式长度不能超过 {max} 个字符"
+      }
+    },
+    "valueType": {
+      "label": "值类型",
+      "placeholder": "请选择值类型",
+      "validation": {
+        "required": "请选择值类型",
+        "maxLength": "值类型长度不能超过 {max} 个字符"
+      }
+    },
+    "dictTypeId": {
+      "label": "字典类型",
+      "placeholder": "由左侧字典类型自动关联",
+      "validation": {
+        "required": "请先选择字典类型",
+        "maxLength": "字典类型 ID 长度不能超过 {max} 个字符"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "dict",
+    "apiModule": "system",
+    "functionName": "字典管理",
+    "constraints": {
+      "dictName": { "required": true, "maxLength": 100 },
+      "dictType": { "required": true, "maxLength": 100 },
+      "status": { "required": true, "maxLength": 1 },
+      "remark": { "maxLength": 500 },
+      "dictLabel": { "required": true, "maxLength": 100 },
+      "dictValue": { "required": true, "maxLength": 100 },
+      "valueType": { "required": true, "maxLength": 20 },
+      "icon": { "maxLength": 64 },
+      "cssClass": { "maxLength": 100 },
+      "listClass": { "maxLength": 100 },
+      "isDefault": { "required": true, "maxLength": 1 },
+      "sortNo": { "required": true }
+    }
+  }
+}

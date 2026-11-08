@@ -1,0 +1,32 @@
+{
+  "page": {
+    "title": "{functionName} Management",
+    "description": "Manage {functionNameLower} records",
+    "addTitle": "Add {functionName}",
+    "editTitle": "Edit {functionName}",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "exportFileName": "{functionName}",
+    "exportSheetName": "{functionName}",
+    "importTemplateFileName": "{functionName} Import Template",
+    "importSheetName": "{functionName}",
+    "importAsyncTaskName": "{functionName} Excel Import",
+    "exportAsyncTaskName": "{functionName} Excel Export",
+    "importStepTemplateHint": "Download the template first. Use dropdowns for dictionary and lookup columns.",
+    "importStepUploadHint": ".xlsx only. Import is all-or-nothing when validation fails."
+  },
+  "templates": {
+    "functionNameFallback": "Record",
+    "placeholderInput": "Please enter {label}",
+    "placeholderSelect": "Please select {label}",
+    "validationRequired": "{label} is required",
+    "validationMaxLength": "{label} must not exceed {maxLength} characters"
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "_codegen",
+    "apiModule": "generator",
+    "functionName": "Codegen i18n templates"
+  }
+}

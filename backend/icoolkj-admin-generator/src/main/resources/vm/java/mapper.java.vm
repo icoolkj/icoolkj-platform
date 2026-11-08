@@ -1,0 +1,32 @@
+package ${packageName}.mapper;
+
+import ${packageName}.domain.${EntityName};
+import ${packageName}.dto.${ClassName}PageQuery;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
+
+@Mapper
+public interface ${ClassName}Mapper {
+
+    ${EntityName} selectById(@Param("id") String id);
+
+    List<${EntityName}> selectList(${ClassName}PageQuery query);
+
+    List<${EntityName}> selectPage(${ClassName}PageQuery query);
+
+    long countByQuery(${ClassName}PageQuery query);
+
+#if($hasImportUnique)
+#foreach($column in $importUniqueColumns)
+    long countBy${column.capJavaField}(@Param("${column.javaField}") String ${column.javaField}#if($baseType == "tenant"), @Param("tenantId") String tenantId#end);
+
+#end
+#end
+    int insert(${EntityName} entity);
+
+    int updateById(${EntityName} entity);
+
+    int deleteById(@Param("id") String id);
+}

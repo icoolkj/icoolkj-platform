@@ -1,0 +1,49 @@
+{
+  "page": {
+    "title": "AI Invoke Logs",
+    "description": "AI invoke audit with full request/response detail",
+    "addTitle": "Add",
+    "editTitle": "Edit",
+    "deleteConfirm": "Delete {count} selected row(s)?",
+    "logDetail": "Detail",
+    "systemPrompt": "System Prompt",
+    "userMessage": "User Message",
+    "aiResponse": "AI Response",
+    "errorMessage": "Error Message"
+  },
+  "fields": {
+    "bizType": {
+      "label": "Biz Type",
+      "placeholder": "Select biz type"
+    },
+    "responseStatus": {
+      "label": "Status",
+      "placeholder": "Select status"
+    },
+    "operatorName": {
+      "label": "Operator",
+      "placeholder": "Enter operator"
+    },
+    "model": {
+      "label": "Model"
+    },
+    "costTime": {
+      "label": "Cost (ms)"
+    },
+    "userPromptPreview": {
+      "label": "User Message"
+    },
+    "responsePreview": {
+      "label": "AI Response"
+    },
+    "createdAt": {
+      "label": "Created At"
+    }
+  },
+  "meta": {
+    "businessName": "aiInvokeLog",
+    "apiModule": "tool",
+    "functionName": "AI Invoke Logs",
+    "constraints": {}
+  }
+}

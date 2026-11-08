@@ -1,0 +1,154 @@
+{
+  "page": {
+    "title": "公告审批",
+    "viewTitle": "公告详情",
+    "noticePanel": "公告详情",
+    "timelinePanel": "流转记录",
+    "progressTabFlow": "流程图",
+    "emptyFlow": "暂无流程设计数据",
+    "approvePanel": "审批操作",
+    "submitApprove": "提交审批",
+    "missingBizId": "缺少 bizId 参数",
+    "missingTaskId": "缺少 taskId 参数",
+    "completeSuccess": "审批已提交",
+    "emptyNotice": "暂无公告数据",
+    "emptyTimeline": "暂无审批记录",
+    "emptyInstance": "暂无流程信息",
+    "timelineStarter": "发起人",
+    "timelineAssignee": "处理人",
+    "timelineToUser": "对象",
+    "timelineResult": "审批结果",
+    "timelineActionTransfer": "转办",
+    "timelineActionDelegate": "委派",
+    "timelineActionDelegateReturn": "委派归还",
+    "timelineActionWithdraw": "撤回",
+    "timelineActionTerminate": "管理员终止",
+    "timelineReasonNoticeWithdraw": "发起人撤回公告审批",
+    "timelineReasonNoticeCloseAfterReturn": "退回后关闭公告",
+    "timelineReasonStarterWithdraw": "发起人从已发申请撤回",
+    "timelineReasonCancelled": "流程已撤回",
+    "timelineActionJump": "跳转节点",
+    "timelineActionRejectJump": "驳回跳转",
+    "timelineActionTimeout": "超时处理",
+    "timelineActionAddSign": "加签",
+    "timelineActionAddSignHandoff": "加签交接",
+    "timelineActionAddSignReturn": "加签归还",
+    "timelineActionRemoveSign": "减签",
+    "startEvent": "发起申请",
+    "cycleSubmit": "第 {n} 次提交",
+    "expandHistory": "展开历史流转（共 {n} 次）",
+    "collapseHistory": "只看最近一次",
+    "nodePending": "待处理",
+    "nodeSkipped": "未经过",
+    "waitingAssignee": "待签收",
+    "resultPass": "通过",
+    "resultReject": "驳回",
+    "quickComments": "常用意见",
+    "quickCommentPlaceholder": "选择常用意见填入（可搜索）",
+    "publishedYes": "是",
+    "publishedNo": "否",
+    "actionTransfer": "转办",
+    "actionDelegate": "委派",
+    "actionAddSign": "加签",
+    "actionRemoveSign": "减签",
+    "transferTitle": "转办给",
+    "transferSuccess": "已转办",
+    "delegateTitle": "委派给",
+    "delegateSuccess": "已委派（对方通过后将交回给你办结）",
+    "delegateUntilTitle": "委派时限",
+    "delegateUntilHint": "可选；到期后被委派人无法提交。空=直至对方办结归还。",
+    "delegateUntilPh": "选择截止时间（可空）",
+    "jumpTitle": "跳转节点",
+    "targetActivityId": "目标节点",
+    "jumpSuccess": "已跳转",
+    "addSignTitle": "加签",
+    "addSignMode": "加签方式",
+    "addSignBefore": "前加签",
+    "addSignAfter": "后加签",
+    "addSignSuccess": "已加签",
+    "removeSignTitle": "减签",
+    "removeSignHint": "选择要从本节点移除的办理人（至少保留一人）",
+    "removeSignEmpty": "当前无可减签办理人",
+    "removeSignSuccess": "已减签",
+    "pickerPendingList": "待选用户",
+    "pickerSelected": "已选",
+    "pickerAddCurrentPage": "添加本页",
+    "pickerClearSelected": "清空已选",
+    "pickerUserSearch": "搜索用户",
+    "pickerDeptTree": "部门",
+    "pickerUserNickname": "姓名",
+    "pickerUserAccount": "账号"
+  },
+  "fields": {
+    "approved": {
+      "label": "审批结果",
+      "validation": {
+        "required": "请选择审批结果"
+      }
+    },
+    "comment": {
+      "label": "审批意见",
+      "placeholder": "请输入审批意见（可选）",
+      "placeholderReject": "请填写驳回原因",
+      "validation": {
+        "maxLength": "审批意见长度不能超过 {max} 个字符",
+        "requiredOnReject": "驳回必须填写意见"
+      }
+    },
+    "taskId": {
+      "label": "任务 ID"
+    },
+    "currentNode": {
+      "label": "当前节点"
+    },
+    "coverPreviewUrl": {
+      "label": "封面"
+    },
+    "publishStatus": {
+      "label": "审批状态"
+    },
+    "approveStatus": {
+      "label": "审批状态"
+    },
+    "noticeTitle": {
+      "label": "标题"
+    },
+    "noticeType": {
+      "label": "类型"
+    },
+    "noticeSummary": {
+      "label": "摘要"
+    },
+    "noticeContent": {
+      "label": "正文"
+    },
+    "publishLocations": {
+      "label": "发布位置"
+    },
+    "versionNo": {
+      "label": "版本号"
+    },
+    "published": {
+      "label": "已发布"
+    },
+    "deploymentId": {
+      "label": "Deployment ID"
+    },
+    "versionRemark": {
+      "label": "版本备注"
+    }
+  },
+  "meta": {
+    "businessName": "noticeApprove",
+    "apiModule": "system",
+    "functionName": "公告审批",
+    "constraints": {
+      "approved": {
+        "required": true
+      },
+      "comment": {
+        "maxLength": 500
+      }
+    }
+  }
+}

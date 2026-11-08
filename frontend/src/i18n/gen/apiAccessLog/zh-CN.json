@@ -1,0 +1,140 @@
+{
+  "page": {
+    "title": "接口日志",
+    "description": "管理接口日志，支持新增、修改与删除",
+    "addTitle": "新增接口日志",
+    "editTitle": "修改接口日志",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "clear": "清空",
+    "clearConfirm": "确认清空全部日志？此操作不可恢复。"
+  },
+  "fields": {
+    "requestUri": {
+      "label": "请求URI",
+      "placeholder": "请输入请求URI",
+      "validation": {
+        "required": "请输入请求URI",
+        "maxLength": "请求URI长度不能超过255"
+      }
+    },
+    "requestMethod": {
+      "label": "方法",
+      "placeholder": "请输入请求方法",
+      "validation": {
+        "required": "请输入请求方法",
+        "maxLength": "请求方法长度不能超过20"
+      }
+    },
+    "username": {
+      "label": "用户",
+      "placeholder": "请输入用户名",
+      "validation": {
+        "maxLength": "用户名长度不能超过50"
+      }
+    },
+    "clientIp": {
+      "label": "客户端IP",
+      "placeholder": "请输入客户端IP",
+      "validation": {
+        "maxLength": "客户端IP长度不能超过64"
+      }
+    },
+    "responseCode": {
+      "label": "响应码",
+      "placeholder": "请输入响应码",
+      "validation": {}
+    },
+    "costTime": {
+      "label": "耗时(ms)",
+      "placeholder": "请输入耗时毫秒",
+      "validation": {}
+    },
+    "accessedAt": {
+      "label": "访问时间",
+      "placeholder": "请选择访问时间",
+      "validation": {
+        "required": "请输入访问时间"
+      }
+    },
+    "tenantId": {
+      "label": "租户ID",
+      "placeholder": "请输入租户ID",
+      "validation": {
+        "required": "请输入租户ID",
+        "maxLength": "租户ID长度不能超过20"
+      }
+    },
+    "traceId": {
+      "label": "链路ID",
+      "placeholder": "请输入链路ID",
+      "validation": {
+        "maxLength": "链路ID长度不能超过64"
+      }
+    },
+    "userId": {
+      "label": "用户ID",
+      "placeholder": "请输入用户ID",
+      "validation": {
+        "maxLength": "用户ID长度不能超过20"
+      }
+    },
+    "requestParam": {
+      "label": "脱敏后请求参数",
+      "placeholder": "请输入脱敏后请求参数",
+      "validation": {
+        "maxLength": "脱敏后请求参数长度不能超过65535"
+      }
+    },
+    "responseMessage": {
+      "label": "响应消息",
+      "placeholder": "请输入响应消息",
+      "validation": {
+        "maxLength": "响应消息长度不能超过255"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "apiAccessLog",
+    "apiModule": "infra",
+    "functionName": "接口日志",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "traceId": {
+        "maxLength": 64
+      },
+      "requestUri": {
+        "required": true,
+        "maxLength": 255
+      },
+      "requestMethod": {
+        "required": true,
+        "maxLength": 20
+      },
+      "clientIp": {
+        "maxLength": 64
+      },
+      "userId": {
+        "maxLength": 20
+      },
+      "username": {
+        "maxLength": 50
+      },
+      "requestParam": {
+        "maxLength": 65535
+      },
+      "responseCode": {},
+      "responseMessage": {
+        "maxLength": 255
+      },
+      "costTime": {},
+      "accessedAt": {
+        "required": true
+      }
+    }
+  }
+}

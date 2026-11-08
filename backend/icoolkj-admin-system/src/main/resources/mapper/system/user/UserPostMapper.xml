@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.user.mapper.UserPostMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.user.domain.UserPostEntity">
+        <result column="tenant_id" property="tenantId"/>
+        <result column="user_id" property="userId"/>
+        <result column="post_id" property="postId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tenant_id, user_id, post_id
+    </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_user_post
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+            <if test="postId != null and postId != ''">AND post_id = #{postId}</if>
+        </where>
+        ORDER BY 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_user_post (tenant_id, user_id, post_id)
+        VALUES (#{tenantId}, #{userId}, #{postId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM sys_user_post
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+            <if test="postId != null and postId != ''">AND post_id = #{postId}</if>
+        </where>
+    </delete>
+
+</mapper>

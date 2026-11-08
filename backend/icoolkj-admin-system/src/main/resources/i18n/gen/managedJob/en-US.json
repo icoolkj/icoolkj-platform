@@ -1,0 +1,73 @@
+{
+  "page": {
+    "title": "Scheduled Jobs",
+    "description": "Enable/pause platform jobs, edit cron, and run now",
+    "editTitle": "Edit scheduled job",
+    "run": "Run now",
+    "runConfirm": "Run “{name}” now?",
+    "pause": "Pause",
+    "resume": "Resume",
+    "pauseConfirm": "Pause “{name}”?",
+    "resumeConfirm": "Resume “{name}”?"
+  },
+  "keys": {
+    "audit-log-retention": "Audit log retention",
+    "database-backup": "Database backup",
+    "infra-file-gc": "File garbage collection",
+    "async-task-pending-reconcile": "Async task queue reconciliation"
+  },
+  "fields": {
+    "jobCode": {
+      "label": "Job code",
+      "placeholder": "Enter job code"
+    },
+    "jobName": {
+      "label": "Job name",
+      "placeholder": "Enter job name"
+    },
+    "cronExpression": {
+      "label": "Cron",
+      "placeholder": "Enter cron expression",
+      "validation": {
+        "required": "Cron is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required"
+      }
+    },
+    "lastStatus": {
+      "label": "Last status"
+    },
+    "lastMessage": {
+      "label": "Last message"
+    },
+    "lastTriggerAt": {
+      "label": "Last trigger"
+    },
+    "allowConcurrent": {
+      "label": "Allow concurrent"
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Enter remark"
+    }
+  },
+  "meta": {
+    "businessName": "managedJob",
+    "apiModule": "monitor",
+    "functionName": "Scheduled Jobs",
+    "constraints": {
+      "cronExpression": {
+        "required": true,
+        "maxLength": 100
+      },
+      "status": {
+        "required": true
+      }
+    }
+  }
+}

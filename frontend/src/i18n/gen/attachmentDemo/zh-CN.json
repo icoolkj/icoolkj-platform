@@ -1,0 +1,64 @@
+{
+  "page": {
+    "title": "附件测试业务",
+    "description": "规范闭环样例：业务表 + view.json fileCatalogs + CatalogAttachmentManager + syncBizFileRefs。开发人员请按本页对照实现真实业务。",
+    "addTitle": "新增附件测试",
+    "editTitle": "编辑附件测试",
+    "detailTitle": "附件测试详情",
+    "detailAction": "详情",
+    "batchDelete": "批量删除",
+    "batchDeleteConfirm": "确认删除选中的 {count} 条记录？",
+    "deleteConfirm": "确认删除该记录？",
+    "sectionAttachments": "附件材料",
+    "attachmentCatalogName": "附件名称",
+    "attachmentCatalogRequirements": "附件要求",
+    "attachmentCatalogFiles": "附件信息",
+    "attachmentRequired": "请上传必传附件：{names}",
+    "upload": "上传",
+    "guideTitle": "开发对照",
+    "guideBody": "1) view.json 声明 fileCatalogs；2) 表单用 CatalogAttachmentManager；3) 保存 assets 到业务表；4) 后端 syncBizFileRefs / 删除 releaseBizFiles。"
+  },
+  "fields": {
+    "title": {
+      "label": "标题",
+      "placeholder": "请输入标题",
+      "validation": {
+        "required": "请输入标题",
+        "maxLength": "标题长度不能超过 {max} 个字符"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "可选备注",
+      "validation": {
+        "maxLength": "备注长度不能超过 {max} 个字符"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "id": {
+      "label": "主键",
+      "validation": {
+        "required": "缺少主键"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "attachmentDemo",
+    "apiModule": "infra",
+    "functionName": "附件测试业务",
+    "constraints": {
+      "title": { "required": true, "maxLength": 200 },
+      "status": { "required": true },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

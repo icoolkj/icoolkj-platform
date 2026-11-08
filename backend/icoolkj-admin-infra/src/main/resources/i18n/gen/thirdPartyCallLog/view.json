@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "businessName": "thirdPartyCallLog",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:thirdPartyCallLog",
+    "className": "ThirdPartyCallLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "providerName",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 200
+      },
+      {
+        "field": "responseStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "infra_call_status",
+        "width": 140
+      },
+      {
+        "field": "bizType",
+        "component": "select",
+        "queryType": "EQ",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "providerName",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "bizType",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "requestUrl",
+        "component": "text",
+        "minWidth": 240,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "requestMethod",
+        "component": "text",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "responseStatus",
+        "component": "dict-tag",
+        "dictType": "infra_call_status",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "costTime",
+        "component": "text",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "calledAt",
+        "component": "text",
+        "width": 170,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "tenantId",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "requestData",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "responseData",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "errorMessage",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "tenantId",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "providerName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "bizType",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "requestUrl",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "requestMethod",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "requestData",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "responseData",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "responseStatus",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "errorMessage",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "costTime",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "calledAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      }
+    ]
+  }
+}

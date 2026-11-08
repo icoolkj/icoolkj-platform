@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "businessName": "brandPack",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:brandPack",
+    "className": "BrandPack"
+  },
+  "page": {
+    "layout": "custom-form"
+  },
+  "fileCatalogs": [
+    {
+      "code": "brand_logo",
+      "tab": "logo",
+      "tabLabelKey": "sectionLogo",
+      "enableLabels": false
+    },
+    {
+      "code": "brand_qr",
+      "tab": "qr",
+      "tabLabelKey": "sectionQr",
+      "enableLabels": true
+    }
+  ]
+}

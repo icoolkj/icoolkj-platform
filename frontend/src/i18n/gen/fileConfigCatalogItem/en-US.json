@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "Catalog Slots",
+    "description": "Bind upload profiles to a catalog; add/edit one by one; disable without deleting (profile rules remain the baseline)",
+    "selectCatalog": "Catalog",
+    "catalogPlaceholder": "Select a catalog",
+    "add": "Add binding",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addTitle": "Add catalog slot",
+    "editTitle": "Edit catalog slot — {code}",
+    "deleteConfirm": "Remove slot \"{code}\" from catalog \"{catalog}\"?",
+    "saveSuccess": "Saved",
+    "deleteSuccess": "Deleted",
+    "emptyHint": "Select a catalog first",
+    "platformOnlyHint": "Catalog slot bindings are platform-only",
+    "requiredYes": "Required",
+    "requiredNo": "Optional",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "inherit": "Inherit profile",
+    "duplicateProfile": "Slot \"{code}\" is already bound in this catalog"
+  },
+  "fields": {
+    "profileCode": { "label": "Profile code", "required": "Select a profile" },
+    "profileName": { "label": "Name" },
+    "required": { "label": "Required" },
+    "minNum": { "label": "Min count" },
+    "maxNum": { "label": "Max count" },
+    "sortNo": { "label": "Sort" },
+    "status": { "label": "Status" },
+    "remark": { "label": "Remark" },
+    "allowedExts": { "label": "Allowed extensions" }
+  }
+}

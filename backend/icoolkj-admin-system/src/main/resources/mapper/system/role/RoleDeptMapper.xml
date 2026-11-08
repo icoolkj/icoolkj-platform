@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.role.mapper.RoleDeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.role.domain.RoleDeptEntity">
+        <result column="tenant_id" property="tenantId"/>
+        <result column="role_id" property="roleId"/>
+        <result column="dept_id" property="deptId"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        tenant_id, role_id, dept_id
+    </sql>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_role_dept
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="roleId != null and roleId != ''">AND role_id = #{roleId}</if>
+            <if test="deptId != null and deptId != ''">AND dept_id = #{deptId}</if>
+        </where>
+        ORDER BY 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_role_dept (tenant_id, role_id, dept_id)
+        VALUES (#{tenantId}, #{roleId}, #{deptId})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM sys_role_dept
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="roleId != null and roleId != ''">AND role_id = #{roleId}</if>
+            <if test="deptId != null and deptId != ''">AND dept_id = #{deptId}</if>
+        </where>
+    </delete>
+
+</mapper>

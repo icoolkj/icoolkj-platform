@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "发起申请",
+    "description": "选择业务发起审批",
+    "searchPlaceholder": "请输入流程名称",
+    "allCategories": "全部流程",
+    "totalCount": "共 {count} 个",
+    "empty": "暂无可发起的流程，请先在审批模板中启用并发布",
+    "unsupported": "该业务发起能力尚未接入",
+    "categoryFallback": "其他",
+    "catalogPanel": "流程目录",
+    "addTitle": "新建{name}",
+    "editTitle": "编辑申请",
+    "bizFallback": "申请",
+    "formSchemaEmpty": "未配置已发布的模板字段，请先在审批模板中发布",
+    "tabBasic": "基本信息"
+  },
+  "fields": {
+    "keyword": { "label": "流程名称", "placeholder": "请输入流程名称" },
+    "remark": { "label": "备注", "placeholder": "可选备注" }
+  },
+  "meta": {
+    "businessName": "officeApply",
+    "apiModule": "oa",
+    "functionName": "发起申请"
+  }
+}

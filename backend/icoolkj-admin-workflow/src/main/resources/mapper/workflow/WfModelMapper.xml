@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.workflow.mapper.WfModelMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.workflow.domain.WfModelEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="model_key" property="modelKey"/>
+        <result column="model_name" property="modelName"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="form_type" property="formType"/>
+        <result column="form_route" property="formRoute"/>
+        <result column="latest_version" property="latestVersion"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="process_config" property="processConfig"/>
+        <result column="source_model_id" property="sourceModelId"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, model_key, model_name, category_name, biz_type, form_type, form_route,
+        latest_version, status, remark, process_config, source_model_id, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="scopeTenantId != null and scopeTenantId != ''">
+                AND (
+                    tenant_id = #{scopeTenantId}
+                    <if test="includePlatform">OR tenant_id = '0'</if>
+                )
+            </if>
+            <if test="modelKey != null and modelKey != ''">AND model_key like concat('%', #{modelKey}, '%')</if>
+            <if test="modelName != null and modelName != ''">AND model_name like concat('%', #{modelName}, '%')</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByTenantAndKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE tenant_id = #{tenantId} AND model_key = #{modelKey} AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectByModelKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE model_key = #{modelKey} AND deleted = 0 AND status = '0'
+        ORDER BY tenant_id ASC
+        LIMIT 1
+    </select>
+
+    <select id="selectByModelKeyPreferTenant" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE model_key = #{modelKey} AND deleted = 0 AND status = '0'
+          AND (
+            <choose>
+                <when test="preferTenantId != null and preferTenantId != ''">
+                    tenant_id = #{preferTenantId} OR tenant_id = '0'
+                </when>
+                <otherwise>
+                    tenant_id = '0'
+                </otherwise>
+            </choose>
+          )
+        ORDER BY CASE WHEN tenant_id = #{preferTenantId} THEN 0 ELSE 1 END, created_at DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectActiveByBizType" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE biz_type = #{bizType} AND deleted = 0 AND status = '0'
+          AND (tenant_id = #{tenantId} OR tenant_id = '0')
+        ORDER BY CASE WHEN tenant_id = #{tenantId} THEN 0 ELSE 1 END, created_at DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectTenantByBizType" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE biz_type = #{bizType}
+          AND tenant_id = #{tenantId}
+          AND deleted = 0
+          AND status = '0'
+        ORDER BY created_at DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectPlatformByBizType" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        WHERE biz_type = #{bizType} AND tenant_id = '0' AND deleted = 0 AND status = '0'
+        ORDER BY created_at DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectPlatformSyncCatalog" resultMap="BaseResultMap">
+        SELECT m.id, m.tenant_id, m.model_key, m.model_name, m.category_name, m.biz_type, m.form_type, m.form_route,
+               m.latest_version, m.status, m.remark, m.process_config, m.source_model_id, m.created_by, m.created_at, m.updated_by, m.updated_at, m.deleted
+        FROM wf_model m
+        INNER JOIN wf_biz_binding_policy p ON p.biz_type = m.biz_type AND p.deleted = 0
+        WHERE m.tenant_id = '0'
+          AND m.deleted = 0
+          AND m.status = '0'
+          AND p.binding_mode IN ('tenant_required', 'tenant_preferred')
+        ORDER BY m.biz_type ASC, m.created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model
+        <include refid="Query_Where"/>
+        ORDER BY tenant_id ASC, created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM wf_model <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO wf_model (
+            id, tenant_id, model_key, model_name, category_name, biz_type, form_type, form_route,
+            latest_version, status, remark, process_config, source_model_id, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{modelKey}, #{modelName}, #{categoryName}, #{bizType}, #{formType}, #{formRoute},
+            #{latestVersion}, #{status}, #{remark}, #{processConfig}, #{sourceModelId}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE wf_model
+        <set>
+            model_name = #{modelName},
+            category_name = #{categoryName},
+            form_type = #{formType},
+            form_route = #{formRoute},
+            latest_version = #{latestVersion},
+            status = #{status},
+            remark = #{remark},
+            process_config = #{processConfig},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <select id="selectOptions" resultType="com.icoolkj.platform.workflow.vo.WorkflowModelOptionVO">
+        SELECT id AS value,
+               CONCAT(model_key, ' — ', model_name) AS label,
+               model_key AS modelKey,
+               biz_type AS bizType
+        FROM wf_model
+        WHERE deleted = 0 AND status = '0'
+          AND (
+            tenant_id = #{scopeTenantId}
+            <if test="includePlatform">OR tenant_id = '0'</if>
+          )
+        ORDER BY tenant_id ASC, model_key ASC
+    </select>
+
+</mapper>

@@ -1,0 +1,110 @@
+{
+  "page": {
+    "title": "平台审批模板",
+    "description": "定义可下发的审批表单与字段，发布后供租户启用",
+    "addTitle": "新建平台审批模板",
+    "editTitle": "编辑平台审批模板",
+    "createDraftAction": "新建草稿",
+    "configureAction": "配置字段",
+    "editFieldsAction": "字段映射",
+    "tabFields": "字段",
+    "tabLayout": "布局",
+    "layoutHint": "受控布局：只能编排字段表中已有 fieldCode；锁定字段不可从画布删除。契约仍以字段表为准。",
+    "layoutValidateFail": "布局校验失败：存在未知或重复字段编码",
+    "publishAction": "发布",
+    "saveAndPublishAction": "保存并发布",
+    "versionAction": "版本",
+    "draftCreated": "已自动创建草稿版本",
+    "noDraft": "请先配置字段",
+    "publishConfirm": "确认发布当前草稿？已发布版本将归档。",
+    "published": "发布成功",
+    "fieldLockedTag": "已锁定",
+    "originPlatformCopy": "来源平台",
+    "originTenantCustom": "本租户自定义",
+    "originTenantOverride": "租户覆盖",
+    "promoteSlotListGroup": "列表冗余槽(01-10)",
+    "promoteSlotExtraGroup": "检索扩展槽(11-100)",
+    "richTextSlotHint": "富文本写入实例 content_text，不占提升槽；每模板仅允许一个",
+    "richTextOnePerTemplate": "每个模板仅允许一个富文本字段"
+  },
+
+  "fields": {
+    "categoryCode": {
+      "label": "业务分类",
+      "placeholder": "请选择业务分类",
+      "validation": {
+        "required": "请选择业务分类",
+        "maxLength": "业务分类长度不能超过 {max} 个字符"
+      }
+    },
+    "templateCode": {
+      "label": "模板编码",
+      "placeholder": "请输入模板编码，如 notice_approve",
+      "validation": {
+        "required": "请输入模板编码",
+        "maxLength": "模板编码长度不能超过 {max} 个字符"
+      }
+    },
+    "templateName": {
+      "label": "模板名称",
+      "placeholder": "请输入模板名称",
+      "validation": {
+        "required": "请输入模板名称",
+        "maxLength": "模板名称长度不能超过 {max} 个字符"
+      }
+    },
+    "wfModelId": {
+      "label": "流程模型",
+      "placeholder": "请选择流程模型",
+      "validation": {
+        "maxLength": "流程模型 ID 长度不能超过 {max} 个字符"
+      }
+    },
+    "latestVersionNo": { "label": "已发布版本" },
+    "draftVersionNo": { "label": "草稿版本" },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "maxLength": "状态长度不能超过 {max} 个字符"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "可选备注",
+      "validation": {
+        "maxLength": "备注长度不能超过 {max} 个字符"
+      }
+    },
+    "id": { "validation": { "required": "缺少模板 ID" } },
+    "fieldOrigin": { "label": "来源" },
+    "fieldCode": { "label": "字段编码", "placeholder": "如 applicant_name" },
+    "fieldName": { "label": "字段名称", "placeholder": "请输入字段名称" },
+    "fieldType": { "label": "字段类型", "placeholder": "请选择字段类型" },
+    "componentType": { "label": "组件类型", "placeholder": "请选择组件类型" },
+    "dictType": { "label": "关联字典", "placeholder": "select/radio 时选择字典" },
+    "fieldRequired": { "label": "必填" },
+    "defaultValue": { "label": "默认值", "placeholder": "可选默认值" },
+    "promoteSlot": { "label": "提升槽位", "placeholder": "请选择槽位" },
+    "listSlotSync": { "label": "同步列表槽" },
+    "platformLocked": { "label": "平台锁定" },
+    "usedInCondition": { "label": "用于条件" },
+    "usedInList": { "label": "用于列表" },
+    "fieldGroup": { "label": "字段分组", "placeholder": "可选分组名称" },
+    "colSpan": { "label": "栅格跨度" },
+    "sortNo": { "label": "排序", "placeholder": "请输入排序号" }
+  },
+  "meta": {
+    "businessName": "oaPlatformTemplate",
+    "apiModule": "oa",
+    "functionName": "平台审批模板",
+    "constraints": {
+      "categoryCode": { "required": true, "maxLength": 64 },
+      "templateCode": { "required": true, "maxLength": 64 },
+      "templateName": { "required": true, "maxLength": 100 },
+      "wfModelId": { "maxLength": 20 },
+      "status": { "maxLength": 1 },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

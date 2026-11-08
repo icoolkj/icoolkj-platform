@@ -1,0 +1,16 @@
+{
+  "meta": {
+    "businessName": "noticeApprove",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "workflow:approve:notice",
+    "className": "NoticeApprove"
+  },
+  "page": { "layout": "custom" },
+  "form": {
+    "fields": [
+      { "field": "approved", "component": "radio", "dictType": "wf_approve_action", "span": 24 },
+      { "field": "comment", "component": "textarea", "span": 24, "rows": 4, "maxLength": 500 }
+    ]
+  }
+}

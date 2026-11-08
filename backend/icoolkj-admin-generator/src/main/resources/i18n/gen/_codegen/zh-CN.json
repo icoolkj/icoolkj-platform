@@ -1,0 +1,32 @@
+{
+  "page": {
+    "title": "{functionName}",
+    "description": "管理{functionName}，支持新增、修改与删除",
+    "addTitle": "新增{functionName}",
+    "editTitle": "修改{functionName}",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "exportFileName": "{functionName}",
+    "exportSheetName": "{functionName}",
+    "exportAsyncTaskName": "{functionName}Excel导出",
+    "importTemplateFileName": "{functionName}导入模板",
+    "importSheetName": "{functionName}",
+    "importAsyncTaskName": "{functionName}Excel导入",
+    "importStepTemplateHint": "先下载模板，按列填写；带下拉的列请使用模板选项。",
+    "importStepUploadHint": "仅支持 .xlsx；单文件导入，校验失败不会写入任何数据。"
+  },
+  "templates": {
+    "functionNameFallback": "记录",
+    "placeholderInput": "请输入{label}",
+    "placeholderSelect": "请选择{label}",
+    "validationRequired": "请输入{label}",
+    "validationMaxLength": "{label}长度不能超过{maxLength}"
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "_codegen",
+    "apiModule": "generator",
+    "functionName": "代码生成 i18n 模板"
+  }
+}

@@ -1,0 +1,74 @@
+package ${packageName}.excel;
+
+import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.icoolkj.platform.framework.excel.ExcelI18nProperty;
+#set($needDict = false)
+#set($needRef = false)
+#foreach($column in $importColumns)
+#if($column.dictType && $column.dictType != "")
+#set($needDict = true)
+#end
+#if($column.javaField == "deptId" || $column.javaField == "deptName"
+    || $column.javaField == "postId" || $column.javaField == "postName"
+    || $column.javaField == "roleId" || $column.javaField == "roleName")
+#set($needRef = true)
+#end
+#end
+#if($needDict)
+import com.icoolkj.platform.framework.excel.ExcelImportDict;
+#end
+#if($needRef)
+import com.icoolkj.platform.framework.excel.ExcelImportRef;
+#end
+import lombok.Data;
+
+/**
+ * AUTO-GENERATED — Excel import row for ${functionName}.
+ * Bind by {@code @ExcelProperty(index)}; dict/dept/post/role cells use human labels/names (template dropdowns).
+ */
+@Data
+public class ${ClassName}ImportRow {
+#set($excelIndex = 0)
+#foreach($column in $importColumns)
+
+    @ExcelProperty(index = ${excelIndex})
+#if($column.javaField == "deptId")
+    @ExcelI18nProperty("gen.${businessName}.deptName.label")
+    @ExcelImportRef(ExcelImportRef.Kind.DEPT_NAME)
+#elseif($column.javaField == "deptName")
+    @ExcelI18nProperty("gen.${businessName}.${column.javaField}.label")
+    @ExcelImportRef(ExcelImportRef.Kind.DEPT_NAME)
+#elseif($column.javaField == "postId")
+    @ExcelI18nProperty("gen.${businessName}.postName.label")
+    @ExcelImportRef(ExcelImportRef.Kind.POST_NAME)
+#elseif($column.javaField == "postName")
+    @ExcelI18nProperty("gen.${businessName}.${column.javaField}.label")
+    @ExcelImportRef(ExcelImportRef.Kind.POST_NAME)
+#elseif($column.javaField == "roleId")
+    @ExcelI18nProperty("gen.${businessName}.roleName.label")
+    @ExcelImportRef(ExcelImportRef.Kind.ROLE_NAME)
+#elseif($column.javaField == "roleName")
+    @ExcelI18nProperty("gen.${businessName}.${column.javaField}.label")
+    @ExcelImportRef(ExcelImportRef.Kind.ROLE_NAME)
+#else
+    @ExcelI18nProperty("gen.${businessName}.${column.javaField}.label")
+#if($column.dictType && $column.dictType != "")
+    @ExcelImportDict("${column.dictType}")
+#end
+#end
+#set($cw = 16)
+#if($column.columnLength && $column.columnLength > 0)
+#set($cw = $column.columnLength)
+#if($cw > 40)
+#set($cw = 40)
+#end
+#if($cw < 8)
+#set($cw = 8)
+#end
+#end
+    @ColumnWidth(${cw})
+    private String ${column.javaField};
+#set($excelIndex = $excelIndex + 1)
+#end
+}

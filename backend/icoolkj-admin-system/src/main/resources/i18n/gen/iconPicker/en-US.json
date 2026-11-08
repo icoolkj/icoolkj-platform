@@ -1,0 +1,15 @@
+{
+  "page": {
+    "title": "Select Icon",
+    "select": "Select",
+    "clear": "Clear",
+    "searchPlaceholder": "Search icon name",
+    "empty": "No icons matched"
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "iconPicker",
+    "apiModule": "common",
+    "functionName": "Icon Picker"
+  }
+}

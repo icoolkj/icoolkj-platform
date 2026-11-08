@@ -1,0 +1,209 @@
+package com.icoolkj.platform.api.controller.${apiModule};
+
+import com.icoolkj.platform.common.model.page.PageResult;
+import com.icoolkj.platform.common.model.response.ApiResponse;
+import com.icoolkj.platform.framework.annotation.Idempotent;
+import com.icoolkj.platform.framework.annotation.OperationLog;
+#if($hasExport || $hasImport)
+import com.icoolkj.platform.framework.i18n.I18nMessageResolver;
+import jakarta.servlet.http.HttpServletResponse;
+#end
+#if($hasExport)
+import com.icoolkj.platform.framework.excel.ExcelExportSupport;
+import com.icoolkj.platform.framework.excel.ExcelValueFormatters;
+import com.icoolkj.platform.infra.excel.ExcelExportAsyncSubmitFacade;
+import com.icoolkj.platform.infra.vo.AsyncTaskSubmitVO;
+import ${packageName}.excel.${ClassName}ExcelExportAsyncHandler;
+import ${packageName}.excel.${ClassName}ExportRow;
+#end
+#if($hasImport)
+#if(!$hasExport)
+import com.icoolkj.platform.framework.excel.ExcelValueFormatters;
+import com.icoolkj.platform.infra.vo.AsyncTaskSubmitVO;
+#end
+import com.icoolkj.platform.framework.excel.ExcelImportLookup;
+import com.icoolkj.platform.framework.excel.ExcelImportResult;
+import com.icoolkj.platform.framework.excel.ExcelImportSupport;
+import com.icoolkj.platform.infra.excel.ExcelImportAsyncSubmitFacade;
+import ${packageName}.excel.${ClassName}ExcelImportAsyncHandler;
+import ${packageName}.excel.${ClassName}ImportRow;
+import org.springframework.web.multipart.MultipartFile;
+#end
+import ${packageName}.dto.${ClassName}CreateRequest;
+import ${packageName}.dto.${ClassName}PageQuery;
+import ${packageName}.dto.${ClassName}UpdateRequest;
+import ${packageName}.service.${ClassName}Service;
+import ${packageName}.vo.${ClassName}VO;
+import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+/** ${functionName}管理 */
+@RestController
+@RequestMapping("${routePath}")
+public class ${ClassName}Controller {
+
+    private final ${ClassName}Service ${className}Service;
+#if($hasExport || $hasImport)
+    private final I18nMessageResolver i18nMessageResolver;
+#end
+#if($hasExport)
+    private final ExcelExportAsyncSubmitFacade excelExportAsyncSubmitFacade;
+#end
+#if($hasImport)
+    private final ExcelImportLookup excelImportLookup;
+    private final ExcelImportAsyncSubmitFacade excelImportAsyncSubmitFacade;
+#end
+
+#if($hasExport && $hasImport)
+    public ${ClassName}Controller(${ClassName}Service ${className}Service,
+                                  I18nMessageResolver i18nMessageResolver,
+                                  ExcelExportAsyncSubmitFacade excelExportAsyncSubmitFacade,
+                                  ExcelImportLookup excelImportLookup,
+                                  ExcelImportAsyncSubmitFacade excelImportAsyncSubmitFacade) {
+        this.${className}Service = ${className}Service;
+        this.i18nMessageResolver = i18nMessageResolver;
+        this.excelExportAsyncSubmitFacade = excelExportAsyncSubmitFacade;
+        this.excelImportLookup = excelImportLookup;
+        this.excelImportAsyncSubmitFacade = excelImportAsyncSubmitFacade;
+    }
+#elseif($hasExport)
+    public ${ClassName}Controller(${ClassName}Service ${className}Service,
+                                  I18nMessageResolver i18nMessageResolver,
+                                  ExcelExportAsyncSubmitFacade excelExportAsyncSubmitFacade) {
+        this.${className}Service = ${className}Service;
+        this.i18nMessageResolver = i18nMessageResolver;
+        this.excelExportAsyncSubmitFacade = excelExportAsyncSubmitFacade;
+    }
+#elseif($hasImport)
+    public ${ClassName}Controller(${ClassName}Service ${className}Service,
+                                  I18nMessageResolver i18nMessageResolver,
+                                  ExcelImportLookup excelImportLookup,
+                                  ExcelImportAsyncSubmitFacade excelImportAsyncSubmitFacade) {
+        this.${className}Service = ${className}Service;
+        this.i18nMessageResolver = i18nMessageResolver;
+        this.excelImportLookup = excelImportLookup;
+        this.excelImportAsyncSubmitFacade = excelImportAsyncSubmitFacade;
+    }
+#else
+    public ${ClassName}Controller(${ClassName}Service ${className}Service) {
+        this.${className}Service = ${className}Service;
+    }
+#end
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:list')")
+    @GetMapping("/page")
+    public ApiResponse<PageResult<${ClassName}VO>> page(${ClassName}PageQuery query) {
+        return ApiResponse.ok(${className}Service.page(query));
+    }
+
+#if($hasExport)
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:export')")
+    @OperationLog(module = "${functionNameEn}", businessType = "EXPORT")
+    @GetMapping("/export")
+    public void export(${ClassName}PageQuery query, HttpServletResponse response) {
+#set($needStatusLabels = false)
+#foreach($column in $exportColumns)
+#if($column.javaField == "status")
+#set($needStatusLabels = true)
+#end
+#end
+#if($needStatusLabels)
+        String statusNormal = ExcelValueFormatters.pageText(i18nMessageResolver, "${businessName}", "statusNormal");
+        String statusDisabled = ExcelValueFormatters.pageText(i18nMessageResolver, "${businessName}", "statusDisabled");
+#end
+        ExcelExportSupport.writeLocalizedPaged(
+                response,
+                "${businessName}",
+                ${ClassName}ExportRow.class,
+                query,
+                ${className}Service::page,
+                vo -> {
+                    ${ClassName}ExportRow row = new ${ClassName}ExportRow();
+#foreach($column in $exportColumns)
+#if($column.javaField == "status")
+                    row.setStatus(ExcelValueFormatters.commonStatus(vo.getStatus(), statusNormal, statusDisabled));
+#elseif($column.javaType == "LocalDateTime")
+                    row.set${column.capJavaField}(ExcelValueFormatters.dateTime(vo.get${column.capJavaField}()));
+#else
+                    row.set${column.capJavaField}(vo.get${column.capJavaField}() == null ? null : String.valueOf(vo.get${column.capJavaField}()));
+#end
+#end
+                    return row;
+                },
+                i18nMessageResolver);
+    }
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:export')")
+    @OperationLog(module = "${functionNameEn}", businessType = "EXPORT")
+    @Idempotent("${permissionPrefix}:export-async")
+    @PostMapping("/export-async")
+    public ApiResponse<AsyncTaskSubmitVO> exportAsync(${ClassName}PageQuery query) throws Exception {
+        return ApiResponse.ok(excelExportAsyncSubmitFacade.submit(
+                ${ClassName}ExcelExportAsyncHandler.TASK_TYPE,
+                ExcelValueFormatters.pageText(i18nMessageResolver, "${businessName}", "exportAsyncTaskName"),
+                query));
+    }
+
+#end
+#if($hasImport)
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:import')")
+    @GetMapping("/import-template")
+    public void importTemplate(HttpServletResponse response) {
+        ExcelImportSupport.writeImportTemplate(response, "${businessName}", ${ClassName}ImportRow.class, i18nMessageResolver, excelImportLookup);
+    }
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:import')")
+    @OperationLog(module = "${functionNameEn}", businessType = "IMPORT")
+    @Idempotent("${permissionPrefix}:import")
+    @PostMapping("/import")
+    public ApiResponse<ExcelImportResult> importExcel(@RequestParam("file") MultipartFile file) {
+        return ApiResponse.ok(${className}Service.importRows(
+                ExcelImportSupport.readRows(file, ${ClassName}ImportRow.class)));
+    }
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:import')")
+    @OperationLog(module = "${functionNameEn}", businessType = "IMPORT")
+    @Idempotent("${permissionPrefix}:import-async")
+    @PostMapping("/import-async")
+    public ApiResponse<AsyncTaskSubmitVO> importExcelAsync(@RequestParam("file") MultipartFile file) throws Exception {
+        return ApiResponse.ok(excelImportAsyncSubmitFacade.submit(
+                file,
+                ${ClassName}ExcelImportAsyncHandler.TASK_TYPE,
+                ExcelValueFormatters.pageText(i18nMessageResolver, "${businessName}", "importAsyncTaskName"),
+                "${businessName} excel import"));
+    }
+
+#end
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:list')")
+    @GetMapping("/{id}")
+    public ApiResponse<${ClassName}VO> getById(@PathVariable String id) {
+        return ApiResponse.ok(${className}Service.getById(id));
+    }
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:add')")
+    @OperationLog(module = "${functionNameEn}", businessType = "CREATE")
+    @Idempotent("${permissionPrefix}:create")
+    @PostMapping("/create")
+    public ApiResponse<String> create(@Valid @RequestBody ${ClassName}CreateRequest request) {
+        return ApiResponse.ok(${className}Service.create(request));
+    }
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:update')")
+    @OperationLog(module = "${functionNameEn}", businessType = "UPDATE")
+    @Idempotent("${permissionPrefix}:update")
+    @PutMapping("/update")
+    public ApiResponse<Void> update(@Valid @RequestBody ${ClassName}UpdateRequest request) {
+        ${className}Service.update(request);
+        return ApiResponse.ok();
+    }
+
+    @PreAuthorize("@authz.hasPermission('${permissionPrefix}:delete')")
+    @OperationLog(module = "${functionNameEn}", businessType = "DELETE")
+    @Idempotent("${permissionPrefix}:delete")
+    @DeleteMapping("/{id}")
+    public ApiResponse<Void> delete(@PathVariable String id) {
+        ${className}Service.deleteById(id);
+        return ApiResponse.ok();
+    }
+}

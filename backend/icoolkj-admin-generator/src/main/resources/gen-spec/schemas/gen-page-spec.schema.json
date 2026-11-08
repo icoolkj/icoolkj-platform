@@ -1,0 +1,216 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://icoolkj.local/schemas/gen-page-spec.schema.json",
+  "title": "GenPageSpec",
+  "type": "object",
+  "required": ["specVersion", "pageKey", "layout", "meta"],
+  "additionalProperties": false,
+  "properties": {
+    "specVersion": { "type": "string", "const": "1.0" },
+    "pageKey": {
+      "type": "string",
+      "pattern": "^[a-z][a-zA-Z0-9]*$",
+      "description": "Git directory name / Vue businessName (camelCase, e.g. user, aiInvokeLog)"
+    },
+    "layout": {
+      "type": "string",
+      "enum": ["standard-crud", "tree-crud", "master-detail", "region-org"]
+    },
+    "vueVariant": {
+      "type": "string",
+      "enum": ["default", "userExtended", "masterDetail", "treeDept"]
+    },
+    "meta": { "$ref": "#/$defs/pageMeta" },
+    "entity": { "$ref": "#/$defs/entityBlock" },
+    "masterDetail": { "$ref": "#/$defs/masterDetailBlock" },
+    "extensions": { "$ref": "#/$defs/extensions" },
+    "viewDefaults": { "$ref": "#/$defs/viewDefaults" },
+    "fields": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/fieldSpec" }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "layout": { "const": "master-detail" } }, "required": ["layout"] },
+      "then": { "required": ["masterDetail"] }
+    },
+    {
+      "if": {
+        "properties": { "layout": { "enum": ["standard-crud", "tree-crud"] } },
+        "required": ["layout"]
+      },
+      "then": { "required": ["entity", "fields"] }
+    }
+  ],
+  "$defs": {
+    "pageMeta": {
+      "type": "object",
+      "required": ["apiModule", "permissionPrefix", "className"],
+      "additionalProperties": false,
+      "properties": {
+        "apiModule": { "type": "string" },
+        "backendModule": { "type": "string" },
+        "permissionPrefix": { "type": "string" },
+        "className": { "type": "string" }
+      }
+    },
+    "entityBlock": {
+      "type": "object",
+      "required": ["tableName", "businessName", "functionName"],
+      "additionalProperties": false,
+      "properties": {
+        "tableName": { "type": "string" },
+        "businessName": { "type": "string" },
+        "functionName": { "type": "string" }
+      }
+    },
+    "masterDetailBlock": {
+      "type": "object",
+      "required": ["detailForeignKey", "master", "detail"],
+      "additionalProperties": false,
+      "properties": {
+        "masterSpan": { "type": "integer", "minimum": 1, "maximum": 23 },
+        "detailSpan": { "type": "integer", "minimum": 1, "maximum": 23 },
+        "detailForeignKey": { "type": "string" },
+        "master": {
+          "type": "object",
+          "required": ["tableName", "businessName", "functionName", "fields"],
+          "additionalProperties": false,
+          "properties": {
+            "tableName": { "type": "string" },
+            "businessName": { "type": "string" },
+            "functionName": { "type": "string" },
+            "fields": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/fieldSpec" }
+            }
+          }
+        },
+        "detail": {
+          "type": "object",
+          "required": ["tableName", "businessName", "functionName", "fields"],
+          "additionalProperties": false,
+          "properties": {
+            "tableName": { "type": "string" },
+            "businessName": { "type": "string" },
+            "functionName": { "type": "string" },
+            "fields": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/fieldSpec" }
+            }
+          }
+        }
+      }
+    },
+    "fieldSpec": {
+      "type": "object",
+      "required": ["javaField"],
+      "additionalProperties": false,
+      "properties": {
+        "javaField": { "type": "string" },
+        "javaType": { "type": "string" },
+        "columnComment": { "type": "string" },
+        "isQuery": { "type": "boolean" },
+        "queryType": { "type": "string", "enum": ["EQ", "LIKE"] },
+        "isList": { "type": "boolean" },
+        "isExport": { "type": "boolean" },
+        "isImport": { "type": "boolean" },
+        "isInsert": { "type": "boolean" },
+        "isEdit": { "type": "boolean" },
+        "htmlType": {
+          "type": "string",
+          "enum": [
+            "input",
+            "textarea",
+            "select",
+            "radio",
+            "datetime",
+            "date",
+            "input-number",
+            "tree-select",
+            "password",
+            "text"
+          ]
+        },
+        "dictType": { "type": ["string", "null"] },
+        "disabledOnEdit": { "type": "boolean" },
+        "insertOnly": { "type": "boolean" }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "toolbarActions": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string", "description": "Shorthand; export / import (importTemplate deprecated → import)" },
+              {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "builtin": { "type": "string", "enum": ["export", "import"] },
+                  "labelKey": { "type": "string" },
+                  "permKey": { "type": "string" },
+                  "type": { "type": "string" },
+                  "fileName": { "type": "string" },
+                  "exportPath": { "type": "string" },
+                  "importPath": { "type": "string" },
+                  "importTemplatePath": { "type": "string" },
+                  "allowOnReadOnly": { "type": "boolean" }
+                }
+              }
+            ]
+          }
+        },
+        "rowActions": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "required": ["id"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "builtin": { "type": "string", "enum": ["edit", "delete"] },
+                  "labelKey": { "type": "string" },
+                  "permKey": { "type": "string" },
+                  "type": { "type": "string", "enum": ["primary", "danger", "warning", "success"] },
+                  "handler": { "type": "string" },
+                  "dialog": { "type": "string" },
+                  "dialogRowKey": { "type": "string" },
+                  "dialogIdProp": { "type": "string" },
+                  "allowOnReadOnly": { "type": "boolean" },
+                  "showWhen": {
+                    "type": "object",
+                    "properties": {
+                      "field": { "type": "string" },
+                      "values": { "type": "array", "items": { "type": "string" } }
+                    }
+                  },
+                  "disabledWhen": {
+                    "type": "object",
+                    "properties": {
+                      "field": { "type": "string" },
+                      "values": { "type": "array", "items": { "type": "string" } }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "dialogs": { "type": "array", "items": { "type": "string" } },
+        "treeSources": { "type": "object" }
+      }
+    },
+    "viewDefaults": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

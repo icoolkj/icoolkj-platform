@@ -1,0 +1,80 @@
+{
+  "page": {
+    "title": "Tenant Policy",
+    "description": "Tenant admins can override login security, password policy, and IP default policy for this tenant. Unchanged keys inherit the platform default; saves apply immediately (i18n admin).",
+    "refreshCache": "Refresh tenant cache",
+    "refreshCacheSuccess": "Tenant config cache refreshed",
+    "save": "Save",
+    "edit": "Edit",
+    "editTitle": "Edit Tenant Policy",
+    "reset": "Reset to platform default",
+    "platformDefault": "Platform default",
+    "overridden": "Overridden",
+    "inherited": "Inherited",
+    "saveSuccess": "Tenant override saved",
+    "resetSuccess": "Reset to platform default",
+    "resetConfirm": "Remove this tenant override and restore the platform default?",
+    "configKey": "Config key",
+    "configName": "Policy",
+    "valueType": "Type",
+    "status": "Status",
+    "editValue": "Tenant value",
+    "category.all": "All",
+    "category.login": "Login security",
+    "category.password": "Password policy",
+    "category.mfa": "MFA",
+    "category.ip": "IP access",
+    "category.i18n": "Internationalization",
+    "category.ai": "AI",
+    "category.backup": "Backup",
+    "category.storage": "File storage",
+    "category.avatar": "Avatar policy",
+    "category.workflow": "Workflow",
+    "category.brand": "Brand / site",
+    "category.other": "Other"
+  },
+  "keys": {
+    "security.login.max-fail-count": "Max login failures (account)",
+    "security.login.lock-minutes": "Account lock minutes",
+    "security.login.max-fail-count-per-ip": "Max login failures (IP)",
+    "security.login.ip-lock-minutes": "IP lock minutes",
+    "security.login.require-captcha": "Require login captcha",
+    "security.login.allow-multi-login": "Allow multi-device login",
+    "security.login.single-login-kickout-oldest": "Kick oldest session on single-login",
+    "security.password.expire-days": "Password expire days",
+    "security.password.force-change-initial": "Force change initial password",
+    "security.password.min-length": "Password min length",
+    "security.password.require-upper": "Require uppercase",
+    "security.password.require-lower": "Require lowercase",
+    "security.password.require-number": "Require digit",
+    "security.password.require-special": "Require special character",
+    "security.password.history-count": "Password history reuse count",
+    "security.password.initial": "Standard initial password",
+    "security.mfa.enabled": "Enable MFA",
+    "security.mfa.force-admin": "Force MFA for admins",
+    "security.ip.default-policy": "IP default policy (allow/deny)",
+    "workflow.approve.quick-comments": "Approval quick comments",
+    "workflow.notify.templates": "Workflow notify templates"
+  },
+  "fields": {
+    "configValue": {
+      "label": "Tenant value",
+      "placeholder": "Enter tenant override value",
+      "validation": {
+        "required": "Please enter tenant override value",
+        "maxLength": "Tenant override value length must not exceed 65535"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "tenantPolicy",
+    "apiModule": "system",
+    "functionName": "Tenant Policy",
+    "constraints": {
+      "configValue": {
+        "required": true,
+        "maxLength": 65535
+      }
+    }
+  }
+}

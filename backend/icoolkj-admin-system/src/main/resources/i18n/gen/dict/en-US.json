@@ -1,0 +1,137 @@
+{
+  "page": {
+    "title": "Dictionary",
+    "description": "Manage dictionary types and items",
+    "addTitle": "Add Dictionary",
+    "editTitle": "Edit Dictionary",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "masterPanel": "Dict Types",
+    "detailPanel": "Dict Items",
+    "selectMasterFirst": "Select a dictionary type first",
+    "masterAddTitle": "Add Dict Type",
+    "masterEditTitle": "Edit Dict Type",
+    "detailAddTitle": "Add Dict Item",
+    "detailEditTitle": "Edit Dict Item"
+  },
+  "fields": {
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Optional remark",
+      "validation": {
+        "maxLength": "Remark must be at most {max} characters"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Please select status",
+        "maxLength": "Status must be at most {max} characters"
+      }
+    },
+    "dictName": {
+      "label": "Dict Name",
+      "placeholder": "Enter dictionary name",
+      "validation": {
+        "required": "Dict name is required",
+        "maxLength": "Dict name must be at most {max} characters"
+      }
+    },
+    "dictType": {
+      "label": "Dict Type",
+      "placeholder": "Enter type code, e.g. sys_gender",
+      "validation": {
+        "required": "Dict type is required",
+        "maxLength": "Dict type must be at most {max} characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort Order",
+      "placeholder": "Enter sort order",
+      "validation": {
+        "required": "Sort order is required"
+      }
+    },
+    "icon": {
+      "label": "Icon",
+      "placeholder": "Pick Element Plus icon (same convention as menu icons)",
+      "validation": {
+        "maxLength": "Icon name must be at most {max} characters"
+      }
+    },
+    "cssClass": {
+      "label": "CSS Class",
+      "placeholder": "Optional CSS class",
+      "validation": {
+        "maxLength": "CSS class must be at most {max} characters"
+      }
+    },
+    "dictLabel": {
+      "label": "Label",
+      "placeholder": "Enter dictionary label",
+      "validation": {
+        "required": "Label is required",
+        "maxLength": "Label must be at most {max} characters"
+      }
+    },
+    "dictValue": {
+      "label": "Value",
+      "placeholder": "Enter dictionary value",
+      "validation": {
+        "required": "Value is required",
+        "maxLength": "Value must be at most {max} characters"
+      }
+    },
+    "isDefault": {
+      "label": "Default",
+      "placeholder": "Select whether default",
+      "validation": {
+        "required": "Please select whether default"
+      }
+    },
+    "listClass": {
+      "label": "Tag Style",
+      "placeholder": "Select table tag style",
+      "validation": {
+        "maxLength": "Tag style must be at most {max} characters"
+      }
+    },
+    "valueType": {
+      "label": "Value Type",
+      "placeholder": "Select value type",
+      "validation": {
+        "required": "Please select value type",
+        "maxLength": "Value type must be at most {max} characters"
+      }
+    },
+    "dictTypeId": {
+      "label": "Dict Type",
+      "placeholder": "Auto-linked from selected type",
+      "validation": {
+        "required": "Select a dictionary type first",
+        "maxLength": "Dict type ID must be at most {max} characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "dict",
+    "apiModule": "system",
+    "functionName": "Dictionary",
+    "constraints": {
+      "dictName": { "required": true, "maxLength": 100 },
+      "dictType": { "required": true, "maxLength": 100 },
+      "status": { "required": true, "maxLength": 1 },
+      "remark": { "maxLength": 500 },
+      "dictLabel": { "required": true, "maxLength": 100 },
+      "dictValue": { "required": true, "maxLength": 100 },
+      "valueType": { "required": true, "maxLength": 20 },
+      "icon": { "maxLength": 64 },
+      "cssClass": { "maxLength": 100 },
+      "listClass": { "maxLength": 100 },
+      "isDefault": { "required": true, "maxLength": 1 },
+      "sortNo": { "required": true }
+    }
+  }
+}

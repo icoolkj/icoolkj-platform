@@ -1,0 +1,185 @@
+﻿{
+  "meta": {
+    "businessName": "role",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:role",
+    "className": "Role"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "roleName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "roleCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      },
+      {
+        "field": "dataScope",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_data_scope",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "roleName",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "roleCode",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "dataScope",
+        "component": "dict-tag",
+        "dictType": "sys_data_scope",
+        "width": 140,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "isSuperRole",
+        "component": "dict-tag",
+        "dictType": "sys_bool",
+        "minWidth": 120,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 240
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "roleName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "roleCode",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "disabledOnEdit": true
+      },
+      {
+        "field": "dataScope",
+        "component": "select",
+        "dictType": "sys_data_scope",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "sortNo",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "min": 0
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      },
+      {
+        "field": "isSuperRole",
+        "component": "radio",
+        "dictType": "sys_bool",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "assignMenu",
+        "labelKey": "assignMenu",
+        "permKey": "update",
+        "dialog": "GenMenuAuthDialog"
+      },
+      { "id": "delete", "builtin": "delete", "permKey": "delete", "type": "danger" }
+    ],
+    "dialogs": ["GenMenuAuthDialog"]
+  }
+}

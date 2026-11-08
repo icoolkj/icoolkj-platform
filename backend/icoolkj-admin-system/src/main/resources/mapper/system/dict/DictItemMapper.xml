@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.dict.mapper.DictItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.dict.domain.DictItemEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="dict_type_id" property="dictTypeId"/>
+        <result column="dict_label" property="dictLabel"/>
+        <result column="dict_value" property="dictValue"/>
+        <result column="value_type" property="valueType"/>
+        <result column="css_class" property="cssClass"/>
+        <result column="icon" property="icon"/>
+        <result column="list_class" property="listClass"/>
+        <result column="is_default" property="isDefault"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, dict_type_id, dict_label, dict_value, value_type, css_class, icon, list_class, is_default, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="dictTypeId != null and dictTypeId != ''">AND dict_type_id = #{dictTypeId}</if>
+            <if test="dictLabel != null and dictLabel != ''">AND dict_label = #{dictLabel}</if>
+            <if test="dictValue != null and dictValue != ''">AND dict_value = #{dictValue}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dict_item
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dict_item
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dict_item
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_dict_item
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_dict_item (id, tenant_id, dict_type_id, dict_label, dict_value, value_type, css_class, icon, list_class, is_default, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted)
+        VALUES (#{id}, #{tenantId}, #{dictTypeId}, #{dictLabel}, #{dictValue}, #{valueType}, #{cssClass}, #{icon}, #{listClass}, #{isDefault}, #{sortNo}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_dict_item
+        <set>
+            dict_type_id = #{dictTypeId},
+            dict_label = #{dictLabel},
+            dict_value = #{dictValue},
+            value_type = #{valueType},
+            css_class = #{cssClass},
+            icon = #{icon},
+            list_class = #{listClass},
+            is_default = #{isDefault},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_dict_item SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectActiveByDictType" resultMap="BaseResultMap">
+        SELECT i.id, i.tenant_id, i.dict_type_id, i.dict_label, i.dict_value, i.value_type,
+               i.css_class, i.icon, i.list_class, i.is_default, i.sort_no, i.status, i.remark,
+               i.created_by, i.created_at, i.updated_by, i.updated_at, i.deleted
+        FROM sys_dict_item i
+        INNER JOIN sys_dict_type t ON i.dict_type_id = t.id AND t.deleted = 0 AND t.status = '0'
+        WHERE t.dict_type = #{dictType}
+          AND i.deleted = 0
+          AND i.status = '0'
+          AND (i.tenant_id = #{tenantId} OR i.tenant_id = '0')
+          AND (t.tenant_id = #{tenantId} OR t.tenant_id = '0')
+        ORDER BY i.sort_no ASC, i.created_at ASC
+    </select>
+
+</mapper>

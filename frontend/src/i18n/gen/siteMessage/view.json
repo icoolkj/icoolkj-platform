@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "businessName": "siteMessage",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:siteMessage",
+    "className": "SiteMessage"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "readOnly": true,
+  "query": {
+    "maxVisible": 4,
+    "collapsible": false,
+    "fields": [
+      {
+        "field": "messageSubject",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 260
+      },
+      {
+        "field": "messageCategory",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_site_message_category",
+        "width": 160
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "messageSubject",
+        "component": "text",
+        "minWidth": 220,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "messageContent",
+        "component": "text",
+        "minWidth": 260,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "messageCategory",
+        "component": "dict-tag",
+        "dictType": "sys_site_message_category",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "senderName",
+        "component": "text",
+        "width": 120,
+        "align": "center"
+      },
+      {
+        "field": "sentAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "recipientCount",
+        "component": "text",
+        "width": 100,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": true,
+      "width": 180
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 720,
+    "fields": []
+  },
+  "detailDialog": {
+    "dialogWidth": 960,
+    "metaFields": [
+      { "field": "messageSubject", "span": 2 },
+      { "field": "messageCategory" },
+      { "field": "senderName" },
+      { "field": "sentAt" },
+      { "field": "recipientCount" }
+    ],
+    "receiptQuery": {
+      "fields": [
+        {
+          "field": "readStatus",
+          "component": "select",
+          "queryType": "EQ",
+          "dictType": "sys_site_message_read_status",
+          "width": 160
+        }
+      ]
+    },
+    "receiptTable": {
+      "fields": [
+        {
+          "field": "userNickname",
+          "component": "text",
+          "minWidth": 140,
+          "showOverflowTooltip": true
+        },
+        {
+          "field": "username",
+          "component": "text",
+          "minWidth": 120,
+          "showOverflowTooltip": true
+        },
+        {
+          "field": "readStatus",
+          "component": "dict-tag",
+          "dictType": "sys_site_message_read_status",
+          "width": 100,
+          "align": "center"
+        },
+        {
+          "field": "readAt",
+          "component": "text",
+          "width": 170,
+          "align": "center"
+        }
+      ]
+    }
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "detailAction",
+        "dialog": "GenSiteMessageDetailDialog",
+        "dialogIdProp": "messageId",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "delete",
+        "builtin": "delete",
+        "permKey": "delete",
+        "type": "danger",
+        "allowOnReadOnly": true
+      }
+    ],
+    "dialogs": ["GenSiteMessageDetailDialog"]
+  }
+}

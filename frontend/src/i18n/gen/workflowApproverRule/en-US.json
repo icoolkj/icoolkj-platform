@@ -1,0 +1,82 @@
+{
+  "page": {
+    "title": "Approver Rules",
+    "description": "Includes platform defaults (read-only) and tenant overrides",
+    "addTitle": "New Approver Rule",
+    "editTitle": "Edit Approver Rule",
+    "strategyConfigHintRole": "e.g. {\"roleCodes\":[\"dept_approver\",\"tenant_admin\"]}",
+    "strategyConfigHintFixedUser": "e.g. {\"userId\":\"user-id\"}",
+    "strategyConfigHintStarterDeptRole": "e.g. {\"roleCodes\":[\"dept_approver\"]} — starter's dept",
+    "strategyConfigHintExpression": "e.g. {\"expr\":\"starter\"}",
+    "strategyConfigInvalid": "Strategy config must be valid JSON",
+    "deleteConfirm": "Delete this approver rule?",
+    "platformOwned": "Platform",
+    "platformReadonly": "Read-only"
+  },
+  "fields": {
+    "modelId": {
+      "label": "Process Model",
+      "placeholder": "Select model",
+      "validation": { "required": "Process model is required" }
+    },
+    "modelKey": { "label": "Model Key", "placeholder": "Model key" },
+    "modelName": { "label": "Model Name" },
+    "taskDefinitionKey": {
+      "label": "BPMN Task ID",
+      "placeholder": "e.g. deptLeaderApprove",
+      "validation": {
+        "required": "Task ID is required",
+        "maxLength": "Task ID must not exceed {max} characters"
+      }
+    },
+    "variableName": {
+      "label": "Variable Name",
+      "placeholder": "e.g. deptLeaderUserId",
+      "validation": {
+        "required": "Variable name is required",
+        "maxLength": "Variable name must not exceed {max} characters"
+      }
+    },
+    "strategyType": {
+      "label": "Strategy",
+      "placeholder": "Select strategy",
+      "validation": { "required": "Strategy is required" }
+    },
+    "strategyConfig": {
+      "label": "Strategy JSON",
+      "placeholder": "JSON config",
+      "validation": {
+        "required": "Strategy config is required",
+        "maxLength": "Config must not exceed {max} characters"
+      }
+    },
+    "resolveScope": {
+      "label": "Resolve Scope",
+      "placeholder": "Select scope",
+      "validation": { "required": "Resolve scope is required" }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "validation": { "required": "Sort number is required" }
+    },
+    "status": { "label": "Status" },
+    "ownerScope": { "label": "Owner" },
+    "remark": { "label": "Remark", "placeholder": "Optional remark" },
+    "id": { "validation": { "required": "Rule ID is required" } }
+  },
+  "meta": {
+    "businessName": "workflowApproverRule",
+    "apiModule": "workflow",
+    "functionName": "Approver Rules",
+    "constraints": {
+      "modelId": { "required": true },
+      "taskDefinitionKey": { "required": true, "maxLength": 64 },
+      "variableName": { "required": true, "maxLength": 64 },
+      "strategyType": { "required": true },
+      "strategyConfig": { "required": true, "maxLength": 1000 },
+      "resolveScope": { "required": true },
+      "sortNo": { "required": true },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaPlatformTemplateVersionMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaPlatformTemplateVersionEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="template_id" property="templateId"/>
+        <result column="version_no" property="versionNo"/>
+        <result column="version_status" property="versionStatus"/>
+        <result column="wf_model_id" property="wfModelId"/>
+        <result column="wf_model_version_no" property="wfModelVersionNo"/>
+        <result column="published_at" property="publishedAt"/>
+        <result column="remark" property="remark"/>
+        <result column="layout_json" property="layoutJson"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, template_id, version_no, version_status, wf_model_id, wf_model_version_no,
+        published_at, remark, layout_json, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template_version
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectDraftByTemplateId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template_version
+        WHERE template_id = #{templateId} AND deleted = 0 AND version_status = 'draft'
+        ORDER BY version_no DESC LIMIT 1
+    </select>
+
+    <select id="selectPublishedByTemplateId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template_version
+        WHERE template_id = #{templateId} AND deleted = 0 AND version_status = 'published'
+        ORDER BY version_no DESC LIMIT 1
+    </select>
+
+    <select id="selectByTemplateId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_platform_template_version
+        WHERE template_id = #{templateId} AND deleted = 0 ORDER BY version_no DESC
+    </select>
+
+    <select id="selectMaxVersionNo" resultType="java.lang.Integer">
+        SELECT MAX(version_no) FROM oa_platform_template_version WHERE template_id = #{templateId} AND deleted = 0
+    </select>
+
+    <insert id="insert">
+        INSERT INTO oa_platform_template_version (
+            id, tenant_id, template_id, version_no, version_status, wf_model_id, wf_model_version_no,
+            published_at, remark, layout_json, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{templateId}, #{versionNo}, #{versionStatus}, #{wfModelId}, #{wfModelVersionNo},
+            #{publishedAt}, #{remark}, #{layoutJson}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE oa_platform_template_version
+        <set>
+            version_status = #{versionStatus},
+            wf_model_id = #{wfModelId},
+            wf_model_version_no = #{wfModelVersionNo},
+            published_at = #{publishedAt},
+            remark = #{remark},
+            layout_json = #{layoutJson},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="archivePublishedByTemplateId">
+        UPDATE oa_platform_template_version SET version_status = 'archived', updated_at = NOW(3)
+        WHERE template_id = #{templateId} AND deleted = 0 AND version_status = 'published'
+    </update>
+</mapper>

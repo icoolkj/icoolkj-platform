@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "AI 接口配置",
+    "description": "（已迁移）请在「AI 能力目录」配置连接、模型与能力绑定",
+    "docsLink": "能力目录说明",
+    "testConnection": "测试连接",
+    "saveConfig": "保存配置",
+    "configHint": "AI 已改为能力目录配置（openai_compatible 等协议）。平台默认与租户覆盖均在「AI 能力目录」维护。",
+    "configOverrideHint": "当前展示为本租户覆盖后的生效值（已覆盖平台默认）。",
+    "configInheritHint": "当前沿用平台默认；保存后将写入本租户覆盖。",
+    "enabled": "启用 AI",
+    "timeoutSeconds": "超时(秒)",
+    "baseUrl": "API 地址",
+    "model": "模型",
+    "apiKey": "API Key",
+    "apiKeyPlaceholder": "留空表示不修改已保存的 Key",
+    "apiKeyConfigured": "已配置（{masked}）",
+    "testSuccess": "连接成功"
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "aiConfig",
+    "apiModule": "tool",
+    "functionName": "AI 接口配置",
+    "constraints": {}
+  }
+}

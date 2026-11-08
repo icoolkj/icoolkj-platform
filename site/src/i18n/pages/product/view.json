@@ -1,0 +1,20 @@
+{
+  "page": {
+    "layout": "marketing-product",
+    "i18nPrefix": "product"
+  },
+  "sections": [
+    {
+      "id": "lines-intro",
+      "type": "product-lines-intro",
+      "itemIds": ["foundation", "oa", "codegen"],
+      "sourcePrefix": "home.lines.items"
+    },
+    {
+      "id": "caps-grid",
+      "type": "caps-grid",
+      "docsTo": "/docs/capabilities",
+      "itemIds": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
+    }
+  ]
+}

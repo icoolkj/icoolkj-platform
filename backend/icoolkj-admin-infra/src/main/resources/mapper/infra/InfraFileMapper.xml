@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="original_name" property="originalName"/>
+        <result column="file_name" property="fileName"/>
+        <result column="file_ext" property="fileExt"/>
+        <result column="content_type" property="contentType"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="storage_type" property="storageType"/>
+        <result column="bucket_name" property="bucketName"/>
+        <result column="object_key" property="objectKey"/>
+        <result column="file_url" property="fileUrl"/>
+        <result column="md5" property="md5"/>
+        <result column="scan_status" property="scanStatus"/>
+        <result column="scan_engine" property="scanEngine"/>
+        <result column="scan_at" property="scanAt"/>
+        <result column="encrypted" property="encrypted"/>
+        <result column="sensitivity_level" property="sensitivityLevel"/>
+        <result column="user_id" property="userId"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+        <result column="deleted_at" property="deletedAt"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, biz_type, biz_id, original_name, file_name, file_ext, content_type, file_size, storage_type, bucket_name, object_key, file_url, md5, scan_status, scan_engine, scan_at, encrypted, sensitivity_level, user_id, remark, created_by, created_at, updated_by, updated_at, deleted, deleted_at
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="bizType != null and bizType != ''">AND biz_type = #{bizType}</if>
+            <if test="bizId != null and bizId != ''">AND biz_id = #{bizId}</if>
+            <if test="originalName != null and originalName != ''">AND original_name LIKE CONCAT('%', #{originalName}, '%')</if>
+            <if test="storageType != null and storageType != ''">AND storage_type = #{storageType}</if>
+        </where>
+    </sql>
+
+    <sql id="Page_Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="bizType != null and bizType != ''">AND biz_type = #{bizType}</if>
+            <if test="bizId != null and bizId != ''">AND biz_id = #{bizId}</if>
+            <if test="originalName != null and originalName != ''">AND original_name LIKE CONCAT('%', #{originalName}, '%')</if>
+            <if test="storageType != null and storageType != ''">AND storage_type = #{storageType}</if>
+            <!-- Excel staging is submitter-owned: hide peers' rows so list matches download. -->
+            <if test="excelStagingOwnerUserId != null and excelStagingOwnerUserId != ''">
+                AND (
+                    (biz_type IS NULL OR (biz_type &lt;&gt; 'excel-import' AND biz_type &lt;&gt; 'excel-export'))
+                    OR user_id = #{excelStagingOwnerUserId}
+                )
+            </if>
+            <if test="dataScopeSql != null and dataScopeSql != ''">${dataScopeSql}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_file
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_file
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_file
+        <include refid="Page_Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM infra_file
+        <include refid="Page_Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO infra_file (id, tenant_id, biz_type, biz_id, original_name, file_name, file_ext, content_type, file_size, storage_type, bucket_name, object_key, file_url, md5, scan_status, scan_engine, scan_at, encrypted, sensitivity_level, user_id, remark, created_by, created_at, updated_by, updated_at, deleted, deleted_at)
+        VALUES (#{id}, #{tenantId}, #{bizType}, #{bizId}, #{originalName}, #{fileName}, #{fileExt}, #{contentType}, #{fileSize}, #{storageType}, #{bucketName}, #{objectKey}, #{fileUrl}, #{md5}, #{scanStatus}, #{scanEngine}, #{scanAt}, #{encrypted}, #{sensitivityLevel}, #{userId}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}, #{deletedAt})
+    </insert>
+
+    <update id="updateById">
+        UPDATE infra_file
+        SET tenant_id = #{tenantId},
+            biz_type = #{bizType},
+            biz_id = #{bizId},
+            original_name = #{originalName},
+            file_name = #{fileName},
+            file_ext = #{fileExt},
+            content_type = #{contentType},
+            file_size = #{fileSize},
+            storage_type = #{storageType},
+            bucket_name = #{bucketName},
+            object_key = #{objectKey},
+            file_url = #{fileUrl},
+            md5 = #{md5},
+            scan_status = #{scanStatus},
+            scan_engine = #{scanEngine},
+            scan_at = #{scanAt},
+            encrypted = #{encrypted},
+            sensitivity_level = #{sensitivityLevel},
+            user_id = #{userId},
+            remark = #{remark},
+            created_by = #{createdBy},
+            created_at = #{createdAt},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted},
+            deleted_at = #{deletedAt}
+        WHERE id = #{id}
+    </update>
+
+    <update id="logicalDeleteById">
+        UPDATE infra_file
+        SET deleted = 1,
+            deleted_at = CURRENT_TIMESTAMP(3)
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <select id="selectSoftDeletedBefore" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_file
+        WHERE deleted = 1
+          AND (
+            (deleted_at IS NOT NULL AND deleted_at &lt; #{before})
+            OR (deleted_at IS NULL AND created_at &lt; #{before})
+          )
+        ORDER BY COALESCE(deleted_at, created_at) ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectOrphanExcelImportStagingBefore" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_file f
+        WHERE f.deleted = 0
+          AND f.biz_type IN ('excel-import', 'excel-export')
+          AND f.created_at &lt; #{before}
+          AND (
+            f.biz_id IS NULL
+            OR f.biz_id = ''
+            OR NOT EXISTS (
+                SELECT 1 FROM infra_async_task t
+                WHERE t.id = f.biz_id AND t.deleted = 0
+            )
+          )
+        ORDER BY f.created_at ASC
+        LIMIT #{limit}
+    </select>
+
+    <delete id="deleteById">
+        DELETE FROM infra_file WHERE id = #{id}
+    </delete>
+
+</mapper>

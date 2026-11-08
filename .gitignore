@@ -1,0 +1,210 @@
+# =============================================================================
+# iCoolKJ Platform
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# OS
+# -----------------------------------------------------------------------------
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# IDE / Editor
+# -----------------------------------------------------------------------------
+.idea/
+*.iml
+*.ipr
+*.iws
+.project
+.classpath
+.settings/
+.factorypath
+.springBeans
+.sts4-cache/
+.apt_generated/
+
+# Cursor: keep shared team rules; ignore local IDE state
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json.example
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------------
+# Java / Maven (backend)
+# -----------------------------------------------------------------------------
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+replay_pid*
+*.hprof
+
+# Spring Boot
+application-local.yml
+application-local.yaml
+application-local.properties
+application-*.local.yml
+application-*.local.yaml
+application-*.local.properties
+
+# -----------------------------------------------------------------------------
+# Node / Frontend (frontend)
+# -----------------------------------------------------------------------------
+node_modules/
+dist/
+dist-ssr/
+*.local
+.npm
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.vite/
+.nuxt/
+.output/
+coverage/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# gen-spec local deps (validate scripts)
+gen-spec/node_modules/
+
+# vue-tsc composite 产物（源文件为 *.ts，勿提交）
+frontend/shell.config.js
+frontend/shell.config.d.ts
+frontend/vite.config.js
+frontend/vite.config.d.ts
+
+# -----------------------------------------------------------------------------
+# Python (tools/icoolkj-codegen)
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# -----------------------------------------------------------------------------
+# Environment & Secrets
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+deploy/env/.env
+deploy/env/.env.*
+!deploy/env/.env.example
+
+# Real deployment env files (only *.example belongs in the repo)
+env.prod
+env.prod.*
+!env.prod.example
+deploy/host/env.prod
+deploy/artifact-bundle/.env
+deploy/artifact-bundle/.env.*
+!deploy/artifact-bundle/.env.example
+
+# Private keys, certificates and credential stores
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.kdbx
+*.crt
+*.cer
+id_rsa
+id_dsa
+*_rsa
+*_dsa
+.credentials
+credentials.json
+service-account*.json
+
+# Database dumps and backups
+*.sql.gz
+*.sql.bak
+*.dump
+db_dump.sql
+backup.sql
+
+# IDE local state (keep only shareable examples)
+.vscode/settings.json
+**/.vscode/settings.json
+
+# -----------------------------------------------------------------------------
+# Logs & Runtime
+# -----------------------------------------------------------------------------
+logs/
+**/logs/
+*.log
+*.pid
+*.seed
+*.pid.lock
+tmp/
+temp/
+
+# -----------------------------------------------------------------------------
+# Docker / Deploy (local runtime data)
+# -----------------------------------------------------------------------------
+docker-data/
+volumes/
+*.volume
+
+# -----------------------------------------------------------------------------
+# Object Storage / Uploads (local dev)
+# -----------------------------------------------------------------------------
+data/
+uploads/
+minio-data/
+# typical subdirs: data/upload, data/db-backup (covered by data/)
+
+# -----------------------------------------------------------------------------
+# Test & Build artifacts
+# -----------------------------------------------------------------------------
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+.jacoco/
+# Maven site 插件产物在 target/site/（已由 target/ 覆盖）；勿忽略仓库根 site/（平台官网）
+
+# Codegen scratch output (tools/icoolkj-codegen --frontend)
+frontend/src/api/generated/
+
+# -----------------------------------------------------------------------------
+# Package manager lockfiles (optional - uncomment if not tracking)
+# -----------------------------------------------------------------------------
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# -----------------------------------------------------------------------------
+# Misc
+# -----------------------------------------------------------------------------
+*.bak
+*.tmp
+*.orig
+.cache/

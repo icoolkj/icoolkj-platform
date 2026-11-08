@@ -1,0 +1,149 @@
+{
+  "page": {
+    "title": "通知公告",
+    "description": "管理平台通知公告，支持封面、富文本正文、发布位置与排序",
+    "addTitle": "新增通知公告",
+    "editTitle": "修改通知公告",
+    "detailTitle": "通知公告详情",
+    "detailAction": "详情",
+    "batchDelete": "批量删除",
+    "batchDeleteConfirm": "确认删除选中的 {count} 条公告？",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "upload": "上传封面",
+    "uploadHint": "支持 jpg/png/webp，建议 16:9",
+    "coverImageRequired": "请选择图片文件",
+    "boardTitle": "平台公告",
+    "boardEmpty": "暂无公告",
+    "boardDetailTitle": "公告详情",
+    "richEditorImageRequired": "请选择图片文件",
+    "richEditorVideoRequired": "请选择视频文件",
+    "richEditorUploadFailed": "图片上传失败",
+    "richEditorVideoUploadFailed": "视频上传失败",
+    "submitApprove": "提交审批",
+    "submitApproveConfirm": "确认提交该公告进入审批流程？",
+    "withdrawApprove": "撤回",
+    "withdrawApproveConfirm": "确认撤回审批中的公告？",
+    "closeAction": "关闭",
+    "closeConfirm": "确认关闭该公告？关闭后不可再编辑或删除，审批记录将保留。",
+    "closeSuccess": "已关闭",
+    "publishAction": "发布",
+    "publishConfirm": "确认发布该公告？发布后门户可见。",
+    "publishSuccess": "已发布",
+    "unpublishAction": "下架",
+    "unpublishConfirm": "确认下架该公告？下架后门户不可见。",
+    "unpublishSuccess": "已下架"
+  },
+  "fields": {
+    "noticeTitle": {
+      "label": "标题",
+      "placeholder": "请输入标题",
+      "validation": {
+        "required": "请输入标题",
+        "maxLength": "标题长度不能超过 {max} 个字符"
+      }
+    },
+    "noticeType": {
+      "label": "类型",
+      "placeholder": "请选择类型",
+      "validation": {
+        "required": "请选择类型",
+        "maxLength": "类型无效"
+      }
+    },
+    "coverFileId": {
+      "label": "封面图",
+      "placeholder": "请上传封面图"
+    },
+    "coverPreviewUrl": {
+      "label": "封面图"
+    },
+    "noticeContent": {
+      "label": "内容",
+      "placeholder": "请输入内容",
+      "validation": {
+        "required": "请输入内容",
+        "maxLength": "内容过长"
+      }
+    },
+    "noticeSummary": {
+      "label": "摘要",
+      "placeholder": "请输入摘要",
+      "validation": {
+        "required": "请输入摘要",
+        "maxLength": "摘要长度不能超过 {max} 个字符"
+      }
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "请输入排序号",
+      "validation": {
+        "required": "请输入排序号"
+      }
+    },
+    "publishLocations": {
+      "label": "发布位置",
+      "placeholder": "请选择发布位置",
+      "validation": {
+        "required": "请选择发布位置",
+        "maxLength": "发布位置无效"
+      }
+    },
+    "publishLocation": {
+      "label": "发布位置",
+      "placeholder": "请选择发布位置"
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态",
+        "maxLength": "状态无效"
+      }
+    },
+    "publishStatus": {
+      "label": "审批状态",
+      "placeholder": "请选择审批状态"
+    },
+    "approveStatus": {
+      "label": "审批状态",
+      "placeholder": "请选择审批状态"
+    },
+    "releaseStatus": {
+      "label": "发布状态",
+      "placeholder": "请选择发布状态"
+    },
+    "processInstanceId": {
+      "label": "流程实例"
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过 {max} 个字符"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "ids": {
+      "validation": {
+        "required": "请选择要删除的记录"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "notice",
+    "apiModule": "system",
+    "functionName": "通知公告",
+    "constraints": {
+      "noticeTitle": { "required": true, "maxLength": 200 },
+      "noticeType": { "required": true, "maxLength": 1 },
+      "noticeContent": { "required": true },
+      "noticeSummary": { "required": true, "maxLength": 60 },
+      "sortNo": { "required": true },
+      "publishLocations": { "required": true, "maxLength": 100 },
+      "status": { "required": true, "maxLength": 1 },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

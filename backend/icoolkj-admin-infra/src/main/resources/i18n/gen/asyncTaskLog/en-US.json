@@ -1,0 +1,71 @@
+{
+  "page": {
+    "title": "Async Task Log Management",
+    "description": "View async task execution logs",
+    "addTitle": "Add Async Task Log",
+    "editTitle": "Edit Async Task Log",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled"
+  },
+  "fields": {
+    "taskId": {
+      "label": "Task ID",
+      "placeholder": "Please enter Task ID",
+      "validation": {
+        "required": "Task Id is required",
+        "maxLength": "Task Id must not exceed 20 characters"
+      }
+    },
+    "logLevel": {
+      "label": "Log Level",
+      "placeholder": "Please select Log Level",
+      "validation": {
+        "required": "Log Level is required",
+        "maxLength": "Log Level must not exceed 20 characters"
+      }
+    },
+    "logContent": {
+      "label": "Log Content",
+      "placeholder": "Please enter Log Content",
+      "validation": {
+        "required": "Log Content is required",
+        "maxLength": "Log Content must not exceed 65535 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "tenantId": {
+      "label": "Tenant Id",
+      "placeholder": "Please enter Tenant Id",
+      "validation": {
+        "required": "Tenant Id is required",
+        "maxLength": "Tenant Id must not exceed 20 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "asyncTaskLog",
+    "apiModule": "infra",
+    "functionName": "Async Task Log",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "taskId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "logLevel": {
+        "required": true,
+        "maxLength": 20
+      },
+      "logContent": {
+        "required": true,
+        "maxLength": 65535
+      }
+    }
+  }
+}

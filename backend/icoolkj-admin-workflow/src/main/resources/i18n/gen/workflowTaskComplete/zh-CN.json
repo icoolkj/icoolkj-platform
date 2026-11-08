@@ -1,0 +1,19 @@
+{
+  "fields": {
+    "approved": {
+      "validation": {
+        "required": "请选择审批结果"
+      }
+    },
+    "comment": {
+      "validation": {
+        "maxLength": "审批意见长度不能超过 {max} 个字符"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "workflowTaskComplete",
+    "apiModule": "workflow",
+    "functionName": "任务审批"
+  }
+}

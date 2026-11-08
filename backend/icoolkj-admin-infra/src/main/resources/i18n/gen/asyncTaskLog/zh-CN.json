@@ -1,0 +1,71 @@
+{
+  "page": {
+    "title": "异步任务日志",
+    "description": "查看异步任务执行日志",
+    "addTitle": "新增异步任务日志表",
+    "editTitle": "修改异步任务日志表",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用"
+  },
+  "fields": {
+    "taskId": {
+      "label": "任务ID",
+      "placeholder": "请输入任务ID",
+      "validation": {
+        "required": "请输入任务ID",
+        "maxLength": "任务ID长度不能超过20"
+      }
+    },
+    "logLevel": {
+      "label": "日志级别",
+      "placeholder": "请选择日志级别",
+      "validation": {
+        "required": "请输入日志级别",
+        "maxLength": "日志级别长度不能超过20"
+      }
+    },
+    "logContent": {
+      "label": "日志内容",
+      "placeholder": "请输入日志内容",
+      "validation": {
+        "required": "请输入日志内容",
+        "maxLength": "日志内容长度不能超过65535"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "tenantId": {
+      "label": "租户ID",
+      "placeholder": "请输入租户ID",
+      "validation": {
+        "required": "请输入租户ID",
+        "maxLength": "租户ID长度不能超过20"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "asyncTaskLog",
+    "apiModule": "infra",
+    "functionName": "异步任务日志",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "taskId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "logLevel": {
+        "required": true,
+        "maxLength": 20
+      },
+      "logContent": {
+        "required": true,
+        "maxLength": 65535
+      }
+    }
+  }
+}

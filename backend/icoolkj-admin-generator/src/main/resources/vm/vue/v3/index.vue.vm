@@ -1,0 +1,12 @@
+#if($tree)
+<!-- AUTO-GENERATED ${functionName} — GenRuntimePage + view.json（配置驱动；扩展走 view.extensions 积木） -->
+#else
+<!-- AUTO-GENERATED ${functionName} — GenRuntimePage + view.json（配置驱动；扩展走 view.extensions 积木） -->
+#end
+<template>
+  <GenRuntimePage page-key="${businessName}" />
+</template>
+
+<script setup lang="ts">
+import { GenRuntimePage } from '@/components/gen'
+</script>

@@ -1,0 +1,62 @@
+{
+  "page": {
+    "title": "策略配置",
+    "description": "",
+    "add": "新增",
+    "edit": "修改",
+    "delete": "删除",
+    "refresh": "重载",
+    "showEffective": "生效中",
+    "showStored": "配置",
+    "deleteConfirm": "删除策略「{pattern}」？",
+    "saveSuccess": "已保存",
+    "deleteSuccess": "已删除",
+    "refreshSuccess": "已重载",
+    "formTitle": "策略",
+    "enabledYes": "启用",
+    "enabledNo": "停用",
+    "emptyStored": "暂无数据",
+    "emptyEffective": "暂无数据",
+    "authModeSESSION": "需登录",
+    "authModeANON": "匿名",
+    "authModeSESSION_OR_ANON": "登录或匿名",
+    "tenantScopeOWN": "本租户",
+    "tenantScopeOWN_OR_PLATFORM": "本租户或平台",
+    "visibilityALWAYS": "ALWAYS",
+    "visibilityCUSTOM": "CUSTOM",
+    "pinned": "锁定",
+    "pinnedHint": "不可修改"
+  },
+  "fields": {
+    "bizTypePattern": {
+      "label": "匹配模式",
+      "placeholder": "brand_* / notice_cover / *",
+      "validation": {
+        "required": "必填"
+      }
+    },
+    "authMode": { "label": "认证" },
+    "tenantScope": { "label": "租户范围" },
+    "visibility": { "label": "可见性" },
+    "anonPurposes": { "label": "匿名用途", "placeholder": "LOGIN_BRAND" },
+    "permAnyOf": { "label": "附加权限", "placeholder": "逗号分隔，空=不校验" },
+    "sortNo": { "label": "排序" },
+    "enabled": { "label": "启用" },
+    "remark": { "label": "备注" }
+  },
+  "meta": {
+    "businessName": "fileAccessPolicy",
+    "apiModule": "infra",
+    "functionName": "策略配置",
+    "constraints": {
+      "bizTypePattern": { "required": true, "maxLength": 64 },
+      "authMode": { "required": true, "maxLength": 32 },
+      "tenantScope": { "required": true, "maxLength": 32 },
+      "visibility": { "required": true, "maxLength": 32 },
+      "anonPurposes": { "maxLength": 128 },
+      "permAnyOf": { "maxLength": 256 },
+      "enabled": { "maxLength": 1 },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

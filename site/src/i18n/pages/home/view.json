@@ -1,0 +1,49 @@
+{
+  "page": {
+    "layout": "marketing-home",
+    "i18nPrefix": "home"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "type": "hero",
+      "ctaPrimary": { "to": "/license", "labelKey": "ctaPrimary" },
+      "ctaSecondary": { "action": "console", "labelKey": "ctaSecondary" }
+    },
+    {
+      "id": "lines",
+      "type": "product-lines",
+      "items": [
+        { "id": "foundation", "to": "/product" },
+        { "id": "oa", "to": "/docs/capabilities" },
+        { "id": "codegen", "to": "/docs/overview" }
+      ]
+    },
+    {
+      "id": "caps",
+      "type": "caps",
+      "docsTo": "/docs/capabilities",
+      "itemIds": ["c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8"]
+    },
+    {
+      "id": "why",
+      "type": "why",
+      "itemIds": ["reuse", "govern", "license"]
+    },
+    {
+      "id": "path",
+      "type": "path",
+      "items": [
+        { "id": "fit", "to": "/product" },
+        { "id": "license", "to": "/license" },
+        { "id": "deploy", "to": "/delivery" }
+      ]
+    },
+    {
+      "id": "cta",
+      "type": "cta-band",
+      "ctaPrimary": { "to": "/license", "labelKey": "ctaBand.primary" },
+      "ctaSecondary": { "action": "console", "labelKey": "ctaBand.secondary" }
+    }
+  ]
+}

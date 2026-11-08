@@ -1,0 +1,48 @@
+package ${packageName}.excel;
+
+import com.alibaba.excel.annotation.write.style.ColumnWidth;
+import com.icoolkj.platform.framework.excel.ExcelI18nProperty;
+#set($needMask = false)
+#foreach($column in $exportColumns)
+#if($column.javaField == "phone" || $column.javaField == "email" || $column.javaField == "mobile" || $column.javaField == "realName" || $column.javaField == "nickname" || $column.javaField == "ip" || $column.javaField.endsWith("Ip") || $column.javaField == "idCard" || $column.javaField == "idNo" || $column.javaField == "certNo" || $column.javaField == "bankCard" || $column.javaField == "bankAccount")
+#set($needMask = true)
+#end
+#end
+#if($needMask)
+import com.icoolkj.platform.framework.excel.ExcelMask;
+#end
+import lombok.Data;
+
+/** AUTO-GENERATED — Excel export allowlist for ${functionName} */
+@Data
+public class ${ClassName}ExportRow {
+#foreach($column in $exportColumns)
+
+    @ExcelI18nProperty("gen.${businessName}.${column.javaField}.label")
+#if($column.javaField == "phone" || $column.javaField == "mobile")
+    @ExcelMask(ExcelMask.Type.PHONE)
+#elseif($column.javaField == "email")
+    @ExcelMask(ExcelMask.Type.EMAIL)
+#elseif($column.javaField == "realName" || $column.javaField == "nickname")
+    @ExcelMask(ExcelMask.Type.NAME)
+#elseif($column.javaField == "ip" || $column.javaField.endsWith("Ip"))
+    @ExcelMask(ExcelMask.Type.IP)
+#elseif($column.javaField == "idCard" || $column.javaField == "idNo" || $column.javaField == "certNo")
+    @ExcelMask(ExcelMask.Type.ID_CARD)
+#elseif($column.javaField == "bankCard" || $column.javaField == "bankAccount")
+    @ExcelMask(ExcelMask.Type.BANK_CARD)
+#end
+#set($cw = 16)
+#if($column.columnLength && $column.columnLength > 0)
+#set($cw = $column.columnLength)
+#if($cw > 40)
+#set($cw = 40)
+#end
+#if($cw < 8)
+#set($cw = 8)
+#end
+#end
+    @ColumnWidth(${cw})
+    private String ${column.javaField};
+#end
+}

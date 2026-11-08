@@ -1,0 +1,82 @@
+{
+  "page": {
+    "title": "Site Brand",
+    "description": "Maintain platform and tenant OEM: product name, logos, copyright, and related assets. Tenants inherit the platform default until overridden. Upload type/size/required rules come from file slot profiles.",
+    "save": "Save",
+    "resetOverride": "Reset to platform default",
+    "resetConfirm": "Clear this tenant brand override and fall back to the platform default?",
+    "loadFailed": "Failed to load brand settings",
+    "saveSuccess": "Brand saved",
+    "resetSuccess": "Restored platform default brand",
+    "targetTenant": "Scope",
+    "platformTenant": "Platform (platform)",
+    "tenantOverrideHint": "Tenant override is active; the login page will prefer this brand.",
+    "tenantInheritHint": "Currently inheriting the platform default; saving creates a tenant override.",
+    "sectionBasic": "Basics",
+    "sectionLogo": "Logo sizes",
+    "sectionCopyright": "Copyright & contact",
+    "sectionQr": "QR codes",
+    "productName": "Product name",
+    "productNameZh": "Product name (zh-CN)",
+    "productNameEn": "Product name (en-US)",
+    "copyrightBrand": "Copyright brand",
+    "icpNo": "ICP number",
+    "icpUrl": "ICP URL",
+    "domain": "Domain",
+    "siteUrl": "Site URL",
+    "email": "Contact email",
+    "contactName": "Contact person",
+    "contactPhone": "Contact phone",
+    "upload": "Upload",
+    "catalogLoadHint": "Could not load file catalogs from view.json. Configure catalog slots under Infrastructure → File Config, then retry.",
+    "catalogEmpty": "No enabled catalog slots (or all disabled); bind and enable them in File Config first",
+    "assetLabelPlaceholder": "Caption (optional)"
+  },
+  "fields": {
+    "productNameZh": {
+      "label": "Product name (zh-CN)",
+      "placeholder": "Enter Chinese product name"
+    },
+    "productNameEn": {
+      "label": "Product name (en-US)",
+      "placeholder": "Enter English product name"
+    },
+    "copyrightBrand": {
+      "label": "Copyright brand",
+      "placeholder": "Enter copyright brand"
+    },
+    "icpNo": {
+      "label": "ICP number",
+      "placeholder": "Enter ICP number"
+    },
+    "icpUrl": {
+      "label": "ICP URL",
+      "placeholder": "Enter ICP URL"
+    },
+    "domain": {
+      "label": "Domain",
+      "placeholder": "Enter domain"
+    },
+    "siteUrl": {
+      "label": "Site URL",
+      "placeholder": "Enter site URL"
+    },
+    "email": {
+      "label": "Contact email",
+      "placeholder": "Enter contact email"
+    },
+    "contactName": {
+      "label": "Contact person",
+      "placeholder": "Enter contact person"
+    },
+    "contactPhone": {
+      "label": "Contact phone",
+      "placeholder": "Enter contact phone"
+    }
+  },
+  "meta": {
+    "businessName": "brandPack",
+    "apiModule": "system",
+    "functionName": "Site Brand"
+  }
+}

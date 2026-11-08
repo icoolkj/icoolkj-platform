@@ -1,0 +1,254 @@
+{
+  "page": {
+    "title": "操作日志",
+    "description": "管理操作日志，支持新增、修改与删除",
+    "addTitle": "新增操作日志",
+    "editTitle": "修改操作日志",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "statusSuccess": "成功",
+    "statusFail": "失败",
+    "exportFileName": "操作日志",
+    "exportAsyncTaskName": "操作日志Excel导出",
+    "exportSheetName": "操作日志",
+    "clear": "清空",
+    "clearConfirm": "确认清空全部日志？此操作不可恢复。"
+  },
+  "audit": {
+    "modules": {
+      "Auth": "认证",
+      "User Profile": "用户资料",
+      "User Preference": "用户偏好",
+      "System User": "系统用户",
+      "System Role": "系统角色",
+      "System Menu": "系统菜单",
+      "System Dept": "系统部门",
+      "System Post": "系统岗位",
+      "System Dict Type": "字典类型",
+      "System Dict Item": "字典项",
+      "System Config": "系统配置",
+      "System Notice": "通知公告",
+      "System Banner": "轮播图",
+      "System Region": "行政区划",
+      "System I18n Message": "国际化文案",
+      "System I18n Locale": "国际化语言",
+      "Site Message": "站内消息",
+      "Site Message Inbox": "站内信收件箱",
+      "Tenant": "租户",
+      "Ip Access Rule": "IP 访问规则",
+      "Infra Async Task": "异步任务",
+      "InfraFile": "文件管理",
+      "DatabaseBackup": "数据库备份",
+      "Code Generator": "代码生成器",
+      "Code Generator View": "代码生成视图",
+      "Code Generator I18n": "代码生成国际化",
+      "AI Chat": "AI 对话",
+      "AI Config": "AI 配置",
+      "AI DDL Log": "AI DDL 日志",
+      "Page Spec AI": "页面规格 AI"
+    },
+    "businessTypes": {
+      "CREATE": "新增",
+      "UPDATE": "修改",
+      "DELETE": "删除",
+      "EXPORT": "导出",
+      "LOGOUT": "退出登录",
+      "REFRESH_CACHE": "刷新缓存",
+      "ASSIGN_ROLE": "分配角色",
+      "ASSIGN_MENU": "分配菜单",
+      "INSERT": "新增",
+      "IMPORT": "导入",
+      "GENERATE_CODE": "生成代码",
+      "SYNC_DB": "同步数据库",
+      "SAVE": "保存",
+      "SYNC": "同步",
+      "RESTORE_BASELINE": "恢复基线",
+      "COPY": "复制",
+      "TEST": "测试",
+      "CREATE_SESSION": "创建会话",
+      "SEND": "发送",
+      "ARCHIVE": "归档",
+      "OTHER": "其它",
+      "PREPARE_TABLE": "准备表",
+      "DESIGN_CREATE_DDL": "设计建表 DDL",
+      "DESIGN_ALTER_DDL": "设计变更 DDL",
+      "EXECUTE_DDL": "执行 DDL",
+      "DESIGN_TABLE": "设计表",
+      "CREATE_TABLE": "创建表",
+      "DESIGN_ALTER_TABLE": "设计变更表",
+      "APPLY_ALTER_TABLE": "应用变更表",
+      "ANALYZE": "分析",
+      "PUBLISH": "发布",
+      "GENERATE": "生成",
+      "COMPILE": "编译"
+    }
+  },
+  "fields": {
+    "moduleName": {
+      "label": "模块",
+      "placeholder": "请输入模块",
+      "validation": {
+        "maxLength": "模块名称长度不能超过100"
+      }
+    },
+    "operatorName": {
+      "label": "操作人",
+      "placeholder": "请输入操作人",
+      "validation": {
+        "maxLength": "操作人长度不能超过50"
+      }
+    },
+    "operationUrl": {
+      "label": "请求URL",
+      "placeholder": "请输入请求URL",
+      "validation": {
+        "maxLength": "请求URL长度不能超过255"
+      }
+    },
+    "operationIp": {
+      "label": "IP",
+      "placeholder": "请输入请求IP",
+      "validation": {
+        "maxLength": "请求IP长度不能超过64"
+      }
+    },
+    "operationStatus": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入操作状态",
+        "maxLength": "操作状态长度不能超过1"
+      }
+    },
+    "operationAt": {
+      "label": "操作时间",
+      "placeholder": "请选择操作时间",
+      "validation": {
+        "required": "请输入操作时间"
+      }
+    },
+    "traceId": {
+      "label": "链路ID",
+      "placeholder": "请输入链路ID",
+      "validation": {
+        "maxLength": "链路ID长度不能超过64"
+      }
+    },
+    "businessType": {
+      "label": "业务类型",
+      "placeholder": "请选择业务类型",
+      "validation": {
+        "maxLength": "业务类型长度不能超过50"
+      }
+    },
+    "method": {
+      "label": "方法签名",
+      "placeholder": "请输入方法签名",
+      "validation": {
+        "maxLength": "方法签名长度不能超过255"
+      }
+    },
+    "requestMethod": {
+      "label": "请求方式",
+      "placeholder": "请输入请求方式",
+      "validation": {
+        "maxLength": "请求方式长度不能超过20"
+      }
+    },
+    "operatorId": {
+      "label": "操作人ID",
+      "placeholder": "请输入操作人ID",
+      "validation": {
+        "maxLength": "操作人ID长度不能超过20"
+      }
+    },
+    "operationLocation": {
+      "label": "操作地点",
+      "placeholder": "请输入操作地点",
+      "validation": {
+        "maxLength": "操作地点长度不能超过255"
+      }
+    },
+    "requestParam": {
+      "label": "脱敏后请求参数",
+      "placeholder": "请输入脱敏后请求参数",
+      "validation": {
+        "maxLength": "脱敏后请求参数长度不能超过65535"
+      }
+    },
+    "responseResult": {
+      "label": "脱敏后返回结果",
+      "placeholder": "请输入脱敏后返回结果",
+      "validation": {
+        "maxLength": "脱敏后返回结果长度不能超过65535"
+      }
+    },
+    "errorMessage": {
+      "label": "错误消息",
+      "placeholder": "请输入错误消息",
+      "validation": {
+        "maxLength": "错误消息长度不能超过65535"
+      }
+    },
+    "costTime": {
+      "label": "耗时毫秒",
+      "placeholder": "请输入耗时毫秒",
+      "validation": {}
+    }
+  },
+  "meta": {
+    "businessName": "operationLog",
+    "apiModule": "system",
+    "functionName": "操作日志",
+    "constraints": {
+      "traceId": {
+        "maxLength": 64
+      },
+      "moduleName": {
+        "maxLength": 100
+      },
+      "businessType": {
+        "maxLength": 50
+      },
+      "method": {
+        "maxLength": 255
+      },
+      "requestMethod": {
+        "maxLength": 20
+      },
+      "operatorId": {
+        "maxLength": 20
+      },
+      "operatorName": {
+        "maxLength": 50
+      },
+      "operationUrl": {
+        "maxLength": 255
+      },
+      "operationIp": {
+        "maxLength": 64
+      },
+      "operationLocation": {
+        "maxLength": 255
+      },
+      "requestParam": {
+        "maxLength": 65535
+      },
+      "responseResult": {
+        "maxLength": 65535
+      },
+      "operationStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "errorMessage": {
+        "maxLength": 65535
+      },
+      "costTime": {},
+      "operationAt": {
+        "required": true
+      }
+    }
+  }
+}

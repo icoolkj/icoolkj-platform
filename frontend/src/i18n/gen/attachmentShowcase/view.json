@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "businessName": "attachmentShowcase",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:file",
+    "className": "AttachmentShowcase"
+  },
+  "page": {
+    "layout": "custom-form"
+  },
+  "fileCatalogs": [
+    {
+      "code": "attachment_demo",
+      "tab": "catalog",
+      "tabLabelKey": "tabCatalog",
+      "enableLabels": false
+    }
+  ],
+  "attachmentPickGuideKeys": [
+    "pickRowSingleImage",
+    "pickRowMultiList",
+    "pickRowCatalog",
+    "pickRowWrappers",
+    "pickRowSpecial"
+  ],
+  "attachmentScenarios": [
+    {
+      "id": "single-image",
+      "tabLabelKey": "tabSingleImage",
+      "whenKey": "whenSingleImage",
+      "snippetKey": "snippetSingleImage",
+      "component": "AttachmentManager",
+      "mode": "single",
+      "variant": "image",
+      "bizTypeConst": "FILE_BIZ_NOTICE_COVER",
+      "downloadScope": "notice"
+    },
+    {
+      "id": "multi-list",
+      "tabLabelKey": "tabMultiList",
+      "whenKey": "whenMultiList",
+      "snippetKey": "snippetMultiList",
+      "component": "AttachmentManager",
+      "mode": "multiple",
+      "variant": "list",
+      "bizTypeConst": "FILE_BIZ_OA_INSTANCE",
+      "downloadScope": "infra",
+      "maxFiles": 5
+    },
+    {
+      "id": "catalog",
+      "tabLabelKey": "tabCatalog",
+      "whenKey": "whenCatalog",
+      "snippetKey": "snippetCatalog",
+      "component": "CatalogAttachmentManager",
+      "catalogBindTab": "catalog",
+      "downloadScope": "infra"
+    },
+    {
+      "id": "banner-image",
+      "tabLabelKey": "tabBannerImage",
+      "whenKey": "whenBannerImage",
+      "snippetKey": "snippetBannerImage",
+      "component": "AttachmentManager",
+      "mode": "single",
+      "variant": "image",
+      "bizTypeConst": "FILE_BIZ_BANNER_IMAGE",
+      "downloadScope": "infra"
+    },
+    {
+      "id": "special",
+      "tabLabelKey": "tabSpecial",
+      "whenKey": "whenSpecial",
+      "snippetKey": "snippetSpecial",
+      "component": "special"
+    }
+  ],
+  "attachmentSpecialCases": [
+    {
+      "nameKey": "specialAvatarName",
+      "descKey": "specialAvatarDesc"
+    },
+    {
+      "nameKey": "specialRichTextName",
+      "descKey": "specialRichTextDesc"
+    },
+    {
+      "nameKey": "specialFileUploadDialogName",
+      "descKey": "specialFileUploadDialogDesc"
+    },
+    {
+      "nameKey": "specialOaPanelName",
+      "descKey": "specialOaPanelDesc"
+    }
+  ]
+}

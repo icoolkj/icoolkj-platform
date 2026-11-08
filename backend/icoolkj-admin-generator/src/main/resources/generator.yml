@@ -1,0 +1,10 @@
+gen:
+  author: icoolkj
+  # 代码生成输出根目录（相对 backend 上级 = 项目根）
+  project-root: ..
+  # 表前缀，导入时可选去除
+  table-prefix: sys_,infra_,biz_,oa_
+  # 默认后端 Maven 模块
+  default-backend-module: system
+  default-api-module: system
+  default-base-type: tenant

@@ -1,0 +1,29 @@
+{
+  "page": {
+    "title": "Process Monitor",
+    "description": "All tenant process instances; filter unresolved assignees for troubleshooting",
+    "viewDetail": "View",
+    "terminateAction": "Terminate",
+    "terminateConfirm": "Terminate this process instance? This cannot be undone.",
+    "terminateReasonDefault": "Terminated by admin",
+    "missingFormRoute": "Missing form route",
+    "missingBizId": "Missing business ID",
+    "unresolvedAssignee": "No assignee resolved"
+  },
+  "fields": {
+    "bizTitle": { "label": "Title", "placeholder": "Enter title" },
+    "bizType": { "label": "Biz Type", "placeholder": "Select type" },
+    "status": { "label": "Status", "placeholder": "Select status" },
+    "unresolvedOnly": { "label": "Unresolved only", "placeholder": "Filter unresolved assignees" },
+    "processDefinitionName": { "label": "Process" },
+    "starterUserName": { "label": "Starter" },
+    "currentTaskName": { "label": "Current node" },
+    "currentAssigneeUserNames": { "label": "Current assignee" },
+    "startTime": { "label": "Started at" }
+  },
+  "meta": {
+    "businessName": "workflowMonitor",
+    "apiModule": "workflow",
+    "functionName": "Process Monitor"
+  }
+}

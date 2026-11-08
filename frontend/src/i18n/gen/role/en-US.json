@@ -1,0 +1,103 @@
+{
+  "page": {
+    "title": "Role Management",
+    "description": "Manage role records",
+    "addTitle": "Add Role",
+    "editTitle": "Edit Role",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "assignMenu": "Menu Auth",
+    "assignMenuTitle": "Assign Menus"
+  },
+  "fields": {
+    "roleName": {
+      "label": "Role Name",
+      "placeholder": "Please enter Role Name",
+      "validation": {
+        "required": "Role Name is required",
+        "maxLength": "Role Name must not exceed 50 characters"
+      }
+    },
+    "roleCode": {
+      "label": "Role Code",
+      "placeholder": "Please enter Role Code",
+      "validation": {
+        "required": "Role Code is required",
+        "maxLength": "Role Code must not exceed 64 characters"
+      }
+    },
+    "dataScope": {
+      "label": "Data Scope",
+      "placeholder": "Select data scope (roles OR-merge; ALL opens all tenant rows)",
+      "validation": {
+        "required": "Data Scope is required",
+        "maxLength": "Data Scope must not exceed 1 characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Please enter Sort",
+      "validation": {
+        "required": "Sort No is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "isSuperRole": {
+      "label": "Is Super Role",
+      "placeholder": "Please select Is Super Role",
+      "validation": {
+        "required": "Is Super Role is required"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "role",
+    "apiModule": "system",
+    "functionName": "Role",
+    "constraints": {
+      "roleName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "roleCode": {
+        "required": true,
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "dataScope": {
+        "required": true,
+        "maxLength": 1
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "isSuperRole": {
+        "required": true
+      }
+    }
+  }
+}

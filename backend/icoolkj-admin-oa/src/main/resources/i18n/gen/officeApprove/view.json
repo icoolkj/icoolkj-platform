@@ -1,0 +1,28 @@
+{
+  "meta": {
+    "businessName": "officeApprove",
+    "apiModule": "oa",
+    "permissionPrefix": "workflow:approve:oa",
+    "backendModule": "oa"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "form": {
+    "mode": "dialog",
+    "fields": [
+      {
+        "field": "approved",
+        "component": "radio",
+        "dictType": "wf_approve_action",
+        "span": 24
+      },
+      {
+        "field": "comment",
+        "component": "textarea",
+        "span": 24,
+        "rows": 3
+      }
+    ]
+  }
+}

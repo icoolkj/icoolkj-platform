@@ -1,0 +1,21 @@
+{
+  "page": {
+    "title": "My Todo",
+    "description": "Approval tasks assigned to you",
+    "approveAction": "Approve",
+    "missingFormRoute": "No form route configured for this task. Set formRoute on the process model."
+  },
+  "fields": {
+    "bizTitle": { "label": "Business Title", "placeholder": "Enter business title" },
+    "bizType": { "label": "Business Type", "placeholder": "Select business type" },
+    "taskName": { "label": "Task", "placeholder": "Enter task name" },
+    "processDefinitionName": { "label": "Process" },
+    "starterUserName": { "label": "Starter" },
+    "createTime": { "label": "Received At" }
+  },
+  "meta": {
+    "businessName": "workflowTaskTodo",
+    "apiModule": "workflow",
+    "functionName": "My Todo"
+  }
+}

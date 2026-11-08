@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "businessName": "banner",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:banner",
+    "className": "Banner"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "bannerTitle",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 220
+      },
+      {
+        "field": "displayPosition",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_banner_display_position",
+        "width": 180
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "bannerTitle",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "imagePreviewUrl",
+        "component": "image",
+        "downloadScope": "infra",
+        "width": 80,
+        "align": "center"
+      },
+      {
+        "field": "displayPositions",
+        "component": "dict-tags",
+        "dictType": "sys_banner_display_position",
+        "minWidth": 200
+      },
+      {
+        "field": "status",
+        "component": "switch",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "align": "center",
+        "activeValue": "0",
+        "inactiveValue": "1"
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 160
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 108,
+    "fields": []
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      { "id": "delete", "builtin": "delete", "permKey": "delete", "type": "danger" }
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "page": {
+    "title": "租户管理员",
+    "description": "查看各业务租户超级管理员，支持重置初始密码与解锁；后续可在此扩展「进入租户管理」。",
+    "tenantCode": "租户编码",
+    "tenantCodePlaceholder": "租户编码",
+    "tenantName": "租户名称",
+    "tenantNamePlaceholder": "租户名称",
+    "username": "管理员账号",
+    "usernamePlaceholder": "管理员账号",
+    "roleName": "角色",
+    "status": "状态",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "lockedUntil": "锁定至",
+    "lastLoginAt": "最近登录",
+    "mustChangePassword": "须改密",
+    "resetPassword": "重置密码",
+    "resetPasswordConfirm": "确认将该管理员密码重置为平台标准初始密码？重置后须改密，并踢出在线会话。",
+    "unlock": "解锁",
+    "unlockConfirm": "确认解除该管理员登录锁定？",
+    "enterTenant": "进入租户",
+    "enterTenantSoon": "进入租户管理能力即将支持",
+    "empty": "暂无租户管理员",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "yes": "是",
+    "no": "否"
+  }
+}

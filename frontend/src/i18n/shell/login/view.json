@@ -1,0 +1,83 @@
+{
+  "page": {
+    "layout": "split-brand-form",
+    "brandSide": "left",
+    "columns": {
+      "brand": 1.22,
+      "form": 1
+    }
+  },
+  "brand": {
+    "showLogo": true,
+    "showIntro": true,
+    "showCopyrightFooter": true,
+    "showTestAccountsLink": true,
+    "resolveByTenant": true,
+    "surfaces": {
+      "logo": {
+        "catalogCode": "brand_logo",
+        "profileCode": "brand_logo_lg"
+      },
+      "favicon": {
+        "catalogCode": "brand_logo",
+        "profileCode": "brand_favicon"
+      },
+      "qr": {
+        "catalogCode": "brand_qr",
+        "defaultLabelKey": "login.qrDefault"
+      }
+    },
+    "features": [
+      {
+        "titleKey": "login.feature1",
+        "descKey": "login.feature1Desc"
+      },
+      {
+        "titleKey": "login.feature2",
+        "descKey": "login.feature2Desc"
+      },
+      {
+        "titleKey": "login.feature3",
+        "descKey": "login.feature3Desc"
+      }
+    ]
+  },
+  "form": {
+    "showLocaleSwitcher": true,
+    "showEmailFooter": true,
+    "fields": [
+      {
+        "field": "tenantCode",
+        "component": "input"
+      },
+      {
+        "field": "username",
+        "component": "input"
+      },
+      {
+        "field": "password",
+        "component": "password"
+      },
+      {
+        "field": "captcha",
+        "component": "captcha",
+        "when": "requireCaptcha"
+      },
+      {
+        "field": "mfaCode",
+        "component": "mfa",
+        "when": "mfaStep"
+      },
+      {
+        "field": "rememberLogin",
+        "component": "checkbox",
+        "when": "!mfaStep"
+      },
+      {
+        "field": "agreeFramework",
+        "component": "agreement",
+        "when": "!mfaStep"
+      }
+    ]
+  }
+}

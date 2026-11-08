@@ -1,0 +1,15 @@
+# Demo showcase profile — read-only API (icoolkj.demo.enabled via shared-demo)
+# Usage: --spring.profiles.active=demo
+# Local: uses icoolkj_platform_dev + demo JWT default from shared-demo
+# Public: set DB_URL / JWT_SECRET env vars
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+icoolkj:
+  security:
+    login:
+      allow-multi-login: true

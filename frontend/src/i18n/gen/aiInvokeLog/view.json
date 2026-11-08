@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "businessName": "aiInvokeLog",
+    "apiModule": "tool",
+    "backendModule": "generator",
+    "permissionPrefix": "tool:ai",
+    "className": "AiInvokeLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "bizType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "tool_ai_invoke_biz_type",
+        "width": 180
+      },
+      {
+        "field": "responseStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "tool_ai_invoke_status",
+        "width": 120
+      },
+      {
+        "field": "operatorName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "bizType",
+        "component": "dict-tag",
+        "dictType": "tool_ai_invoke_biz_type",
+        "width": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "model",
+        "component": "text",
+        "width": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "responseStatus",
+        "component": "dict-tag",
+        "dictType": "tool_ai_invoke_status",
+        "width": 90,
+        "align": "center"
+      },
+      {
+        "field": "costTime",
+        "component": "text",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "userPromptPreview",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "responsePreview",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operatorName",
+        "component": "text",
+        "width": 110,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 90
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 120,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": []
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "logDetail",
+        "dialog": "GenAiInvokeLogDetailDialog",
+        "allowOnReadOnly": true
+      }
+    ],
+    "dialogs": ["GenAiInvokeLogDetailDialog"]
+  }
+}

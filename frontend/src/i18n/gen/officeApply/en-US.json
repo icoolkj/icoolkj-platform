@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "Start Application",
+    "description": "Pick a process to start an approval",
+    "searchPlaceholder": "Search process name",
+    "allCategories": "All processes",
+    "totalCount": "{count} total",
+    "empty": "No launchable processes. Enable and publish an approval template first.",
+    "unsupported": "This process is not wired for launch yet",
+    "categoryFallback": "Other",
+    "catalogPanel": "Process catalog",
+    "addTitle": "New {name}",
+    "editTitle": "Edit Application",
+    "bizFallback": "Application",
+    "formSchemaEmpty": "No published template fields. Publish an approval template first.",
+    "tabBasic": "Basic Info"
+  },
+  "fields": {
+    "keyword": { "label": "Process", "placeholder": "Search process name" },
+    "remark": { "label": "Remark", "placeholder": "Optional remark" }
+  },
+  "meta": {
+    "businessName": "officeApply",
+    "apiModule": "oa",
+    "functionName": "Start Application"
+  }
+}

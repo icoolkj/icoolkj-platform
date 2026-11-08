@@ -1,0 +1,17 @@
+{
+  "license": {
+    "title": "许可与使用",
+    "lead": "iCoolKJ Platform 源码公开，采用 iCoolKJ 非商业学习研究许可证 v1.0：允许学习与研究，禁止任何商业使用。",
+    "stepsTitle": "如何开始",
+    "steps": [
+      "阅读 LICENSE.txt 与 NOTICE.txt，确认使用目的属于非商业范围",
+      "克隆仓库，按 docs/configuration.md 准备本地隔离环境",
+      "运行 Flyway 迁移并启动前后端，在虚构数据上做实验"
+    ],
+    "consoleTitle": "本地控制台",
+    "consoleBody": "在本地运行管理端即可了解全部能力。请勿将本软件部署到生产环境或用于处理真实业务数据。",
+    "consoleCta": "查看完整许可",
+    "note": "本项目是源码公开（Source Available），不是 OSI 开源软件。任何商业使用须事先取得书面授权，联系 icoolkj@163.com / QQ 594047667。",
+    "eyebrow": "许可"
+  }
+}

@@ -1,0 +1,258 @@
+﻿{
+  "meta": {
+    "businessName": "user",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:user",
+    "className": "User"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "username",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "nickname",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "phone",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      },
+      {
+        "field": "deptId",
+        "component": "tree-select",
+        "queryType": "EQ",
+        "treeSource": "dept",
+        "treeLabelField": "deptName",
+        "treeValueField": "id",
+        "width": 200
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "username",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "nickname",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "realName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "phone",
+        "component": "text",
+        "width": 130,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "email",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "deptName",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "gender",
+        "component": "dict-tag",
+        "dictType": "sys_gender",
+        "width": 90,
+        "minWidth": 100,
+        "align": "center"
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 280
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "username",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12,
+        "disabledOnEdit": true
+      },
+      {
+        "field": "nickname",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "password",
+        "component": "password",
+        "insert": true,
+        "span": 12,
+        "insertOnly": true
+      },
+      {
+        "field": "realName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "phone",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "email",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "deptId",
+        "component": "tree-select",
+        "treeSource": "dept",
+        "treeLabelField": "deptName",
+        "treeValueField": "id",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "gender",
+        "component": "radio",
+        "dictType": "sys_gender",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 12
+      },
+      {
+        "field": "avatarFileId",
+        "component": "input",
+        "insert": false,
+        "edit": false,
+        "span": 0
+      },
+      {
+        "field": "avatarUrl",
+        "component": "avatar-picker",
+        "insert": false,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "assignRoles",
+        "labelKey": "assignRoles",
+        "permKey": "update",
+        "dialog": "GenUserRoleDialog"
+      },
+      {
+        "id": "resetPassword",
+        "labelKey": "resetPassword",
+        "permKey": "resetPassword",
+        "type": "warning",
+        "handler": "user.resetPassword"
+      },
+      { "id": "delete", "builtin": "delete", "permKey": "delete", "type": "danger" }
+    ],
+    "dialogs": ["GenUserRoleDialog"],
+    "treeSources": {
+      "dept": {
+        "apiKey": "pageDept",
+        "parentField": "parentId",
+        "rootValue": "0",
+        "labelField": "deptName",
+        "valueField": "id",
+        "rootLabelKey": "treeRoot"
+      }
+    }
+  }
+}

@@ -1,0 +1,156 @@
+{
+  "page": {
+    "title": "个人中心",
+    "description": "查看与维护当前登录账号的资料、组织与密码",
+    "openProfile": "个人中心",
+    "basicInfo": "基本信息",
+    "organization": "组织架构",
+    "account": "账号相关",
+    "mfa": "双因素认证",
+    "mfaEnabled": "已启用双因素认证（TOTP）",
+    "mfaDisabled": "尚未启用双因素认证",
+    "mfaStart": "开始绑定",
+    "mfaConfirm": "确认绑定",
+    "mfaDisable": "关闭双因素",
+    "mfaCodePlaceholder": "请输入 6 位验证码",
+    "mfaBound": "双因素认证已绑定",
+    "mfaDisabledOk": "双因素认证已关闭",
+    "shortcuts": "快捷方式",
+    "messages": "我的消息",
+    "uploadAvatar": "上传头像",
+    "saveBasic": "保存基本信息",
+    "saveSuccess": "保存成功",
+    "changePassword": "修改密码",
+    "passwordChanged": "密码修改成功",
+    "passwordMismatch": "两次输入的密码不一致",
+    "tenant": "所属租户",
+    "dept": "所属部门",
+    "roles": "角色",
+    "posts": "岗位",
+    "lastLogin": "最后登录",
+    "lastLoginIp": "登录 IP",
+    "pwdUpdatedAt": "密码更新时间",
+    "shortcutsPlaceholder": "快捷方式功能即将上线",
+    "messageCategorySystem": "系统",
+    "messageCategoryBusiness": "业务",
+    "messageSubject": "主题",
+    "messageSentAt": "发送时间",
+    "messageReadStatus": "是否已读",
+    "messageDetail": "详情",
+    "messageDetailTitle": "消息详情",
+    "messageMarkRead": "标为已读",
+    "messageSender": "发送人",
+    "messageContent": "正文",
+    "none": "暂无",
+    "genderMale": "男",
+    "genderFemale": "女",
+    "genderUnknown": "未知",
+    "cropTitle": "头像裁剪",
+    "cropSelectHint": "请先选择图片",
+    "cropZoomIn": "放大",
+    "cropZoomOut": "缩小",
+    "cropRotateLeft": "向左旋转",
+    "cropRotateRight": "向右旋转",
+    "cropUpload": "点击上传图片",
+    "cropSizeHint": "请上传图片文件，建议不超过 {size} MB",
+    "cropPreview": "预览",
+    "cropFailed": "头像裁剪失败"
+  },
+  "fields": {
+    "username": {
+      "label": "账号"
+    },
+    "realName": {
+      "label": "姓名",
+      "placeholder": "请输入姓名",
+      "validation": {
+        "maxLength": "姓名长度不能超过50"
+      }
+    },
+    "nickname": {
+      "label": "昵称",
+      "placeholder": "请输入昵称",
+      "validation": {
+        "required": "请输入昵称",
+        "maxLength": "昵称长度不能超过50"
+      }
+    },
+    "gender": {
+      "label": "性别",
+      "placeholder": "请选择性别",
+      "validation": {
+        "required": "请选择性别"
+      }
+    },
+    "email": {
+      "label": "邮箱",
+      "placeholder": "请输入邮箱",
+      "validation": {
+        "maxLength": "邮箱长度不能超过100"
+      }
+    },
+    "phone": {
+      "label": "手机号",
+      "placeholder": "请输入手机号",
+      "validation": {
+        "maxLength": "手机号长度不能超过20"
+      }
+    },
+    "oldPassword": {
+      "label": "原密码",
+      "placeholder": "请输入原密码",
+      "validation": {
+        "required": "请输入原密码"
+      }
+    },
+    "newPassword": {
+      "label": "新密码",
+      "placeholder": "请输入新密码",
+      "validation": {
+        "required": "请输入新密码",
+        "maxLength": "密码长度不能超过100"
+      }
+    },
+    "confirmPassword": {
+      "label": "确认密码",
+      "placeholder": "请再次输入新密码",
+      "validation": {
+        "required": "请确认新密码"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "profile",
+    "apiModule": "auth",
+    "functionName": "Profile",
+    "constraints": {
+      "nickname": {
+        "required": true,
+        "maxLength": 50
+      },
+      "realName": {
+        "maxLength": 50
+      },
+      "email": {
+        "maxLength": 100
+      },
+      "phone": {
+        "maxLength": 20
+      },
+      "gender": {
+        "required": true,
+        "maxLength": 1
+      },
+      "oldPassword": {
+        "required": true
+      },
+      "newPassword": {
+        "required": true,
+        "maxLength": 100
+      },
+      "confirmPassword": {
+        "required": true
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.generator.mapper.GenTableColumnMapper">
+
+    <resultMap id="GenTableColumnResult" type="com.icoolkj.platform.generator.domain.GenTableColumn">
+        <id property="id" column="id"/>
+        <result property="tableId" column="table_id"/>
+        <result property="columnName" column="column_name"/>
+        <result property="columnComment" column="column_comment"/>
+        <result property="columnType" column="column_type"/>
+        <result property="javaType" column="java_type"/>
+        <result property="javaField" column="java_field"/>
+        <result property="isPk" column="is_pk"/>
+        <result property="isInsert" column="is_insert"/>
+        <result property="isEdit" column="is_edit"/>
+        <result property="isList" column="is_list"/>
+        <result property="isExport" column="is_export"/>
+        <result property="isImport" column="is_import"/>
+        <result property="isQuery" column="is_query"/>
+        <result property="queryType" column="query_type"/>
+        <result property="htmlType" column="html_type"/>
+        <result property="dictType" column="dict_type"/>
+        <result property="isRequired" column="is_required"/>
+        <result property="columnLength" column="column_length"/>
+        <result property="sort" column="sort"/>
+    </resultMap>
+
+    <select id="selectGenTableColumnListByTableId" resultMap="GenTableColumnResult">
+        select * from gen_table_column where table_id = #{tableId} order by sort
+    </select>
+
+    <select id="selectDbTableColumnsByName" resultMap="GenTableColumnResult">
+        select column_name,
+               (case when column_key = 'PRI' then '1' else '0' end) as is_pk,
+               column_comment,
+               column_type,
+               (case when is_nullable = 'NO' then '1' else '0' end) as is_required,
+               /* longtext/lonblob report 4294967295 — exceeds Java Integer / gen_table_column.column_length int */
+               (case
+                    when character_maximum_length is not null and character_maximum_length &lt;= 2147483647
+                        then character_maximum_length
+                    when character_maximum_length is not null
+                        then null
+                    when numeric_precision is not null and numeric_precision &lt;= 2147483647
+                        then numeric_precision
+                    else null
+                end) as column_length
+        from information_schema.columns
+        where table_schema = (select database()) and table_name = #{tableName}
+        order by ordinal_position
+    </select>
+
+    <insert id="insertGenTableColumn">
+        insert into gen_table_column (id, table_id, column_name, column_comment, column_type, java_type, java_field,
+            is_pk, is_insert, is_edit, is_list, is_export, is_import, is_query, query_type, html_type, dict_type, is_required, column_length, sort, created_at, updated_at)
+        values (#{id}, #{tableId}, #{columnName}, #{columnComment}, #{columnType}, #{javaType}, #{javaField},
+            #{isPk}, #{isInsert}, #{isEdit}, #{isList}, #{isExport}, #{isImport}, #{isQuery}, #{queryType}, #{htmlType}, #{dictType}, #{isRequired}, #{columnLength}, #{sort}, now(3), now(3))
+    </insert>
+
+    <update id="updateGenTableColumn">
+        update gen_table_column
+        set column_comment=#{columnComment}, java_type=#{javaType}, java_field=#{javaField},
+            is_insert=#{isInsert}, is_edit=#{isEdit}, is_list=#{isList}, is_export=#{isExport}, is_import=#{isImport}, is_query=#{isQuery},
+            query_type=#{queryType}, html_type=#{htmlType}, dict_type=#{dictType},
+            is_required=#{isRequired}, column_length=#{columnLength}, sort=#{sort}, updated_at=now(3)
+        where id = #{id}
+    </update>
+
+    <delete id="deleteGenTableColumnByTableId">
+        delete from gen_table_column where table_id = #{tableId}
+    </delete>
+</mapper>

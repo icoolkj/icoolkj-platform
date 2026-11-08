@@ -1,0 +1,85 @@
+package ${packageName}.excel;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.icoolkj.platform.common.model.page.PageResult;
+import com.icoolkj.platform.framework.excel.ExcelValueFormatters;
+import com.icoolkj.platform.framework.i18n.I18nMessageResolver;
+import com.icoolkj.platform.infra.excel.AbstractExcelExportAsyncHandler;
+import com.icoolkj.platform.infra.service.InfraFileService;
+import ${packageName}.dto.${ClassName}PageQuery;
+import ${packageName}.service.${ClassName}Service;
+import ${packageName}.vo.${ClassName}VO;
+import org.springframework.stereotype.Component;
+
+/**
+ * Async Excel export for ${functionName} ({@code taskType=excel.export.${businessName}}).
+ * {@code request_param} JSON = {@link ${ClassName}PageQuery}.
+ */
+@Component
+public class ${ClassName}ExcelExportAsyncHandler
+        extends AbstractExcelExportAsyncHandler<${ClassName}PageQuery, ${ClassName}VO, ${ClassName}ExportRow> {
+
+    public static final String TASK_TYPE = "excel.export.${businessName}";
+
+    private final ${ClassName}Service ${className}Service;
+    private final I18nMessageResolver i18nMessageResolver;
+
+    public ${ClassName}ExcelExportAsyncHandler(InfraFileService infraFileService,
+                                               ObjectMapper objectMapper,
+                                               I18nMessageResolver i18nMessageResolver,
+                                               ${ClassName}Service ${className}Service) {
+        super(infraFileService, objectMapper, i18nMessageResolver);
+        this.${className}Service = ${className}Service;
+        this.i18nMessageResolver = i18nMessageResolver;
+    }
+
+    @Override
+    public String taskType() {
+        return TASK_TYPE;
+    }
+
+    @Override
+    protected Class<${ClassName}PageQuery> queryType() {
+        return ${ClassName}PageQuery.class;
+    }
+
+    @Override
+    protected String businessName() {
+        return "${businessName}";
+    }
+
+    @Override
+    protected Class<${ClassName}ExportRow> exportRowType() {
+        return ${ClassName}ExportRow.class;
+    }
+
+    @Override
+    protected PageResult<${ClassName}VO> loadPage(${ClassName}PageQuery query) {
+        return ${className}Service.page(query);
+    }
+
+    @Override
+    protected ${ClassName}ExportRow toExportRow(${ClassName}VO vo) {
+#set($needStatusLabels = false)
+#foreach($column in $exportColumns)
+#if($column.javaField == "status")
+#set($needStatusLabels = true)
+#end
+#end
+#if($needStatusLabels)
+        String statusNormal = ExcelValueFormatters.pageText(i18nMessageResolver, "${businessName}", "statusNormal");
+        String statusDisabled = ExcelValueFormatters.pageText(i18nMessageResolver, "${businessName}", "statusDisabled");
+#end
+        ${ClassName}ExportRow row = new ${ClassName}ExportRow();
+#foreach($column in $exportColumns)
+#if($column.javaField == "status")
+        row.setStatus(ExcelValueFormatters.commonStatus(vo.getStatus(), statusNormal, statusDisabled));
+#elseif($column.javaType == "LocalDateTime")
+        row.set${column.capJavaField}(ExcelValueFormatters.dateTime(vo.get${column.capJavaField}()));
+#else
+        row.set${column.capJavaField}(vo.get${column.capJavaField}() == null ? null : String.valueOf(vo.get${column.capJavaField}()));
+#end
+#end
+        return row;
+    }
+}

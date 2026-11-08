@@ -1,0 +1,24 @@
+{
+  "page": {
+    "title": "CC'd to Me",
+    "description": "Carbon-copy tasks: pending first, then acknowledged",
+    "viewAction": "View",
+    "ackAction": "Acknowledge",
+    "missingFormRoute": "Missing form route",
+    "missingBizId": "Missing business ID"
+  },
+  "fields": {
+    "bizTitle": { "label": "Business Title", "placeholder": "Enter business title" },
+    "bizType": { "label": "Business Type", "placeholder": "Select business type" },
+    "taskName": { "label": "CC Node", "placeholder": "Enter node name" },
+    "processDefinitionName": { "label": "Process" },
+    "starterUserName": { "label": "Starter" },
+    "createTime": { "label": "Arrived At" },
+    "endTime": { "label": "Acknowledged At" }
+  },
+  "meta": {
+    "businessName": "workflowTaskCc",
+    "apiModule": "workflow",
+    "functionName": "CC'd to Me"
+  }
+}

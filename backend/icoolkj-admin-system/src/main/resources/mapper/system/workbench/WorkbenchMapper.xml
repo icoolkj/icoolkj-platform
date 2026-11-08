@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.workbench.mapper.WorkbenchMapper">
+
+    <select id="countTodayLogins" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_login_log
+        WHERE login_status = '0'
+          AND login_at &gt;= CURDATE()
+        <if test="tenantId != null and tenantId != ''">
+          AND tenant_id = #{tenantId}
+        </if>
+    </select>
+
+    <select id="selectRecentLoginLogs" resultType="com.icoolkj.platform.system.workbench.vo.WorkbenchLoginLogItemVO">
+        SELECT username, ip, location, browser, os, login_at AS loginAt
+        FROM sys_login_log
+        WHERE login_status = '0'
+        <if test="tenantId != null and tenantId != ''">
+          AND tenant_id = #{tenantId}
+        </if>
+        ORDER BY login_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectRecentOperationLogs" resultType="com.icoolkj.platform.system.workbench.vo.WorkbenchOperationLogItemVO">
+        SELECT module_name AS moduleName, business_type AS businessType,
+               operator_name AS operatorName, operation_status AS operationStatus,
+               operation_at AS operationAt
+        FROM sys_operation_log
+        <where>
+            <if test="tenantId != null and tenantId != ''">
+                tenant_id = #{tenantId}
+            </if>
+        </where>
+        ORDER BY operation_at DESC
+        LIMIT #{limit}
+    </select>
+
+</mapper>

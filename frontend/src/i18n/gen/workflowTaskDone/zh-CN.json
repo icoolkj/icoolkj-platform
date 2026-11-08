@@ -1,0 +1,23 @@
+{
+  "page": {
+    "title": "我的已办",
+    "description": "当前用户已处理的审批任务",
+    "viewDetail": "查看",
+    "missingFormRoute": "缺少业务办理路由",
+    "missingBizId": "缺少业务单据 ID"
+  },
+  "fields": {
+    "bizTitle": { "label": "业务标题", "placeholder": "请输入业务标题" },
+    "bizType": { "label": "业务类型", "placeholder": "请选择业务类型" },
+    "taskName": { "label": "处理节点" },
+    "processDefinitionName": { "label": "流程名称" },
+    "starterUserName": { "label": "发起人" },
+    "approveResult": { "label": "处理结果" },
+    "endTime": { "label": "处理时间" }
+  },
+  "meta": {
+    "businessName": "workflowTaskDone",
+    "apiModule": "workflow",
+    "functionName": "我的已办"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "businessName": "workflowModel",
+    "apiModule": "workflow",
+    "backendModule": "workflow",
+    "permissionPrefix": "workflow:model",
+    "className": "WorkflowModel"
+  },
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 2,
+    "collapsible": false,
+    "fields": [
+      { "field": "modelKey", "component": "input", "queryType": "LIKE", "width": 180 },
+      { "field": "modelName", "component": "input", "queryType": "LIKE", "width": 180 },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      { "field": "modelKey", "component": "text", "minWidth": 140 },
+      { "field": "modelName", "component": "text", "minWidth": 160 },
+      { "field": "categoryName", "component": "text", "width": 100 },
+      {
+        "field": "formType",
+        "component": "dict-tag",
+        "dictType": "wf_form_type",
+        "width": 100,
+        "align": "center"
+      },
+      { "field": "latestVersion", "component": "text", "width": 80, "align": "center" },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "align": "center"
+      }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 280 }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 720,
+    "labelWidth": 108,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "modelKey",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "disabledOnEdit": true,
+        "span": 24
+      },
+      { "field": "modelName", "component": "input", "insert": true, "edit": true, "span": 24 },
+      { "field": "bizType", "component": "input", "insert": true, "edit": false, "span": 24 },
+      { "field": "categoryName", "component": "input", "insert": true, "edit": true, "span": 24 },
+      {
+        "field": "formType",
+        "component": "select",
+        "dictType": "wf_form_type",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      { "field": "formRoute", "component": "input", "insert": true, "edit": true, "span": 24 },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "defaultValue": "0"
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "design",
+        "labelKey": "designAction",
+        "permKey": "deploy",
+        "handler": "workflowModel.design"
+      },
+      {
+        "id": "deploy",
+        "labelKey": "deployAction",
+        "permKey": "deploy",
+        "handler": "workflowModel.deploy"
+      },
+      {
+        "id": "versions",
+        "labelKey": "versionAction",
+        "permKey": "query",
+        "handler": "workflowModel.versions"
+      }
+    ]
+  }
+}

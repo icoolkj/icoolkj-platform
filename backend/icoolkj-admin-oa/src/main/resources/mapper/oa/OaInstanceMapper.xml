@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaInstanceMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaInstanceEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="category_code" property="categoryCode"/>
+        <result column="tenant_template_id" property="tenantTemplateId"/>
+        <result column="tenant_tpl_ver_id" property="tenantTplVerId"/>
+        <result column="platform_tpl_ver_id" property="platformTplVerId"/>
+        <result column="instance_title" property="instanceTitle"/>
+        <result column="approve_status" property="approveStatus"/>
+        <result column="process_instance_id" property="processInstanceId"/>
+        <result column="process_definition_key" property="processDefinitionKey"/>
+        <result column="starter_user_id" property="starterUserId"/>
+        <result column="user_id" property="userId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="submitted_at" property="submittedAt"/>
+        <result column="finished_at" property="finishedAt"/>
+        <result column="idx_str_01" property="idxStr01"/>
+        <result column="idx_str_02" property="idxStr02"/>
+        <result column="idx_str_03" property="idxStr03"/>
+        <result column="idx_str_04" property="idxStr04"/>
+        <result column="idx_str_05" property="idxStr05"/>
+        <result column="idx_str_06" property="idxStr06"/>
+        <result column="idx_str_07" property="idxStr07"/>
+        <result column="idx_str_08" property="idxStr08"/>
+        <result column="idx_str_09" property="idxStr09"/>
+        <result column="idx_str_10" property="idxStr10"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, category_code, tenant_template_id, tenant_tpl_ver_id, platform_tpl_ver_id,
+        instance_title, approve_status, process_instance_id, process_definition_key, starter_user_id,
+        user_id, dept_id,
+        submitted_at, finished_at,
+        idx_str_01, idx_str_02, idx_str_03, idx_str_04, idx_str_05,
+        idx_str_06, idx_str_07, idx_str_08, idx_str_09, idx_str_10,
+        status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM oa_instance WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <sql id="My_Query_Where">
+        WHERE deleted = 0
+          AND starter_user_id = #{starterUserId}
+        <if test="instanceTitle != null and instanceTitle != ''">AND instance_title like concat('%', #{instanceTitle}, '%')</if>
+        <if test="categoryCode != null and categoryCode != ''">AND category_code = #{categoryCode}</if>
+        <choose>
+            <when test="scope != null and scope == 'draft'">
+                AND approve_status IN ('draft', 'rejected', 'cancelled', 'returned')
+                <if test="approveStatus != null and approveStatus != ''">AND approve_status = #{approveStatus}</if>
+            </when>
+            <otherwise>
+                <if test="approveStatus != null and approveStatus != ''">AND approve_status = #{approveStatus}</if>
+            </otherwise>
+        </choose>
+    </sql>
+
+    <select id="selectMyPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/> FROM oa_instance
+        <include refid="My_Query_Where"/>
+        ORDER BY updated_at DESC, created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countMyByQuery" resultType="long">
+        SELECT COUNT(1) FROM oa_instance
+        <include refid="My_Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO oa_instance (
+            id, tenant_id, category_code, tenant_template_id, tenant_tpl_ver_id, platform_tpl_ver_id,
+            instance_title, approve_status, process_instance_id, process_definition_key, starter_user_id,
+            user_id, dept_id,
+            submitted_at, finished_at,
+            idx_str_01, idx_str_02, idx_str_03, idx_str_04, idx_str_05,
+            idx_str_06, idx_str_07, idx_str_08, idx_str_09, idx_str_10,
+            status, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{categoryCode}, #{tenantTemplateId}, #{tenantTplVerId}, #{platformTplVerId},
+            #{instanceTitle}, #{approveStatus}, #{processInstanceId}, #{processDefinitionKey}, #{starterUserId},
+            #{userId}, #{deptId},
+            #{submittedAt}, #{finishedAt},
+            #{idxStr01}, #{idxStr02}, #{idxStr03}, #{idxStr04}, #{idxStr05},
+            #{idxStr06}, #{idxStr07}, #{idxStr08}, #{idxStr09}, #{idxStr10},
+            #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE oa_instance SET
+            instance_title = #{instanceTitle},
+            approve_status = #{approveStatus},
+            process_instance_id = #{processInstanceId},
+            process_definition_key = #{processDefinitionKey},
+            submitted_at = #{submittedAt},
+            finished_at = #{finishedAt},
+            idx_str_01 = #{idxStr01},
+            idx_str_02 = #{idxStr02},
+            idx_str_03 = #{idxStr03},
+            idx_str_04 = #{idxStr04},
+            idx_str_05 = #{idxStr05},
+            idx_str_06 = #{idxStr06},
+            idx_str_07 = #{idxStr07},
+            idx_str_08 = #{idxStr08},
+            idx_str_09 = #{idxStr09},
+            idx_str_10 = #{idxStr10},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="updateApproveFields">
+        UPDATE oa_instance SET
+            approve_status = #{approveStatus},
+            process_instance_id = #{processInstanceId},
+            finished_at = #{finishedAt},
+            updated_at = NOW(3)
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE oa_instance SET deleted = 1, updated_at = NOW(3) WHERE id = #{id} AND deleted = 0
+    </update>
+</mapper>

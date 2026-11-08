@@ -1,0 +1,35 @@
+specVersion: "1.0"
+pageKey: workflowApproverRule
+layout: standard-crud
+vueVariant: workflowApproverRuleCrud
+
+meta:
+  apiModule: workflow
+  backendModule: workflow
+  permissionPrefix: workflow:approverRule
+  className: WorkflowApproverRule
+
+entity:
+  tableName: wf_approver_rule
+  businessName: workflowApproverRule
+  functionName: 审批人规则
+
+extensions:
+  listApi: GET /workflow/approver-rule/page
+  detailApi: GET /workflow/approver-rule/{id}
+  createApi: POST /workflow/approver-rule/create
+  updateApi: PUT /workflow/approver-rule/update
+  deleteApi: DELETE /workflow/approver-rule/{id}
+  modelOptionsApi: GET /workflow/approver-rule/model-options
+  dialogs:
+    - WorkflowApproverRuleFormDialog
+  customForm: true
+
+viewDefaults:
+  query:
+    maxVisible: 3
+    collapsible: true
+  table:
+    actions:
+      edit: false
+      delete: false

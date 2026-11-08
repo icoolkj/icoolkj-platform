@@ -1,0 +1,110 @@
+{
+  "page": {
+    "title": "Platform Approval Templates",
+    "description": "Declare field mappings per business category; publish for tenants to enable",
+    "addTitle": "New Platform Approval Template",
+    "editTitle": "Edit Platform Approval Template",
+    "createDraftAction": "New Draft",
+    "configureAction": "Configure Fields",
+    "editFieldsAction": "Field Mapping",
+    "tabFields": "Fields",
+    "tabLayout": "Layout",
+    "layoutHint": "Bound layout: only arrange fieldCodes from the field table; locked fields cannot be removed. Contracts stay in the field table.",
+    "layoutValidateFail": "Layout validation failed: unknown or duplicate field code",
+    "publishAction": "Publish",
+    "saveAndPublishAction": "Save & Publish",
+    "versionAction": "Versions",
+    "draftCreated": "Draft created automatically",
+    "noDraft": "Configure fields first",
+    "publishConfirm": "Publish current draft? The previous published version will be archived.",
+    "published": "Published",
+    "fieldLockedTag": "Locked",
+    "originPlatformCopy": "From Platform",
+    "originTenantCustom": "Tenant Custom",
+    "originTenantOverride": "Tenant Override",
+    "promoteSlotListGroup": "List slots (01-10)",
+    "promoteSlotExtraGroup": "Search slots (11-100)",
+    "richTextSlotHint": "Rich text is stored in instance content_text (no promote slot); one per template",
+    "richTextOnePerTemplate": "Only one rich text field is allowed per template"
+  },
+
+  "fields": {
+    "categoryCode": {
+      "label": "Business Category",
+      "placeholder": "Select business category",
+      "validation": {
+        "required": "Please select a business category",
+        "maxLength": "Category must be at most {max} characters"
+      }
+    },
+    "templateCode": {
+      "label": "Template Code",
+      "placeholder": "e.g. notice_approve",
+      "validation": {
+        "required": "Template code is required",
+        "maxLength": "Template code must be at most {max} characters"
+      }
+    },
+    "templateName": {
+      "label": "Template Name",
+      "placeholder": "Enter template name",
+      "validation": {
+        "required": "Template name is required",
+        "maxLength": "Template name must be at most {max} characters"
+      }
+    },
+    "wfModelId": {
+      "label": "Workflow Model",
+      "placeholder": "Select workflow model",
+      "validation": {
+        "maxLength": "Workflow model ID must be at most {max} characters"
+      }
+    },
+    "latestVersionNo": { "label": "Published Version" },
+    "draftVersionNo": { "label": "Draft Version" },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "maxLength": "Status must be at most {max} characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Optional remark",
+      "validation": {
+        "maxLength": "Remark must be at most {max} characters"
+      }
+    },
+    "id": { "validation": { "required": "Template ID is required" } },
+    "fieldOrigin": { "label": "Origin" },
+    "fieldCode": { "label": "Field Code", "placeholder": "e.g. applicant_name" },
+    "fieldName": { "label": "Field Name", "placeholder": "Enter field name" },
+    "fieldType": { "label": "Field Type", "placeholder": "Select field type" },
+    "componentType": { "label": "Component", "placeholder": "Select component type" },
+    "dictType": { "label": "Dictionary", "placeholder": "Required for select/radio" },
+    "fieldRequired": { "label": "Required" },
+    "defaultValue": { "label": "Default", "placeholder": "Optional default" },
+    "promoteSlot": { "label": "Promote Slot", "placeholder": "Select slot" },
+    "listSlotSync": { "label": "List Slot Sync" },
+    "platformLocked": { "label": "Platform Locked" },
+    "usedInCondition": { "label": "In Condition" },
+    "usedInList": { "label": "In List" },
+    "fieldGroup": { "label": "Field Group", "placeholder": "Optional group name" },
+    "colSpan": { "label": "Column Span" },
+    "sortNo": { "label": "Sort", "placeholder": "Enter sort number" }
+  },
+  "meta": {
+    "businessName": "oaPlatformTemplate",
+    "apiModule": "oa",
+    "functionName": "Platform Approval Templates",
+    "constraints": {
+      "categoryCode": { "required": true, "maxLength": 64 },
+      "templateCode": { "required": true, "maxLength": 64 },
+      "templateName": { "required": true, "maxLength": 100 },
+      "wfModelId": { "maxLength": 20 },
+      "status": { "maxLength": 1 },
+      "remark": { "maxLength": 500 }
+    }
+  }
+}

@@ -1,0 +1,255 @@
+﻿{
+  "meta": {
+    "businessName": "notice",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:notice",
+    "className": "Notice"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "noticeTitle",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 220
+      },
+      {
+        "field": "noticeType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_notice_type",
+        "width": 140
+      },
+      {
+        "field": "publishLocation",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_notice_publish_location",
+        "width": 180
+      },
+      {
+        "field": "approveStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_notice_approve_status",
+        "width": 140
+      },
+      {
+        "field": "releaseStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_notice_release_status",
+        "width": 140
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_notice_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "noticeTitle",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "coverPreviewUrl",
+        "component": "image",
+        "downloadScope": "notice",
+        "width": 80,
+        "align": "center"
+      },
+      {
+        "field": "noticeType",
+        "component": "dict-tag",
+        "dictType": "sys_notice_type",
+        "width": 90,
+        "align": "center"
+      },
+      {
+        "field": "publishLocations",
+        "component": "dict-tags",
+        "dictType": "sys_notice_publish_location",
+        "minWidth": 200
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "align": "center"
+      },
+      {
+        "field": "approveStatus",
+        "component": "dict-tag",
+        "dictType": "sys_notice_approve_status",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "releaseStatus",
+        "component": "dict-tag",
+        "dictType": "sys_notice_release_status",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_notice_status",
+        "width": 90,
+        "align": "center"
+      },
+      {
+        "field": "createdAt",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 380
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 960,
+    "labelWidth": 108,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "noticeTitle",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "noticeType",
+        "component": "radio",
+        "dictType": "sys_notice_type",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "coverFileId",
+        "component": "cover-picker",
+        "bizType": "notice_cover",
+        "downloadScope": "notice",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "noticeContent",
+        "component": "rich-editor",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "noticeSummary",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 3,
+        "maxLength": 60
+      },
+      {
+        "field": "publishLocations",
+        "component": "checkbox",
+        "dictType": "sys_notice_publish_location",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "sortNo",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "min": 0,
+        "defaultValue": 99
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_notice_status",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "defaultValue": "0"
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "detailAction",
+        "handler": "notice.view",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "submitApprove",
+        "labelKey": "submitApprove",
+        "permKey": "submit",
+        "handler": "notice.submitApprove"
+      },
+      {
+        "id": "withdrawApprove",
+        "labelKey": "withdrawApprove",
+        "permKey": "withdraw",
+        "type": "warning",
+        "handler": "notice.withdrawApprove"
+      },
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "publish",
+        "labelKey": "publishAction",
+        "permKey": "publish",
+        "handler": "notice.publish"
+      },
+      {
+        "id": "unpublish",
+        "labelKey": "unpublishAction",
+        "permKey": "publish",
+        "type": "warning",
+        "handler": "notice.unpublish"
+      },
+      {
+        "id": "close",
+        "labelKey": "closeAction",
+        "permKey": "close",
+        "type": "warning",
+        "handler": "notice.close"
+      },
+      { "id": "delete", "builtin": "delete", "permKey": "delete", "type": "danger" }
+    ]
+  }
+}

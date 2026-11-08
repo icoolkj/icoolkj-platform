@@ -1,0 +1,21 @@
+package ${packageName}.dto;
+
+import com.icoolkj.platform.common.model.page.PageQuery;
+#foreach($import in $importList)
+import ${import};
+#end
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+/** ${functionName}分页查询 */
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class ${ClassName}PageQuery extends PageQuery {
+#foreach($column in $columns)
+#if($column.isQuery())
+    private $column.javaType $column.javaField;
+#end
+#end
+}

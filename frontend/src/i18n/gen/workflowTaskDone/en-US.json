@@ -1,0 +1,23 @@
+{
+  "page": {
+    "title": "My Done",
+    "description": "Approval tasks you have completed",
+    "viewDetail": "View",
+    "missingFormRoute": "Missing form route",
+    "missingBizId": "Missing business ID"
+  },
+  "fields": {
+    "bizTitle": { "label": "Business Title", "placeholder": "Enter business title" },
+    "bizType": { "label": "Business Type", "placeholder": "Select business type" },
+    "taskName": { "label": "Task" },
+    "processDefinitionName": { "label": "Process" },
+    "starterUserName": { "label": "Starter" },
+    "approveResult": { "label": "Result" },
+    "endTime": { "label": "Completed At" }
+  },
+  "meta": {
+    "businessName": "workflowTaskDone",
+    "apiModule": "workflow",
+    "functionName": "My Done"
+  }
+}

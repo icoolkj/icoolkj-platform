@@ -1,0 +1,95 @@
+{
+  "page": {
+    "title": "产品管理",
+    "description": "维护 Console 顶栏产品宇宙：编码、名称、图标与排序；菜单请在菜单管理中按 product_code 配置",
+    "addTitle": "新增产品",
+    "editTitle": "修改产品",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？"
+  },
+  "fields": {
+    "code": {
+      "label": "产品编码",
+      "placeholder": "小写英文，如 geo、crm",
+      "validation": {
+        "required": "请输入产品编码",
+        "maxLength": "产品编码长度不能超过32",
+        "pattern": "编码须以小写字母开头，仅含小写字母、数字与下划线"
+      }
+    },
+    "name": {
+      "label": "产品名称",
+      "placeholder": "中文名称",
+      "validation": {
+        "required": "请输入产品名称",
+        "maxLength": "产品名称长度不能超过50"
+      }
+    },
+    "nameEn": {
+      "label": "英文名称",
+      "placeholder": "English name (optional)",
+      "validation": {
+        "maxLength": "英文名称长度不能超过50"
+      }
+    },
+    "icon": {
+      "label": "图标",
+      "placeholder": "Element Plus 图标名"
+    },
+    "sortNo": {
+      "label": "排序",
+      "placeholder": "业务产品宜 1–49，内置 50–89，platform 90+",
+      "validation": {
+        "required": "请输入显示顺序"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "说明用途；新建产品后请在菜单管理配置概览与目录",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    }
+  },
+  "meta": {
+    "businessName": "product",
+    "apiModule": "system",
+    "functionName": "产品",
+    "constraints": {
+      "code": {
+        "required": true,
+        "maxLength": 32,
+        "pattern": "^[a-z][a-z0-9_]{0,30}$"
+      },
+      "name": {
+        "required": true,
+        "maxLength": 50
+      },
+      "nameEn": {
+        "maxLength": 50
+      },
+      "icon": {
+        "maxLength": 100
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

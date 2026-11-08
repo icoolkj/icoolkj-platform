@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileAccessPolicyMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileAccessPolicyEntity">
+        <id column="id" property="id"/>
+        <result column="biz_type_pattern" property="bizTypePattern"/>
+        <result column="auth_mode" property="authMode"/>
+        <result column="tenant_scope" property="tenantScope"/>
+        <result column="visibility" property="visibility"/>
+        <result column="anon_purposes" property="anonPurposes"/>
+        <result column="perm_any_of" property="permAnyOf"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="enabled" property="enabled"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="BaseColumns">
+        id, biz_type_pattern, auth_mode, tenant_scope, visibility, anon_purposes, perm_any_of,
+        sort_no, enabled, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectEnabled" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from infra_file_access_policy
+        where deleted = 0
+          and enabled = '1'
+        order by sort_no asc, biz_type_pattern asc
+    </select>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from infra_file_access_policy
+        where deleted = 0
+        order by sort_no asc, biz_type_pattern asc
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from infra_file_access_policy
+        where id = #{id}
+          and deleted = 0
+        limit 1
+    </select>
+
+    <select id="selectByPattern" resultMap="BaseResultMap">
+        select <include refid="BaseColumns"/>
+        from infra_file_access_policy
+        where deleted = 0
+          and biz_type_pattern = #{bizTypePattern}
+        limit 1
+    </select>
+
+    <insert id="insert">
+        insert into infra_file_access_policy (
+            id, biz_type_pattern, auth_mode, tenant_scope, visibility, anon_purposes, perm_any_of,
+            sort_no, enabled, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) values (
+            #{id}, #{bizTypePattern}, #{authMode}, #{tenantScope}, #{visibility}, #{anonPurposes}, #{permAnyOf},
+            #{sortNo}, #{enabled}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        update infra_file_access_policy
+        set biz_type_pattern = #{bizTypePattern},
+            auth_mode = #{authMode},
+            tenant_scope = #{tenantScope},
+            visibility = #{visibility},
+            anon_purposes = #{anonPurposes},
+            perm_any_of = #{permAnyOf},
+            sort_no = #{sortNo},
+            enabled = #{enabled},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        where id = #{id}
+          and deleted = 0
+    </update>
+
+    <update id="logicalDeleteById">
+        update infra_file_access_policy
+        set deleted = 1,
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        where id = #{id}
+          and deleted = 0
+    </update>
+</mapper>

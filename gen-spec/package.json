@@ -1,0 +1,11 @@
+{
+  "name": "icoolkj-gen-spec",
+  "private": true,
+  "type": "module",
+  "description": "Dev dependencies for validate-gen-pages.mjs",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "yaml": "^2.8.0"
+  }
+}

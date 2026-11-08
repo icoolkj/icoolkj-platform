@@ -1,0 +1,235 @@
+﻿{
+  "page": {
+    "title": "文件管理",
+    "description": "管理平台与业务附件，支持上传、预览与下载",
+    "addTitle": "新增文件表",
+    "editTitle": "修改文件表",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "upload": "文件上传",
+    "batchDelete": "批量删除",
+    "uploadTitle": "文件上传",
+    "uploadHint": "单击或拖动文件到此区域进行上传",
+    "uploadSingleHint": "单文件上传；存储全局上限 {size} MB（若已选业务类型，以该上传配置的大小/类型规则为准）",
+    "uploadSingleOnly": "仅支持单个文件上传",
+    "uploadSizeExceeded": "文件大小不能超过 {size} MB",
+    "uploadBizType": "业务类型",
+    "uploadBizTypePlaceholder": "请选择上传配置（profileCode）",
+    "uploadBizTypeHint": "bizType 须为文件配置中心已启用的上传配置编码，上传将按该配置校验类型与大小。",
+    "bizTypeRequired": "请选择业务类型（上传配置）",
+    "uploadProfileEmpty": "暂无启用的上传配置，请先在「文件配置中心」维护并启用。",
+    "uploadProfileExts": "允许扩展名：{exts}",
+    "uploadProfileMaxSize": "大小上限：{size}",
+    "storageLocal": "本地",
+    "storageMinio": "MinIO",
+    "keywordPlaceholder": "请输入文件名称关键词",
+    "storageLocation": "存储位置",
+    "storageEngine": "储存引擎",
+    "thumbnail": "类型",
+    "preview": "预览",
+    "detail": "详情",
+    "download": "下载",
+    "detailTitle": "文件详情",
+    "referenceCount": "业务引用数",
+    "refsTitle": "业务引用",
+    "refField": "引用字段",
+    "deleteOneConfirm": "确认删除文件「{name}」？",
+    "deleteBatchConfirm": "确认删除选中的 {count} 个文件？",
+    "batchDeleteConfirm": "确认删除选中的 {count} 个文件？",
+    "previewFullscreen": "全屏",
+    "previewExitFullscreen": "退出全屏",
+    "previewNewTab": "新窗口打开",
+    "previewFit": "适应窗口",
+    "previewZoomIn": "放大",
+    "previewZoomOut": "缩小"
+  },
+  "fields": {
+    "bizType": {
+      "label": "业务类型",
+      "placeholder": "请选择或输入业务类型（上传配置编码）",
+      "validation": {
+        "required": "请选择业务类型（上传配置）",
+        "maxLength": "业务类型长度不能超过50"
+      }
+    },
+    "bizId": {
+      "label": "业务ID",
+      "placeholder": "请输入业务ID",
+      "validation": {
+        "maxLength": "业务ID长度不能超过20"
+      }
+    },
+    "originalName": {
+      "label": "原始文件名",
+      "placeholder": "请输入原始文件名",
+      "validation": {
+        "required": "请输入原始文件名",
+        "maxLength": "原始文件名长度不能超过255"
+      }
+    },
+    "fileExt": {
+      "label": "扩展名",
+      "placeholder": "请输入文件扩展名",
+      "validation": {
+        "maxLength": "文件扩展名长度不能超过20"
+      }
+    },
+    "thumbnail": {
+      "label": "类型"
+    },
+    "fileSizeDisplay": {
+      "label": "文件大小"
+    },
+    "fileSize": {
+      "label": "文件大小",
+      "placeholder": "请输入文件大小(字节)",
+      "validation": {
+        "required": "请输入文件大小(字节)"
+      }
+    },
+    "storageType": {
+      "label": "存储类型",
+      "placeholder": "请选择存储类型",
+      "validation": {
+        "required": "请输入存储类型",
+        "maxLength": "存储类型长度不能超过20"
+      }
+    },
+    "userId": {
+      "label": "归属用户",
+      "placeholder": "请输入归属用户",
+      "validation": {
+        "maxLength": "归属用户长度不能超过20"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间",
+      "placeholder": "请选择创建时间",
+      "validation": {
+        "required": "请输入创建时间"
+      }
+    },
+    "tenantId": {
+      "label": "租户ID",
+      "placeholder": "请输入租户ID",
+      "validation": {
+        "required": "请输入租户ID",
+        "maxLength": "租户ID长度不能超过20"
+      }
+    },
+    "fileName": {
+      "label": "存储文件名",
+      "placeholder": "请输入存储文件名",
+      "validation": {
+        "required": "请输入存储文件名",
+        "maxLength": "存储文件名长度不能超过255"
+      }
+    },
+    "contentType": {
+      "label": "内容类型",
+      "placeholder": "请选择内容类型",
+      "validation": {
+        "maxLength": "内容类型长度不能超过100"
+      }
+    },
+    "bucketName": {
+      "label": "桶名称",
+      "placeholder": "请输入桶名称",
+      "validation": {
+        "required": "请输入桶名称",
+        "maxLength": "桶名称长度不能超过100"
+      }
+    },
+    "objectKey": {
+      "label": "对象Key",
+      "placeholder": "请输入对象Key",
+      "validation": {
+        "required": "请输入对象Key",
+        "maxLength": "对象Key长度不能超过255"
+      }
+    },
+    "fileUrl": {
+      "label": "访问地址",
+      "placeholder": "请输入访问地址",
+      "validation": {
+        "maxLength": "访问地址长度不能超过500"
+      }
+    },
+    "md5": {
+      "label": "文件MD5",
+      "placeholder": "请输入文件MD5",
+      "validation": {
+        "maxLength": "文件MD5长度不能超过64"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "file",
+    "apiModule": "infra",
+    "functionName": "文件管理",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "bizType": {
+        "maxLength": 50
+      },
+      "bizId": {
+        "maxLength": 20
+      },
+      "originalName": {
+        "required": true,
+        "maxLength": 255
+      },
+      "fileName": {
+        "required": true,
+        "maxLength": 255
+      },
+      "fileExt": {
+        "maxLength": 20
+      },
+      "contentType": {
+        "maxLength": 100
+      },
+      "fileSize": {
+        "required": true
+      },
+      "storageType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "bucketName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "objectKey": {
+        "required": true,
+        "maxLength": 255
+      },
+      "fileUrl": {
+        "maxLength": 500
+      },
+      "md5": {
+        "maxLength": 64
+      },
+      "userId": {
+        "maxLength": 20
+      },
+      "createdAt": {
+        "required": true
+      },
+      "remark": {
+        "maxLength": 500
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.oa.mapper.OaPlatformFieldDefMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.oa.domain.OaPlatformFieldDefEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="template_version_id" property="templateVersionId"/>
+        <result column="field_code" property="fieldCode"/>
+        <result column="field_name" property="fieldName"/>
+        <result column="field_alias" property="fieldAlias"/>
+        <result column="field_type" property="fieldType"/>
+        <result column="component_type" property="componentType"/>
+        <result column="dict_type" property="dictType"/>
+        <result column="field_required" property="fieldRequired"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="field_group" property="fieldGroup"/>
+        <result column="col_span" property="colSpan"/>
+        <result column="default_value" property="defaultValue"/>
+        <result column="max_length" property="maxLength"/>
+        <result column="platform_locked" property="platformLocked"/>
+        <result column="used_in_condition" property="usedInCondition"/>
+        <result column="used_in_list" property="usedInList"/>
+        <result column="promote_slot" property="promoteSlot"/>
+        <result column="list_slot_sync" property="listSlotSync"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectByVersionId" resultMap="BaseResultMap">
+        SELECT * FROM oa_platform_field_def
+        WHERE template_version_id = #{versionId} AND deleted = 0 ORDER BY sort_no ASC, field_code ASC
+    </select>
+
+    <!-- Soft-delete must uniquify field_code: uk includes (version, field_code, deleted). -->
+    <update id="deleteByVersionId">
+        UPDATE oa_platform_field_def
+        SET field_code = CONCAT(SUBSTRING(field_code, 1, 43), '#', id),
+            deleted = 1,
+            updated_at = NOW(3)
+        WHERE template_version_id = #{versionId} AND deleted = 0
+    </update>
+
+    <insert id="insertBatch">
+        INSERT INTO oa_platform_field_def (
+            id, tenant_id, template_version_id, field_code, field_name, field_alias, field_type,
+            component_type, dict_type, field_required, sort_no, field_group, col_span, default_value, max_length,
+            platform_locked, used_in_condition, used_in_list, promote_slot, list_slot_sync,
+            status, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id}, #{item.tenantId}, #{item.templateVersionId}, #{item.fieldCode}, #{item.fieldName},
+             #{item.fieldAlias}, #{item.fieldType}, #{item.componentType}, #{item.dictType}, #{item.fieldRequired},
+             #{item.sortNo}, #{item.fieldGroup}, #{item.colSpan}, #{item.defaultValue}, #{item.maxLength},
+             #{item.platformLocked}, #{item.usedInCondition},
+             #{item.usedInList}, #{item.promoteSlot}, #{item.listSlotSync}, #{item.status}, #{item.remark},
+             #{item.createdBy}, #{item.createdAt}, #{item.updatedBy}, #{item.updatedAt}, #{item.deleted})
+        </foreach>
+    </insert>
+</mapper>

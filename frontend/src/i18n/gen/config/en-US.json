@@ -1,0 +1,96 @@
+{
+  "page": {
+    "title": "Parameter Management",
+    "description": "Manage parameter records",
+    "addTitle": "Add Parameter",
+    "editTitle": "Edit Parameter",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "refreshCache": "Refresh cache",
+    "refreshCacheSuccess": "Parameter cache refreshed",
+    "category.all": "All",
+    "category.login": "Login security",
+    "category.password": "Password policy",
+    "category.mfa": "MFA",
+    "category.ip": "IP access",
+    "category.i18n": "Internationalization",
+    "category.ai": "AI",
+    "category.backup": "Backup",
+    "category.storage": "File storage",
+    "category.avatar": "Avatar policy",
+    "category.workflow": "Workflow",
+    "category.brand": "Brand / site",
+    "category.other": "Other"
+  },
+  "fields": {
+    "configName": {
+      "label": "Config Name",
+      "placeholder": "Please enter Config Name",
+      "validation": {
+        "required": "Config Name is required",
+        "maxLength": "Config Name must not exceed 100 characters"
+      }
+    },
+    "configKey": {
+      "label": "Config Key",
+      "placeholder": "Please enter Config Key",
+      "validation": {
+        "required": "Config Key is required",
+        "maxLength": "Config Key must not exceed 100 characters"
+      }
+    },
+    "configValue": {
+      "label": "Config Value",
+      "placeholder": "Please enter Config Value",
+      "validation": {
+        "required": "Config Value is required",
+        "maxLength": "Config Value must not exceed 65535 characters"
+      }
+    },
+    "configType": {
+      "label": "Built-in",
+      "placeholder": "Please select Built-in",
+      "validation": {
+        "required": "Config Type is required",
+        "maxLength": "Config Type must not exceed 1 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    }
+  },
+  "meta": {
+    "businessName": "config",
+    "apiModule": "system",
+    "functionName": "Parameter",
+    "constraints": {
+      "configName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "configKey": {
+        "required": true,
+        "maxLength": 100
+      },
+      "configValue": {
+        "required": true,
+        "maxLength": 65535
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "configType": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.workflow.mapper.WfCcReceiptMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.workflow.domain.WfCcReceiptEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="process_instance_id" property="processInstanceId"/>
+        <result column="task_id" property="taskId"/>
+        <result column="user_id" property="userId"/>
+        <result column="read_at" property="readAt"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, process_instance_id, task_id, user_id, read_at,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <insert id="insert" parameterType="com.icoolkj.platform.workflow.domain.WfCcReceiptEntity">
+        INSERT INTO wf_cc_receipt (
+            id, tenant_id, process_instance_id, task_id, user_id, read_at,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{processInstanceId}, #{taskId}, #{userId}, #{readAt},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateReadAt">
+        UPDATE wf_cc_receipt
+        SET read_at = #{readAt},
+            updated_at = #{readAt},
+            updated_by = #{userId}
+        WHERE task_id = #{taskId}
+          AND user_id = #{userId}
+          AND deleted = 0
+    </update>
+
+    <select id="selectByTaskIdAndUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_cc_receipt
+        WHERE task_id = #{taskId}
+          AND user_id = #{userId}
+          AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectByTaskIdsAndUserId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_cc_receipt
+        WHERE user_id = #{userId}
+          AND deleted = 0
+          AND task_id IN
+        <foreach collection="taskIds" item="taskId" open="(" separator="," close=")">
+            #{taskId}
+        </foreach>
+    </select>
+</mapper>

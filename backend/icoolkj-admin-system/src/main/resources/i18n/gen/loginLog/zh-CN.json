@@ -1,0 +1,133 @@
+{
+  "page": {
+    "title": "登录日志",
+    "description": "管理登录日志，支持新增、修改与删除",
+    "addTitle": "新增登录日志",
+    "editTitle": "修改登录日志",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "loginStatusSuccess": "成功",
+    "loginStatusFail": "失败",
+    "exportFileName": "登录日志",
+    "exportAsyncTaskName": "登录日志Excel导出",
+    "exportSheetName": "登录日志",
+    "clear": "清空",
+    "clearConfirm": "确认清空全部日志？此操作不可恢复。"
+  },
+  "fields": {
+    "username": {
+      "label": "用户名",
+      "placeholder": "请输入用户名",
+      "validation": {
+        "required": "请输入登录账号",
+        "maxLength": "登录账号长度不能超过50"
+      }
+    },
+    "loginStatus": {
+      "label": "登录状态",
+      "placeholder": "请选择登录状态",
+      "validation": {
+        "required": "请输入登录状态 0成功 1失败",
+        "maxLength": "登录状态 0成功 1失败长度不能超过1"
+      }
+    },
+    "ip": {
+      "label": "IP地址",
+      "placeholder": "请输入登录IP",
+      "validation": {
+        "maxLength": "登录IP长度不能超过64"
+      }
+    },
+    "message": {
+      "label": "消息",
+      "placeholder": "请输入提示消息",
+      "validation": {
+        "maxLength": "提示消息长度不能超过500"
+      }
+    },
+    "loginAt": {
+      "label": "登录时间",
+      "placeholder": "请选择登录时间",
+      "validation": {
+        "required": "请输入登录时间"
+      }
+    },
+    "loginType": {
+      "label": "登录方式",
+      "placeholder": "请选择登录方式",
+      "validation": {
+        "required": "请输入登录方式",
+        "maxLength": "登录方式长度不能超过20"
+      }
+    },
+    "location": {
+      "label": "登录地点",
+      "placeholder": "请输入登录地点",
+      "validation": {
+        "maxLength": "登录地点长度不能超过255"
+      }
+    },
+    "userAgent": {
+      "label": "用户代理",
+      "placeholder": "请输入用户代理",
+      "validation": {
+        "maxLength": "用户代理长度不能超过500"
+      }
+    },
+    "browser": {
+      "label": "浏览器",
+      "placeholder": "请输入浏览器",
+      "validation": {
+        "maxLength": "浏览器长度不能超过100"
+      }
+    },
+    "os": {
+      "label": "操作系统",
+      "placeholder": "请输入操作系统",
+      "validation": {
+        "maxLength": "操作系统长度不能超过100"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "loginLog",
+    "apiModule": "system",
+    "functionName": "登录日志",
+    "constraints": {
+      "username": {
+        "required": true,
+        "maxLength": 50
+      },
+      "loginType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "loginStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "message": {
+        "maxLength": 500
+      },
+      "ip": {
+        "maxLength": 64
+      },
+      "location": {
+        "maxLength": 255
+      },
+      "userAgent": {
+        "maxLength": 500
+      },
+      "browser": {
+        "maxLength": 100
+      },
+      "os": {
+        "maxLength": 100
+      },
+      "loginAt": {
+        "required": true
+      }
+    }
+  }
+}

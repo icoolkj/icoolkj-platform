@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.iprule.mapper.IpAccessRuleMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.iprule.domain.IpAccessRuleEntity">
+        <id column="id" property="id"/>
+        <result column="rule_name" property="ruleName"/>
+        <result column="ip_address" property="ipAddress"/>
+        <result column="match_type" property="matchType"/>
+        <result column="rule_type" property="ruleType"/>
+        <result column="apply_scope" property="applyScope"/>
+        <result column="priority_no" property="priorityNo"/>
+        <result column="status" property="status"/>
+        <result column="start_at" property="startAt"/>
+        <result column="end_at" property="endAt"/>
+        <result column="remark" property="remark"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, 
+        rule_name, 
+        ip_address, 
+        match_type, 
+        rule_type, 
+        apply_scope, 
+        priority_no, 
+        status, 
+        start_at, 
+        end_at, 
+        remark, 
+        tenant_id, 
+        created_by, 
+        created_at, 
+        updated_by, 
+        updated_at, 
+        deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="ruleName != null and ruleName != ''">AND rule_name like concat('%', #{ruleName}, '%')</if>
+            <if test="ipAddress != null and ipAddress != ''">AND ip_address = #{ipAddress}</if>
+            <if test="matchType != null and matchType != ''">AND match_type = #{matchType}</if>
+            <if test="ruleType != null and ruleType != ''">AND rule_type = #{ruleType}</if>
+            <if test="applyScope != null and applyScope != ''">AND apply_scope = #{applyScope}</if>
+            <if test="priorityNo != null and priorityNo != ''">AND priority_no = #{priorityNo}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="startAt != null and startAt != ''">AND start_at = #{startAt}</if>
+            <if test="endAt != null and endAt != ''">AND end_at = #{endAt}</if>
+            <if test="remark != null and remark != ''">AND remark = #{remark}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_ip_access_rule WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_ip_access_rule
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/> FROM sys_ip_access_rule
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_ip_access_rule
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_ip_access_rule (<include refid="Base_Column_List"/>)
+        VALUES (#{id}, #{ruleName}, #{ipAddress}, #{matchType}, #{ruleType}, #{applyScope}, #{priorityNo}, #{status}, #{startAt}, #{endAt}, #{remark}, #{tenantId}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_ip_access_rule
+        <set>
+            rule_name = #{ruleName},
+            ip_address = #{ipAddress},
+            match_type = #{matchType},
+            rule_type = #{ruleType},
+            apply_scope = #{applyScope},
+            priority_no = #{priorityNo},
+            status = #{status},
+            start_at = #{startAt},
+            end_at = #{endAt},
+            remark = #{remark},
+            tenant_id = #{tenantId},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted},
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_ip_access_rule SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="selectActiveRules" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_ip_access_rule
+        WHERE deleted = 0 AND status = '0'
+          AND tenant_id IN (#{platformTenantId}, #{tenantId})
+          AND (start_at IS NULL OR start_at &lt;= #{now})
+          AND (end_at IS NULL OR end_at &gt;= #{now})
+        ORDER BY priority_no DESC
+    </select>
+</mapper>

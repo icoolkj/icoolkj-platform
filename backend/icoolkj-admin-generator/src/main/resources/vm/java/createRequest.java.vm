@@ -1,0 +1,34 @@
+package ${packageName}.dto;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+#foreach($import in $importList)
+import ${import};
+#end
+import lombok.Data;
+
+/** 新增${functionName} */
+@Data
+public class ${ClassName}CreateRequest {
+#foreach($column in $columns)
+#if($column.isInsert() && !$table.isSuperColumn($column.javaField))
+#if($column.javaType == 'String' && $column.isRequired() && $column.columnLength && $column.columnLength > 0)
+    @NotBlank(message = "{gen.${businessName}.${column.javaField}.required}")
+    @Size(max = $column.columnLength, message = "{gen.${businessName}.${column.javaField}.maxLength}")
+    private $column.javaType $column.javaField;
+#elseif($column.javaType == 'String' && $column.isRequired())
+    @NotBlank(message = "{gen.${businessName}.${column.javaField}.required}")
+    private $column.javaType $column.javaField;
+#elseif($column.javaType == 'String' && $column.columnLength && $column.columnLength > 0)
+    @Size(max = $column.columnLength, message = "{gen.${businessName}.${column.javaField}.maxLength}")
+    private $column.javaType $column.javaField;
+#elseif($column.javaType != 'String' && $column.isRequired())
+    @NotNull(message = "{gen.${businessName}.${column.javaField}.required}")
+    private $column.javaType $column.javaField;
+#else
+    private $column.javaType $column.javaField;
+#end
+#end
+#end
+}

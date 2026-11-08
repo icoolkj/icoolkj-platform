@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.user.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.user.domain.UserEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="username" property="username"/>
+        <result column="nickname" property="nickname"/>
+        <result column="real_name" property="realName"/>
+        <result column="user_type" property="userType"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="gender" property="gender"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="avatar_url_sm" property="avatarUrlSm"/>
+        <result column="avatar_url_lg" property="avatarUrlLg"/>
+        <result column="avatar_file_id" property="avatarFileId"/>
+        <result column="password_hash" property="passwordHash"/>
+        <result column="status" property="status"/>
+        <result column="is_super_admin" property="isSuperAdmin"/>
+        <result column="login_fail_count" property="loginFailCount"/>
+        <result column="locked_until" property="lockedUntil"/>
+        <result column="last_login_ip" property="lastLoginIp"/>
+        <result column="last_login_at" property="lastLoginAt"/>
+        <result column="pwd_updated_at" property="pwdUpdatedAt"/>
+        <result column="must_change_password" property="mustChangePassword"/>
+        <result column="mfa_enabled" property="mfaEnabled"/>
+        <result column="mfa_secret_enc" property="mfaSecretEnc"/>
+        <result column="mfa_bound_at" property="mfaBoundAt"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+        <result column="dept_name" property="deptName"/>
+    </resultMap>
+
+    <resultMap id="PageResultMap" type="com.icoolkj.platform.system.user.domain.UserEntity" extends="BaseResultMap"/>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, dept_id, username, nickname, real_name, user_type, email, phone, gender, avatar_url, avatar_url_sm, avatar_url_lg, avatar_file_id, password_hash, status, is_super_admin, login_fail_count, locked_until, last_login_ip, last_login_at, pwd_updated_at, must_change_password, mfa_enabled, mfa_secret_enc, mfa_bound_at, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="username != null and username != ''">AND username like concat('%', #{username}, '%')</if>
+            <if test="nickname != null and nickname != ''">AND nickname like concat('%', #{nickname}, '%')</if>
+            <if test="phone != null and phone != ''">AND phone = #{phone}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="deptId != null and deptId != ''">AND dept_id = #{deptId}</if>
+        </where>
+    </sql>
+
+    <sql id="Page_Query_Where">
+        <where>
+            u.deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND u.tenant_id = #{tenantId}</if>
+            <if test="username != null and username != ''">AND u.username like concat('%', #{username}, '%')</if>
+            <if test="nickname != null and nickname != ''">AND u.nickname like concat('%', #{nickname}, '%')</if>
+            <if test="phone != null and phone != ''">AND u.phone = #{phone}</if>
+            <if test="status != null and status != ''">AND u.status = #{status}</if>
+            <if test="deptId != null and deptId != ''">AND u.dept_id = #{deptId}</if>
+            <if test="deptSubtreeRootId != null and deptSubtreeRootId != ''">AND u.dept_id IN (
+                SELECT id FROM sys_dept WHERE tenant_id = #{tenantId} AND deleted = 0
+                AND (id = #{deptSubtreeRootId} OR FIND_IN_SET(#{deptSubtreeRootId}, ancestors))
+            )</if>
+            <if test="dataScopeSql != null and dataScopeSql != ''">${dataScopeSql}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_user
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_user
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="PageResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT u.id, u.tenant_id, u.dept_id, u.username, u.nickname, u.real_name, u.user_type, u.email, u.phone,
+               u.gender, u.avatar_url, u.avatar_url_sm, u.avatar_url_lg, u.avatar_file_id, u.password_hash, u.status, u.is_super_admin, u.login_fail_count, u.locked_until,
+               u.last_login_ip, u.last_login_at, u.pwd_updated_at, u.must_change_password, u.mfa_enabled, u.mfa_secret_enc, u.mfa_bound_at, u.remark, u.created_by,
+               u.created_at, u.updated_by, u.updated_at, u.deleted, d.dept_name
+        FROM sys_user u
+        LEFT JOIN sys_dept d ON d.id = u.dept_id AND d.deleted = 0 AND d.tenant_id = u.tenant_id
+        <include refid="Page_Query_Where"/>
+        ORDER BY u.created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_user u
+        LEFT JOIN sys_dept d ON d.id = u.dept_id AND d.deleted = 0 AND d.tenant_id = u.tenant_id
+        <include refid="Page_Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_user (id, tenant_id, dept_id, username, nickname, real_name, user_type, email, phone, gender, avatar_url, avatar_url_sm, avatar_url_lg, avatar_file_id, password_hash, status, is_super_admin, login_fail_count, locked_until, last_login_ip, last_login_at, pwd_updated_at, must_change_password, mfa_enabled, mfa_secret_enc, mfa_bound_at, remark, created_by, created_at, updated_by, updated_at, deleted)
+        VALUES (#{id}, #{tenantId}, #{deptId}, #{username}, #{nickname}, #{realName}, #{userType}, #{email}, #{phone}, #{gender}, #{avatarUrl}, #{avatarUrlSm}, #{avatarUrlLg}, #{avatarFileId}, #{passwordHash}, #{status}, #{isSuperAdmin}, #{loginFailCount}, #{lockedUntil}, #{lastLoginIp}, #{lastLoginAt}, #{pwdUpdatedAt}, #{mustChangePassword}, #{mfaEnabled}, #{mfaSecretEnc}, #{mfaBoundAt}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_user
+        <set>
+            dept_id = #{deptId},
+            username = #{username},
+            nickname = #{nickname},
+            real_name = #{realName},
+            user_type = #{userType},
+            email = #{email},
+            phone = #{phone},
+            gender = #{gender},
+            avatar_url = #{avatarUrl},
+            avatar_url_sm = #{avatarUrlSm},
+            avatar_url_lg = #{avatarUrlLg},
+            avatar_file_id = #{avatarFileId},
+            password_hash = #{passwordHash},
+            status = #{status},
+            is_super_admin = #{isSuperAdmin},
+            login_fail_count = #{loginFailCount},
+            locked_until = #{lockedUntil},
+            last_login_ip = #{lastLoginIp},
+            last_login_at = #{lastLoginAt},
+            pwd_updated_at = #{pwdUpdatedAt},
+            must_change_password = #{mustChangePassword},
+            mfa_enabled = #{mfaEnabled},
+            mfa_secret_enc = #{mfaSecretEnc},
+            mfa_bound_at = #{mfaBoundAt},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_user SET deleted = 1 WHERE id = #{id}
+    </update>
+
+    <select id="countByDeptId" resultType="long">
+        SELECT COUNT(1) FROM sys_user WHERE dept_id = #{deptId} AND deleted = 0
+    </select>
+
+    <select id="selectByTenantAndUsername" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_user
+        WHERE tenant_id = #{tenantId} AND username = #{username} AND deleted = 0
+        LIMIT 1
+    </select>
+    <update id="resetLoginSuccess">
+        UPDATE sys_user SET login_fail_count = 0, locked_until = NULL,
+            last_login_ip = #{lastLoginIp}, last_login_at = #{lastLoginAt}, updated_at = NOW(3)
+        WHERE id = #{id} AND deleted = 0
+    </update>
+    <update id="updateLoginFailCount">
+        UPDATE sys_user SET login_fail_count = #{loginFailCount}, updated_at = NOW(3)
+        WHERE id = #{id} AND deleted = 0
+    </update>
+    <update id="updateLockState">
+        UPDATE sys_user SET login_fail_count = #{loginFailCount}, locked_until = #{lockedUntil}, updated_at = NOW(3)
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <select id="selectActiveUserIdsByTenant" resultType="java.lang.String">
+        SELECT id FROM sys_user
+        WHERE tenant_id = #{tenantId} AND deleted = 0 AND status = '0'
+          AND dept_id IS NOT NULL AND dept_id &lt;&gt; ''
+    </select>
+
+    <select id="selectActiveUserIdsByDeptIds" resultType="java.lang.String">
+        SELECT DISTINCT id FROM sys_user
+        WHERE tenant_id = #{tenantId} AND deleted = 0 AND status = '0'
+          AND dept_id IN
+        <foreach collection="deptIds" item="deptId" open="(" separator="," close=")">
+            #{deptId}
+        </foreach>
+    </select>
+
+    <select id="selectActiveUserIdsByRoleIds" resultType="java.lang.String">
+        SELECT DISTINCT ur.user_id
+        FROM sys_user_role ur
+        INNER JOIN sys_user u ON u.id = ur.user_id AND u.deleted = 0 AND u.status = '0'
+        WHERE ur.tenant_id = #{tenantId}
+          AND ur.role_id IN
+        <foreach collection="roleIds" item="roleId" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </select>
+
+    <select id="selectActiveUserIdsByRoleCodes" resultType="java.lang.String">
+        SELECT DISTINCT ur.user_id
+        FROM sys_user_role ur
+        INNER JOIN sys_user u
+            ON u.id = ur.user_id
+           AND u.tenant_id = #{tenantId}
+           AND u.deleted = 0
+           AND u.status = '0'
+        INNER JOIN sys_role r
+            ON r.id = ur.role_id
+           AND r.tenant_id = #{tenantId}
+           AND r.deleted = 0
+           AND r.status = '0'
+        WHERE ur.tenant_id = #{tenantId}
+          AND r.role_code IN
+        <foreach collection="roleCodes" item="roleCode" open="(" separator="," close=")">
+            #{roleCode}
+        </foreach>
+        ORDER BY ur.user_id
+    </select>
+
+    <select id="selectActiveUserIdsByRoleCodesAndDeptId" resultType="java.lang.String">
+        SELECT DISTINCT ur.user_id
+        FROM sys_user_role ur
+        INNER JOIN sys_user u
+            ON u.id = ur.user_id
+           AND u.tenant_id = #{tenantId}
+           AND u.dept_id = #{deptId}
+           AND u.deleted = 0
+           AND u.status = '0'
+        INNER JOIN sys_role r
+            ON r.id = ur.role_id
+           AND r.tenant_id = #{tenantId}
+           AND r.deleted = 0
+           AND r.status = '0'
+        WHERE ur.tenant_id = #{tenantId}
+          AND r.role_code IN
+        <foreach collection="roleCodes" item="roleCode" open="(" separator="," close=")">
+            #{roleCode}
+        </foreach>
+        ORDER BY ur.user_id
+    </select>
+
+    <select id="selectBriefByIds" resultMap="BaseResultMap">
+        SELECT id, tenant_id, username, nickname, status
+        FROM sys_user
+        WHERE deleted = 0
+          AND id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <sql id="Tenant_Admin_Where">
+        WHERE u.deleted = 0
+          AND u.tenant_id &lt;&gt; '0'
+          AND t.deleted = 0
+          AND r.deleted = 0
+          AND r.is_super_role = '1'
+        <if test="tenantCode != null and tenantCode != ''">
+            AND t.tenant_code LIKE concat('%', #{tenantCode}, '%')
+        </if>
+        <if test="tenantName != null and tenantName != ''">
+            AND t.tenant_name LIKE concat('%', #{tenantName}, '%')
+        </if>
+        <if test="username != null and username != ''">
+            AND u.username LIKE concat('%', #{username}, '%')
+        </if>
+        <if test="status != null and status != ''">
+            AND u.status = #{status}
+        </if>
+    </sql>
+
+    <select id="selectTenantAdminPage" resultType="com.icoolkj.platform.system.tenant.vo.TenantAdminVO">
+        SELECT
+            u.id AS userId,
+            u.tenant_id AS tenantId,
+            t.tenant_code AS tenantCode,
+            t.tenant_name AS tenantName,
+            t.tenant_type AS tenantType,
+            u.username AS username,
+            u.nickname AS nickname,
+            r.role_code AS roleCode,
+            r.role_name AS roleName,
+            u.status AS status,
+            u.login_fail_count AS loginFailCount,
+            u.locked_until AS lockedUntil,
+            u.last_login_at AS lastLoginAt,
+            u.must_change_password AS mustChangePassword,
+            u.mfa_enabled AS mfaEnabled
+        FROM sys_user u
+        INNER JOIN sys_tenant t ON t.id = u.tenant_id
+        INNER JOIN sys_user_role ur ON ur.user_id = u.id AND ur.tenant_id = u.tenant_id
+        INNER JOIN sys_role r ON r.id = ur.role_id AND r.tenant_id = u.tenant_id
+        <include refid="Tenant_Admin_Where"/>
+        ORDER BY t.tenant_code ASC, u.username ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countTenantAdmin" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_user u
+        INNER JOIN sys_tenant t ON t.id = u.tenant_id
+        INNER JOIN sys_user_role ur ON ur.user_id = u.id AND ur.tenant_id = u.tenant_id
+        INNER JOIN sys_role r ON r.id = ur.role_id AND r.tenant_id = u.tenant_id
+        <include refid="Tenant_Admin_Where"/>
+    </select>
+
+</mapper>

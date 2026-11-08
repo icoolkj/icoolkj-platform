@@ -1,0 +1,207 @@
+# Shared infrastructure for api + worker.
+# Loaded by each app's application.yml; profile file loads automatically:
+#   application-icoolkj-shared-dev.yml | -prod.yml | -test.yml
+spring:
+  jackson:
+    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL:jdbc:mysql://127.0.0.1:3306/icoolkj_platform?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+    hikari:
+      minimum-idle: 10
+      maximum-pool-size: 30
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      validation-timeout: 5000
+      connection-test-query: SELECT 1
+
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      database: ${REDIS_DB:0}
+      timeout: 5s
+      lettuce:
+        pool:
+          min-idle: 4
+          max-idle: 16
+          max-active: 32
+          max-wait: 3s
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  type-aliases-package: com.icoolkj.platform.**.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: assign_id
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+logging:
+  file:
+    path: logs
+  level:
+    root: info
+    com.icoolkj.platform: info
+    org.springframework.security: warn
+    org.mybatis: warn
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] [%X{traceId}] %-5level %logger{36} - %msg%n"
+
+icoolkj:
+  jwt:
+    issuer: icoolkj-platform
+    access-token-expire-seconds: 7200
+    refresh-token-expire-seconds: 604800
+    clock-skew-seconds: 60
+    token-prefix: "Bearer "
+    header-name: Authorization
+
+  tenant:
+    enabled: true
+    platform-tenant-id: "0"
+    platform-tenant-code: platform
+    ignore-tables:
+      - sys_tenant
+      - sys_region
+      - sys_menu
+      - sys_product
+      - sys_ai_skill
+      - sys_i18n_locale
+      - sys_i18n_message
+      - gen_table
+      - gen_table_column
+      - gen_i18n_message
+      - gen_view_config
+      - wf_biz_process
+      - infra_file_access_policy
+      - tool_ai_provider
+      - tool_ai_model
+      - tool_ai_capability_binding
+    header-tenant-code: X-Tenant-Code
+    strict-mode: true
+
+  cache:
+    key-prefix: icoolkj
+    default-ttl-seconds: 1800
+    null-value-ttl-seconds: 60
+    ttl:
+      auth-session: 604800
+      auth-permission: 1800
+      auth-blacklist: 7200
+      auth-login-fail: 1800
+      dict: 3600
+      config: 3600
+      tenant-config: 3600
+      tenant-ip-rule: 1800
+
+  redis:
+    lock:
+      wait-seconds: 3
+      lease-seconds: 15
+
+  config:
+    cache-seconds: 3600
+    fallback-to-platform: true
+
+  dict:
+    cache-seconds: 3600
+
+  ip-rule:
+    enabled: true
+    cache-seconds: 1800
+
+  backup:
+    output-dir: ./data/db-backup
+    retention-days: 14
+    mysqldump-command: mysqldump
+    compress: true
+
+  storage:
+    gc:
+      retention-days: 30
+      batch-size: 100
+      max-batches-per-run: 50
+    security:
+      require-biz-type: true
+      content-sniff-enabled: true
+      verify-md5-on-download: true
+      malware-scan:
+        enabled: false
+        engine: clamav
+        clamav-host: 127.0.0.1
+        clamav-port: 3310
+        connect-timeout-ms: 3000
+        read-timeout-ms: 60000
+        fail-closed: true
+      encryption:
+        enabled: true
+        minio-sse-s3: false
+      rate-limit:
+        enabled: true
+        max-uploads-per-minute: 30
+      watermark:
+        enabled: false
+        text: iCoolKJ
+        min-sensitivity: "2"
+      minio-acl:
+        inspect-on-startup: true
+        fail-on-public-read: false
+      download-guard:
+        enabled: true
+        sensitive-min-level: "3"
+        sensitive-permission: infra:file:download:sensitive
+
+  demo:
+    enabled: false
+    allow-write-urls:
+      - /auth/login
+      - /auth/refresh
+      - /auth/logout
+      - /auth/password
+
+  # Code generator (api process). Prod: enabled=false or disk-write-enabled=false.
+  generator:
+    enabled: true
+    disk-write-enabled: true
+
+  logging:
+    sensitive-fields:
+      - password
+      - token
+      - authorization
+      - secret
+      - appSecret
+      - phone
+      - idCard
+      - bankCard
+    async-executor:
+      core-pool-size: 2
+      max-pool-size: 8
+      queue-capacity: 1000
+      await-termination-seconds: 10
+      thread-name-prefix: audit-log-
+    access-log:
+      enabled: true
+      include-headers: false
+      include-query-string: true
+      async-save: true
+      max-body-length: 4096
+      exclude-urls:
+        - /actuator/health
+    operation-log:
+      enabled: true
+      async-save: true

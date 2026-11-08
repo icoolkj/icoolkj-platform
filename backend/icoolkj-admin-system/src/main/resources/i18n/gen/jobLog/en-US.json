@@ -1,0 +1,47 @@
+{
+  "page": {
+    "title": "Job execution logs",
+    "description": "Platform scheduled job run history",
+    "detail": "Detail"
+  },
+  "fields": {
+    "jobCode": {
+      "label": "Job code",
+      "placeholder": "Enter job code"
+    },
+    "triggerType": {
+      "label": "Trigger type",
+      "placeholder": "Select trigger type"
+    },
+    "triggerUserId": {
+      "label": "Triggered by"
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status"
+    },
+    "jobMessage": {
+      "label": "Message"
+    },
+    "startedAt": {
+      "label": "Started at"
+    },
+    "finishedAt": {
+      "label": "Finished at"
+    },
+    "resultSummary": {
+      "label": "Result summary"
+    },
+    "exceptionInfo": {
+      "label": "Exception"
+    },
+    "requestParam": {
+      "label": "Request param"
+    }
+  },
+  "meta": {
+    "businessName": "jobLog",
+    "apiModule": "monitor",
+    "functionName": "Job Logs"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "page": {
+    "defaultSummary": "Default CRUD scheme for table {0}. Refine with AI as needed."
+  },
+  "fields": {},
+  "meta": {
+    "businessName": "page_spec",
+    "apiModule": "generator",
+    "functionName": "Page Spec"
+  }
+}

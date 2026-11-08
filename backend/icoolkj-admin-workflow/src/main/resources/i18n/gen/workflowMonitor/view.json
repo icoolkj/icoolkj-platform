@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "businessName": "workflowMonitor",
+    "apiModule": "workflow",
+    "backendModule": "workflow",
+    "permissionPrefix": "workflow:monitor",
+    "className": "WorkflowMonitor"
+  },
+  "readOnly": true,
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      { "field": "bizTitle", "component": "input", "queryType": "LIKE", "width": 200 },
+      {
+        "field": "bizType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 140
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_instance_status",
+        "width": 140
+      },
+      {
+        "field": "unresolvedOnly",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_yes_no",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      { "field": "bizTitle", "component": "text", "minWidth": 180, "showOverflowTooltip": true },
+      { "field": "processDefinitionName", "component": "text", "minWidth": 120 },
+      { "field": "starterUserName", "component": "text", "width": 100 },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "wf_instance_status",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "currentTaskName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "currentAssigneeUserNames",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      { "field": "startTime", "component": "datetime", "width": 170, "align": "center" }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 100 }
+  },
+  "form": { "mode": "dialog", "fields": [] },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "view",
+        "labelKey": "viewDetail",
+        "handler": "workflowMonitor.view",
+        "allowOnReadOnly": true
+      },
+      {
+        "id": "terminate",
+        "labelKey": "terminateAction",
+        "permKey": "terminate",
+        "type": "danger",
+        "handler": "workflowMonitor.terminate",
+        "allowOnReadOnly": true,
+        "showWhen": { "field": "status", "values": ["running", "returned"] }
+      }
+    ]
+  }
+}

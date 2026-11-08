@@ -1,0 +1,157 @@
+{
+  "page": {
+    "title": "异步任务",
+    "description": "查看用户异步任务状态与结果；仅成功/失败/取消可删除。操作审计见「操作日志」",
+    "detail": "详情",
+    "addTitle": "新增异步任务",
+    "editTitle": "修改异步任务",
+    "deleteConfirm": "确认删除该终态任务？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用"
+  },
+  "fields": {
+    "taskType": {
+      "label": "任务类型",
+      "placeholder": "请输入任务类型",
+      "validation": {
+        "required": "请输入任务类型",
+        "maxLength": "任务类型长度不能超过50"
+      }
+    },
+    "taskName": {
+      "label": "任务名称",
+      "placeholder": "请输入任务名称",
+      "validation": {
+        "required": "请输入任务名称",
+        "maxLength": "任务名称长度不能超过100"
+      }
+    },
+    "bizType": {
+      "label": "业务类型",
+      "placeholder": "请输入业务类型",
+      "validation": {
+        "maxLength": "业务类型长度不能超过50"
+      }
+    },
+    "bizId": {
+      "label": "业务ID",
+      "placeholder": "请输入业务ID",
+      "validation": {
+        "maxLength": "业务ID长度不能超过20"
+      }
+    },
+    "taskStatus": {
+      "label": "任务状态",
+      "placeholder": "请选择任务状态",
+      "validation": {
+        "required": "请选择任务状态",
+        "maxLength": "任务状态长度不能超过1"
+      }
+    },
+    "requestParam": {
+      "label": "请求参数",
+      "placeholder": "请输入请求参数",
+      "validation": {
+        "maxLength": "请求参数长度不能超过65535"
+      }
+    },
+    "resultData": {
+      "label": "结果数据",
+      "placeholder": "请输入结果数据",
+      "validation": {
+        "maxLength": "结果数据长度不能超过65535"
+      }
+    },
+    "errorMessage": {
+      "label": "错误信息",
+      "placeholder": "请输入错误信息",
+      "validation": {
+        "maxLength": "错误信息长度不能超过65535"
+      }
+    },
+    "retryCount": {
+      "label": "重试次数",
+      "placeholder": "请输入重试次数",
+      "validation": {
+        "required": "请输入重试次数"
+      }
+    },
+    "maxRetryCount": {
+      "label": "最大重试次数",
+      "placeholder": "请输入最大重试次数",
+      "validation": {
+        "required": "请输入最大重试次数"
+      }
+    },
+    "requeueCount": {
+      "label": "重投次数"
+    },
+    "startedAt": {
+      "label": "开始时间",
+      "placeholder": "请选择开始时间",
+      "validation": {}
+    },
+    "finishedAt": {
+      "label": "完成时间",
+      "placeholder": "请选择完成时间",
+      "validation": {}
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "tenantId": {
+      "label": "租户ID",
+      "placeholder": "请输入租户ID",
+      "validation": {
+        "required": "请输入租户ID",
+        "maxLength": "租户ID长度不能超过20"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "asyncTask",
+    "apiModule": "infra",
+    "functionName": "异步任务",
+    "constraints": {
+      "taskType": {
+        "required": true,
+        "maxLength": 50
+      },
+      "taskName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "bizType": {
+        "maxLength": 50
+      },
+      "bizId": {
+        "maxLength": 20
+      },
+      "taskStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "requestParam": {
+        "maxLength": 65535
+      },
+      "resultData": {
+        "maxLength": 65535
+      },
+      "errorMessage": {
+        "maxLength": 65535
+      },
+      "retryCount": {
+        "required": true
+      },
+      "maxRetryCount": {
+        "required": true
+      },
+      "startedAt": {},
+      "finishedAt": {}
+    }
+  }
+}

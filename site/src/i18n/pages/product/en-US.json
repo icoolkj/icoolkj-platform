@@ -1,0 +1,44 @@
+{
+  "product": {
+    "title": "Capabilities",
+    "lead": "Organized by deliverable outcomes—not a tech-stack laundry list.",
+    "linesEyebrow": "Product lines",
+    "linesTitle": "Three pillars, one delivery path",
+    "linesLead": "Foundation governance, OA workflow, and engineering codegen form the delivery surface.",
+    "docsLink": "Read the full capabilities docs",
+    "items": {
+      "c1": {
+        "title": "Multi-tenant & org permissions",
+        "body": "One account per tenant with clear platform vs tenant boundaries; orgs, roles, and data scope."
+      },
+      "c2": {
+        "title": "Menus, RBAC & security",
+        "body": "Navigation separated from permission codes; login hardening, IP rules, and log redaction."
+      },
+      "c3": {
+        "title": "Workflow & OA",
+        "body": "Process design, approvals, and tenant office configuration for real approval workloads."
+      },
+      "c4": {
+        "title": "Codegen & engineering norms",
+        "body": "CRUD generation and consistent project structure to accelerate standard admin modules."
+      },
+      "c5": {
+        "title": "Async jobs & Excel import",
+        "body": "Keep sync import for simple cases; large files go async—API returns a task id, work runs in the background, UI polls for results. User async jobs stay separate from platform cron; transport is environment config, with tenant isolation on every task."
+      },
+      "c6": {
+        "title": "Configurable & extensible",
+        "body": "Config, dictionaries, i18n, and clean extension seams—grow business on the foundation."
+      },
+      "c7": {
+        "title": "Deployable & maintainable",
+        "body": "Initialization baselines and ops-minded features for production—not demos only."
+      },
+      "c8": {
+        "title": "Domestic stack readiness",
+        "body": "Abstractions for DB, cache, and files to ease migration in regulated environments."
+      }
+    }
+  }
+}

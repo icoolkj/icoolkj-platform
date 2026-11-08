@@ -1,0 +1,110 @@
+{
+  "meta": {
+    "businessName": "oaTenantTemplate",
+    "apiModule": "oa",
+    "backendModule": "oa",
+    "permissionPrefix": "oa:tenantTemplate",
+    "className": "OaTenantTemplate"
+  },
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": false,
+    "fields": [
+      {
+        "field": "categoryCode",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 160
+      },
+      { "field": "templateName", "component": "input", "queryType": "LIKE", "width": 180 },
+      {
+        "field": "enableStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "oa_enable_status",
+        "width": 120
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "categoryCode",
+        "component": "dict-tag",
+        "dictType": "wf_biz_type",
+        "minWidth": 140
+      },
+      { "field": "templateName", "component": "text", "minWidth": 180 },
+      {
+        "field": "enableStatus",
+        "component": "dict-tag",
+        "dictType": "oa_enable_status",
+        "width": 110,
+        "align": "center"
+      },
+      { "field": "latestVersionNo", "component": "text", "width": 100, "align": "center" },
+      { "field": "draftVersionNo", "component": "text", "width": 90, "align": "center" },
+      { "field": "platformLatestVersionNo", "component": "text", "width": 90, "align": "center" },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "align": "center"
+      }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 300 }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 560,
+    "labelWidth": 108,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      { "field": "templateName", "component": "input", "edit": true, "span": 24 },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "edit": true,
+        "span": 24
+      },
+      { "field": "remark", "component": "textarea", "edit": true, "span": 24, "rows": 2 }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "syncPreview",
+        "labelKey": "syncPlatformAction",
+        "permKey": "update",
+        "type": "danger",
+        "handler": "oaTenantTemplate.syncPreview",
+        "showWhen": { "field": "platformOutdated", "values": ["true"] }
+      },
+      {
+        "id": "viewMapping",
+        "labelKey": "viewMappingAction",
+        "permKey": "query",
+        "handler": "oaTenantTemplate.viewMapping"
+      },
+      {
+        "id": "configure",
+        "labelKey": "configureAction",
+        "permKey": "update",
+        "handler": "oaTenantTemplate.configure"
+      }
+    ]
+  }
+}

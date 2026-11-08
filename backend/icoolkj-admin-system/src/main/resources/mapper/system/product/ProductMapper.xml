@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.product.mapper.ProductMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.product.domain.ProductEntity">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="name_i18n" property="nameI18n"/>
+        <result column="icon" property="icon"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, code, name, name_i18n, icon, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="code != null and code != ''">AND code like concat('%', #{code}, '%')</if>
+            <if test="name != null and name != ''">AND name like concat('%', #{name}, '%')</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_product
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByCode" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_product
+        WHERE deleted = 0 AND code = #{code}
+        LIMIT 1
+    </select>
+
+    <select id="selectActiveByCodes" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_product
+        WHERE deleted = 0 AND status = '0'
+        <if test="codes != null and codes.size() &gt; 0">
+            AND code IN
+            <foreach collection="codes" item="code" open="(" separator="," close=")">#{code}</foreach>
+        </if>
+        <if test="codes == null or codes.size() == 0">
+            AND 1 = 0
+        </if>
+        ORDER BY sort_no ASC, code ASC
+    </select>
+
+    <select id="selectAllActive" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_product
+        WHERE deleted = 0 AND status = '0'
+        ORDER BY sort_no ASC, code ASC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_product
+        <include refid="Query_Where"/>
+        ORDER BY sort_no ASC, code ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_product
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_product (
+            id, code, name, name_i18n, icon, sort_no, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{code}, #{name}, #{nameI18n}, #{icon}, #{sortNo}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_product
+        <set>
+            name = #{name},
+            name_i18n = #{nameI18n},
+            icon = #{icon},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+</mapper>

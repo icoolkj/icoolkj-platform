@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileCatalogItemMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileCatalogItemEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="catalog_code" property="catalogCode"/>
+        <result column="profile_code" property="profileCode"/>
+        <result column="required" property="required"/>
+        <result column="min_num" property="minNum"/>
+        <result column="max_num" property="maxNum"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="chrome_roles" property="chromeRoles"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, catalog_code, profile_code, required, min_num, max_num, sort_no, status, chrome_roles, remark,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectByTenantAndCatalog" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_catalog_item
+        where deleted = 0 and tenant_id = #{tenantId} and catalog_code = #{catalogCode}
+        order by sort_no asc, profile_code asc
+    </select>
+
+    <select id="selectByTenantCatalogProfile" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_catalog_item
+        where deleted = 0 and tenant_id = #{tenantId}
+          and catalog_code = #{catalogCode} and profile_code = #{profileCode}
+        limit 1
+    </select>
+
+    <insert id="insert">
+        insert into infra_file_catalog_item (
+            id, tenant_id, catalog_code, profile_code, required, min_num, max_num, sort_no, status, chrome_roles, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) values (
+            #{id}, #{tenantId}, #{catalogCode}, #{profileCode}, #{required}, #{minNum}, #{maxNum}, #{sortNo}, #{status},
+            #{chromeRoles}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        update infra_file_catalog_item
+        set required = #{required},
+            min_num = #{minNum},
+            max_num = #{maxNum},
+            sort_no = #{sortNo},
+            status = #{status},
+            chrome_roles = #{chromeRoles},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        where id = #{id} and deleted = 0
+    </update>
+
+    <update id="logicalDeleteById">
+        update infra_file_catalog_item set deleted = 1, updated_at = now(3) where id = #{id} and deleted = 0
+    </update>
+
+    <delete id="deleteByTenantAndCatalog">
+        delete from infra_file_catalog_item
+        where tenant_id = #{tenantId} and catalog_code = #{catalogCode}
+    </delete>
+</mapper>

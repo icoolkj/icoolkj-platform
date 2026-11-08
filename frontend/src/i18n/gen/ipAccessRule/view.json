@@ -1,0 +1,206 @@
+{
+  "meta": {
+    "businessName": "ipAccessRule",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:ipAccessRule",
+    "className": "IpAccessRule"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "ruleName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "ipAddress",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 200
+      },
+      {
+        "field": "matchType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_ip_match_type",
+        "width": 140
+      },
+      {
+        "field": "ruleType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_ip_rule_type",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "ruleName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "ipAddress",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "matchType",
+        "component": "dict-tag",
+        "dictType": "sys_ip_match_type",
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "ruleType",
+        "component": "dict-tag",
+        "dictType": "sys_ip_rule_type",
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "applyScope",
+        "component": "dict-tag",
+        "dictType": "sys_ip_apply_scope",
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "priorityNo",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "startAt",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "endAt",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 160
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "ruleName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "ipAddress",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "matchType",
+        "component": "select",
+        "dictType": "sys_ip_match_type",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "ruleType",
+        "component": "select",
+        "dictType": "sys_ip_rule_type",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "applyScope",
+        "component": "select",
+        "dictType": "sys_ip_apply_scope",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "priorityNo",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "startAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      },
+      {
+        "field": "endAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  }
+}

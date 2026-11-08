@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.i18n.mapper.I18nMessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.i18n.domain.I18nMessageEntity">
+        <id column="id" property="id"/>
+        <result column="message_key" property="messageKey"/>
+        <result column="locale" property="locale"/>
+        <result column="message_value" property="messageValue"/>
+        <result column="module" property="module"/>
+        <result column="scope" property="scope"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, message_key, locale, message_value, module, scope, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="messageKey != null and messageKey != ''">AND message_key like concat('%', #{messageKey}, '%')</if>
+            <if test="locale != null and locale != ''">AND locale = #{locale}</if>
+            <if test="module != null and module != ''">AND module = #{module}</if>
+            <if test="scope != null and scope != ''">AND scope = #{scope}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM sys_i18n_message WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByKeyAndLocale" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_message
+        WHERE message_key = #{messageKey} AND locale = #{locale} AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectByLocaleAndScopes" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_message
+        WHERE locale = #{locale} AND deleted = 0
+        AND scope IN
+        <foreach collection="scopes" item="scope" open="(" separator="," close=")">
+            #{scope}
+        </foreach>
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_message
+        <include refid="Query_Where"/>
+        ORDER BY message_key ASC, locale ASC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_i18n_message
+        <include refid="Query_Where"/>
+        ORDER BY message_key ASC, locale ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_i18n_message
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_i18n_message (
+            id, message_key, locale, message_value, module, scope, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        )
+        VALUES (
+            #{id}, #{messageKey}, #{locale}, #{messageValue}, #{module}, #{scope}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_i18n_message
+        <set>
+            message_key = #{messageKey},
+            locale = #{locale},
+            message_value = #{messageValue},
+            module = #{module},
+            scope = #{scope},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_i18n_message SET deleted = 1, updated_at = now(3) WHERE id = #{id} AND deleted = 0
+    </update>
+
+</mapper>

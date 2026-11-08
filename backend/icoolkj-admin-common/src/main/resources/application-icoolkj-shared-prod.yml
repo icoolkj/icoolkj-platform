@@ -1,0 +1,58 @@
+# Shared prod overrides (api + worker, profile=prod)
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      minimum-idle: 20
+      maximum-pool-size: 60
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD}
+      database: ${REDIS_DB:0}
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+
+icoolkj:
+  jwt:
+    secret: ${JWT_SECRET}
+  security:
+    cors:
+      # Example: https://admin.example.com
+      allowed-origins: ${CORS_ALLOWED_ORIGINS:}
+  async:
+    provider: redis-stream
+  backup:
+    output-dir: ${DB_BACKUP_OUTPUT_DIR:/var/lib/icoolkj/db-backup}
+    mysqldump-command: ${MYSQLDUMP_COMMAND:mysqldump}
+  logging:
+    async-executor:
+      core-pool-size: ${AUDIT_LOG_CORE_POOL_SIZE:4}
+      max-pool-size: ${AUDIT_LOG_MAX_POOL_SIZE:16}
+      queue-capacity: ${AUDIT_LOG_QUEUE_CAPACITY:5000}
+      await-termination-seconds: ${AUDIT_LOG_AWAIT_TERMINATION_SECONDS:20}
+      thread-name-prefix: ${AUDIT_LOG_THREAD_NAME_PREFIX:audit-log-}
+    retention:
+      login-log-days: 180
+      operation-log-days: 180
+      api-access-log-days: 90
+      archive-login-log-days: 365
+      archive-operation-log-days: 365
+      archive-api-access-log-days: 180
+    access-log:
+      max-body-length: 2048
+  storage:
+    security:
+      malware-scan:
+        # Prod default: require ClamAV (or override host/port via env / local override).
+        enabled: false
+        fail-closed: false
+  generator:
+    # Keep module for zip download if needed; never write to host filesystem in prod.
+    enabled: true
+    disk-write-enabled: false

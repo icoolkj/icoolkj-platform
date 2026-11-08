@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "businessName": "loginLog",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "monitor:loginLog",
+    "className": "LoginLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "username",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "loginStatus",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_login_status",
+        "width": 140
+      },
+      {
+        "field": "loginType",
+        "component": "select",
+        "queryType": "EQ",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "username",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "loginStatus",
+        "component": "dict-tag",
+        "dictType": "sys_login_status",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "ip",
+        "component": "text",
+        "width": 140,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "message",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "loginAt",
+        "component": "text",
+        "width": 170,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "loginType",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "location",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "userAgent",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "browser",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "os",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 160,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "username",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "loginType",
+        "component": "select",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "loginStatus",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "message",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "ip",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "location",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "userAgent",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "browser",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "os",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "loginAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      }
+    ]
+  },
+  "extensions": {
+    "toolbarActions": [
+      {
+        "id": "export",
+        "builtin": "export",
+        "permKey": "export",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "businessName": "aiChatLog",
+    "apiModule": "tool",
+    "backendModule": "generator",
+    "permissionPrefix": "tool:ai",
+    "className": "AiChatLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "title",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 220
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "title",
+        "component": "text",
+        "minWidth": 200,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operatorName",
+        "component": "text",
+        "width": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "updatedAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 90
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 120,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": []
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "logDetail",
+        "dialog": "GenAiChatLogDetailDialog",
+        "allowOnReadOnly": true
+      }
+    ],
+    "dialogs": ["GenAiChatLogDetailDialog"]
+  }
+}

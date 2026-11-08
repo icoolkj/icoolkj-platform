@@ -1,0 +1,88 @@
+specVersion: "1.0"
+pageKey: workflowModel
+layout: standard-crud
+vueVariant: workflowModelCrud
+
+meta:
+  apiModule: workflow
+  backendModule: workflow
+  permissionPrefix: workflow:model
+  className: WorkflowModel
+
+entity:
+  tableName: wf_model
+  businessName: workflowModel
+  functionName: 流程模型
+
+extensions:
+  listApi: GET /workflow/model/page
+  detailApi: GET /workflow/model/{id}
+  versionApi: GET /workflow/model/{id}/versions
+  deployApi: POST /workflow/model/deploy
+  dialogs:
+    - WorkflowModelDeployDialog
+    - WorkflowModelVersionDialog
+  toolbarActions:
+    - deploy
+
+viewDefaults:
+  query:
+    maxVisible: 2
+    collapsible: false
+  form:
+    mode: dialog
+    dialogWidth: 720
+    labelWidth: 108
+    closeOnClickModal: false
+    closeOnPressEscape: false
+  table:
+    actions:
+      edit: true
+      delete: false
+      width: 220
+
+fields:
+  - javaField: modelKey
+    columnComment: 模型标识
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+    disabledOnEdit: true
+  - javaField: modelName
+    columnComment: 模型名称
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: categoryName
+    columnComment: 分类
+    isList: true
+    htmlType: text
+  - javaField: formType
+    columnComment: 表单类型
+    isList: true
+    htmlType: dict-tag
+    dictType: wf_form_type
+  - javaField: latestVersion
+    columnComment: 当前版本
+    isList: true
+    htmlType: text
+  - javaField: status
+    columnComment: 状态
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: radio
+    dictType: sys_common_status
+  - javaField: remark
+    columnComment: 备注
+    isInsert: true
+    isEdit: true
+    htmlType: textarea

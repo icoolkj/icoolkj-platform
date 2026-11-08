@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.dept.mapper.DeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.dept.domain.DeptEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="ancestors" property="ancestors"/>
+        <result column="dept_name" property="deptName"/>
+        <result column="dept_code" property="deptCode"/>
+        <result column="leader_name" property="leaderName"/>
+        <result column="phone" property="phone"/>
+        <result column="email" property="email"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, parent_id, ancestors, dept_name, dept_code, leader_name, phone, email, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="deptName != null and deptName != ''">AND dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="deptCode != null and deptCode != ''">AND dept_code = #{deptCode}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="parentId != null and parentId != ''">AND parent_id = #{parentId}</if>
+        </where>
+    </sql>
+
+    <sql id="Page_Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="deptName != null and deptName != ''">AND dept_name like concat('%', #{deptName}, '%')</if>
+            <if test="deptCode != null and deptCode != ''">AND dept_code = #{deptCode}</if>
+            <if test="status != null and status != ''">AND status = #{status}</if>
+            <if test="parentId != null and parentId != ''">AND parent_id = #{parentId}</if>
+            <if test="dataScopeSql != null and dataScopeSql != ''">${dataScopeSql}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dept
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dept
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dept
+        <include refid="Page_Query_Where"/>
+        ORDER BY sort_no ASC, created_at ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_dept
+        <include refid="Page_Query_Where"/>
+    </select>
+
+    <select id="selectChildren" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_dept
+        WHERE tenant_id = #{tenantId}
+          AND parent_id = #{parentId}
+          AND deleted = 0
+        ORDER BY sort_no ASC, created_at ASC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_dept (id, tenant_id, parent_id, ancestors, dept_name, dept_code, leader_name, phone, email, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted)
+        VALUES (#{id}, #{tenantId}, #{parentId}, #{ancestors}, #{deptName}, #{deptCode}, #{leaderName}, #{phone}, #{email}, #{sortNo}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_dept
+        <set>
+            parent_id = #{parentId},
+            ancestors = #{ancestors},
+            dept_name = #{deptName},
+            dept_code = #{deptCode},
+            leader_name = #{leaderName},
+            phone = #{phone},
+            email = #{email},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE sys_dept SET deleted = 1 WHERE id = #{id}
+    </update>
+
+</mapper>

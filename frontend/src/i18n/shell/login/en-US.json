@@ -1,0 +1,103 @@
+{
+  "brandSubtitle": "Enterprise multi-tenant admin platform",
+  "brandTitle": "iCoolKJ Platform",
+  "copyrightIcpLabel": "ICP Filing No.",
+  "copyrightDomainLabel": "Domain",
+  "copyrightEmailLabel": "Email",
+  "brandIntro": "A ready-to-use admin foundation with permissions, tenancy, and code generation.",
+  "feature1": "Unified permissions & tenant isolation",
+  "feature1Desc": "Platform / enterprise / org isolation with roles and data scopes",
+  "feature2": "Full-stack Java + Vue code generation",
+  "feature2Desc": "Generate end-to-end CRUD from table schema to speed delivery",
+  "feature3": "Modern Element Plus admin UI",
+  "feature3Desc": "Layouts, themes, and components tailored for admin consoles",
+  "testAccountsLink": "Test accounts",
+  "qrWechatDefault": "Scan for support",
+  "qrOfficialDefault": "Scan to follow",
+  "qrDefault": "Scan to connect",
+  "login": "Sign In",
+  "password": "Password",
+  "passwordRequired": "Password is required",
+  "subtitle": "Sign in to access the admin console",
+  "tenantCode": "Tenant Code",
+  "tenantCodePlaceholder": "Enter Tenant code",
+  "tenantCodeRequired": "Tenant code is required",
+  "title": "Welcome",
+  "username": "Username",
+  "usernamePlaceholder": "Enter username",
+  "usernameRequired": "Username is required",
+  "rememberLogin": "Remember sign-in info",
+  "captcha": "Captcha",
+  "captchaPlaceholder": "Enter captcha",
+  "captchaRefresh": "Click to refresh",
+  "forceChangeTitle": "Change Initial Password",
+  "forceChangeHint": "For account security, change your initial password before using the system",
+  "passwordPolicyHint": "New password must be at least 10 characters and include uppercase, lowercase, a digit, and a special character",
+  "forceChangeSubmit": "Save and Sign In Again",
+  "forceChangeLogout": "Sign Out",
+  "forceChangeSuccess": "Password updated. Please sign in with your new password",
+  "oldPassword": "Current Password",
+  "oldPasswordRequired": "Current password is required",
+  "newPassword": "New Password",
+  "newPasswordRequired": "New password is required",
+  "newPasswordMin": "New password must be at least 10 characters",
+  "passwordRequireUpper": "New password must contain at least one uppercase letter",
+  "passwordRequireLower": "New password must contain at least one lowercase letter",
+  "passwordRequireNumber": "New password must contain at least one digit",
+  "passwordRequireSpecial": "New password must contain at least one special character",
+  "confirmPassword": "Confirm New Password",
+  "confirmPasswordRequired": "Please confirm the new password",
+  "passwordMismatch": "The two new passwords do not match",
+  "mfaCode": "MFA Code",
+  "mfaCodePlaceholder": "Enter 6-digit code",
+  "mfaCodeRequired": "Enter the 6-digit MFA code",
+  "mfaVerify": "Verify and Sign In",
+  "mfaBack": "Back",
+  "mfaQrAlt": "MFA QR code",
+  "forceEnrollTitle": "Enroll MFA",
+  "forceEnrollHint": "Policy requires TOTP MFA enrollment before you can continue",
+  "forceEnrollScan": "Scan with an Authenticator app, or add the URI below manually",
+  "forceEnrollSubmit": "Confirm Enrollment",
+  "forceEnrollSuccess": "MFA enrolled successfully",
+  "agreementPrefix": "I have read and agree to the",
+  "agreementLink": "Framework License Agreement",
+  "agreementRequired": "Please read and accept the Framework License Agreement",
+  "agreementDialogTitle": "Framework License Agreement",
+  "agreementClose": "Got it",
+  "agreementVersion": "Version 1.0",
+  "agreementIntro": "Welcome to this admin platform (the \"Framework\" or \"Software\"). Before signing in, please read this agreement carefully. By checking the box and signing in, you acknowledge that you have read, understood, and accepted all terms.",
+  "agreementSections": [
+    {
+      "title": "1. Scope",
+      "body": "This agreement covers your licensed use of the Framework and related admin components. License scope, term, and support levels are defined by written contract or license documents; this agreement supplements product usage terms."
+    },
+    {
+      "title": "2. License & use",
+      "body": "Within a valid license, you may deploy, configure, and extend business modules on the Framework. Without written permission, you may not copy, resell, sublicense, rent, or otherwise provide Framework source or core capabilities beyond the licensed scope."
+    },
+    {
+      "title": "3. Intellectual property",
+      "body": "The Framework, documentation, marks, and related IP remain with the rights holder. Business code and data you build on top belong to you, without claiming rights over the Framework itself."
+    },
+    {
+      "title": "4. Accounts & security",
+      "body": "You must safeguard tenant codes, accounts, and passwords and are responsible for actions under your accounts. Enable captcha, password policy, and MFA where appropriate. Losses from poor credential hygiene are your responsibility."
+    },
+    {
+      "title": "5. Prohibited uses",
+      "body": "Do not use the Framework for unlawful activity; do not bypass licensing, security, or audit controls; do not crack or reverse engineer the Framework except where mandatory law allows."
+    },
+    {
+      "title": "6. Disclaimer",
+      "body": "The Framework is provided \"as is\". To the maximum extent permitted by law, the rights holder is not liable for indirect, incidental, or consequential damages arising from use or inability to use the Framework, except for liabilities that cannot be excluded by law."
+    },
+    {
+      "title": "7. Changes",
+      "body": "Terms may be updated as the product evolves and published on the sign-in page or related channels. Continued sign-in constitutes acceptance; if you disagree, stop using the Software and contact your licensor."
+    },
+    {
+      "title": "8. Contact",
+      "body": "For licensing, delivery, or agreement questions, use the contact email shown in the page footer or channels defined in your contract."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+# Shared test overrides (api + worker, profile=test)
+spring:
+  datasource:
+    url: jdbc:mysql://db.test.example.com:3306/icoolkj_platform_test?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: test_user
+    password: ${DB_PASSWORD}
+  data:
+    redis:
+      host: redis.test.example.com
+      port: 6379
+      password: ${REDIS_PASSWORD}
+      database: 1
+
+icoolkj:
+  jwt:
+    secret: ${JWT_SECRET}
+  security:
+    password-transport:
+      allow-plaintext: false
+  async:
+    provider: redis-stream

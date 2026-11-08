@@ -1,0 +1,127 @@
+{
+  "page": {
+    "title": "站内信息",
+    "description": "查看与管理本人发送的站内信，支持按用户、部门、角色或全员投递。",
+    "sendTitle": "发送站内信",
+    "detailTitle": "站内信详情",
+    "detailTabContent": "正文",
+    "detailTabReceipt": "查收情况",
+    "readAtLabel": "阅读时间",
+    "sendSuccess": "发送成功",
+    "batchDelete": "批量删除",
+    "batchDeleteConfirm": "确认删除选中的 {count} 条站内信？",
+    "keywordPlaceholder": "请输入站内信息主题关键词",
+    "sendAction": "发送站内信",
+    "detailAction": "详情",
+    "recipientUsers": "指定用户",
+    "recipientDepts": "指定部门",
+    "recipientRoles": "指定角色",
+    "recipientAll": "全员",
+    "targetTenant": "目标租户",
+    "targetTenantPlaceholder": "请选择要发送的租户",
+    "targetTenantRequired": "请选择目标租户",
+    "targetTenantHint": "平台账号需先选择目标租户；下方接收范围仅作用于该租户，与当前登录租户无关。",
+    "recipientAllHint": "全员指目标租户下全部启用用户，不是全平台所有租户。",
+    "multiTenantHint": "选择多个租户时，指定用户/部门/角色会在组织架构中按租户分组展示；系统会分别向各租户投递。",
+    "roleListTitle": "角色列表",
+    "pickTenants": "选择租户",
+    "pickTenantsTitle": "选择目标租户",
+    "pickUsers": "选择用户",
+    "pickUsersTitle": "选择用户",
+    "pickDepts": "选择部门",
+    "pickDeptsTitle": "选择部门",
+    "pickRoles": "选择角色",
+    "pickRolesTitle": "选择角色",
+    "tenantSearchPlaceholder": "请输入租户名称",
+    "userSearchPlaceholder": "请输入用户名",
+    "roleSearchPlaceholder": "请输入角色名称",
+    "selectedCount": "已选择",
+    "clearSelected": "全部移除",
+    "deptTreeTitle": "组织架构",
+    "pendingListTitle": "待选择列表",
+    "selectedListTitle": "已选择",
+    "selectedEmptyText": "暂未选择，请从左侧列表添加",
+    "listCountUnit": "条",
+    "addCurrentPage": "添加当前页",
+    "tenantNameLabel": "租户名称",
+    "tenantCodeLabel": "租户编码",
+    "tenantTypeLabel": "租户类型",
+    "userNicknameLabel": "姓名",
+    "userAccountLabel": "账号",
+    "roleNameLabel": "角色名称",
+    "roleCodeLabel": "角色编码",
+    "selectUsers": "选择用户",
+    "selectDepts": "选择部门",
+    "selectRoles": "选择角色"
+  },
+  "fields": {
+    "messageSubject": {
+      "label": "主题",
+      "placeholder": "请输入主题",
+      "validation": {
+        "required": "请输入主题",
+        "maxLength": "主题长度不能超过 {max} 个字符"
+      }
+    },
+    "messageCategory": {
+      "label": "站内信分类",
+      "placeholder": "请选择站内信分类",
+      "validation": {
+        "required": "请选择站内信分类",
+        "maxLength": "分类无效"
+      }
+    },
+    "messageContent": {
+      "label": "正文",
+      "placeholder": "请输入正文",
+      "validation": {
+        "required": "请输入正文"
+      }
+    },
+    "recipientType": {
+      "label": "接收范围",
+      "placeholder": "请选择接收范围",
+      "validation": {
+        "required": "请选择接收范围"
+      }
+    },
+    "senderName": {
+      "label": "发送人"
+    },
+    "sentAt": {
+      "label": "发送时间"
+    },
+    "recipientCount": {
+      "label": "接收人数"
+    },
+    "readStatus": {
+      "label": "是否已读",
+      "placeholder": "请选择阅读状态"
+    },
+    "userNickname": {
+      "label": "姓名"
+    },
+    "username": {
+      "label": "账号"
+    },
+    "readAt": {
+      "label": "阅读时间"
+    },
+    "ids": {
+      "validation": {
+        "required": "请选择要删除的记录"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "siteMessage",
+    "apiModule": "system",
+    "functionName": "站内信息",
+    "constraints": {
+      "messageSubject": { "required": true, "maxLength": 200 },
+      "messageCategory": { "required": true, "maxLength": 20 },
+      "messageContent": { "required": true },
+      "recipientType": { "required": true }
+    }
+  }
+}

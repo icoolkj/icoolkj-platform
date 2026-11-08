@@ -1,0 +1,205 @@
+{
+  "page": {
+    "title": "Menu Management",
+    "description": "Manage menu records",
+    "addTitle": "Add Menu",
+    "editTitle": "Edit Menu",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "treeRoot": "Root",
+    "addChild": "Add Child",
+    "showButtons": "Show button permissions"
+  },
+  "fields": {
+    "menuName": {
+      "label": "Menu Name",
+      "placeholder": "Chinese title (name_i18n.zh-CN / menu_name)",
+      "validation": {
+        "required": "Menu Name is required",
+        "maxLength": "Menu Name must not exceed 50 characters"
+      }
+    },
+    "menuNameEn": {
+      "label": "English Name",
+      "placeholder": "Optional (name_i18n.en-US)",
+      "validation": {
+        "maxLength": "English Name must not exceed 100 characters"
+      }
+    },
+    "menuType": {
+      "label": "Menu Type",
+      "placeholder": "Please select Menu Type",
+      "validation": {
+        "required": "Please select Menu Type",
+        "maxLength": "Menu Type must not exceed 1 characters"
+      }
+    },
+    "parentId": {
+      "label": "Parent Menu",
+      "placeholder": "Please select Parent Menu",
+      "validation": {
+        "required": "Parent Id is required",
+        "maxLength": "Parent Id must not exceed 20 characters"
+      }
+    },
+    "routePath": {
+      "label": "Route Path",
+      "placeholder": "Please enter Route Path",
+      "validation": {
+        "maxLength": "Route Path must not exceed 200 characters"
+      }
+    },
+    "routeName": {
+      "label": "Route Name",
+      "placeholder": "Please enter Route Name",
+      "validation": {
+        "maxLength": "Route Name must not exceed 100 characters"
+      }
+    },
+    "componentPath": {
+      "label": "Component Path",
+      "placeholder": "Please enter Component Path",
+      "validation": {
+        "maxLength": "Component Path must not exceed 200 characters"
+      }
+    },
+    "permissionCode": {
+      "label": "Permission Code",
+      "placeholder": "Please enter Permission Code",
+      "validation": {
+        "maxLength": "Permission Code must not exceed 100 characters"
+      }
+    },
+    "icon": {
+      "label": "Icon",
+      "placeholder": "Please select an icon",
+      "validation": {
+        "maxLength": "Icon must not exceed 100 characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Please enter Sort",
+      "validation": {
+        "required": "Sort No is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "assignScope": {
+      "label": "Assign Scope",
+      "placeholder": "Please select assign scope",
+      "validation": {
+        "maxLength": "Assign scope must not exceed 20 characters"
+      }
+    },
+    "productCode": {
+      "label": "Product",
+      "placeholder": "Select product universe",
+      "validation": {
+        "required": "Product is required",
+        "maxLength": "Product code must not exceed 32 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "visible": {
+      "label": "Visible",
+      "placeholder": "Please select Visible",
+      "validation": {
+        "required": "Visible is required",
+        "maxLength": "Visible must not exceed 1 characters"
+      }
+    },
+    "isExternal": {
+      "label": "Is External",
+      "placeholder": "Please enter Is External",
+      "validation": {
+        "required": "Is External is required"
+      }
+    },
+    "isCache": {
+      "label": "Is Cache",
+      "placeholder": "Please enter Is Cache",
+      "validation": {
+        "required": "Is Cache is required"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "menu",
+    "apiModule": "system",
+    "functionName": "Menu",
+    "constraints": {
+      "menuName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "menuNameEn": {
+        "maxLength": 100
+      },
+      "menuType": {
+        "required": true,
+        "maxLength": 1
+      },
+      "routePath": {
+        "maxLength": 200
+      },
+      "routeName": {
+        "maxLength": 100
+      },
+      "componentPath": {
+        "maxLength": 200
+      },
+      "permissionCode": {
+        "maxLength": 100
+      },
+      "icon": {
+        "maxLength": 100
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "parentId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "sortNo": {
+        "required": true
+      },
+      "visible": {
+        "required": true,
+        "maxLength": 1
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "assignScope": {
+        "maxLength": 20
+      },
+      "productCode": {
+        "required": true,
+        "maxLength": 32
+      },
+      "isExternal": {
+        "required": true
+      },
+      "isCache": {
+        "required": true
+      }
+    }
+  }
+}

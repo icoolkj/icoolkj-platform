@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "businessName": "admin",
+    "apiModule": "tenant",
+    "backendModule": "system",
+    "permissionPrefix": "tenant:admin",
+    "className": "TenantAdmin"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "tenantCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "tenantName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "username",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "tenantCode",
+        "component": "text",
+        "width": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "tenantName",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "username",
+        "component": "text",
+        "width": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "roleName",
+        "component": "text",
+        "width": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "align": "center"
+      },
+      {
+        "field": "lockedUntil",
+        "component": "datetime",
+        "minWidth": 160,
+        "align": "center"
+      },
+      {
+        "field": "lastLoginAt",
+        "component": "datetime",
+        "minWidth": 160,
+        "align": "center"
+      },
+      {
+        "field": "mustChangePassword",
+        "component": "dict-tag",
+        "dictType": "sys_yes_no",
+        "width": 100,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false
+    }
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "resetPassword",
+        "labelKey": "resetPassword",
+        "handler": "tenantAdmin.resetPassword",
+        "permKey": "resetPassword",
+        "type": "primary"
+      },
+      {
+        "id": "unlock",
+        "labelKey": "unlock",
+        "handler": "tenantAdmin.unlock",
+        "permKey": "unlock",
+        "type": "warning"
+      }
+    ]
+  }
+}

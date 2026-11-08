@@ -1,0 +1,138 @@
+{
+  "page": {
+    "title": "OA Approval",
+    "viewTitle": "Application Detail",
+    "back": "Back",
+    "currentNodePrefix": "Current node",
+    "missingBizId": "Missing business ID",
+    "missingTaskId": "No pending task",
+    "bizPanel": "Application",
+    "attachmentsPanel": "Attachments",
+    "approvePanel": "Approval",
+    "timelineTitle": "Flow History",
+    "progressTabFlow": "Flowchart",
+    "emptyFlow": "No process design data",
+    "timelineStarter": "Starter",
+    "timelineAssignee": "Assignee",
+    "timelineToUser": "To",
+    "timelineResult": "Result",
+    "timelineActionTransfer": "Transfer",
+    "timelineActionDelegate": "Delegate",
+    "timelineActionDelegateReturn": "Delegate return",
+    "timelineActionWithdraw": "Withdraw",
+    "timelineActionTerminate": "Admin terminate",
+    "timelineReasonOaInstanceWithdraw": "Applicant withdrew the request",
+    "timelineReasonOaCloseAfterReturn": "Closed after return",
+    "timelineReasonStarterWithdraw": "Starter withdrew from Submitted",
+    "timelineReasonCancelled": "Process withdrawn",
+    "timelineActionJump": "Jump",
+    "timelineActionRejectJump": "Reject jump",
+    "timelineActionTimeout": "Timeout",
+    "timelineActionAddSign": "Add sign",
+    "timelineActionAddSignHandoff": "Add-sign handoff",
+    "timelineActionAddSignReturn": "Add-sign return",
+    "timelineActionRemoveSign": "Remove sign",
+    "startEvent": "Submitted",
+    "cycleSubmit": "Submission #{n}",
+    "expandHistory": "Show full history ({n})",
+    "collapseHistory": "Latest cycle only",
+    "emptyTimeline": "No approval records",
+    "emptyInstance": "No process instance",
+    "emptyBiz": "Application not found",
+    "nodePending": "Pending",
+    "nodeSkipped": "Skipped",
+    "waitingAssignee": "Unassigned",
+    "resultPass": "Pass",
+    "resultReject": "Reject",
+    "approvePass": "Approve",
+    "writableFields": "Editable fields",
+    "approveReject": "Reject",
+    "approveRejectReturn": "Reject & return",
+    "approveRejectStarterEdit": "Return for edit",
+    "actionTransfer": "Transfer",
+    "actionDelegate": "Delegate",
+    "actionAddSign": "Add sign",
+    "actionRemoveSign": "Remove sign",
+    "actionUrge": "Urge",
+    "transferTitle": "Transfer to",
+    "transferSuccess": "Transferred",
+    "delegateTitle": "Delegate to",
+    "delegateSuccess": "Delegated (returns to you after they approve)",
+    "delegateUntilTitle": "Delegation deadline",
+    "delegateUntilHint": "Optional. After expiry the delegatee cannot submit. Empty = until they return.",
+    "delegateUntilPh": "Pick deadline (optional)",
+    "jumpTitle": "Jump to node",
+    "targetActivityId": "Target node",
+    "jumpSuccess": "Jumped",
+    "addSignTitle": "Add signers",
+    "addSignMode": "Add-sign mode",
+    "addSignBefore": "Before (pre)",
+    "addSignAfter": "After (post)",
+    "addSignSuccess": "Add-sign applied",
+    "removeSignTitle": "Remove sign",
+    "removeSignHint": "Select assignees to remove (at least one must remain)",
+    "removeSignEmpty": "No removable assignees",
+    "removeSignSuccess": "Remove-sign applied",
+    "urgeConfirm": "Urge the current assignee?",
+    "urgeSuccess": "Urge sent",
+    "pickerPendingList": "Candidates",
+    "pickerSelected": "Selected",
+    "pickerAddCurrentPage": "Add page",
+    "pickerClearSelected": "Clear",
+    "pickerUserSearch": "Search users",
+    "pickerDeptTree": "Department",
+    "pickerUserNickname": "Name",
+    "pickerUserAccount": "Account",
+    "ccTitle": "CC Acknowledge",
+    "ccPanel": "CC Action",
+    "ccAck": "Acknowledge",
+    "ccCommentPlaceholder": "Optional note",
+    "ccCompleteSuccess": "Acknowledged",
+    "quickComments": "Quick comments",
+    "quickCommentPlaceholder": "Pick a quick comment (searchable)",
+    "techInfo": "Technical details",
+    "submitApprove": "Submit",
+    "completeSuccess": "Approved"
+  },
+  "fields": {
+    "instanceTitle": {
+      "label": "Title"
+    },
+    "approveStatus": {
+      "label": "Status"
+    },
+    "remark": {
+      "label": "Remark"
+    },
+    "currentNode": {
+      "label": "Current Node"
+    },
+    "taskId": {
+      "label": "Task ID"
+    },
+    "approved": {
+      "label": "Decision",
+      "validation": {
+        "required": "Select a decision"
+      }
+    },
+    "comment": {
+      "label": "Comment",
+      "placeholder": "Optional comment",
+      "placeholderReject": "Please enter the reject reason",
+      "validation": {
+        "requiredOnReject": "Comment is required when rejecting"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "officeApprove",
+    "apiModule": "oa",
+    "constraints": {
+      "approved": {
+        "required": true
+      }
+    },
+    "backendModule": "oa"
+  }
+}

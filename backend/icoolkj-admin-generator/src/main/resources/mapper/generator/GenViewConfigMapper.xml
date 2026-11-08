@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.generator.mapper.GenViewConfigMapper">
+
+    <resultMap id="GenViewConfigResult" type="com.icoolkj.platform.generator.domain.GenViewConfig">
+        <id property="id" column="id"/>
+        <result property="tableId" column="table_id"/>
+        <result property="viewJson" column="view_json"/>
+        <result property="remark" column="remark"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectByTableId" resultMap="GenViewConfigResult">
+        select * from gen_view_config where table_id = #{tableId}
+    </select>
+
+    <select id="selectByBusinessAndModule" resultMap="GenViewConfigResult">
+        select v.*
+        from gen_view_config v
+        inner join gen_table t on t.id = v.table_id
+        where t.business_name = #{businessName}
+          and t.api_module = #{apiModule}
+        limit 1
+    </select>
+
+    <insert id="insert">
+        insert into gen_view_config (id, table_id, view_json, remark, created_at, updated_at)
+        values (#{id}, #{tableId}, #{viewJson}, #{remark}, now(3), now(3))
+    </insert>
+
+    <update id="update">
+        update gen_view_config
+        set view_json = #{viewJson},
+            remark = #{remark},
+            updated_at = now(3)
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByTableId">
+        delete from gen_view_config where table_id = #{tableId}
+    </delete>
+</mapper>

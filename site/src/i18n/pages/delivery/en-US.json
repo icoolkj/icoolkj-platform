@@ -1,0 +1,33 @@
+{
+  "delivery": {
+    "title": "Learning & support",
+    "lead": "Three common paths around the Source Available release: self-study, feedback, and commercial licensing enquiries.",
+    "modes": {
+      "title": "Available paths",
+      "items": {
+        "license": {
+          "title": "Non-commercial study",
+          "body": "Read, run and modify the source free of charge for personal learning, academic research and classroom teaching."
+        },
+        "implement": {
+          "title": "Feedback & contributions",
+          "body": "Read CONTRIBUTING.md before opening an issue or PR; contributions are licensed under the same terms."
+        },
+        "custom": {
+          "title": "Commercial licensing",
+          "body": "Enterprise deployment, client delivery and SaaS require a separate written licence from the copyright holder."
+        }
+      }
+    },
+    "out": {
+      "title": "Expressly outside the licence",
+      "items": [
+        "Production deployment or processing real business data (including internal use)",
+        "Delivering products, components, scaffolds or foundations to third parties",
+        "Providing SaaS, hosting, consulting or paid implementation services",
+        "Removing attribution, misusing trademarks or sublicensing"
+      ]
+    },
+    "eyebrow": "Support"
+  }
+}

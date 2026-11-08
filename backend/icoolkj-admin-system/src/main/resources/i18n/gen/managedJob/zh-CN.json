@@ -1,0 +1,73 @@
+{
+  "page": {
+    "title": "定时任务",
+    "description": "平台定时任务启停、Cron 与立即执行",
+    "editTitle": "编辑定时任务",
+    "run": "立即执行",
+    "runConfirm": "确认立即执行“{name}”？",
+    "pause": "暂停",
+    "resume": "恢复",
+    "pauseConfirm": "确认暂停“{name}”？",
+    "resumeConfirm": "确认恢复“{name}”？"
+  },
+  "keys": {
+    "audit-log-retention": "审计日志归档清理",
+    "database-backup": "数据库备份",
+    "infra-file-gc": "文件垃圾回收",
+    "async-task-pending-reconcile": "异步任务排队对账"
+  },
+  "fields": {
+    "jobCode": {
+      "label": "任务编码",
+      "placeholder": "请输入任务编码"
+    },
+    "jobName": {
+      "label": "任务名称",
+      "placeholder": "请输入任务名称"
+    },
+    "cronExpression": {
+      "label": "Cron",
+      "placeholder": "请输入 Cron 表达式",
+      "validation": {
+        "required": "请输入 Cron 表达式"
+      }
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请选择状态"
+      }
+    },
+    "lastStatus": {
+      "label": "最近状态"
+    },
+    "lastMessage": {
+      "label": "最近消息"
+    },
+    "lastTriggerAt": {
+      "label": "最近触发"
+    },
+    "allowConcurrent": {
+      "label": "允许并发"
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注"
+    }
+  },
+  "meta": {
+    "businessName": "managedJob",
+    "apiModule": "monitor",
+    "functionName": "定时任务",
+    "constraints": {
+      "cronExpression": {
+        "required": true,
+        "maxLength": 100
+      },
+      "status": {
+        "required": true
+      }
+    }
+  }
+}

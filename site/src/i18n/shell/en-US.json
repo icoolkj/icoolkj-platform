@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "iCoolKJ Platform — Source Available Admin Framework (Non-Commercial)",
+    "description": "Multi-tenant, permissions, workflow, and codegen in one framework for SaaS and business systems."
+  },
+  "nav": {
+    "home": "Home",
+    "product": "Capabilities",
+    "docs": "Docs",
+    "license": "Licence & usage",
+    "delivery": "Delivery",
+    "about": "About",
+    "console": "Open Console",
+    "language": "Language",
+    "theme": "Appearance",
+    "themeLight": "Light",
+    "themeDark": "Dark"
+  },
+  "footer": {
+    "rights": "Licensed under iCoolKJ Non-Commercial Study and Research License v1.0"
+  }
+}

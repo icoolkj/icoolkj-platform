@@ -1,0 +1,35 @@
+{
+  "page": {
+    "title": "目录槽位",
+    "description": "将上传槽位绑定到材料目录；支持逐条新增/修改，可停用绑定（上传约束仍以槽位配置为基线）",
+    "selectCatalog": "选择目录",
+    "catalogPlaceholder": "请选择材料目录",
+    "add": "新增绑定",
+    "edit": "修改",
+    "delete": "删除",
+    "addTitle": "新增目录槽位",
+    "editTitle": "修改目录槽位 — {code}",
+    "deleteConfirm": "确认删除目录「{catalog}」下的槽位「{code}」？",
+    "saveSuccess": "保存成功",
+    "deleteSuccess": "删除成功",
+    "emptyHint": "请先选择目录",
+    "platformOnlyHint": "目录槽位绑定仅平台运营可维护",
+    "requiredYes": "必传",
+    "requiredNo": "非必传",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "inherit": "继承槽位",
+    "duplicateProfile": "该目录下已绑定槽位「{code}」"
+  },
+  "fields": {
+    "profileCode": { "label": "槽位编码", "required": "请选择槽位" },
+    "profileName": { "label": "槽位名称" },
+    "required": { "label": "必传" },
+    "minNum": { "label": "最小数量" },
+    "maxNum": { "label": "最大数量" },
+    "sortNo": { "label": "排序" },
+    "status": { "label": "状态" },
+    "remark": { "label": "备注" },
+    "allowedExts": { "label": "允许扩展名" }
+  }
+}

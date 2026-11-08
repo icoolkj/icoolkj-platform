@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.banner.mapper.BannerMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.banner.domain.BannerEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="banner_title" property="bannerTitle"/>
+        <result column="image_file_id" property="imageFileId"/>
+        <result column="display_positions" property="displayPositions"/>
+        <result column="position_config" property="positionConfig"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+        <result column="image_preview_url" property="imagePreviewUrl"/>
+    </resultMap>
+
+    <sql id="List_Column_List">
+        b.id, b.tenant_id, b.banner_title, b.image_file_id, b.display_positions,
+        b.sort_no, b.status, b.remark, b.created_by, b.created_at, b.updated_by, b.updated_at, b.deleted
+    </sql>
+
+    <sql id="Base_Column_List">
+        b.id, b.tenant_id, b.banner_title, b.image_file_id, b.display_positions, b.position_config,
+        b.sort_no, b.status, b.remark, b.created_by, b.created_at, b.updated_by, b.updated_at, b.deleted
+    </sql>
+
+    <sql id="From_Join">
+        FROM sys_banner b
+        LEFT JOIN infra_file f ON f.id = b.image_file_id AND f.deleted = 0
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            b.deleted = 0
+            <if test="bannerTitle != null and bannerTitle != ''">
+                AND b.banner_title like concat('%', #{bannerTitle}, '%')
+            </if>
+            <if test='displayPosition != null and displayPosition != ""'>
+                AND FIND_IN_SET(#{displayPosition}, b.display_positions)
+            </if>
+            <if test="status != null and status != ''">AND b.status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, f.file_url AS image_preview_url
+        <include refid="From_Join"/>
+        WHERE b.id = #{id} AND b.deleted = 0
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="List_Column_List"/>, f.file_url AS image_preview_url
+        <include refid="From_Join"/>
+        <include refid="Query_Where"/>
+        ORDER BY b.sort_no ASC, b.created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1)
+        <include refid="From_Join"/>
+        <include refid="Query_Where"/>
+    </select>
+
+    <select id="selectPublished" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, f.file_url AS image_preview_url
+        <include refid="From_Join"/>
+        WHERE b.deleted = 0
+          AND b.status = '0'
+          AND b.tenant_id = #{tenantId}
+          AND FIND_IN_SET(#{displayPosition}, b.display_positions)
+        ORDER BY b.sort_no ASC, b.created_at DESC
+        LIMIT #{limit}
+    </select>
+
+    <select id="countByImageFileId" resultType="long">
+        SELECT COUNT(1)
+        FROM sys_banner
+        WHERE deleted = 0 AND image_file_id = #{imageFileId}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_banner (
+            id, tenant_id, banner_title, image_file_id, display_positions, position_config,
+            sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{bannerTitle}, #{imageFileId}, #{displayPositions}, #{positionConfig},
+            #{sortNo}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_banner
+        <set>
+            banner_title = #{bannerTitle},
+            image_file_id = #{imageFileId},
+            display_positions = #{displayPositions},
+            position_config = #{positionConfig},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+</mapper>

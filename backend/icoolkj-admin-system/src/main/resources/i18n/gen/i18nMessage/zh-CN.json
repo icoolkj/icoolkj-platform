@@ -1,0 +1,94 @@
+{
+  "page": {
+    "title": "国际化文案",
+    "description": "管理国际化文案，支持新增、修改与删除",
+    "addTitle": "新增国际化文案",
+    "editTitle": "修改国际化文案",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "refreshCache": "刷新缓存",
+    "refreshCacheSuccess": "文案缓存已刷新",
+    "refreshCacheConfirm": "确认刷新全部国际化文案缓存？"
+  },
+  "fields": {
+    "messageKey": {
+      "label": "消息键",
+      "placeholder": "请输入消息键",
+      "validation": {
+        "required": "请输入消息键",
+        "maxLength": "消息键长度不能超过128"
+      }
+    },
+    "locale": {
+      "label": "语言",
+      "placeholder": "请输入语言",
+      "validation": {
+        "required": "请输入语言",
+        "maxLength": "语言长度不能超过16"
+      }
+    },
+    "messageValue": {
+      "label": "消息值",
+      "placeholder": "请输入消息值",
+      "validation": {
+        "required": "请输入消息值",
+        "maxLength": "消息内容长度不能超过65535"
+      }
+    },
+    "module": {
+      "label": "模块",
+      "placeholder": "请输入模块",
+      "validation": {
+        "required": "请输入模块分组",
+        "maxLength": "模块长度不能超过64"
+      }
+    },
+    "scope": {
+      "label": "范围",
+      "placeholder": "请输入范围",
+      "validation": {
+        "required": "作用域不能为空",
+        "maxLength": "作用域 backend/frontend/all长度不能超过16",
+        "invalid": "作用域取值无效"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过256"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "i18nMessage",
+    "apiModule": "system",
+    "functionName": "国际化文案",
+    "constraints": {
+      "messageKey": {
+        "required": true,
+        "maxLength": 128
+      },
+      "locale": {
+        "required": true,
+        "maxLength": 16
+      },
+      "messageValue": {
+        "required": true,
+        "maxLength": 65535
+      },
+      "module": {
+        "required": true,
+        "maxLength": 64
+      },
+      "scope": {
+        "required": true,
+        "maxLength": 16
+      },
+      "remark": {
+        "maxLength": 256
+      }
+    }
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "businessName": "tenant",
+    "apiModule": "tenant",
+    "backendModule": "system",
+    "permissionPrefix": "tenant:tenant",
+    "className": "Tenant"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "tenantCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "tenantName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "tenantType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_tenant_type",
+        "width": 140
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "tenantCode",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "tenantName",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "tenantType",
+        "component": "dict-tag",
+        "dictType": "sys_tenant_type",
+        "width": 120,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "rootRegionName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "contactName",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "contactPhone",
+        "component": "text",
+        "width": 140,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "contactEmail",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "licenseNo",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "expireAt",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "accountLimit",
+        "component": "text",
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 180
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "tenantType",
+        "component": "radio",
+        "dictType": "sys_tenant_type",
+        "insert": true,
+        "edit": true,
+        "disabledOnEdit": true,
+        "span": 24
+      },
+      {
+        "field": "tenantCode",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "disabledOnEdit": true
+      },
+      {
+        "field": "tenantName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "adminUsername",
+        "component": "input",
+        "insert": true,
+        "edit": false,
+        "span": 24
+      },
+      {
+        "field": "rootDeptCode",
+        "component": "input",
+        "insert": true,
+        "edit": false,
+        "span": 24
+      },
+      {
+        "field": "rootDeptName",
+        "component": "input",
+        "insert": true,
+        "edit": false,
+        "span": 24
+      },
+      {
+        "field": "parentTenantId",
+        "component": "tree-select",
+        "treeSource": "orgTenants",
+        "treeLabelField": "label",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "showWhen": {
+          "field": "tenantType",
+          "values": ["ORGANIZATION"]
+        }
+      },
+      {
+        "field": "rootRegionId",
+        "component": "tree-select",
+        "treeSource": "regionRoots",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "contactName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "contactPhone",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      },
+      {
+        "field": "contactEmail",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "licenseNo",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "expireAt",
+        "component": "datetime",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "valueFormat": "YYYY-MM-DD HH:mm:ss"
+      },
+      {
+        "field": "accountLimit",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      }
+    ]
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "disable",
+        "labelKey": "disable",
+        "permKey": "disable",
+        "type": "danger",
+        "handler": "tenant.disable",
+        "showWhen": { "field": "status", "values": ["0"] }
+      },
+      {
+        "id": "enable",
+        "labelKey": "enable",
+        "permKey": "update",
+        "type": "success",
+        "handler": "tenant.enable",
+        "showWhen": { "field": "status", "values": ["1"] }
+      }
+    ]
+  }
+}

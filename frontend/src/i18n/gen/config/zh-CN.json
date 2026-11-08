@@ -1,0 +1,96 @@
+{
+  "page": {
+    "title": "参数配置",
+    "description": "管理参数配置，支持新增、修改与删除",
+    "addTitle": "新增参数配置",
+    "editTitle": "修改参数配置",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "refreshCache": "刷新缓存",
+    "refreshCacheSuccess": "参数缓存已刷新",
+    "category.all": "全部",
+    "category.login": "登录安全",
+    "category.password": "密码策略",
+    "category.mfa": "双因素认证",
+    "category.ip": "IP 访问",
+    "category.i18n": "国际化",
+    "category.ai": "AI 配置",
+    "category.backup": "数据备份",
+    "category.storage": "文件存储",
+    "category.avatar": "头像策略",
+    "category.workflow": "工作流",
+    "category.brand": "品牌站点",
+    "category.other": "其他"
+  },
+  "fields": {
+    "configName": {
+      "label": "参数名称",
+      "placeholder": "请输入参数名称",
+      "validation": {
+        "required": "请输入参数名称",
+        "maxLength": "参数名称长度不能超过100"
+      }
+    },
+    "configKey": {
+      "label": "参数键名",
+      "placeholder": "请输入参数键名",
+      "validation": {
+        "required": "请输入参数键名",
+        "maxLength": "参数键名长度不能超过100"
+      }
+    },
+    "configValue": {
+      "label": "参数键值",
+      "placeholder": "请输入参数键值",
+      "validation": {
+        "required": "请输入参数键值",
+        "maxLength": "参数键值长度不能超过65535"
+      }
+    },
+    "configType": {
+      "label": "系统内置",
+      "placeholder": "请选择系统内置",
+      "validation": {
+        "required": "请输入是否系统内置",
+        "maxLength": "是否系统内置长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    }
+  },
+  "meta": {
+    "businessName": "config",
+    "apiModule": "system",
+    "functionName": "参数配置",
+    "constraints": {
+      "configName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "configKey": {
+        "required": true,
+        "maxLength": 100
+      },
+      "configValue": {
+        "required": true,
+        "maxLength": 65535
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "configType": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

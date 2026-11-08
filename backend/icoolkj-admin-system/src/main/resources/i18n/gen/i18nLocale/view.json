@@ -1,0 +1,158 @@
+﻿{
+  "meta": {
+    "businessName": "i18nLocale",
+    "apiModule": "system",
+    "backendModule": "system",
+    "permissionPrefix": "system:i18nLocale",
+    "className": "I18nLocale"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "localeCode",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "localeName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 160
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "localeCode",
+        "component": "text",
+        "width": 120,
+        "minWidth": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "localeName",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "nativeName",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "sortNo",
+        "component": "text",
+        "width": 80,
+        "minWidth": 120,
+        "align": "center",
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "isDefault",
+        "component": "dict-tag",
+        "dictType": "sys_yes_no",
+        "width": 100,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "minWidth": 120,
+        "align": "center"
+      },
+      {
+        "field": "remark",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      }
+    ],
+    "actions": {
+      "edit": true,
+      "delete": true,
+      "width": 160
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 100,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": [
+      {
+        "field": "localeCode",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "disabledOnEdit": true
+      },
+      {
+        "field": "localeName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "nativeName",
+        "component": "input",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "sortNo",
+        "component": "input-number",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "min": 0
+      },
+      {
+        "field": "isDefault",
+        "component": "radio",
+        "dictType": "sys_yes_no",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "status",
+        "component": "radio",
+        "dictType": "sys_common_status",
+        "insert": true,
+        "edit": true,
+        "span": 24
+      },
+      {
+        "field": "remark",
+        "component": "textarea",
+        "insert": true,
+        "edit": true,
+        "span": 24,
+        "rows": 2
+      }
+    ]
+  }
+}

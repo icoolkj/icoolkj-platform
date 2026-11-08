@@ -1,0 +1,484 @@
+package ${packageName}.service.impl;
+
+import com.icoolkj.platform.common.exception.BusinessException;
+import com.icoolkj.platform.common.model.page.PageResult;
+#if($pkColumn.javaType == "String")
+import com.icoolkj.platform.common.util.IdGeneratorUtils;
+#end
+#if($hasDeletedColumn)
+import com.icoolkj.platform.framework.mybatis.AuditFieldHelper;
+#end
+#if($hasUserIdColumn)
+import com.icoolkj.platform.framework.datascope.OwnershipColumns;
+import com.icoolkj.platform.framework.security.SecurityContextHelper;
+#end
+#if($hasUserIdColumn && $hasDeptIdColumn)
+import com.icoolkj.platform.framework.datascope.OwnerDeptLookup;
+#end
+#if($hasDataScope)
+import com.icoolkj.platform.framework.datascope.DataScopeSpec;
+import com.icoolkj.platform.framework.datascope.RowAccessSupport;
+#end
+import ${packageName}.convert.${ClassName}Convert;
+import ${packageName}.domain.${EntityName};
+import ${packageName}.dto.${ClassName}CreateRequest;
+import ${packageName}.dto.${ClassName}PageQuery;
+import ${packageName}.dto.${ClassName}UpdateRequest;
+#if($hasImport)
+import ${packageName}.excel.${ClassName}ImportRow;
+import com.icoolkj.platform.framework.excel.ExcelImportLookup;
+import com.icoolkj.platform.framework.excel.ExcelImportI18n;
+import com.icoolkj.platform.framework.excel.ExcelImportResult;
+import com.icoolkj.platform.framework.excel.ExcelImportRowError;
+#end
+import ${packageName}.mapper.${ClassName}Mapper;
+import ${packageName}.service.${ClassName}Service;
+import ${packageName}.vo.${ClassName}VO;
+#if($baseType == "tenant")
+import com.icoolkj.platform.framework.tenant.TenantQueryScope;
+#end
+import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
+import java.util.Collections;
+import java.util.List;
+
+/** ${functionName}服务实现 */
+@Service
+public class ${ClassName}ServiceImpl implements ${ClassName}Service {
+
+    private final ${ClassName}Mapper ${className}Mapper;
+#if($hasDataScope)
+    private final RowAccessSupport rowAccessSupport;
+#end
+#if($hasUserIdColumn && $hasDeptIdColumn)
+    private final OwnerDeptLookup ownerDeptLookup;
+#end
+#if($hasImport)
+    private final ExcelImportLookup excelImportLookup;
+    @org.springframework.beans.factory.annotation.Autowired
+    private jakarta.validation.Validator validator;
+#end
+
+#if($hasDataScope && $hasUserIdColumn && $hasDeptIdColumn && $hasImport)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper,
+                                   RowAccessSupport rowAccessSupport,
+                                   OwnerDeptLookup ownerDeptLookup,
+                                   ExcelImportLookup excelImportLookup) {
+        this.${className}Mapper = ${className}Mapper;
+        this.rowAccessSupport = rowAccessSupport;
+        this.ownerDeptLookup = ownerDeptLookup;
+        this.excelImportLookup = excelImportLookup;
+    }
+#elseif($hasDataScope && $hasUserIdColumn && $hasDeptIdColumn)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper,
+                                   RowAccessSupport rowAccessSupport,
+                                   OwnerDeptLookup ownerDeptLookup) {
+        this.${className}Mapper = ${className}Mapper;
+        this.rowAccessSupport = rowAccessSupport;
+        this.ownerDeptLookup = ownerDeptLookup;
+    }
+#elseif($hasDataScope && $hasImport)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper,
+                                   RowAccessSupport rowAccessSupport,
+                                   ExcelImportLookup excelImportLookup) {
+        this.${className}Mapper = ${className}Mapper;
+        this.rowAccessSupport = rowAccessSupport;
+        this.excelImportLookup = excelImportLookup;
+    }
+#elseif($hasDataScope)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper, RowAccessSupport rowAccessSupport) {
+        this.${className}Mapper = ${className}Mapper;
+        this.rowAccessSupport = rowAccessSupport;
+    }
+#elseif($hasUserIdColumn && $hasDeptIdColumn && $hasImport)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper,
+                                   OwnerDeptLookup ownerDeptLookup,
+                                   ExcelImportLookup excelImportLookup) {
+        this.${className}Mapper = ${className}Mapper;
+        this.ownerDeptLookup = ownerDeptLookup;
+        this.excelImportLookup = excelImportLookup;
+    }
+#elseif($hasUserIdColumn && $hasDeptIdColumn)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper,
+                                   OwnerDeptLookup ownerDeptLookup) {
+        this.${className}Mapper = ${className}Mapper;
+        this.ownerDeptLookup = ownerDeptLookup;
+    }
+#elseif($hasImport)
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper,
+                                   ExcelImportLookup excelImportLookup) {
+        this.${className}Mapper = ${className}Mapper;
+        this.excelImportLookup = excelImportLookup;
+    }
+#else
+    public ${ClassName}ServiceImpl(${ClassName}Mapper ${className}Mapper) {
+        this.${className}Mapper = ${className}Mapper;
+    }
+#end
+
+    @Override
+    public PageResult<${ClassName}VO> page(${ClassName}PageQuery query) {
+#if($baseType == "tenant")
+        TenantQueryScope.applyPageQuery(query);
+#end
+        long total = ${className}Mapper.countByQuery(query);
+        if (total == 0) {
+            return PageResult.of(Collections.emptyList(), 0L, query.getPageNo(), query.getPageSize());
+        }
+        List<${EntityName}> list = ${className}Mapper.selectPage(query);
+        if (CollectionUtils.isEmpty(list)) {
+            return PageResult.of(Collections.emptyList(), total, query.getPageNo(), query.getPageSize());
+        }
+        return PageResult.of(list.stream().map(${ClassName}Convert::toVo).toList(), total, query.getPageNo(), query.getPageSize());
+    }
+
+    @Override
+    public ${ClassName}VO getById(String id) {
+        ${EntityName} entity = ${className}Mapper.selectById(id);
+        if (entity == null) {
+            throw new BusinessException("error.entity.not_found", "entity.name.${businessName}");
+        }
+#if($hasDataScope)
+        assertRowAccess(entity);
+#elseif($baseType == "tenant")
+        TenantQueryScope.assertReadable(entity.getTenantId());
+#end
+        return ${ClassName}Convert.toVo(entity);
+    }
+
+    @Override
+    public String create(${ClassName}CreateRequest request) {
+        ${EntityName} entity = ${ClassName}Convert.toEntity(request);
+#if($pkColumn.javaType == "String")
+        entity.set${pkColumn.capJavaField}(IdGeneratorUtils.nextIdStr());
+#end
+#if($hasUserIdColumn && $hasDeptIdColumn)
+        OwnershipColumns.applyUserAndDept(entity::setUserId, entity::setDeptId,
+                SecurityContextHelper.getUserId(), ownerDeptLookup);
+#elseif($hasUserIdColumn)
+        OwnershipColumns.applyUser(entity::setUserId, SecurityContextHelper.getUserId());
+#end
+        ${className}Mapper.insert(entity);
+        return String.valueOf(entity.get${pkColumn.capJavaField}());
+    }
+
+    @Override
+    public void update(${ClassName}UpdateRequest request) {
+        ${EntityName} entity = ${className}Mapper.selectById(request.getId());
+        if (entity == null) {
+            throw new BusinessException("error.entity.not_found", "entity.name.${businessName}");
+        }
+#if($hasDataScope)
+        assertRowAccess(entity);
+#end
+        ${ClassName}Convert.copy(request, entity);
+        ${className}Mapper.updateById(entity);
+    }
+
+    @Override
+    public void deleteById(String id) {
+        ${EntityName} entity = ${className}Mapper.selectById(id);
+        if (entity == null) {
+            throw new BusinessException("error.entity.not_found", "entity.name.${businessName}");
+        }
+#if($hasDataScope)
+        assertRowAccess(entity);
+#end
+#if($hasDeletedColumn)
+        AuditFieldHelper.markDeleted(entity);
+        ${className}Mapper.updateById(entity);
+#else
+        ${className}Mapper.deleteById(id);
+#end
+    }
+#if($hasImport)
+
+    /**
+     * Default import: Bean Validation → create(). For in-file uniqueness / DataScope domain checks,
+     * harden post-gen against {@code UserServiceImpl.importRows} (do not bypass {@code create()}).
+     */
+    @Override
+    @org.springframework.transaction.annotation.Transactional(rollbackFor = Exception.class)
+    public ExcelImportResult importRows(List<${ClassName}ImportRow> rows) {
+        if (CollectionUtils.isEmpty(rows)) {
+            return ExcelImportResult.ok(0, 0);
+        }
+        java.util.List<ExcelImportRowError> errors = new java.util.ArrayList<>();
+        java.util.List<AcceptedImport> accepted = new java.util.ArrayList<>();
+#if($hasImportUnique)
+        java.util.Map<String, java.util.Set<String>> uniqueSeen = new java.util.HashMap<>();
+#end
+        int skipped = 0;
+        for (int i = 0; i < rows.size(); i++) {
+            int excelRow = i + 2;
+            ${ClassName}ImportRow row = rows.get(i);
+            if (isBlankImportRow(row)) {
+                skipped++;
+                continue;
+            }
+            try {
+                ${ClassName}CreateRequest request = toCreateRequest(row);
+                String validationError = validateImportRequest(request#if($hasImportUnique), uniqueSeen#end);
+                if (validationError != null) {
+                    errors.add(new ExcelImportRowError(excelRow, validationError));
+                    continue;
+                }
+                accepted.add(new AcceptedImport(excelRow, request));
+            } catch (BusinessException ex) {
+                errors.add(new ExcelImportRowError(excelRow, resolveImportMessage(ex)));
+            }
+        }
+        if (!errors.isEmpty()) {
+            return ExcelImportResult.rejected(rows.size(), skipped, errors);
+        }
+        if (accepted.isEmpty()) {
+            return ExcelImportResult.ok(0, skipped);
+        }
+        for (AcceptedImport item : accepted) {
+            try {
+                create(item.request());
+            } catch (BusinessException ex) {
+                errors.add(new ExcelImportRowError(item.excelRow(), resolveImportMessage(ex)));
+            }
+        }
+        if (!errors.isEmpty()) {
+            org.springframework.transaction.interceptor.TransactionAspectSupport
+                    .currentTransactionStatus()
+                    .setRollbackOnly();
+            return ExcelImportResult.rejected(rows.size(), skipped, errors);
+        }
+        return ExcelImportResult.ok(accepted.size(), skipped);
+    }
+
+    private record AcceptedImport(int excelRow, ${ClassName}CreateRequest request) {
+    }
+
+    private String firstBeanValidationMessage(${ClassName}CreateRequest request) {
+        java.util.Set<jakarta.validation.ConstraintViolation<${ClassName}CreateRequest>> violations =
+                validator.validate(request);
+        if (violations.isEmpty()) {
+            return null;
+        }
+        return ExcelImportI18n.encodeViolation(violations.iterator().next());
+    }
+
+    /**
+     * Pre-persist import checks (Bean Validation + in-file unique keys + DB unique keys).
+     * Further domain checks (DataScope assignable refs, etc.) — extend after generation like User gold.
+     */
+    private String validateImportRequest(${ClassName}CreateRequest request#if($hasImportUnique),
+                                         java.util.Map<String, java.util.Set<String>> uniqueSeen#end) {
+        String beanError = firstBeanValidationMessage(request);
+        if (beanError != null) {
+            return beanError;
+        }
+#if($hasImportUnique)
+        String uniqueError = checkImportUniqueness(request, uniqueSeen);
+        if (uniqueError != null) {
+            return uniqueError;
+        }
+#end
+        return validateImportDomain(request);
+    }
+
+    /** DB uniqueness for import business keys; extend further for DataScope / assignable refs. */
+    private String validateImportDomain(${ClassName}CreateRequest request) {
+#if($hasImportUnique)
+#if($baseType == "tenant")
+        String tenantId = TenantQueryScope.requiredOperatorTenantId();
+#end
+#foreach($column in $importUniqueColumns)
+        {
+            String raw = request.get${column.capJavaField}();
+            if (org.springframework.util.StringUtils.hasText(raw)) {
+                long existing = ${className}Mapper.countBy${column.capJavaField}(
+                        raw.trim()#if($baseType == "tenant"), tenantId#end);
+                if (existing > 0) {
+                    return ExcelImportI18n.encode("error.excel.import_already_exists", "${column.javaField}");
+                }
+            }
+        }
+#end
+#end
+        return null;
+    }
+
+    private String resolveImportMessage(BusinessException ex) {
+        return ExcelImportI18n.encode(ex);
+    }
+
+#if($hasImportUnique)
+    /** In-file uniqueness for required business-key import columns (see VelocityUtils.getImportUniqueColumns). */
+    private static String checkImportUniqueness(${ClassName}CreateRequest request,
+                                                java.util.Map<String, java.util.Set<String>> seen) {
+#foreach($column in $importUniqueColumns)
+        {
+            String raw = request.get${column.capJavaField}();
+            if (org.springframework.util.StringUtils.hasText(raw)) {
+                String key = raw.trim().toLowerCase(java.util.Locale.ROOT);
+                java.util.Set<String> bucket =
+                        seen.computeIfAbsent("${column.javaField}", k -> new java.util.HashSet<>());
+                if (!bucket.add(key)) {
+                    return ExcelImportI18n.encode("error.excel.import_duplicate_in_file", "${column.javaField}");
+                }
+            }
+        }
+#end
+        return null;
+    }
+
+#end
+    private static boolean isBlankImportRow(${ClassName}ImportRow row) {
+#if($importColumns && $importColumns.size() > 0)
+#set($firstImport = $importColumns.get(0))
+        return !org.springframework.util.StringUtils.hasText(row.get${firstImport.capJavaField}())
+#foreach($column in $importColumns)
+#if($foreach.count > 1)
+                && !org.springframework.util.StringUtils.hasText(row.get${column.capJavaField}())
+#end
+#end
+                ;
+#else
+        return true;
+#end
+    }
+
+    private ${ClassName}CreateRequest toCreateRequest(${ClassName}ImportRow row) {
+        ${ClassName}CreateRequest request = new ${ClassName}CreateRequest();
+#foreach($column in $importColumns)
+#if(!$table.isSuperColumn($column.javaField))
+#if($column.javaField == "deptId" || $column.javaField == "deptName")
+        request.setDeptId(excelImportLookup.resolveDeptId(row.get${column.capJavaField}()));
+#elseif($column.javaField == "postId" || $column.javaField == "postName")
+        request.setPostId(excelImportLookup.resolvePostId(row.get${column.capJavaField}()));
+#elseif($column.javaField == "roleId" || $column.javaField == "roleName")
+        request.setRoleId(excelImportLookup.resolveRoleId(row.get${column.capJavaField}()));
+#elseif($column.dictType && $column.dictType != "")
+        request.set${column.capJavaField}(excelImportLookup.resolveDictCode("${column.dictType}", row.get${column.capJavaField}()));
+#elseif($column.javaType == "Integer" || $column.javaType == "int")
+        request.set${column.capJavaField}(parseImportInteger("${column.javaField}", row.get${column.capJavaField}()));
+#elseif($column.javaType == "Long" || $column.javaType == "long")
+        request.set${column.capJavaField}(parseImportLong("${column.javaField}", row.get${column.capJavaField}()));
+#elseif($column.javaType == "Boolean" || $column.javaType == "boolean")
+        request.set${column.capJavaField}(parseImportBoolean("${column.javaField}", row.get${column.capJavaField}()));
+#elseif($column.javaType == "BigDecimal")
+        request.set${column.capJavaField}(parseImportBigDecimal("${column.javaField}", row.get${column.capJavaField}()));
+#elseif($column.javaType == "LocalDateTime")
+        request.set${column.capJavaField}(parseImportLocalDateTime("${column.javaField}", row.get${column.capJavaField}()));
+#elseif($column.javaType == "LocalDate")
+        request.set${column.capJavaField}(parseImportLocalDate("${column.javaField}", row.get${column.capJavaField}()));
+#else
+        request.set${column.capJavaField}(blankToNull(row.get${column.capJavaField}()));
+#end
+#end
+#end
+        return request;
+    }
+
+    private static String blankToNull(String raw) {
+        return org.springframework.util.StringUtils.hasText(raw) ? raw.trim() : null;
+    }
+
+    private static Integer parseImportInteger(String field, String raw) {
+        String v = blankToNull(raw);
+        if (v == null) {
+            return null;
+        }
+        try {
+            return Integer.valueOf(v);
+        } catch (NumberFormatException ex) {
+            throw new BusinessException("error.excel.import_row_invalid", field);
+        }
+    }
+
+    private static Long parseImportLong(String field, String raw) {
+        String v = blankToNull(raw);
+        if (v == null) {
+            return null;
+        }
+        try {
+            return Long.valueOf(v);
+        } catch (NumberFormatException ex) {
+            throw new BusinessException("error.excel.import_row_invalid", field);
+        }
+    }
+
+    private static Boolean parseImportBoolean(String field, String raw) {
+        String v = blankToNull(raw);
+        if (v == null) {
+            return null;
+        }
+        if ("1".equals(v) || "true".equalsIgnoreCase(v) || "yes".equalsIgnoreCase(v) || "Y".equalsIgnoreCase(v)) {
+            return Boolean.TRUE;
+        }
+        if ("0".equals(v) || "false".equalsIgnoreCase(v) || "no".equalsIgnoreCase(v) || "N".equalsIgnoreCase(v)) {
+            return Boolean.FALSE;
+        }
+        throw new BusinessException("error.excel.import_row_invalid", field);
+    }
+
+    private static java.math.BigDecimal parseImportBigDecimal(String field, String raw) {
+        String v = blankToNull(raw);
+        if (v == null) {
+            return null;
+        }
+        try {
+            return new java.math.BigDecimal(v);
+        } catch (NumberFormatException ex) {
+            throw new BusinessException("error.excel.import_row_invalid", field);
+        }
+    }
+
+    private static java.time.LocalDateTime parseImportLocalDateTime(String field, String raw) {
+        String v = blankToNull(raw);
+        if (v == null) {
+            return null;
+        }
+        try {
+            return java.time.LocalDateTime.parse(v.replace(' ', 'T'));
+        } catch (Exception ex) {
+            throw new BusinessException("error.excel.import_row_invalid", field);
+        }
+    }
+
+    private static java.time.LocalDate parseImportLocalDate(String field, String raw) {
+        String v = blankToNull(raw);
+        if (v == null) {
+            return null;
+        }
+        try {
+            return java.time.LocalDate.parse(v);
+        } catch (Exception ex) {
+            throw new BusinessException("error.excel.import_row_invalid", field);
+        }
+    }
+#end
+#if($hasDataScope)
+
+    private void assertRowAccess(${EntityName} entity) {
+#if($hasUserIdColumn && $hasDeptIdColumn)
+        DataScopeSpec spec = DataScopeSpec.userAndDept();
+#if($baseType == "tenant")
+        rowAccessSupport.assertReadable(entity.getTenantId(), spec, entity.getUserId(), entity.getDeptId());
+#else
+        rowAccessSupport.assertDataScope(spec, entity.getUserId(), entity.getDeptId());
+#end
+#elseif($hasUserIdColumn)
+        DataScopeSpec spec = DataScopeSpec.userOnly();
+#if($baseType == "tenant")
+        rowAccessSupport.assertReadable(entity.getTenantId(), spec, entity.getUserId(), null);
+#else
+        rowAccessSupport.assertDataScope(spec, entity.getUserId(), null);
+#end
+#elseif($hasDeptIdColumn)
+        DataScopeSpec spec = new DataScopeSpec("", "", "dept_id", "");
+#if($baseType == "tenant")
+        rowAccessSupport.assertReadable(entity.getTenantId(), spec, null, entity.getDeptId());
+#else
+        rowAccessSupport.assertDataScope(spec, null, entity.getDeptId());
+#end
+#end
+    }
+#end
+}

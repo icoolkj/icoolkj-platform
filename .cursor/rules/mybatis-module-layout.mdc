@@ -1,0 +1,93 @@
+---
+description: MyBatis XML + iCoolKJ 领域优先模块布局（system/infra/biz）
+globs: backend/icoolkj-admin-*/**/*
+alwaysApply: false
+---
+
+# 领域优先模块规范
+
+## Java 包结构（领域优先，层放领域包内）
+
+`com.icoolkj.platform.{module}.{domain}/{layer}`：
+
+```text
+com.icoolkj.platform.system/
+  auth/             # 登录 / MFA / 验证码 / 在线会话
+  tenant/           # 租户、开户、租户策略
+  user/             # 用户、岗位关系、密码策略、偏好
+  role/             # 角色、角色菜单/部门、SoD
+  menu/             # 菜单、路由、产品
+  dept/             # 部门树
+  post/             # 岗位
+  dict/             # 字典
+  config/           # 系统参数
+  region/           # 区划
+  notice/           # 公告（含工作流集成）
+  banner/           # Banner
+  brandpack/        # 品牌包
+  sitemessage/      # 站内信
+  iprule/           # IP 访问规则
+  loginlog/         # 登录日志
+  operationlog/     # 操作日志
+  audit/            # 审计链校验
+  job/              # 平台定时任务（sys_job*）
+  i18n/             # 文案与数据库覆盖
+  product/          # 产品宇宙
+  workbench/        # 工作台
+  backup/           # 数据库备份配置
+  ai/               # AI 能力目录 / Skill
+  datascope/        # 数据权限（跨领域）
+  workflow/         # 工作流集成（跨领域）
+
+每领域内部按层分包：
+  {domain}/domain    # Entity
+  {domain}/mapper    # Mapper 接口
+  {domain}/service   # Service 接口
+  {domain}/service/impl
+  {domain}/dto       # Request / PageQuery
+  {domain}/vo        # 出参 VO
+  {domain}/convert   # MapStruct
+  {domain}/support   # TreeBuilder 等
+  {domain}/excel     # 导出/导入
+  {domain}/constant  # 领域常量
+```
+
+同域跨领域引用（如 `datascope`、`workflow` 集成类）不拆平层；`ai` / `datascope` /
+`workflow` 保持既有领域布局。新增业务领域时按上表创建同名领域包。
+
+## Mapper 扫描（统一配置）
+
+在 `icoolkj-admin-framework` 的 `MybatisApplicationConfig` 中统一声明：
+
+```java
+@MapperScan("com.icoolkj.platform.**.mapper")
+```
+
+- **禁止**在 `api` 启动类上重复 `@MapperScan`
+- 仅匹配包路径以 `.mapper` 结尾的接口（system / infra / biz / generator 均适用）
+- Service 接口放在 `service` 包，与 Mapper 物理隔离，避免 Bean 名冲突
+
+## XML 路径
+
+- system: `resources/mapper/system/{domain}/{XxxMapper}.xml`
+- infra:  `resources/mapper/infra/{XxxMapper}.xml`
+
+namespace = `com.icoolkj.platform.{module}.{domain}.mapper.{XxxMapper}`
+
+## 每个 Mapper 必须包含
+
+| 方法 | 说明 |
+|------|------|
+| `selectById` | 单条（有 id 主键表） |
+| `selectList` | 列表，Entity 作查询条件 |
+| `insert` | 新增 |
+| `updateById` | 更新 |
+| `deleteById` | 逻辑删或物理删 |
+
+禁止 Service 层 `Wrappers` / `BaseMapper`。
+
+## Entity / 代码生成
+
+- Lombok 与批量生成规则见 `.cursor/rules/codegen.mdc`
+- 生成器：`python scripts/codegen/generator.py --all`
+- 表清单：`scripts/codegen/tables.yaml`

@@ -1,0 +1,16 @@
+package ${packageName}.vo;
+
+#foreach($import in $importList)
+import ${import};
+#end
+import lombok.Data;
+
+/** ${functionName}列表/详情 */
+@Data
+public class ${ClassName}VO {
+#foreach($column in $columns)
+#if($column.isList() || $column.isPk())
+    private $column.javaType $column.javaField;
+#end
+#end
+}

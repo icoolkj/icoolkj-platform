@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.icoolkj.platform</groupId>
+        <artifactId>icoolkj-platform-backend</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>icoolkj-admin-api</artifactId>
+    <name>icoolkj-admin-api</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-common</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-framework</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-system</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-infra</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-workflow</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-oa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-biz</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.icoolkj.platform</groupId>
+            <artifactId>icoolkj-admin-generator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-mysql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>${project.basedir}/../database/migration</directory>
+                <targetPath>db/migration</targetPath>
+                <includes>
+                    <include>V*.sql</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

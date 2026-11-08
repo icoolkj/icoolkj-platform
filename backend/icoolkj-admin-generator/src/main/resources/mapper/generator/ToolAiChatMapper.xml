@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.generator.mapper.ToolAiChatMapper">
+
+    <resultMap id="ChatSessionMap" type="com.icoolkj.platform.generator.domain.ToolAiChatSession">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="title" property="title"/>
+        <result column="status" property="status"/>
+        <result column="operator_id" property="operatorId"/>
+        <result column="user_id" property="userId"/>
+        <result column="operator_name" property="operatorName"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <resultMap id="ChatMessageMap" type="com.icoolkj.platform.generator.domain.ToolAiChatMessage">
+        <id column="id" property="id"/>
+        <result column="session_id" property="sessionId"/>
+        <result column="invoke_id" property="invokeId"/>
+        <result column="role" property="role"/>
+        <result column="content_preview" property="contentPreview"/>
+        <result column="created_at" property="createdAt"/>
+    </resultMap>
+
+    <insert id="insertSession">
+        INSERT INTO tool_ai_chat_session (
+            id, tenant_id, title, status, operator_id, user_id, operator_name, created_at, updated_at
+        ) VALUES (
+            #{id}, #{tenantId}, #{title}, #{status}, #{operatorId}, #{userId}, #{operatorName}, #{createdAt}, #{updatedAt}
+        )
+    </insert>
+
+    <update id="updateSession">
+        UPDATE tool_ai_chat_session
+        SET title = #{title}, status = #{status}, updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectSessionById" resultMap="ChatSessionMap">
+        SELECT id, tenant_id, title, status, operator_id, user_id, operator_name, created_at, updated_at
+        FROM tool_ai_chat_session WHERE id = #{id}
+    </select>
+
+    <sql id="Session_Query_Where">
+        <where>
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="mineOnly == null or mineOnly == true">AND status = 'ACTIVE'</if>
+            <if test="operatorId != null and operatorId != ''">AND operator_id = #{operatorId}</if>
+            <if test="title != null and title != ''">AND title LIKE CONCAT('%', #{title}, '%')</if>
+        </where>
+    </sql>
+
+    <select id="countSessionByQuery" resultType="long">
+        SELECT COUNT(1) FROM tool_ai_chat_session <include refid="Session_Query_Where"/>
+    </select>
+
+    <select id="selectSessionPage" resultMap="ChatSessionMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT id, tenant_id, title, status, operator_id, user_id, operator_name, created_at, updated_at
+        FROM tool_ai_chat_session
+        <include refid="Session_Query_Where"/>
+        ORDER BY updated_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <insert id="insertMessage">
+        INSERT INTO tool_ai_chat_message (id, session_id, invoke_id, role, content_preview, created_at)
+        VALUES (#{id}, #{sessionId}, #{invokeId}, #{role}, #{contentPreview}, #{createdAt})
+    </insert>
+
+    <insert id="insertMessageContent">
+        INSERT INTO tool_ai_chat_message_content (message_id, content)
+        VALUES (#{messageId}, #{content})
+    </insert>
+
+    <select id="selectMessagesBySessionId" resultMap="ChatMessageMap">
+        SELECT id, session_id, invoke_id, role, content_preview, created_at
+        FROM tool_ai_chat_message
+        WHERE session_id = #{sessionId}
+        ORDER BY created_at ASC
+    </select>
+
+    <select id="selectMessageContentById" resultType="com.icoolkj.platform.generator.domain.ToolAiChatMessageContent">
+        SELECT message_id, content FROM tool_ai_chat_message_content WHERE message_id = #{messageId}
+    </select>
+
+    <update id="archiveSession">
+        UPDATE tool_ai_chat_session SET status = 'ARCHIVED', updated_at = now(3) WHERE id = #{id}
+    </update>
+</mapper>

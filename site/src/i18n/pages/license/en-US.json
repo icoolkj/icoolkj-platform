@@ -1,0 +1,17 @@
+{
+  "license": {
+    "title": "Licence & permitted use",
+    "lead": "iCoolKJ Platform is Source Available under the iCoolKJ Non-Commercial Study and Research License v1.0: study and research are permitted, commercial use is prohibited.",
+    "stepsTitle": "Getting started",
+    "steps": [
+      "Read LICENSE.txt and NOTICE.txt and confirm your purpose is non-commercial",
+      "Clone the repository and prepare a local isolated environment per docs/configuration.md",
+      "Run Flyway migrations, start both apps, and experiment with fictional data only"
+    ],
+    "consoleTitle": "Local console",
+    "consoleBody": "Run the admin app locally to explore every capability. Do not deploy this software to production or use it with real business data.",
+    "consoleCta": "Read the full licence",
+    "note": "This project is Source Available, NOT OSI Open Source. Any commercial use requires prior written authorisation: icoolkj@163.com / QQ 594047667.",
+    "eyebrow": "Licence"
+  }
+}

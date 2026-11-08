@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${packageName}.mapper.${ClassName}Mapper">
+
+    <resultMap id="BaseResultMap" type="${packageName}.domain.${EntityName}">
+#foreach($column in $columns)
+#if($column.isPk())
+        <id column="${column.columnName}" property="${column.javaField}"/>
+#end
+#end
+#foreach($column in $columns)
+#if(!$column.isPk())
+        <result column="${column.columnName}" property="${column.javaField}"/>
+#end
+#end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+#foreach($column in $columns)
+        $column.columnName#if($foreach.hasNext), #end
+#end
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+#if($hasDeletedColumn)
+            deleted = 0
+#end
+#foreach($column in $columns)
+#if($column.isQuery())
+#if($column.queryType == "LIKE")
+            <if test="${column.javaField} != null and ${column.javaField} != ''">AND ${column.columnName} like concat('%', #{${column.javaField}}, '%')</if>
+#else
+            <if test="${column.javaField} != null and ${column.javaField} != ''">AND ${column.columnName} = #{${column.javaField}}</if>
+#end
+#end
+#end
+#if($baseType == "tenant")
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+#end
+#if($hasDataScope)
+            <if test="dataScopeSql != null and dataScopeSql != ''">\${dataScopeSql}</if>
+#end
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM ${tableName} WHERE ${pkColumn.columnName} = #{id}#if($hasDeletedColumn) AND deleted = 0#end
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM ${tableName}
+        <include refid="Query_Where"/>
+        ORDER BY ${orderByColumn} DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/> FROM ${tableName}
+        <include refid="Query_Where"/>
+        ORDER BY ${orderByColumn} DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM ${tableName}
+        <include refid="Query_Where"/>
+    </select>
+
+#if($hasImportUnique)
+#foreach($column in $importUniqueColumns)
+    <select id="countBy${column.capJavaField}" resultType="long">
+        SELECT COUNT(1) FROM ${tableName}
+        WHERE ${column.columnName} = #{${column.javaField}}
+#if($hasDeletedColumn)
+          AND deleted = 0
+#end
+#if($baseType == "tenant")
+          AND tenant_id = #{tenantId}
+#end
+    </select>
+
+#end
+#end
+    <insert id="insert"#if($pkColumn.javaType != "String") useGeneratedKeys="true" keyProperty="${pkColumn.javaField}"#end>
+        INSERT INTO ${tableName} (<include refid="Base_Column_List"/>)
+        VALUES (#foreach($column in $columns)#{${column.javaField}}#if($foreach.hasNext), #end#end)
+    </insert>
+
+    <update id="updateById">
+        UPDATE ${tableName}
+        <set>
+#foreach($column in $columns)
+#if(!$column.isPk() && $column.columnName != 'created_at' && $column.columnName != 'created_by')
+            ${column.columnName} = #{${column.javaField}},
+#end
+#end
+        </set>
+        WHERE ${pkColumn.columnName} = #{${pkColumn.javaField}}#if($hasDeletedColumn) AND deleted = 0#end
+    </update>
+
+#if($hasDeletedColumn)
+    <update id="deleteById">
+        UPDATE ${tableName} SET deleted = 1 WHERE ${pkColumn.columnName} = #{id}
+    </update>
+#else
+    <delete id="deleteById">
+        DELETE FROM ${tableName} WHERE ${pkColumn.columnName} = #{id}
+    </delete>
+#end
+</mapper>

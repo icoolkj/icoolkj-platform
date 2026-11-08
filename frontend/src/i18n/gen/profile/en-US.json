@@ -1,0 +1,156 @@
+{
+  "page": {
+    "title": "Personal Center",
+    "description": "View and update your profile, organization, and password",
+    "openProfile": "Profile",
+    "basicInfo": "Basic Info",
+    "organization": "Organization",
+    "account": "Account",
+    "mfa": "MFA",
+    "mfaEnabled": "MFA (TOTP) is enabled",
+    "mfaDisabled": "MFA is not enabled",
+    "mfaStart": "Start enrollment",
+    "mfaConfirm": "Confirm enrollment",
+    "mfaDisable": "Disable MFA",
+    "mfaCodePlaceholder": "Enter 6-digit code",
+    "mfaBound": "MFA enrolled",
+    "mfaDisabledOk": "MFA disabled",
+    "shortcuts": "Shortcuts",
+    "messages": "My Messages",
+    "uploadAvatar": "Upload Avatar",
+    "saveBasic": "Save Basic Info",
+    "saveSuccess": "Saved successfully",
+    "changePassword": "Change Password",
+    "passwordChanged": "Password updated",
+    "passwordMismatch": "Passwords do not match",
+    "tenant": "Tenant",
+    "dept": "Department",
+    "roles": "Roles",
+    "posts": "Posts",
+    "lastLogin": "Last Login",
+    "lastLoginIp": "Login IP",
+    "pwdUpdatedAt": "Password Updated At",
+    "shortcutsPlaceholder": "Shortcuts coming soon",
+    "messageCategorySystem": "System",
+    "messageCategoryBusiness": "Business",
+    "messageSubject": "Subject",
+    "messageSentAt": "Sent At",
+    "messageReadStatus": "Read Status",
+    "messageDetail": "Details",
+    "messageDetailTitle": "Message Detail",
+    "messageMarkRead": "Mark as Read",
+    "messageSender": "Sender",
+    "messageContent": "Body",
+    "none": "None",
+    "genderMale": "Male",
+    "genderFemale": "Female",
+    "genderUnknown": "Unknown",
+    "cropTitle": "Crop Avatar",
+    "cropSelectHint": "Select an image first",
+    "cropZoomIn": "Zoom In",
+    "cropZoomOut": "Zoom Out",
+    "cropRotateLeft": "Rotate Left",
+    "cropRotateRight": "Rotate Right",
+    "cropUpload": "Upload Image",
+    "cropSizeHint": "Image files only, up to {size} MB recommended",
+    "cropPreview": "Preview",
+    "cropFailed": "Failed to crop avatar"
+  },
+  "fields": {
+    "username": {
+      "label": "Account"
+    },
+    "realName": {
+      "label": "Name",
+      "placeholder": "Enter name",
+      "validation": {
+        "maxLength": "Name must not exceed 50 characters"
+      }
+    },
+    "nickname": {
+      "label": "Nickname",
+      "placeholder": "Enter nickname",
+      "validation": {
+        "required": "Nickname is required",
+        "maxLength": "Nickname must not exceed 50 characters"
+      }
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Select gender",
+      "validation": {
+        "required": "Gender is required"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Enter email",
+      "validation": {
+        "maxLength": "Email must not exceed 100 characters"
+      }
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Enter phone",
+      "validation": {
+        "maxLength": "Phone must not exceed 20 characters"
+      }
+    },
+    "oldPassword": {
+      "label": "Current Password",
+      "placeholder": "Enter current password",
+      "validation": {
+        "required": "Current password is required"
+      }
+    },
+    "newPassword": {
+      "label": "New Password",
+      "placeholder": "Enter new password",
+      "validation": {
+        "required": "New password is required",
+        "maxLength": "Password must not exceed 100 characters"
+      }
+    },
+    "confirmPassword": {
+      "label": "Confirm Password",
+      "placeholder": "Re-enter new password",
+      "validation": {
+        "required": "Please confirm new password"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "profile",
+    "apiModule": "auth",
+    "functionName": "Profile",
+    "constraints": {
+      "nickname": {
+        "required": true,
+        "maxLength": 50
+      },
+      "realName": {
+        "maxLength": 50
+      },
+      "email": {
+        "maxLength": 100
+      },
+      "phone": {
+        "maxLength": 20
+      },
+      "gender": {
+        "required": true,
+        "maxLength": 1
+      },
+      "oldPassword": {
+        "required": true
+      },
+      "newPassword": {
+        "required": true,
+        "maxLength": 100
+      },
+      "confirmPassword": {
+        "required": true
+      }
+    }
+  }
+}

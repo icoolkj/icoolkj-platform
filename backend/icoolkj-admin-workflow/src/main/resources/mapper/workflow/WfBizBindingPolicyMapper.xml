@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.workflow.mapper.WfBizBindingPolicyMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.workflow.domain.WfBizBindingPolicyEntity">
+        <id column="id" property="id"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="binding_mode" property="bindingMode"/>
+        <result column="allow_tenant_approver_override" property="allowTenantApproverOverride"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, biz_type, binding_mode, allow_tenant_approver_override, remark,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="bizType != null and bizType != ''">AND biz_type like concat('%', #{bizType}, '%')</if>
+            <if test="bindingMode != null and bindingMode != ''">AND binding_mode = #{bindingMode}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_biz_binding_policy
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectByBizType" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_biz_binding_policy
+        WHERE biz_type = #{bizType} AND deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectPage" resultType="com.icoolkj.platform.workflow.vo.WorkflowBizBindingPolicyVO">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT id, biz_type AS bizType, binding_mode AS bindingMode,
+               allow_tenant_approver_override AS allowTenantApproverOverride, remark
+        FROM wf_biz_binding_policy
+        <include refid="Query_Where"/>
+        ORDER BY biz_type ASC, created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1)
+        FROM wf_biz_binding_policy
+        <include refid="Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO wf_biz_binding_policy (
+            id, biz_type, binding_mode, allow_tenant_approver_override, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{bizType}, #{bindingMode}, #{allowTenantApproverOverride}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE wf_biz_binding_policy
+        <set>
+            binding_mode = #{bindingMode},
+            allow_tenant_approver_override = #{allowTenantApproverOverride},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE wf_biz_binding_policy SET deleted = 1, updated_at = NOW(3) WHERE id = #{id} AND deleted = 0
+    </update>
+
+</mapper>

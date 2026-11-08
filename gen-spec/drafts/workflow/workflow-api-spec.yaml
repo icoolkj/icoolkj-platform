@@ -1,0 +1,231 @@
+# Phase 1 工作流 API 契约草稿（公告 pilot）
+# 模块：icoolkj-admin-workflow + NoticeController 扩展
+# 统一前缀：/workflow/* 、/system/notice/* 扩展
+
+specVersion: "1.0"
+module: workflow
+basePath: /workflow
+
+controllers:
+  WorkflowTaskController:
+    basePath: /workflow/task
+    description: 待办/已办/任务详情/审批
+    endpoints:
+      - method: GET
+        path: /todo/page
+        permission: workflow:todo:list
+        query: WorkflowTaskPageQuery
+        response: PageResult<WorkflowTaskVO>
+        notes: taskAssignee=当前用户，status=active
+      - method: GET
+        path: /done/page
+        permission: workflow:done:list
+        query: WorkflowTaskPageQuery
+        response: PageResult<WorkflowTaskVO>
+        notes: 历史任务，finished=true
+      - method: GET
+        path: /{taskId}
+        permission: workflow:task:query
+        response: WorkflowTaskDetailVO
+        notes: 含 bizType/bizId/formRoute/processInstanceId
+      - method: POST
+        path: /{taskId}/complete
+        permission: workflow:task:complete
+        body: WorkflowTaskCompleteRequest
+        response: Void
+        operationLog: APPROVE
+        idempotent: workflow:task:complete:{taskId}
+        notes: |
+          body: { approved: boolean, comment?: string }
+          校验当前用户=assignee；写 Flowable comment
+
+  WorkflowInstanceController:
+    basePath: /workflow/instance
+    description: 已发申请 / 实例详情 / 撤回
+    endpoints:
+      - method: GET
+        path: /submitted/page
+        permission: workflow:submitted:list
+        query: WorkflowInstancePageQuery
+        response: PageResult<WorkflowInstanceVO>
+      - method: GET
+        path: /{instanceId}
+        permission: workflow:instance:query
+        response: WorkflowInstanceDetailVO
+        notes: 含审批轨迹 tasks[]、variables、biz 信息
+      - method: POST
+        path: /{instanceId}/cancel
+        permission: workflow:instance:cancel
+        body: none
+        response: Void
+        operationLog: CANCEL
+        idempotent: workflow:instance:cancel:{instanceId}
+        notes: 已发入口；原因码固定 starter_withdraw
+
+  WorkflowModelController:
+    basePath: /workflow/model
+    description: 流程模型（平台管理员）
+    endpoints:
+      - method: GET
+        path: /page
+        permission: workflow:model:list
+        query: WorkflowModelPageQuery
+        response: PageResult<WorkflowModelVO>
+      - method: GET
+        path: /{id}
+        permission: workflow:model:query
+        response: WorkflowModelDetailVO
+      - method: GET
+        path: /{id}/versions
+        permission: workflow:model:query
+        response: List<WorkflowModelVersionVO>
+      - method: POST
+        path: /create
+        permission: workflow:model:update
+        body: WorkflowModelCreateRequest
+        response: String
+      - method: PUT
+        path: /update
+        permission: workflow:model:update
+        body: WorkflowModelUpdateRequest
+        response: Void
+      - method: POST
+        path: /deploy
+        permission: workflow:model:deploy
+        body: WorkflowModelDeployRequest
+        response: WorkflowModelDeployResultVO
+        notes: 保存 bpmnXml → wf_model_version → Flowable deploy
+
+  NoticeControllerExtension:
+    basePath: /system/notice
+    description: 公告审批集成（扩展既有 Controller）
+    endpoints:
+      - method: POST
+        path: /{id}/submit-approve
+        permission: system:notice:submit
+        response: String
+        operationLog: SUBMIT
+        idempotent: system:notice:submit:{id}
+        notes: 启动 notice_publish 流程，返回 processInstanceId
+      - method: POST
+        path: /{id}/withdraw
+        permission: system:notice:withdraw
+        response: Void
+        operationLog: WITHDRAW
+        idempotent: system:notice:withdraw:{id}
+      - method: GET
+        path: /{id}/approve-detail
+        permission: workflow:approve:notice:view
+        response: NoticeApproveDetailVO
+        notes: 公告 VO + publishStatus + 当前任务信息
+
+dto:
+  WorkflowTaskPageQuery:
+    fields:
+      - bizTitle: String # LIKE
+      - bizType: String # EQ，Phase1 默认 sys_notice
+      - processDefinitionKey: String # EQ
+      - taskName: String # LIKE
+      - startTimeBegin: LocalDateTime
+      - startTimeEnd: LocalDateTime
+      - pageNum: int
+      - pageSize: int
+
+  WorkflowTaskCompleteRequest:
+    fields:
+      - approved: boolean # required
+      - comment: String # max 500
+
+  WorkflowInstancePageQuery:
+    fields:
+      - bizTitle: String
+      - bizType: String
+      - status: String # running|approved|rejected|cancelled
+      - pageNum: int
+      - pageSize: int
+
+  WorkflowInstanceCancelRequest:
+    fields:
+      - reason: String # max 500
+
+  WorkflowModelDeployRequest:
+    fields:
+      - modelId: String # required
+      - bpmnXml: String # required
+      - remark: String
+
+vo:
+  WorkflowTaskVO:
+    fields:
+      - taskId: String
+      - taskName: String
+      - processInstanceId: String
+      - processDefinitionKey: String
+      - processDefinitionName: String
+      - bizType: String
+      - bizId: String
+      - bizTitle: String
+      - starterUserId: String
+      - starterUserName: String
+      - formRoute: String
+      - createTime: LocalDateTime
+      - dueDate: LocalDateTime
+
+  WorkflowTaskDetailVO:
+    extends: WorkflowTaskVO
+    fields:
+      - commentList: List<WorkflowCommentVO>
+      - variables: Map<String, Object>
+
+  WorkflowInstanceVO:
+    fields:
+      - instanceId: String
+      - processDefinitionKey: String
+      - processDefinitionName: String
+      - bizType: String
+      - bizId: String
+      - bizTitle: String
+      - status: String
+      - starterUserId: String
+      - starterUserName: String
+      - startTime: LocalDateTime
+      - endTime: LocalDateTime
+
+  WorkflowInstanceDetailVO:
+    extends: WorkflowInstanceVO
+    fields:
+      - currentTaskId: String
+      - progressNodes: List<WorkflowProgressNodeVO>
+      - tasks: List<WorkflowHistoricTaskVO>
+      - variables: Map<String, Object>
+
+  WorkflowProgressNodeVO:
+    fields:
+      - nodeKey: String
+      - nodeName: String
+      - nodeStatus: String # pending | active | completed | rejected
+      - assigneeUserId: String
+      - assigneeUserName: String
+      - approved: Boolean
+      - comment: String
+
+  WorkflowHistoricTaskVO:
+    fields:
+      - taskId: String
+      - taskName: String
+      - taskDefinitionKey: String
+      - nodeStatus: String
+      - assigneeUserId: String
+      - assigneeUserName: String
+      - approved: Boolean
+      - comment: String
+      - startTime: LocalDateTime
+      - endTime: LocalDateTime
+
+  NoticeApproveDetailVO:
+    fields:
+      - notice: NoticeVO
+      - taskId: String
+      - processInstanceId: String
+      - publishStatus: String
+      - instance: WorkflowInstanceDetailVO

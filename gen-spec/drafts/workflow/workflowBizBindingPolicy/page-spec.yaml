@@ -1,0 +1,35 @@
+specVersion: "1.0"
+pageKey: workflowBizBindingPolicy
+layout: standard-crud
+vueVariant: workflowBizBindingPolicyCrud
+
+meta:
+  apiModule: workflow
+  backendModule: workflow
+  permissionPrefix: workflow:bizBindingPolicy
+  className: WorkflowBizBindingPolicy
+
+entity:
+  tableName: wf_biz_binding_policy
+  businessName: workflowBizBindingPolicy
+  functionName: 绑定策略
+
+extensions:
+  listApi: GET /workflow/biz-binding-policy/page
+  detailApi: GET /workflow/biz-binding-policy/{id}
+  createApi: POST /workflow/biz-binding-policy/create
+  updateApi: PUT /workflow/biz-binding-policy/update
+  deleteApi: DELETE /workflow/biz-binding-policy/{id}
+  platformOnly: true
+  dialogs:
+    - WorkflowBizBindingPolicyFormDialog
+  customForm: true
+
+viewDefaults:
+  query:
+    maxVisible: 2
+    collapsible: false
+  table:
+    actions:
+      edit: false
+      delete: false

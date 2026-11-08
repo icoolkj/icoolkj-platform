@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.workflow.mapper.WfApproverRuleMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.workflow.domain.WfApproverRuleEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="model_id" property="modelId"/>
+        <result column="task_definition_key" property="taskDefinitionKey"/>
+        <result column="variable_name" property="variableName"/>
+        <result column="strategy_type" property="strategyType"/>
+        <result column="strategy_config" property="strategyConfig"/>
+        <result column="resolve_scope" property="resolveScope"/>
+        <result column="sort_no" property="sortNo"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        r.id, r.tenant_id, r.model_id, r.task_definition_key, r.variable_name, r.strategy_type, r.strategy_config,
+        r.resolve_scope, r.sort_no, r.status, r.remark, r.created_by, r.created_at, r.updated_by, r.updated_at, r.deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            r.deleted = 0
+            <if test="scopeTenantId != null and scopeTenantId != ''">
+                AND (
+                    r.tenant_id = #{scopeTenantId}
+                    <if test="includePlatform">OR r.tenant_id = '0'</if>
+                )
+            </if>
+            <if test="modelId != null and modelId != ''">AND r.model_id = #{modelId}</if>
+            <if test="modelKey != null and modelKey != ''">AND m.model_key like concat('%', #{modelKey}, '%')</if>
+            <if test="taskDefinitionKey != null and taskDefinitionKey != ''">AND r.task_definition_key like concat('%', #{taskDefinitionKey}, '%')</if>
+            <if test="strategyType != null and strategyType != ''">AND r.strategy_type = #{strategyType}</if>
+            <if test="status != null and status != ''">AND r.status = #{status}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>, m.model_key, m.model_name
+        FROM wf_approver_rule r
+        LEFT JOIN wf_model m ON m.id = r.model_id AND m.deleted = 0
+        WHERE r.id = #{id} AND r.deleted = 0
+    </select>
+
+    <select id="selectByUniqueKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_approver_rule r
+        WHERE r.model_id = #{modelId}
+          AND r.task_definition_key = #{taskDefinitionKey}
+          AND r.tenant_id = #{tenantId}
+          AND r.deleted = 0
+        LIMIT 1
+    </select>
+
+    <select id="selectPage" resultType="com.icoolkj.platform.workflow.vo.WorkflowApproverRuleVO">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT r.id, r.tenant_id AS tenantId, r.model_id AS modelId, m.model_key AS modelKey, m.model_name AS modelName,
+               r.task_definition_key AS taskDefinitionKey, r.variable_name AS variableName, r.strategy_type AS strategyType,
+               r.strategy_config AS strategyConfig, r.resolve_scope AS resolveScope, r.sort_no AS sortNo,
+               r.status, r.remark
+        FROM wf_approver_rule r
+        LEFT JOIN wf_model m ON m.id = r.model_id AND m.deleted = 0
+        <include refid="Query_Where"/>
+        ORDER BY r.tenant_id ASC, m.model_key ASC, r.task_definition_key ASC, r.sort_no ASC, r.created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1)
+        FROM wf_approver_rule r
+        LEFT JOIN wf_model m ON m.id = r.model_id AND m.deleted = 0
+        <include refid="Query_Where"/>
+    </select>
+
+    <select id="selectByModelAndTenants" resultMap="BaseResultMap">
+        SELECT id, tenant_id, model_id, task_definition_key, variable_name, strategy_type, strategy_config,
+               resolve_scope, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+        FROM wf_approver_rule
+        WHERE model_id = #{modelId}
+          AND deleted = 0
+          AND status = '0'
+          AND tenant_id IN
+        <foreach collection="tenantIds" item="tid" open="(" separator="," close=")">
+            #{tid}
+        </foreach>
+        ORDER BY task_definition_key ASC, sort_no ASC, tenant_id DESC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO wf_approver_rule (
+            id, tenant_id, model_id, task_definition_key, variable_name, strategy_type, strategy_config,
+            resolve_scope, sort_no, status, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{modelId}, #{taskDefinitionKey}, #{variableName}, #{strategyType}, #{strategyConfig},
+            #{resolveScope}, #{sortNo}, #{status}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE wf_approver_rule
+        <set>
+            variable_name = #{variableName},
+            strategy_type = #{strategyType},
+            strategy_config = #{strategyConfig},
+            resolve_scope = #{resolveScope},
+            sort_no = #{sortNo},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE wf_approver_rule SET deleted = 1, updated_at = NOW(3) WHERE id = #{id} AND deleted = 0
+    </update>
+
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.system.config.mapper.ConfigMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.system.config.domain.ConfigEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="config_name" property="configName"/>
+        <result column="config_key" property="configKey"/>
+        <result column="config_value" property="configValue"/>
+        <result column="config_type" property="configType"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, config_name, config_key, config_value, config_type, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="configName != null and configName != ''">AND config_name like concat('%', #{configName}, '%')</if>
+            <if test="configKey != null and configKey != ''">AND config_key = #{configKey}</if>
+            <if test="configType != null and configType != ''">AND config_type = #{configType}</if>
+        </where>
+    </sql>
+
+    <sql id="Page_Query_Where">
+        <where>
+            deleted = 0
+            <if test="configName != null and configName != ''">AND config_name like concat('%', #{configName}, '%')</if>
+            <if test="configKey != null and configKey != ''">AND config_key = #{configKey}</if>
+            <if test="configKeyPrefix != null and configKeyPrefix != ''">
+                AND config_key like concat(#{configKeyPrefix}, '%')
+            </if>
+            <if test="configKeyExcludePrefixList != null and configKeyExcludePrefixList.size() &gt; 0">
+                <foreach collection="configKeyExcludePrefixList" item="pfx">
+                    AND config_key not like concat(#{pfx}, '%')
+                </foreach>
+            </if>
+            <if test="configType != null and configType != ''">AND config_type = #{configType}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_config
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_config
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_config
+        <include refid="Page_Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM sys_config
+        <include refid="Page_Query_Where"/>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO sys_config (id, tenant_id, config_name, config_key, config_value, config_type, remark, created_by, created_at, updated_by, updated_at, deleted)
+        VALUES (#{id}, #{tenantId}, #{configName}, #{configKey}, #{configValue}, #{configType}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted})
+    </insert>
+
+    <update id="updateById">
+        UPDATE sys_config
+        <set>
+            config_name = #{configName},
+            config_key = #{configKey},
+            config_value = #{configValue},
+            config_type = #{configType},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM sys_config WHERE id = #{id}
+    </delete>
+
+    <delete id="purgeByTenantAndKey">
+        DELETE FROM sys_config
+        WHERE tenant_id = #{tenantId}
+          AND (
+            config_key = #{configKey}
+            OR config_key LIKE concat(#{configKey}, '#del#%')
+          )
+    </delete>
+
+    <select id="selectByTenantAndKey" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM sys_config
+        WHERE tenant_id = #{tenantId} AND config_key = #{configKey} AND deleted = 0
+        LIMIT 1
+    </select>
+
+</mapper>

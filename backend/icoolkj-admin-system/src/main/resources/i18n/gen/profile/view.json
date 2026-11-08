@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "businessName": "profile",
+    "apiModule": "auth",
+    "backendModule": "system",
+    "permissionPrefix": "",
+    "className": "UserProfile"
+  },
+  "page": {
+    "layout": "custom-profile"
+  },
+  "form": {
+    "fields": [
+      {
+        "field": "username",
+        "component": "input",
+        "readonly": true
+      },
+      {
+        "field": "realName",
+        "component": "input"
+      },
+      {
+        "field": "nickname",
+        "component": "input"
+      },
+      {
+        "field": "gender",
+        "component": "radio",
+        "dictType": "sys_gender"
+      },
+      {
+        "field": "email",
+        "component": "input"
+      },
+      {
+        "field": "phone",
+        "component": "input"
+      }
+    ]
+  }
+}

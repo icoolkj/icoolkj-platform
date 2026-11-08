@@ -1,0 +1,93 @@
+{
+  "demoBanner": "Demo mode: data is read-only. Create, update and delete are disabled.",
+  "brand": "iCoolKJ",
+  "brandMini": "KJ",
+  "codeGen": "Code Generator",
+  "configManage": "Parameters",
+  "currentTenant": "Tenant",
+  "currentTenantLabel": "Tenant: {code}",
+  "dashboard": "Dashboard",
+  "editGenConfig": "Edit Generator Config",
+  "formDesigner": "Form Designer",
+  "oaTenantConfigure": "Configure Mapping",
+  "home": "Home",
+  "language": "Language",
+  "fullscreen": "Fullscreen",
+  "fullscreenExit": "Exit fullscreen",
+  "logout": "Sign out",
+  "noAccess": "No Access",
+  "noAccessRelogin": "Sign In Again",
+  "noAccessSubtitle": "This account has no menu permissions. Contact your tenant administrator to assign a role, then sign in again.",
+  "noAccessTitle": "No Pages Available",
+  "pageTitle": "iCoolKJ Platform",
+  "sidebarNoMenus": "No menus available",
+  "menuSearchPlaceholder": "Search menus",
+  "menuSearchEmpty": "No matching menus",
+  "productSwitcher": "Switch product",
+  "messages": "Messages",
+  "messagesViewAll": "View all",
+  "menuAuthSelectProduct": "Select all in product",
+  "menuAuthClearProduct": "Clear product",
+  "messagesEmpty": "No messages",
+  "overviewPlaceholder": "Metrics and shortcuts will be wired in later iterations",
+  "overview": {
+    "oa": {
+      "title": "Office Overview",
+      "desc": "Todos, submissions, and recent collaboration",
+      "stat1": "Todos",
+      "stat2": "Submitted",
+      "stat3": "Recent notices"
+    },
+    "files": {
+      "title": "Files Overview",
+      "desc": "Quota, uploads, and policy summary",
+      "stat1": "Used storage",
+      "stat2": "Uploads (7d)",
+      "stat3": "Policies"
+    },
+    "ai": {
+      "title": "AI Overview",
+      "desc": "Capability bindings, usage, and quick try",
+      "stat1": "Bound capabilities",
+      "stat2": "Calls (7d)",
+      "stat3": "Failures"
+    }
+  },
+  "systemManage": "System",
+  "systemTools": "System Tools",
+  "theme": "Theme",
+  "themes": {
+    "blue": "Tech Blue",
+    "green": "Teal",
+    "orange": "Orange",
+    "purple": "Purple",
+    "rose": "Rose"
+  },
+  "settings": {
+    "title": "Layout Settings",
+    "themeColor": "Theme Color",
+    "headerStyle": "Top Bar",
+    "headerPrimary": "Themed",
+    "headerLight": "Light",
+    "sidebarStyle": "Sidebar Style",
+    "sidebarDark": "Dark",
+    "sidebarLight": "Light",
+    "interface": "Interface",
+    "breadcrumb": "Breadcrumb",
+    "tagsView": "Multi-tabs",
+    "pageHeader": "Page header",
+    "watermark": "User Watermark",
+    "menuUniqueOpened": "Exclusive Menu Expand",
+    "formMode": "Form Style",
+    "formDialog": "Dialog",
+    "formDrawer": "Drawer",
+    "reset": "Reset Defaults",
+    "hint": "Settings apply instantly and sync to your account."
+  },
+  "tags": {
+    "more": "Tab actions",
+    "closeOthers": "Close others",
+    "closeAll": "Close all",
+    "maxHint": "Up to {max} tabs; oldest tabs close automatically"
+  }
+}

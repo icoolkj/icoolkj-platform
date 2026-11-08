@@ -1,0 +1,102 @@
+specVersion: "1.0"
+pageKey: oaPlatformTemplate
+layout: standard-crud
+vueVariant: oaPlatformTemplateCrud
+
+meta:
+  apiModule: oa
+  backendModule: oa
+  permissionPrefix: oa:platformTemplate
+  className: OaPlatformTemplate
+
+entity:
+  tableName: oa_platform_template
+  businessName: oaPlatformTemplate
+  functionName: OA平台模板
+
+extensions:
+  listApi: GET /oa/platformTemplate/page
+  detailApi: GET /oa/platformTemplate/{id}
+  versionApi: GET /oa/platformTemplate/{id}/versions
+  fieldApi: GET /oa/platformTemplate/version/{versionId}
+  createDraftApi: POST /oa/platformTemplate/version/createDraft
+  saveFieldsApi: PUT /oa/platformTemplate/version/saveFields
+  publishApi: POST /oa/platformTemplate/version/publish
+  dialogs:
+    - OaPlatformTemplateFormDialog
+    - OaVersionFieldDialog
+  customForm: true
+  modelOptionsApi: GET /oa/platformTemplate/model-options
+  toolbarActions:
+    - createDraft
+    - editFields
+    - publish
+
+viewDefaults:
+  query:
+    maxVisible: 2
+    collapsible: false
+  form:
+    mode: dialog
+    dialogWidth: 640
+    labelWidth: 108
+    closeOnClickModal: false
+    closeOnPressEscape: false
+  table:
+    actions:
+      edit: true
+      delete: false
+      width: 300
+
+fields:
+  - javaField: categoryCode
+    columnComment: 业务分类
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isInsert: true
+    isEdit: false
+    htmlType: select
+    dictType: wf_biz_type
+    disabledOnEdit: true
+  - javaField: templateCode
+    columnComment: 模板编码
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: false
+    htmlType: input
+    disabledOnEdit: true
+  - javaField: templateName
+    columnComment: 模板名称
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: input
+  - javaField: wfModelId
+    columnComment: 流程模型
+    isInsert: true
+    isEdit: true
+    htmlType: select
+    # options: GET /oa/platformTemplate/model-options
+  - javaField: latestVersionNo
+    columnComment: 已发布版本
+    isList: true
+    htmlType: text
+  - javaField: status
+    columnComment: 状态
+    isQuery: true
+    queryType: EQ
+    isList: true
+    isInsert: true
+    isEdit: true
+    htmlType: radio
+    dictType: sys_common_status
+  - javaField: remark
+    columnComment: 备注
+    isInsert: true
+    isEdit: true
+    htmlType: textarea

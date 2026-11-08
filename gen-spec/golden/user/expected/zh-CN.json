@@ -1,0 +1,244 @@
+{
+  "page": {
+    "title": "用户",
+    "description": "管理用户，支持新增、修改与删除",
+    "addTitle": "新增用户",
+    "editTitle": "修改用户",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "statusNormal": "正常",
+    "statusDisabled": "停用",
+    "treeRoot": "顶级",
+    "addChild": "新增子项",
+    "assignRoles": "分配角色",
+    "assignRolesTitle": "分配角色",
+    "noRolesAvailable": "暂无可用角色",
+    "resetPassword": "重置密码",
+    "resetPasswordConfirm": "确认将该用户密码重置为系统标准初始密码？重置后须强制修改密码，并踢出全部在线会话。",
+    "resetPasswordSuccess": "密码已重置为系统标准初始密码",
+    "uploadAvatar": "上传头像",
+    "saveSuccess": "保存成功",
+    "avatarNeedUserId": "请先保存用户后再上传头像",
+    "cropTitle": "头像裁剪",
+    "cropSelectHint": "请先选择图片",
+    "cropZoomIn": "放大",
+    "cropZoomOut": "缩小",
+    "cropRotateLeft": "向左旋转",
+    "cropRotateRight": "向右旋转",
+    "cropUpload": "点击上传图片",
+    "cropSizeHint": "请上传图片文件，建议不超过 {size} MB",
+    "cropPreview": "预览",
+    "cropFailed": "头像裁剪失败"
+  },
+  "fields": {
+    "username": {
+      "label": "用户名",
+      "placeholder": "请输入用户名",
+      "validation": {
+        "required": "请输入用户名",
+        "maxLength": "用户名长度不能超过50"
+      }
+    },
+    "nickname": {
+      "label": "昵称",
+      "placeholder": "请输入昵称",
+      "validation": {
+        "required": "请输入昵称",
+        "maxLength": "昵称长度不能超过50"
+      }
+    },
+    "password": {
+      "label": "初始密码",
+      "placeholder": "留空则使用系统标准初始密码",
+      "validation": {
+        "maxLength": "密码长度不能超过100"
+      }
+    },
+    "phone": {
+      "label": "手机号",
+      "placeholder": "请输入手机号",
+      "validation": {
+        "maxLength": "手机号长度不能超过20"
+      }
+    },
+    "email": {
+      "label": "邮箱",
+      "placeholder": "请输入邮箱",
+      "validation": {
+        "maxLength": "邮箱长度不能超过100"
+      }
+    },
+    "deptId": {
+      "label": "部门",
+      "placeholder": "请选择部门",
+      "validation": {
+        "required": "请选择部门",
+        "maxLength": "部门ID长度不能超过20"
+      }
+    },
+    "deptName": {
+      "label": "部门"
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态",
+      "validation": {
+        "required": "请输入状态",
+        "maxLength": "状态长度不能超过1"
+      }
+    },
+    "remark": {
+      "label": "备注",
+      "placeholder": "请输入备注",
+      "validation": {
+        "maxLength": "备注长度不能超过500"
+      }
+    },
+    "createdAt": {
+      "label": "创建时间"
+    },
+    "realName": {
+      "label": "真实姓名",
+      "placeholder": "请输入真实姓名",
+      "validation": {
+        "maxLength": "真实姓名长度不能超过50"
+      }
+    },
+    "userType": {
+      "label": "用户类型",
+      "placeholder": "请选择用户类型",
+      "validation": {
+        "required": "请输入用户类型",
+        "maxLength": "用户类型长度不能超过20"
+      }
+    },
+    "gender": {
+      "label": "性别",
+      "placeholder": "请选择性别",
+      "validation": {
+        "required": "请输入性别",
+        "maxLength": "性别长度不能超过1"
+      }
+    },
+    "avatarUrl": {
+      "label": "头像",
+      "placeholder": "请上传头像",
+      "validation": {
+        "maxLength": "头像地址长度不能超过255"
+      }
+    },
+    "avatarFileId": {
+      "label": "头像文件ID",
+      "validation": {
+        "maxLength": "头像文件ID长度不能超过20"
+      }
+    },
+    "isSuperAdmin": {
+      "label": "是否超级管理员",
+      "placeholder": "请输入是否超级管理员",
+      "validation": {
+        "required": "请输入是否超级管理员"
+      }
+    },
+    "loginFailCount": {
+      "label": "连续登录失败次数",
+      "placeholder": "请输入连续登录失败次数",
+      "validation": {
+        "required": "请输入连续登录失败次数"
+      }
+    },
+    "lockedUntil": {
+      "label": "锁定截止时间",
+      "placeholder": "请选择锁定截止时间",
+      "validation": {}
+    },
+    "lastLoginIp": {
+      "label": "最后登录IP",
+      "placeholder": "请输入最后登录IP",
+      "validation": {
+        "maxLength": "最后登录IP长度不能超过64"
+      }
+    },
+    "lastLoginAt": {
+      "label": "最后登录时间",
+      "placeholder": "请选择最后登录时间",
+      "validation": {}
+    },
+    "pwdUpdatedAt": {
+      "label": "密码更新时间",
+      "placeholder": "请选择密码更新时间",
+      "validation": {}
+    },
+    "mustChangePassword": {
+      "label": "是否必须修改密码",
+      "placeholder": "请输入是否必须修改密码",
+      "validation": {
+        "required": "请输入是否必须修改密码"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "user",
+    "apiModule": "system",
+    "functionName": "用户",
+    "constraints": {
+      "username": {
+        "required": true,
+        "maxLength": 50
+      },
+      "nickname": {
+        "required": true,
+        "maxLength": 50
+      },
+      "passwordHash": {
+        "required": true,
+        "maxLength": 100
+      },
+      "phone": {
+        "maxLength": 20
+      },
+      "email": {
+        "maxLength": 100
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "deptId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "realName": {
+        "maxLength": 50
+      },
+      "userType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "gender": {
+        "required": true,
+        "maxLength": 1
+      },
+      "avatarUrl": {
+        "maxLength": 255
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "isSuperAdmin": {
+        "required": true
+      },
+      "loginFailCount": {
+        "required": true
+      },
+      "lockedUntil": {},
+      "lastLoginIp": {
+        "maxLength": 64
+      },
+      "lastLoginAt": {},
+      "pwdUpdatedAt": {},
+      "mustChangePassword": {
+        "required": true
+      }
+    }
+  }
+}

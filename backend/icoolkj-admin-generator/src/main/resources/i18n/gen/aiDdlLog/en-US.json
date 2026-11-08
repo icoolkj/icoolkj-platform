@@ -1,0 +1,48 @@
+{
+  "page": {
+    "title": "AI DDL Records",
+    "description": "Review AI create/alter DDL generation and copy history",
+    "addTitle": "Add",
+    "editTitle": "Edit",
+    "deleteConfirm": "Delete {count} selected row(s)?",
+    "logDetail": "Detail",
+    "userMessage": "User Message",
+    "generatedDdl": "Generated DDL",
+    "finalDdl": "Final DDL"
+  },
+  "fields": {
+    "recordType": {
+      "label": "Record Type",
+      "placeholder": "Select record type"
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status"
+    },
+    "targetTableName": {
+      "label": "Table Name",
+      "placeholder": "Enter table name"
+    },
+    "apiModule": {
+      "label": "Module"
+    },
+    "generatedSummary": {
+      "label": "Summary"
+    },
+    "userPromptPreview": {
+      "label": "User Message"
+    },
+    "operatorName": {
+      "label": "Operator"
+    },
+    "createdAt": {
+      "label": "Created At"
+    }
+  },
+  "meta": {
+    "businessName": "aiDdlLog",
+    "apiModule": "tool",
+    "functionName": "AI DDL Records",
+    "constraints": {}
+  }
+}

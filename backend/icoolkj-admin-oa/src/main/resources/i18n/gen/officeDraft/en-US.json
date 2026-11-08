@@ -1,0 +1,26 @@
+{
+  "page": {
+    "title": "My Drafts",
+    "description": "Editable OA documents (draft, rejected, withdrawn, returned): edit, submit, close",
+    "viewDetail": "View",
+    "deleteConfirm": "Delete this draft?",
+    "closeInstance": "Close",
+    "closeConfirm": "Close this document? It cannot be edited or deleted afterward, but flow history remains viewable.",
+    "closeSuccess": "Closed",
+    "submitApprove": "Submit",
+    "submitSuccess": "Submitted for approval",
+    "unsupported": "This process cannot be handled here yet"
+  },
+  "fields": {
+    "instanceTitle": { "label": "Title", "placeholder": "Enter title" },
+    "categoryCode": { "label": "Type", "placeholder": "Select type" },
+    "approveStatus": { "label": "Status", "placeholder": "Select status" },
+    "updatedAt": { "label": "Updated At" },
+    "createdAt": { "label": "Created At" }
+  },
+  "meta": {
+    "businessName": "officeDraft",
+    "apiModule": "oa",
+    "functionName": "My Drafts"
+  }
+}

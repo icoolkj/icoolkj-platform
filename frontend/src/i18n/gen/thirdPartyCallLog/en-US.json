@@ -1,0 +1,132 @@
+{
+  "page": {
+    "title": "Third Party Call Log Management",
+    "description": "View third-party service call audit records",
+    "addTitle": "Add Thirdparty Call Log",
+    "editTitle": "Edit Thirdparty Call Log",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled"
+  },
+  "fields": {
+    "providerName": {
+      "label": "Provider",
+      "placeholder": "Please enter Provider",
+      "validation": {
+        "required": "Provider Name is required",
+        "maxLength": "Provider Name must not exceed 100 characters"
+      }
+    },
+    "bizType": {
+      "label": "Biz Type",
+      "placeholder": "Please select Biz Type",
+      "validation": {
+        "maxLength": "Biz Type must not exceed 50 characters"
+      }
+    },
+    "requestUrl": {
+      "label": "Request URL",
+      "placeholder": "Please enter Request Url",
+      "validation": {
+        "maxLength": "Request Url must not exceed 500 characters"
+      }
+    },
+    "requestMethod": {
+      "label": "Request Method",
+      "placeholder": "Please enter Request Method",
+      "validation": {
+        "maxLength": "Request Method must not exceed 20 characters"
+      }
+    },
+    "responseStatus": {
+      "label": "Call Status",
+      "placeholder": "Please select Call Status",
+      "validation": {
+        "required": "Response Status is required",
+        "maxLength": "Response Status must not exceed 1 characters"
+      }
+    },
+    "costTime": {
+      "label": "Cost (ms)",
+      "placeholder": "Please enter Cost Time",
+      "validation": {}
+    },
+    "calledAt": {
+      "label": "Called At",
+      "placeholder": "Please select Called At",
+      "validation": {
+        "required": "Called At is required"
+      }
+    },
+    "tenantId": {
+      "label": "Tenant Id",
+      "placeholder": "Please enter Tenant Id",
+      "validation": {
+        "required": "Tenant Id is required",
+        "maxLength": "Tenant Id must not exceed 20 characters"
+      }
+    },
+    "requestData": {
+      "label": "Request Data",
+      "placeholder": "Please enter Request Data",
+      "validation": {
+        "maxLength": "Request Data must not exceed 65535 characters"
+      }
+    },
+    "responseData": {
+      "label": "Response Data",
+      "placeholder": "Please enter Response Data",
+      "validation": {
+        "maxLength": "Response Data must not exceed 65535 characters"
+      }
+    },
+    "errorMessage": {
+      "label": "Error Message",
+      "placeholder": "Please enter Error Message",
+      "validation": {
+        "maxLength": "Error Message must not exceed 65535 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "thirdPartyCallLog",
+    "apiModule": "infra",
+    "functionName": "Third Party Call Log",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "providerName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "bizType": {
+        "maxLength": 50
+      },
+      "requestUrl": {
+        "maxLength": 500
+      },
+      "requestMethod": {
+        "maxLength": 20
+      },
+      "requestData": {
+        "maxLength": 65535
+      },
+      "responseData": {
+        "maxLength": 65535
+      },
+      "responseStatus": {
+        "required": true,
+        "maxLength": 1
+      },
+      "errorMessage": {
+        "maxLength": 65535
+      },
+      "costTime": {},
+      "calledAt": {
+        "required": true
+      }
+    }
+  }
+}

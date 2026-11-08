@@ -1,0 +1,72 @@
+{
+  "page": {
+    "title": "数据库备份",
+    "description": "查看备份配置、手动执行备份并管理备份文件。定时任务由 worker 进程执行。",
+    "configTitle": "备份策略",
+    "tabFiles": "备份文件",
+    "tabPolicy": "备份策略",
+    "saveConfig": "保存配置",
+    "configSaved": "备份策略已保存",
+    "runNow": "立即备份",
+    "download": "下载",
+    "delete": "删除",
+    "runConfirm": "确认立即执行数据库备份？",
+    "runSuccess": "备份成功：{name}",
+    "deleteConfirm": "确认删除备份文件 {name}？",
+    "hint": "输出目录 / 保留天数 / 压缩写入 sys_config；启用与 Cron 写入 sys_job。mysqldump 路径见 application.yml（icoolkj.backup.mysqldump-command）。",
+    "mysqldumpYamlHint": "由 application.yml 提供，只读。"
+  },
+  "fields": {
+    "fileName": {
+      "label": "文件名",
+      "placeholder": "请输入文件名",
+      "validation": {}
+    },
+    "sizeText": {
+      "label": "大小",
+      "placeholder": "",
+      "validation": {}
+    },
+    "modifiedAt": {
+      "label": "修改时间",
+      "placeholder": "",
+      "validation": {}
+    },
+    "enabled": {
+      "label": "定时备份",
+      "placeholder": "",
+      "validation": {}
+    },
+    "cron": {
+      "label": "Cron 表达式",
+      "placeholder": "",
+      "validation": {}
+    },
+    "outputDir": {
+      "label": "备份目录",
+      "placeholder": "",
+      "validation": {}
+    },
+    "retentionDays": {
+      "label": "保留天数",
+      "placeholder": "",
+      "validation": {}
+    },
+    "compress": {
+      "label": "Gzip 压缩",
+      "placeholder": "",
+      "validation": {}
+    },
+    "mysqldumpCommand": {
+      "label": "mysqldump 命令",
+      "placeholder": "",
+      "validation": {}
+    }
+  },
+  "meta": {
+    "businessName": "databaseBackup",
+    "apiModule": "infra",
+    "functionName": "数据库备份",
+    "constraints": {}
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "businessName": "aiDdlLog",
+    "apiModule": "tool",
+    "backendModule": "generator",
+    "permissionPrefix": "tool:ai",
+    "className": "AiDdlLog"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 4,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "recordType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "tool_ai_ddl_record_type",
+        "width": 140
+      },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "tool_ai_ddl_status",
+        "width": 130
+      },
+      {
+        "field": "targetTableName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 180
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "recordType",
+        "component": "dict-tag",
+        "dictType": "tool_ai_ddl_record_type",
+        "width": 120,
+        "align": "center"
+      },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "tool_ai_ddl_status",
+        "width": 110,
+        "align": "center"
+      },
+      {
+        "field": "apiModule",
+        "component": "text",
+        "width": 100,
+        "align": "center"
+      },
+      {
+        "field": "targetTableName",
+        "component": "text",
+        "minWidth": 140,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "generatedSummary",
+        "component": "text",
+        "minWidth": 160,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "userPromptPreview",
+        "component": "text",
+        "minWidth": 180,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "operatorName",
+        "component": "text",
+        "width": 110,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "text",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 90
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 860,
+    "labelWidth": 120,
+    "closeOnClickModal": false,
+    "closeOnPressEscape": false,
+    "fields": []
+  },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "detail",
+        "labelKey": "logDetail",
+        "dialog": "GenAiDdlLogDetailDialog",
+        "allowOnReadOnly": true
+      }
+    ],
+    "dialogs": ["GenAiDdlLogDetailDialog"]
+  }
+}

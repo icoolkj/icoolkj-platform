@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "businessName": "workflowTaskDone",
+    "apiModule": "workflow",
+    "backendModule": "workflow",
+    "permissionPrefix": "workflow:done",
+    "className": "WorkflowTaskDone"
+  },
+  "readOnly": true,
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      { "field": "bizTitle", "component": "input", "queryType": "LIKE", "width": 200 },
+      {
+        "field": "bizType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 140
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      { "field": "bizTitle", "component": "text", "minWidth": 200, "showOverflowTooltip": true },
+      { "field": "processDefinitionName", "component": "text", "minWidth": 140 },
+      { "field": "taskName", "component": "text", "width": 140 },
+      { "field": "starterUserName", "component": "text", "width": 120 },
+      {
+        "field": "approveResult",
+        "component": "dict-tag",
+        "dictType": "wf_approve_result",
+        "width": 100,
+        "align": "center"
+      },
+      { "field": "endTime", "component": "datetime", "width": 170, "align": "center" }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 100 }
+  },
+  "form": { "mode": "dialog", "fields": [] },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "view",
+        "labelKey": "viewDetail",
+        "handler": "workflowTaskDone.view",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

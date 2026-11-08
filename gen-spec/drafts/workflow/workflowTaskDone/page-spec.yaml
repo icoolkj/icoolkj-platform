@@ -1,0 +1,68 @@
+specVersion: "1.0"
+pageKey: workflowTaskDone
+layout: standard-crud
+vueVariant: workflowTaskList
+
+meta:
+  apiModule: workflow
+  backendModule: workflow
+  permissionPrefix: workflow:done
+  className: WorkflowTaskDone
+
+entity:
+  tableName: wf_task_done_view
+  businessName: workflowTaskDone
+  functionName: 我的已办
+
+extensions:
+  listApi: GET /workflow/task/done/page
+  detailApi: GET /workflow/task/{taskId}
+  rowActions:
+    - view
+  toolbarActions: []
+
+viewDefaults:
+  query:
+    maxVisible: 3
+    collapsible: true
+  table:
+    actions:
+      edit: false
+      delete: false
+      width: 100
+
+fields:
+  - javaField: bizTitle
+    columnComment: 业务标题
+    isQuery: true
+    queryType: LIKE
+    isList: true
+    htmlType: input
+  - javaField: bizType
+    columnComment: 业务类型
+    isQuery: true
+    queryType: EQ
+    isList: true
+    htmlType: select
+    dictType: wf_biz_type
+  - javaField: processDefinitionName
+    columnComment: 流程名称
+    isList: true
+    htmlType: text
+  - javaField: taskName
+    columnComment: 处理节点
+    isList: true
+    htmlType: input
+  - javaField: starterUserName
+    columnComment: 发起人
+    isList: true
+    htmlType: text
+  - javaField: endTime
+    columnComment: 处理时间
+    isList: true
+    htmlType: datetime
+  - javaField: approved
+    columnComment: 处理结果
+    isList: true
+    htmlType: dict-tag
+    dictType: wf_approve_result

@@ -1,0 +1,72 @@
+---
+description: 行级数据权限（L3）统一规范——新业务必须按此接线，禁止另起炉灶
+globs:
+  - backend/**/*.java
+  - backend/**/resources/mapper/**/*.xml
+  - backend/icoolkj-admin-generator/**/*.vm
+  - docs/architecture/06-auth-permission.md
+alwaysApply: false
+---
+
+# 行级访问（L3）统一规范
+
+本规则冻结，禁止在 Controller / ServiceImpl / 接口之间来回挪挂载点。
+
+## 三层分工
+
+| 层 | 职责 | 禁止 |
+|----|------|------|
+| L1 | `@PreAuthorize` 能力码 | 用菜单权限代替行过滤 |
+| L2 | 租户插件 + `TenantQueryScope` | 把平台当成隐式 ALL |
+| L3 | 行归属 `user_id` / `dept_id` | 用 `created_by`/`updated_by`；做区划行过滤 |
+
+区划只在租户级 `sys_tenant.root_region_id`。
+
+## 新业务唯一接线（必须齐全）
+
+有归属列的业务表，四件套缺一不可：
+
+1. **写**：`OwnershipColumns.applyUser` 或 `applyUserAndDept`（空归属直接失败；错误键 `error.datascope.owner_required`）
+2. **列表注解**：只挂在 **Service 接口** 的 `page(...)` 方法上：`@DataScope(...)`（`@Target(METHOD)`，禁止类级）
+3. **列表 SQL**：对应 Mapper 分页 WHERE 增加  
+   `<if test="dataScopeSql != null and dataScopeSql != ''">${dataScopeSql}</if>`
+4. **详情/改删**：`RowAccessSupport.assertReadable(tenantId, DataScopeSpec…, ownerUserId, ownerDeptId)`（越权用既有 `error.forbidden`）
+
+Controller **只**做 `@PreAuthorize`，**禁止** `@DataScope`。  
+ServiceImpl **禁止**重复挂 `@DataScope`（注解以接口为准）。
+
+**L3 错误键 i18n（按 [docs/i18n-standard.md](docs/i18n-standard.md)）：** `error.datascope.*` / `error.forbidden` 属平台固定文案，须 **前后端双份** `i18n/platform/{zh-CN,en-US}.json` 同步；禁止只改一端。
+
+## 不要 L3 的表
+
+配置/目录类（notice、config、dict、menu、tenant、ip 规则、模板目录等）：
+
+- 不要 `@DataScope`
+- 不要 Mapper `${dataScopeSql}`
+- 只要 L1 + L2
+
+## 框架侧（已有，勿绕开）
+
+- `DataScopeSqlScrubAspect` + `DataScopeSqlBindGuard`：客户端不能注入 `dataScopeSql`
+- `DataScopeAspect` + `DataScopePointcut`（接口方法注解在 CGLIB 下可匹配）：服务端写入 `PageQuery.dataScopeSql`
+- 列表语义与详情：`DataScopeMatchSupport` / Evaluator；缺 handler 失败
+- 代码生成：`hasDataScope` 时生成接口注解 + XML 片段 + OwnershipColumns + assertReadable
+
+## 特例
+
+- `sys_user`：`userColumn=id`，`DataScopeSpec.userAsId()`
+- `sys_dept`：`deptColumn=id`，`DataScopeSpec.deptAsId()`
+- 站内信平台超管 L3 bypass：仅该模块白名单，禁止复制
+- OA「我的」列表：发起人过滤；管理读用 L3；改删仍 starter
+- WF：可写 ownership；读仍 WorkflowAccessGuard
+- 平台定时任务：定义 `sys_job` / 日志 `sys_job_log`（L1+L2，无业务 L3）；手动触发记 `trigger_user_id`，Cron 为空。禁止把跑批日志写入 `infra_async_task`。
+
+## 自检
+
+新增/改造业务表时：
+
+- [ ] 有 `user_id`/`dept_id` 才上 L3
+- [ ] `@DataScope` 仅在 Service 接口 `page`
+- [ ] Mapper 分页 WHERE 有统一 `${dataScopeSql}` 片段
+- [ ] create 走 OwnershipColumns；get/update/delete 走 assertReadable
+- [ ] Controller 无 `@DataScope`

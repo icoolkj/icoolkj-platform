@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.generator.mapper.GenI18nMessageMapper">
+
+    <resultMap id="GenI18nMessageResult" type="com.icoolkj.platform.generator.domain.GenI18nMessage">
+        <id property="id" column="id"/>
+        <result property="tableId" column="table_id"/>
+        <result property="locale" column="locale"/>
+        <result property="messagesJson" column="messages_json"/>
+        <result property="remark" column="remark"/>
+        <result property="createdAt" column="created_at"/>
+        <result property="updatedAt" column="updated_at"/>
+    </resultMap>
+
+    <select id="selectByTableId" resultMap="GenI18nMessageResult">
+        select * from gen_i18n_message where table_id = #{tableId} order by locale
+    </select>
+
+    <select id="selectByTableIdAndLocale" resultMap="GenI18nMessageResult">
+        select * from gen_i18n_message where table_id = #{tableId} and locale = #{locale}
+    </select>
+
+    <select id="selectByBusinessAndLocale" resultMap="GenI18nMessageResult">
+        select m.*
+        from gen_i18n_message m
+        inner join gen_table t on t.id = m.table_id
+        where t.business_name = #{businessName}
+          and t.api_module = #{apiModule}
+          and m.locale = #{locale}
+        limit 1
+    </select>
+
+    <select id="selectAllByLocale" resultMap="GenI18nMessageResult">
+        select * from gen_i18n_message where locale = #{locale}
+    </select>
+
+    <insert id="insert">
+        insert into gen_i18n_message (id, table_id, locale, messages_json, remark, created_at, updated_at)
+        values (#{id}, #{tableId}, #{locale}, #{messagesJson}, #{remark}, now(3), now(3))
+    </insert>
+
+    <update id="update">
+        update gen_i18n_message
+        set messages_json = #{messagesJson},
+            remark = #{remark},
+            updated_at = now(3)
+        where id = #{id}
+    </update>
+
+    <delete id="deleteByTableId">
+        delete from gen_i18n_message where table_id = #{tableId}
+    </delete>
+</mapper>

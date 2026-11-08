@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.workflow.mapper.WfModelVersionMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.workflow.domain.WfModelVersionEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="model_id" property="modelId"/>
+        <result column="version_no" property="versionNo"/>
+        <result column="bpmn_xml" property="bpmnXml"/>
+        <result column="design_json" property="designJson"/>
+        <result column="process_config_json" property="processConfigJson"/>
+        <result column="deployment_id" property="deploymentId"/>
+        <result column="process_definition_id" property="processDefinitionId"/>
+        <result column="process_definition_key" property="processDefinitionKey"/>
+        <result column="published" property="published"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, model_id, version_no, bpmn_xml, design_json, process_config_json, deployment_id, process_definition_id,
+        process_definition_key, published, remark, created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model_version
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectPublishedByModelId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model_version
+        WHERE model_id = #{modelId} AND deleted = 0 AND published = 1
+        ORDER BY version_no DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectLatestByModelId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model_version
+        WHERE model_id = #{modelId} AND deleted = 0
+        ORDER BY version_no DESC
+        LIMIT 1
+    </select>
+
+    <select id="selectByModelId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model_version
+        WHERE model_id = #{modelId} AND deleted = 0
+        ORDER BY version_no DESC
+    </select>
+
+    <select id="selectMaxVersionNo" resultType="java.lang.Integer">
+        SELECT MAX(version_no) FROM wf_model_version WHERE model_id = #{modelId} AND deleted = 0
+    </select>
+
+    <select id="selectByProcessDefinitionId" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM wf_model_version
+        WHERE process_definition_id = #{processDefinitionId} AND deleted = 0
+        ORDER BY version_no DESC
+        LIMIT 1
+    </select>
+
+    <insert id="insert">
+        INSERT INTO wf_model_version (
+            id, tenant_id, model_id, version_no, bpmn_xml, design_json, process_config_json, deployment_id, process_definition_id,
+            process_definition_key, published, remark, created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{modelId}, #{versionNo}, #{bpmnXml}, #{designJson}, #{processConfigJson}, #{deploymentId}, #{processDefinitionId},
+            #{processDefinitionKey}, #{published}, #{remark}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE wf_model_version
+        <set>
+            bpmn_xml = #{bpmnXml},
+            design_json = #{designJson},
+            process_config_json = #{processConfigJson},
+            deployment_id = #{deploymentId},
+            process_definition_id = #{processDefinitionId},
+            process_definition_key = #{processDefinitionKey},
+            published = #{published},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        </set>
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="unpublishByModelId">
+        UPDATE wf_model_version SET published = 0, updated_at = NOW(3)
+        WHERE model_id = #{modelId} AND deleted = 0 AND published = 1
+    </update>
+
+</mapper>

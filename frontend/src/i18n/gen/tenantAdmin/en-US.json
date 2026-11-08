@@ -1,0 +1,56 @@
+{
+  "page": {
+    "title": "Tenant admins",
+    "description": "List tenant super admins; reset initial password or unlock. “Enter tenant” can be added here later.",
+    "tenantCode": "Tenant code",
+    "tenantCodePlaceholder": "Tenant code",
+    "tenantName": "Tenant name",
+    "tenantNamePlaceholder": "Tenant name",
+    "username": "Admin username",
+    "usernamePlaceholder": "Admin username",
+    "roleName": "Role",
+    "status": "Status",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "lockedUntil": "Locked until",
+    "lastLoginAt": "Last login",
+    "mustChangePassword": "Must change password",
+    "resetPassword": "Reset password",
+    "resetPasswordConfirm": "Reset this admin password to the standard initial password? The user must change it on next login and sessions will be revoked.",
+    "unlock": "Unlock",
+    "unlockConfirm": "Clear login lock for this admin?",
+    "enterTenant": "Enter tenant",
+    "enterTenantSoon": "Enter-tenant management is coming soon",
+    "empty": "No tenant admins",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "yes": "Yes",
+    "no": "No"
+  },
+  "fields": {
+    "tenantCode": {
+      "label": "Tenant code"
+    },
+    "tenantName": {
+      "label": "Tenant name"
+    },
+    "username": {
+      "label": "Admin username"
+    },
+    "roleName": {
+      "label": "Role"
+    },
+    "status": {
+      "label": "Status"
+    },
+    "lockedUntil": {
+      "label": "Locked until"
+    },
+    "lastLoginAt": {
+      "label": "Last login"
+    },
+    "mustChangePassword": {
+      "label": "Must change password"
+    }
+  }
+}

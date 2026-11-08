@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileCatalogMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileCatalogEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="catalog_code" property="catalogCode"/>
+        <result column="catalog_name" property="catalogName"/>
+        <result column="catalog_name_i18n" property="catalogNameI18n"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, catalog_code, catalog_name, catalog_name_i18n, status, remark,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectByTenantAndCode" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_catalog
+        where deleted = 0 and tenant_id = #{tenantId} and catalog_code = #{catalogCode}
+        limit 1
+    </select>
+
+    <select id="selectByTenant" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_catalog
+        where deleted = 0 and tenant_id = #{tenantId}
+        order by catalog_code asc
+    </select>
+
+    <insert id="insert">
+        insert into infra_file_catalog (
+            id, tenant_id, catalog_code, catalog_name, catalog_name_i18n, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) values (
+            #{id}, #{tenantId}, #{catalogCode}, #{catalogName}, #{catalogNameI18n}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        update infra_file_catalog
+        set catalog_name = #{catalogName},
+            catalog_name_i18n = #{catalogNameI18n},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        where id = #{id} and deleted = 0
+    </update>
+
+    <update id="logicalDeleteById">
+        update infra_file_catalog set deleted = 1, updated_at = now(3) where id = #{id} and deleted = 0
+    </update>
+</mapper>

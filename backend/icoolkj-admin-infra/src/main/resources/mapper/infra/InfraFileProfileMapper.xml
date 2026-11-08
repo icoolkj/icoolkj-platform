@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileProfileMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileProfileEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="profile_code" property="profileCode"/>
+        <result column="profile_name" property="profileName"/>
+        <result column="profile_name_i18n" property="profileNameI18n"/>
+        <result column="category_tag" property="categoryTag"/>
+        <result column="status" property="status"/>
+        <result column="remark" property="remark"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, profile_code, profile_name, profile_name_i18n, category_tag, status, remark,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <select id="selectByTenantAndCode" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_profile
+        where deleted = 0 and tenant_id = #{tenantId} and profile_code = #{profileCode}
+        limit 1
+    </select>
+
+    <select id="selectByTenant" resultMap="BaseResultMap">
+        select <include refid="Base_Column_List"/>
+        from infra_file_profile
+        where deleted = 0 and tenant_id = #{tenantId}
+        <if test="categoryTag != null and categoryTag != ''">
+            and category_tag = #{categoryTag}
+        </if>
+        <if test="keyword != null and keyword != ''">
+            and (profile_code like concat('%', #{keyword}, '%')
+                 or profile_name like concat('%', #{keyword}, '%'))
+        </if>
+        order by category_tag asc, profile_code asc
+    </select>
+
+    <insert id="insert">
+        insert into infra_file_profile (
+            id, tenant_id, profile_code, profile_name, profile_name_i18n, category_tag, status, remark,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) values (
+            #{id}, #{tenantId}, #{profileCode}, #{profileName}, #{profileNameI18n}, #{categoryTag}, #{status}, #{remark},
+            #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        update infra_file_profile
+        set profile_name = #{profileName},
+            profile_name_i18n = #{profileNameI18n},
+            category_tag = #{categoryTag},
+            status = #{status},
+            remark = #{remark},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt}
+        where id = #{id} and deleted = 0
+    </update>
+
+    <update id="logicalDeleteById">
+        update infra_file_profile set deleted = 1, updated_at = now(3) where id = #{id} and deleted = 0
+    </update>
+</mapper>

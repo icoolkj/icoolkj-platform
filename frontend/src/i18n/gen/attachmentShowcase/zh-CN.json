@@ -1,0 +1,65 @@
+{
+  "page": {
+    "title": "附件组件场景测试",
+    "description": "按 view.json 场景分 Tab 试用与选型；文案与目录编码均由 gen JSON 驱动。",
+    "pickTitle": "如何选型",
+    "pickRowSingleImage": "单图封面/Logo → AttachmentManager mode=single variant=image",
+    "pickRowMultiList": "多文件列表 → AttachmentManager mode=multiple variant=list",
+    "pickRowCatalog": "配置目录多槽位（名称/要求/文件表）→ CatalogAttachmentManager；目录编码来自 view.json fileCatalogs（样例 catalog=attachment_demo）。完整闭环见菜单「附件测试业务」。",
+    "bizLoopHint": "完整业务闭环（建表/保存/引用同步/删除）：基础设施 → 文件配置中心 → 附件测试业务",
+    "pickRowWrappers": "轮播等其它单图场景同样用 AttachmentManager，只换 bizType（如 FILE_BIZ_BANNER_IMAGE）；勿再引入 CoverImagePicker / OaFileUpload",
+    "pickRowSpecial": "头像裁剪 / 富文本内嵌 / 管理端存储上传 → 继续用手写特殊组件",
+    "tabSingleImage": "1 · 单图封面",
+    "tabMultiList": "2 · 多文件列表",
+    "tabCatalog": "3 · 目录槽位表",
+    "tabBannerImage": "4 · 轮播单图",
+    "tabSpecial": "5 · 特殊场景",
+    "whenSingleImage": "公告封面等：bizType=notice_cover，downloadScope=notice。",
+    "whenMultiList": "OA 附件、表单 file 字段、任意多文件列表。",
+    "whenCatalog": "业务表单按 infra_file_catalog（view.json fileCatalogs）配置多槽位规则表上传。",
+    "whenBannerImage": "轮播图等：bizType=banner_image，downloadScope=infra；与公告封面同一组件，只换常量。",
+    "whenSpecial": "勿用 AttachmentManager 替换的特殊交互。",
+    "snippetSingleImage": "import { AttachmentManager, FILE_BIZ_NOTICE_COVER, FILE_DOWNLOAD_SCOPE_NOTICE } from '@/components/attachment'\n\n<AttachmentManager\n  v-model=\"form.coverFileId\"\n  v-model:preview-url=\"form.coverPreviewUrl\"\n  :biz-type=\"FILE_BIZ_NOTICE_COVER\"\n  :download-scope=\"FILE_DOWNLOAD_SCOPE_NOTICE\"\n  mode=\"single\"\n  variant=\"image\"\n/>",
+    "snippetMultiList": "import { AttachmentManager, FILE_BIZ_OA_INSTANCE, FILE_DOWNLOAD_SCOPE_INFRA } from '@/components/attachment'\n\n<AttachmentManager\n  v-model=\"form.fileIds\"\n  :biz-type=\"FILE_BIZ_OA_INSTANCE\"\n  :download-scope=\"FILE_DOWNLOAD_SCOPE_INFRA\"\n  mode=\"multiple\"\n  variant=\"list\"\n  :max-files=\"5\"\n/>",
+    "snippetCatalog": "import { CatalogAttachmentManager } from '@/components/attachment'\nimport viewConfig from '@/i18n/gen/yourBiz/view.json'\n\n// catalogCode 取自 view.json fileCatalogs[].code\n<CatalogAttachmentManager\n  v-model=\"form.attachments\"\n  :catalog-code=\"viewConfig.fileCatalogs[0].code\"\n  :biz-id=\"form.id\"\n  @change=\"({ fileIds }) => (form.fileIds = fileIds)\"\n/>",
+    "snippetBannerImage": "import { AttachmentManager, FILE_BIZ_BANNER_IMAGE, FILE_DOWNLOAD_SCOPE_INFRA } from '@/components/attachment'\n\n<AttachmentManager\n  v-model=\"form.imageFileId\"\n  v-model:preview-url=\"form.imageUrl\"\n  :biz-type=\"FILE_BIZ_BANNER_IMAGE\"\n  :download-scope=\"FILE_DOWNLOAD_SCOPE_INFRA\"\n  mode=\"single\"\n  variant=\"image\"\n/>",
+    "snippetSpecial": "// AvatarPicker / RichTextEditor / FileUploadDialog / OaAttachmentPanel\n// 见本页「特殊场景」说明；勿强行换成 AttachmentManager",
+    "stateLabel": "当前绑定值",
+    "catalogCode": "目录编码",
+    "catalogPlaceholder": "请选择 view.json fileCatalogs 中的 code",
+    "bizId": "业务主键",
+    "bizIdHint": "可选；有值时上传写 file_ref",
+    "copySnippet": "复制片段",
+    "copied": "已复制",
+    "devTag": "DEV",
+    "specialAvatarName": "AvatarPicker",
+    "specialAvatarDesc": "头像裁剪 + Profile/用户专用上传接口。",
+    "specialRichTextName": "RichTextEditor",
+    "specialRichTextDesc": "富文本内嵌图/视频；bizType 用 FILE_BIZ_NOTICE_RICHTEXT。",
+    "specialFileUploadDialogName": "FileUploadDialog",
+    "specialFileUploadDialogDesc": "基础设施管理端按存储供应商上传；勿用于业务表单。",
+    "specialOaPanelName": "OaAttachmentPanel",
+    "specialOaPanelDesc": "OA 详情只读预览/下载，不是上传组件。",
+    "attachmentCatalogName": "附件名称",
+    "attachmentCatalogRequirements": "附件要求",
+    "attachmentCatalogFiles": "附件信息",
+    "componentAttachmentManager": "AttachmentManager",
+    "componentCatalogAttachmentManager": "CatalogAttachmentManager",
+    "componentWrappers": "（已弃用）CoverImagePicker / OaFileUpload"
+  },
+  "fields": {
+    "catalogCode": {
+      "label": "目录编码",
+      "placeholder": "请选择目录编码"
+    },
+    "bizId": {
+      "label": "业务主键",
+      "placeholder": "可选业务主键"
+    }
+  },
+  "meta": {
+    "businessName": "attachmentShowcase",
+    "apiModule": "infra",
+    "functionName": "附件组件场景测试"
+  }
+}

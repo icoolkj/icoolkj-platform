@@ -1,0 +1,121 @@
+{
+  "page": {
+    "title": "Department Management",
+    "description": "Manage department records",
+    "addTitle": "Add Department",
+    "editTitle": "Edit Department",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "treeRoot": "Root",
+    "addChild": "Add Child"
+  },
+  "fields": {
+    "deptName": {
+      "label": "Dept Name",
+      "placeholder": "Please enter Dept Name",
+      "validation": {
+        "required": "Dept Name is required",
+        "maxLength": "Dept Name must not exceed 50 characters"
+      }
+    },
+    "deptCode": {
+      "label": "Dept Code",
+      "placeholder": "Please enter Dept Code",
+      "validation": {
+        "maxLength": "Dept Code must not exceed 64 characters"
+      }
+    },
+    "parentId": {
+      "label": "Parent Dept",
+      "placeholder": "Please select Parent Dept",
+      "validation": {
+        "required": "Parent Id is required",
+        "maxLength": "Parent Id must not exceed 20 characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Please enter Sort",
+      "validation": {
+        "required": "Sort No is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "leaderName": {
+      "label": "Leader Name",
+      "placeholder": "Please enter Leader Name",
+      "validation": {
+        "maxLength": "Leader Name must not exceed 50 characters"
+      }
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Please enter Phone",
+      "validation": {
+        "maxLength": "Phone must not exceed 20 characters"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Please enter Email",
+      "validation": {
+        "maxLength": "Email must not exceed 100 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "dept",
+    "apiModule": "system",
+    "functionName": "Department",
+    "constraints": {
+      "deptName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "deptCode": {
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "parentId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "leaderName": {
+        "maxLength": 50
+      },
+      "phone": {
+        "maxLength": 20
+      },
+      "email": {
+        "maxLength": 100
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

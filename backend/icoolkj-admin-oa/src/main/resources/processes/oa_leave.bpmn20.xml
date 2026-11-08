@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:flowable="http://flowable.org/bpmn"
+             targetNamespace="http://www.icoolkj.com/oa/leave">
+  <!-- Emitter-contract sample: assignee via TaskListener + gw_{taskKey}; design_json is SoT -->
+  <process id="oa_leave" name="oa_leave" isExecutable="true">
+    <startEvent id="startEvent" name="start"/>
+    <userTask id="deptLeaderApprove" name="deptLeaderApprove">
+      <extensionElements>
+        <flowable:taskListener event="create" delegateExpression="${workflowAssigneeTaskListener}"/>
+      </extensionElements>
+    </userTask>
+    <exclusiveGateway id="gw_deptLeaderApprove" name="deptLeaderApproveResult" default="flowReject_deptLeaderApprove"/>
+    <endEvent id="endApproved" name="endApproved"/>
+    <endEvent id="endRejected" name="endRejected"/>
+    <sequenceFlow id="flowStart" sourceRef="startEvent" targetRef="deptLeaderApprove"/>
+    <sequenceFlow id="flowTask_deptLeaderApprove" sourceRef="deptLeaderApprove" targetRef="gw_deptLeaderApprove"/>
+    <sequenceFlow id="flowApprove_deptLeaderApprove" sourceRef="gw_deptLeaderApprove" targetRef="endApproved">
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${approved}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="flowReject_deptLeaderApprove" sourceRef="gw_deptLeaderApprove" targetRef="endRejected"/>
+  </process>
+</definitions>

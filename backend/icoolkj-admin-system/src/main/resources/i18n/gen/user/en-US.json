@@ -1,0 +1,255 @@
+{
+  "page": {
+    "title": "User Management",
+    "description": "Manage user records",
+    "addTitle": "Add User",
+    "editTitle": "Edit User",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "exportFileName": "Users",
+    "exportSheetName": "Users",
+    "importTemplateFileName": "User Import Template",
+    "importSheetName": "Users",
+    "importAsyncTaskName": "User Excel Import",
+    "exportAsyncTaskName": "User Excel Export",
+    "importStepTemplateHint": "Download the template first. Use dropdowns for dictionary and department columns.",
+    "importStepUploadHint": ".xlsx only. Import is all-or-nothing when validation fails.",
+    "treeRoot": "Root",
+    "addChild": "Add Child",
+    "assignRoles": "Assign Roles",
+    "assignRolesTitle": "Assign Roles",
+    "noRolesAvailable": "No roles available",
+    "resetPassword": "Reset Password",
+    "resetPasswordConfirm": "Reset this user's password to the system standard initial password? The user must change it on next login, and all sessions will be signed out.",
+    "resetPasswordSuccess": "Password reset to the system standard initial password",
+    "unlock": "Unlock",
+    "unlockConfirm": "Clear login lock for this user? Fail counters will be reset and sessions revoked.",
+    "unlockSuccess": "Account unlocked",
+    "uploadAvatar": "Upload Avatar",
+    "saveSuccess": "Saved successfully",
+    "avatarNeedUserId": "Save the user before uploading an avatar",
+    "cropTitle": "Crop Avatar",
+    "cropSelectHint": "Select an image first",
+    "cropZoomIn": "Zoom In",
+    "cropZoomOut": "Zoom Out",
+    "cropRotateLeft": "Rotate Left",
+    "cropRotateRight": "Rotate Right",
+    "cropUpload": "Upload Image",
+    "cropSizeHint": "Image files only, up to {size} MB recommended",
+    "cropPreview": "Preview",
+    "cropFailed": "Failed to crop avatar"
+  },
+  "fields": {
+    "username": {
+      "label": "Username",
+      "placeholder": "Please enter Username",
+      "validation": {
+        "required": "Username is required",
+        "maxLength": "Username must not exceed 50 characters"
+      }
+    },
+    "nickname": {
+      "label": "Nickname",
+      "placeholder": "Please enter Nickname",
+      "validation": {
+        "required": "Nickname is required",
+        "maxLength": "Nickname must not exceed 50 characters"
+      }
+    },
+    "password": {
+      "label": "Initial Password",
+      "placeholder": "Leave blank to use the system standard initial password",
+      "validation": {
+        "maxLength": "Password must not exceed 100 characters"
+      }
+    },
+    "phone": {
+      "label": "Phone",
+      "placeholder": "Please enter Phone",
+      "validation": {
+        "maxLength": "Phone must not exceed 20 characters"
+      }
+    },
+    "email": {
+      "label": "Email",
+      "placeholder": "Please enter Email",
+      "validation": {
+        "maxLength": "Email must not exceed 100 characters"
+      }
+    },
+    "deptId": {
+      "label": "Department",
+      "placeholder": "Please select Department",
+      "validation": {
+        "required": "Department is required",
+        "maxLength": "Dept Id must not exceed 20 characters"
+      }
+    },
+    "deptName": {
+      "label": "Department"
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "realName": {
+      "label": "Real Name",
+      "placeholder": "Please enter Real Name",
+      "validation": {
+        "maxLength": "Real Name must not exceed 50 characters"
+      }
+    },
+    "userType": {
+      "label": "User Type",
+      "placeholder": "Please select User Type",
+      "validation": {
+        "required": "User Type is required",
+        "maxLength": "User Type must not exceed 20 characters"
+      }
+    },
+    "gender": {
+      "label": "Gender",
+      "placeholder": "Please select Gender",
+      "validation": {
+        "required": "Gender is required",
+        "maxLength": "Gender must not exceed 1 characters"
+      }
+    },
+    "avatarUrl": {
+      "label": "Avatar",
+      "placeholder": "Upload avatar",
+      "validation": {
+        "maxLength": "Avatar URL must not exceed 255 characters"
+      }
+    },
+    "avatarFileId": {
+      "label": "Avatar File ID",
+      "validation": {
+        "maxLength": "Avatar file ID must not exceed 20 characters"
+      }
+    },
+    "isSuperAdmin": {
+      "label": "Is Super Admin",
+      "placeholder": "Please enter Is Super Admin",
+      "validation": {
+        "required": "Is Super Admin is required"
+      }
+    },
+    "loginFailCount": {
+      "label": "Login Fail Count",
+      "placeholder": "Please enter Login Fail Count",
+      "validation": {
+        "required": "Login Fail Count is required"
+      }
+    },
+    "lockedUntil": {
+      "label": "Locked Until",
+      "placeholder": "Please select Locked Until",
+      "validation": {}
+    },
+    "lastLoginIp": {
+      "label": "Last Login Ip",
+      "placeholder": "Please enter Last Login Ip",
+      "validation": {
+        "maxLength": "Last Login Ip must not exceed 64 characters"
+      }
+    },
+    "lastLoginAt": {
+      "label": "Last Login At",
+      "placeholder": "Please select Last Login At",
+      "validation": {}
+    },
+    "pwdUpdatedAt": {
+      "label": "Pwd Updated At",
+      "placeholder": "Please select Pwd Updated At",
+      "validation": {}
+    },
+    "mustChangePassword": {
+      "label": "Must Change Password",
+      "placeholder": "Please enter Must Change Password",
+      "validation": {
+        "required": "Must Change Password is required"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "user",
+    "apiModule": "system",
+    "functionName": "User",
+    "constraints": {
+      "username": {
+        "required": true,
+        "maxLength": 50
+      },
+      "nickname": {
+        "required": true,
+        "maxLength": 50
+      },
+      "passwordHash": {
+        "required": true,
+        "maxLength": 100
+      },
+      "phone": {
+        "maxLength": 20
+      },
+      "email": {
+        "maxLength": 100
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "deptId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "realName": {
+        "maxLength": 50
+      },
+      "userType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "gender": {
+        "required": true,
+        "maxLength": 1
+      },
+      "avatarUrl": {
+        "maxLength": 255
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      },
+      "isSuperAdmin": {
+        "required": true
+      },
+      "loginFailCount": {
+        "required": true
+      },
+      "lockedUntil": {},
+      "lastLoginIp": {
+        "maxLength": 64
+      },
+      "lastLoginAt": {},
+      "pwdUpdatedAt": {},
+      "mustChangePassword": {
+        "required": true
+      }
+    }
+  }
+}

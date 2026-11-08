@@ -1,0 +1,50 @@
+{
+  "meta": {
+    "businessName": "workflowTaskTodo",
+    "apiModule": "workflow",
+    "backendModule": "workflow",
+    "permissionPrefix": "workflow:todo",
+    "className": "WorkflowTaskTodo"
+  },
+  "readOnly": true,
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      { "field": "bizTitle", "component": "input", "queryType": "LIKE", "width": 200 },
+      {
+        "field": "bizType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 140
+      },
+      { "field": "taskName", "component": "input", "queryType": "LIKE", "width": 160 }
+    ]
+  },
+  "table": {
+    "fields": [
+      { "field": "bizTitle", "component": "text", "minWidth": 200, "showOverflowTooltip": true },
+      { "field": "processDefinitionName", "component": "text", "minWidth": 140 },
+      { "field": "taskName", "component": "text", "width": 140 },
+      { "field": "starterUserName", "component": "text", "width": 120 },
+      { "field": "createTime", "component": "datetime", "width": 170, "align": "center" }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 120 }
+  },
+  "form": { "mode": "dialog", "fields": [] },
+  "extensions": {
+    "rowActions": [
+      {
+        "id": "approve",
+        "labelKey": "approveAction",
+        "permKey": "complete",
+        "handler": "workflowTaskTodo.approve",
+        "allowOnReadOnly": true
+      }
+    ]
+  }
+}

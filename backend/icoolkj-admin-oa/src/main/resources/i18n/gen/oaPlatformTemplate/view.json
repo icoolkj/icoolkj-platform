@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "businessName": "oaPlatformTemplate",
+    "apiModule": "oa",
+    "backendModule": "oa",
+    "permissionPrefix": "oa:platformTemplate",
+    "className": "OaPlatformTemplate"
+  },
+  "page": { "layout": "standard-crud" },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": false,
+    "fields": [
+      {
+        "field": "categoryCode",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "wf_biz_type",
+        "width": 160
+      },
+      { "field": "templateCode", "component": "input", "queryType": "LIKE", "width": 160 },
+      { "field": "templateName", "component": "input", "queryType": "LIKE", "width": 180 },
+      {
+        "field": "status",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "sys_common_status",
+        "width": 120
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "categoryCode",
+        "component": "dict-tag",
+        "dictType": "wf_biz_type",
+        "minWidth": 140
+      },
+      { "field": "templateCode", "component": "text", "minWidth": 140 },
+      { "field": "templateName", "component": "text", "minWidth": 160 },
+      { "field": "latestVersionNo", "component": "text", "width": 100, "align": "center" },
+      { "field": "draftVersionNo", "component": "text", "width": 90, "align": "center" },
+      {
+        "field": "status",
+        "component": "dict-tag",
+        "dictType": "sys_common_status",
+        "width": 90,
+        "align": "center"
+      }
+    ],
+    "actions": { "edit": false, "delete": false, "width": 220 }
+  },
+  "extensions": {
+    "rowActions": [
+      { "id": "edit", "builtin": "edit", "permKey": "update" },
+      {
+        "id": "configure",
+        "labelKey": "configureAction",
+        "permKey": "update",
+        "handler": "oaPlatformTemplate.configure"
+      },
+      {
+        "id": "publish",
+        "labelKey": "publishAction",
+        "permKey": "publish",
+        "type": "warning",
+        "handler": "oaPlatformTemplate.publish",
+        "showWhen": { "field": "hasDraft", "values": ["true"] }
+      }
+    ]
+  }
+}

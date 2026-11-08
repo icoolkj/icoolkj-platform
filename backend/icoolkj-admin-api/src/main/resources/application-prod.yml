@@ -1,0 +1,25 @@
+# api prod-only overrides (shared prod loaded automatically)
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false
+
+flowable:
+  database-schema-update: false
+
+icoolkj:
+  security:
+    login:
+      allow-multi-login: false
+      single-login-kickout-oldest: true
+      require-captcha: true
+  provider:
+    sms:
+      enabled: ${SMS_ENABLED:false}
+    mail:
+      enabled: ${MAIL_ENABLED:false}
+    ocr:
+      enabled: ${OCR_ENABLED:false}
+    sign:
+      enabled: ${SIGN_ENABLED:false}

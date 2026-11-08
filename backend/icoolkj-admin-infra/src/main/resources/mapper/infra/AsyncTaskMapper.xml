@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.AsyncTaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.AsyncTaskEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="task_type" property="taskType"/>
+        <result column="task_name" property="taskName"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="request_param" property="requestParam"/>
+        <result column="result_data" property="resultData"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="retry_count" property="retryCount"/>
+        <result column="max_retry_count" property="maxRetryCount"/>
+        <result column="requeue_count" property="requeueCount"/>
+        <result column="started_at" property="startedAt"/>
+        <result column="finished_at" property="finishedAt"/>
+        <result column="user_id" property="userId"/>
+        <result column="locale" property="locale"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_by" property="updatedBy"/>
+        <result column="updated_at" property="updatedAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, tenant_id, task_type, task_name, biz_type, biz_id, task_status, request_param, result_data,
+        error_message, retry_count, max_retry_count, requeue_count, started_at, finished_at, user_id, locale,
+        created_by, created_at, updated_by, updated_at, deleted
+    </sql>
+
+    <sql id="Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="taskType != null and taskType != ''">AND task_type = #{taskType}</if>
+            <if test="taskStatus != null and taskStatus != ''">AND task_status = #{taskStatus}</if>
+            <if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+        </where>
+    </sql>
+
+    <sql id="Page_Query_Where">
+        <where>
+            deleted = 0
+            <if test="tenantId != null and tenantId != ''">AND tenant_id = #{tenantId}</if>
+            <if test="taskType != null and taskType != ''">AND task_type = #{taskType}</if>
+            <if test="taskStatus != null and taskStatus != ''">AND task_status = #{taskStatus}</if>
+            <if test="userId != null and userId != ''">AND user_id = #{userId}</if>
+            <if test="dataScopeSql != null and dataScopeSql != ''">${dataScopeSql}</if>
+        </where>
+    </sql>
+
+    <select id="selectById" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task
+        WHERE id = #{id} AND deleted = 0
+    </select>
+
+    <select id="selectList" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task
+        <include refid="Query_Where"/>
+        ORDER BY created_at DESC
+    </select>
+
+    <select id="selectPage" resultMap="BaseResultMap">
+        <bind name="offset" value="(pageNo - 1) * pageSize"/>
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task
+        <include refid="Page_Query_Where"/>
+        ORDER BY created_at DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+
+    <select id="countByQuery" resultType="long">
+        SELECT COUNT(1) FROM infra_async_task
+        <include refid="Page_Query_Where"/>
+    </select>
+
+    <select id="selectStaleByStatus" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task
+        WHERE deleted = 0
+          AND task_status = #{taskStatus}
+          AND updated_at &lt; #{updatedBefore}
+        ORDER BY updated_at ASC
+        LIMIT #{limit}
+    </select>
+
+    <select id="selectTerminalExcelImportFinishedBefore" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List"/>
+        FROM infra_async_task
+        WHERE deleted = 0
+          AND biz_type IN ('excel-import', 'excel-export')
+          AND task_status IN ('2', '3', '4')
+          AND finished_at IS NOT NULL
+          AND finished_at &lt; #{finishedBefore}
+        ORDER BY finished_at ASC
+        LIMIT #{limit}
+    </select>
+
+    <insert id="insert">
+        INSERT INTO infra_async_task (
+            id, tenant_id, task_type, task_name, biz_type, biz_id, task_status, request_param, result_data,
+            error_message, retry_count, max_retry_count, requeue_count, started_at, finished_at, user_id, locale,
+            created_by, created_at, updated_by, updated_at, deleted
+        ) VALUES (
+            #{id}, #{tenantId}, #{taskType}, #{taskName}, #{bizType}, #{bizId}, #{taskStatus}, #{requestParam},
+            #{resultData}, #{errorMessage}, #{retryCount}, #{maxRetryCount}, #{requeueCount}, #{startedAt},
+            #{finishedAt}, #{userId}, #{locale}, #{createdBy}, #{createdAt}, #{updatedBy}, #{updatedAt}, #{deleted}
+        )
+    </insert>
+
+    <update id="updateById">
+        UPDATE infra_async_task
+        SET tenant_id = #{tenantId},
+            task_type = #{taskType},
+            task_name = #{taskName},
+            biz_type = #{bizType},
+            biz_id = #{bizId},
+            task_status = #{taskStatus},
+            request_param = #{requestParam},
+            result_data = #{resultData},
+            error_message = #{errorMessage},
+            retry_count = #{retryCount},
+            max_retry_count = #{maxRetryCount},
+            requeue_count = #{requeueCount},
+            started_at = #{startedAt},
+            finished_at = #{finishedAt},
+            updated_by = #{updatedBy},
+            updated_at = #{updatedAt},
+            deleted = #{deleted}
+        WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="deleteById">
+        UPDATE infra_async_task SET deleted = 1 WHERE id = #{id}
+    </update>
+
+</mapper>

@@ -1,0 +1,79 @@
+{
+  "page": {
+    "title": "Post Management",
+    "description": "Manage post records",
+    "addTitle": "Add Post",
+    "editTitle": "Edit Post",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled"
+  },
+  "fields": {
+    "postName": {
+      "label": "Post Name",
+      "placeholder": "Enter post name",
+      "validation": {
+        "required": "Post Name is required",
+        "maxLength": "Post Name must not exceed 50 characters"
+      }
+    },
+    "postCode": {
+      "label": "Post Code",
+      "placeholder": "Enter post code",
+      "validation": {
+        "required": "Post Code is required",
+        "maxLength": "Post Code must not exceed 64 characters"
+      }
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Enter sort order",
+      "validation": {
+        "required": "Sort No is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    }
+  },
+  "meta": {
+    "businessName": "post",
+    "apiModule": "system",
+    "functionName": "Post",
+    "constraints": {
+      "postName": {
+        "required": true,
+        "maxLength": 50
+      },
+      "postCode": {
+        "required": true,
+        "maxLength": 64
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "sortNo": {
+        "required": true
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

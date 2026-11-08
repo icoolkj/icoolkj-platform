@@ -1,0 +1,48 @@
+{
+  "page": {
+    "title": "AI 建表记录",
+    "description": "查看 AI 建表/改表 DDL 生成与复制记录",
+    "addTitle": "新增",
+    "editTitle": "修改",
+    "deleteConfirm": "确认删除选中的 {count} 条数据？",
+    "logDetail": "详情",
+    "userMessage": "用户消息",
+    "generatedDdl": "生成 DDL",
+    "finalDdl": "最终 DDL"
+  },
+  "fields": {
+    "recordType": {
+      "label": "记录类型",
+      "placeholder": "请选择记录类型"
+    },
+    "status": {
+      "label": "状态",
+      "placeholder": "请选择状态"
+    },
+    "targetTableName": {
+      "label": "表名",
+      "placeholder": "请输入表名"
+    },
+    "apiModule": {
+      "label": "所属模块"
+    },
+    "generatedSummary": {
+      "label": "摘要"
+    },
+    "userPromptPreview": {
+      "label": "用户消息"
+    },
+    "operatorName": {
+      "label": "操作人"
+    },
+    "createdAt": {
+      "label": "创建时间"
+    }
+  },
+  "meta": {
+    "businessName": "aiDdlLog",
+    "apiModule": "tool",
+    "functionName": "AI 建表记录",
+    "constraints": {}
+  }
+}

@@ -1,0 +1,140 @@
+{
+  "page": {
+    "title": "API Log Management",
+    "description": "Manage api log records",
+    "addTitle": "Add API Log",
+    "editTitle": "Edit API Log",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "clear": "Clear",
+    "clearConfirm": "Clear all logs? This cannot be undone."
+  },
+  "fields": {
+    "requestUri": {
+      "label": "Request URI",
+      "placeholder": "Please enter Request URI",
+      "validation": {
+        "required": "Request Uri is required",
+        "maxLength": "Request Uri must not exceed 255 characters"
+      }
+    },
+    "requestMethod": {
+      "label": "Method",
+      "placeholder": "Please enter Request Method",
+      "validation": {
+        "required": "Request Method is required",
+        "maxLength": "Request Method must not exceed 20 characters"
+      }
+    },
+    "username": {
+      "label": "User",
+      "placeholder": "Please enter Username",
+      "validation": {
+        "maxLength": "Username must not exceed 50 characters"
+      }
+    },
+    "clientIp": {
+      "label": "Client IP",
+      "placeholder": "Please enter Client Ip",
+      "validation": {
+        "maxLength": "Client Ip must not exceed 64 characters"
+      }
+    },
+    "responseCode": {
+      "label": "Code",
+      "placeholder": "Please enter Response Code",
+      "validation": {}
+    },
+    "costTime": {
+      "label": "Cost",
+      "placeholder": "Please enter Cost Time",
+      "validation": {}
+    },
+    "accessedAt": {
+      "label": "Accessed At",
+      "placeholder": "Please select Accessed At",
+      "validation": {
+        "required": "Accessed At is required"
+      }
+    },
+    "tenantId": {
+      "label": "Tenant Id",
+      "placeholder": "Please enter Tenant Id",
+      "validation": {
+        "required": "Tenant Id is required",
+        "maxLength": "Tenant Id must not exceed 20 characters"
+      }
+    },
+    "traceId": {
+      "label": "Trace Id",
+      "placeholder": "Please enter Trace Id",
+      "validation": {
+        "maxLength": "Trace Id must not exceed 64 characters"
+      }
+    },
+    "userId": {
+      "label": "User Id",
+      "placeholder": "Please enter User Id",
+      "validation": {
+        "maxLength": "User Id must not exceed 20 characters"
+      }
+    },
+    "requestParam": {
+      "label": "Request Param",
+      "placeholder": "Please enter Request Param",
+      "validation": {
+        "maxLength": "Request Param must not exceed 65535 characters"
+      }
+    },
+    "responseMessage": {
+      "label": "Response Message",
+      "placeholder": "Please enter Response Message",
+      "validation": {
+        "maxLength": "Response Message must not exceed 255 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "apiAccessLog",
+    "apiModule": "infra",
+    "functionName": "API Log",
+    "constraints": {
+      "tenantId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "traceId": {
+        "maxLength": 64
+      },
+      "requestUri": {
+        "required": true,
+        "maxLength": 255
+      },
+      "requestMethod": {
+        "required": true,
+        "maxLength": 20
+      },
+      "clientIp": {
+        "maxLength": 64
+      },
+      "userId": {
+        "maxLength": 20
+      },
+      "username": {
+        "maxLength": 50
+      },
+      "requestParam": {
+        "maxLength": 65535
+      },
+      "responseCode": {},
+      "responseMessage": {
+        "maxLength": 255
+      },
+      "costTime": {},
+      "accessedAt": {
+        "required": true
+      }
+    }
+  }
+}

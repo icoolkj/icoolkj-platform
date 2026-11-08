@@ -1,0 +1,36 @@
+{
+  "page": {
+    "title": "在线用户",
+    "description": "查看当前有效登录会话；可强制下线本租户（平台可看全部）会话。",
+    "username": "用户名",
+    "usernamePlaceholder": "按用户名筛选",
+    "tenantCode": "租户编码",
+    "tenantCodePlaceholder": "按租户编码筛选",
+    "sessionId": "会话 ID",
+    "userId": "用户 ID",
+    "loginAt": "登录时间",
+    "forceLogout": "强制下线",
+    "forceLogoutConfirm": "确认强制下线该会话？对方需重新登录。",
+    "forceLogoutSuccess": "已强制下线",
+    "forceLogoutSelf": "目标用户包含当前账号的会话，强制下线后相关终端需重新登录",
+    "empty": "暂无在线会话",
+    "totalCount": "共 {count} 个会话"
+  },
+  "fields": {
+    "username": {
+      "label": "用户名"
+    },
+    "tenantCode": {
+      "label": "租户编码"
+    },
+    "userId": {
+      "label": "用户 ID"
+    },
+    "sessionId": {
+      "label": "会话 ID"
+    },
+    "createdAt": {
+      "label": "登录时间"
+    }
+  }
+}

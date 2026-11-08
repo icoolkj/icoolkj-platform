@@ -1,0 +1,105 @@
+{
+  "page": {
+    "title": "Banners",
+    "description": "Manage carousel banners with multi-position display and click actions",
+    "addTitle": "Add Banner",
+    "editTitle": "Edit Banner",
+    "batchDelete": "Batch Delete",
+    "batchDeleteConfirm": "Delete {count} selected banner(s)?",
+    "deleteConfirm": "Delete this banner?",
+    "upload": "Upload Image",
+    "uploadHint": "jpg/png/webp, 16:9 recommended",
+    "coverImageRequired": "Please select an image file",
+    "positionConfigTitle": "Position Settings",
+    "clickEnabled": "Enable",
+    "clickDisabled": "Disable",
+    "clickEvent": "Click Action",
+    "linkType": "Jump Type",
+    "linkUrl": "URL",
+    "linkUrlPlaceholder": "Enter URL or route path",
+    "positionColumn": "Position",
+    "displayPositionsRequired": "Select at least one display position"
+  },
+  "fields": {
+    "bannerTitle": {
+      "label": "Title",
+      "placeholder": "Enter title",
+      "validation": {
+        "required": "Title is required",
+        "maxLength": "Title must be at most {max} characters"
+      }
+    },
+    "imageFileId": {
+      "label": "Image",
+      "placeholder": "Upload image",
+      "validation": {
+        "required": "Image is required"
+      }
+    },
+    "imagePreviewUrl": {
+      "label": "Image"
+    },
+    "displayPositions": {
+      "label": "Display Positions",
+      "placeholder": "Select positions",
+      "validation": {
+        "required": "Select at least one position",
+        "maxLength": "Invalid display positions"
+      }
+    },
+    "displayPosition": {
+      "label": "Display Position",
+      "placeholder": "Select position",
+      "validation": {
+        "required": "Display position is required"
+      }
+    },
+    "positionConfig": {
+      "label": "Position Config"
+    },
+    "sortNo": {
+      "label": "Sort",
+      "placeholder": "Enter sort order",
+      "validation": {
+        "required": "Sort order is required"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Select status",
+      "validation": {
+        "required": "Status is required"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Enter remark",
+      "validation": {
+        "maxLength": "Remark must be at most {max} characters"
+      }
+    },
+    "createdAt": {
+      "label": "Created At"
+    },
+    "ids": {
+      "validation": {
+        "required": "Select records to delete"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "banner",
+    "apiModule": "system",
+    "functionName": "Banner",
+    "constraints": {
+      "bannerTitle": { "required": true, "maxLength": 200 },
+      "imageFileId": { "required": true, "maxLength": 20 },
+      "displayPositions": { "required": true, "maxLength": 100 },
+      "positionConfig": { "maxLength": 65535 },
+      "sortNo": { "required": true },
+      "status": { "required": true, "maxLength": 1 },
+      "remark": { "maxLength": 500 },
+      "displayPosition": { "required": true }
+    }
+  }
+}

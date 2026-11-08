@@ -1,0 +1,80 @@
+{
+  "page": {
+    "title": "租户策略配置",
+    "description": "租户管理员可为本租户覆盖登录安全、密码策略、IP 默认策略等参数。未覆盖时沿用平台默认；保存后立即对本租户生效（含多语言后台）。",
+    "refreshCache": "刷新本租户缓存",
+    "refreshCacheSuccess": "本租户配置缓存已刷新",
+    "save": "保存",
+    "edit": "修改",
+    "editTitle": "修改租户策略",
+    "reset": "恢复平台默认",
+    "platformDefault": "平台默认",
+    "overridden": "已覆盖",
+    "inherited": "沿用默认",
+    "saveSuccess": "已保存本租户覆盖",
+    "resetSuccess": "已恢复为平台默认",
+    "resetConfirm": "确认删除本租户覆盖并恢复平台默认？",
+    "configKey": "配置键",
+    "configName": "策略项",
+    "valueType": "类型",
+    "status": "状态",
+    "editValue": "本租户值",
+    "category.all": "全部",
+    "category.login": "登录安全",
+    "category.password": "密码策略",
+    "category.mfa": "双因素认证",
+    "category.ip": "IP 访问",
+    "category.i18n": "国际化",
+    "category.ai": "AI 配置",
+    "category.backup": "数据备份",
+    "category.storage": "文件存储",
+    "category.avatar": "头像策略",
+    "category.workflow": "工作流",
+    "category.brand": "品牌站点",
+    "category.other": "其他"
+  },
+  "keys": {
+    "security.login.max-fail-count": "登录失败最大次数（账号）",
+    "security.login.lock-minutes": "账号锁定分钟数",
+    "security.login.max-fail-count-per-ip": "登录失败最大次数（IP）",
+    "security.login.ip-lock-minutes": "IP 锁定分钟数",
+    "security.login.require-captcha": "登录是否启用验证码",
+    "security.login.allow-multi-login": "是否允许多端登录",
+    "security.login.single-login-kickout-oldest": "单端登录时踢出旧会话",
+    "security.password.expire-days": "密码有效天数",
+    "security.password.force-change-initial": "强制修改初始密码",
+    "security.password.min-length": "密码最小长度",
+    "security.password.require-upper": "密码要求大写字母",
+    "security.password.require-lower": "密码要求小写字母",
+    "security.password.require-number": "密码要求数字",
+    "security.password.require-special": "密码要求特殊字符",
+    "security.password.history-count": "密码历史禁止重用次数",
+    "security.password.initial": "标准初始密码",
+    "security.mfa.enabled": "是否启用 MFA",
+    "security.mfa.force-admin": "管理员强制绑定 MFA",
+    "security.ip.default-policy": "IP 无命中默认策略（allow/deny）",
+    "workflow.approve.quick-comments": "审批快捷意见模板",
+    "workflow.notify.templates": "流程站内信模板"
+  },
+  "fields": {
+    "configValue": {
+      "label": "本租户值",
+      "placeholder": "请输入本租户覆盖值",
+      "validation": {
+        "required": "请输入本租户覆盖值",
+        "maxLength": "本租户覆盖值长度不能超过65535"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "tenantPolicy",
+    "apiModule": "system",
+    "functionName": "租户策略配置",
+    "constraints": {
+      "configValue": {
+        "required": true,
+        "maxLength": 65535
+      }
+    }
+  }
+}

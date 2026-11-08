@@ -1,0 +1,17 @@
+{
+  "page": {
+    "layout": "marketing-simple",
+    "i18nPrefix": "delivery"
+  },
+  "sections": [
+    {
+      "id": "modes",
+      "type": "delivery-modes",
+      "itemIds": ["license", "implement", "custom"]
+    },
+    {
+      "id": "out",
+      "type": "delivery-out"
+    }
+  ]
+}

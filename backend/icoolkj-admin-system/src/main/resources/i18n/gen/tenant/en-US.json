@@ -1,0 +1,203 @@
+{
+  "page": {
+    "title": "Tenant Management",
+    "description": "Manage tenant records",
+    "addTitle": "Add Tenant",
+    "editTitle": "Edit Tenant",
+    "deleteConfirm": "Delete {count} selected record(s)?",
+    "statusNormal": "Normal",
+    "statusDisabled": "Disabled",
+    "disable": "Disable",
+    "enable": "Enable",
+    "disableConfirm": "Disable this tenant?",
+    "provisionTitle": "Tenant provisioned",
+    "provisionWarn": "Copy and keep these credentials now. The initial password is shown only once. If lost, check the platform “Standard initial password” config, or reset the tenant admin password later.",
+    "provisionLoginTip": "Sign in with tenant code + username + password. You must change the password on first login.",
+    "provisionTenantName": "Tenant name",
+    "provisionTenantCode": "Tenant code",
+    "provisionAdminUsername": "Admin username",
+    "provisionInitialPassword": "Initial password",
+    "provisionRootDept": "Root department",
+    "provisionRootDeptCode": "Root dept code",
+    "provisionCopy": "Copy",
+    "provisionCopyAll": "Copy all",
+    "provisionSaved": "I have saved it",
+    "provisionShowPassword": "Show",
+    "provisionHidePassword": "Hide",
+    "provisionCopyAllText": "Tenant code: {tenantCode}\nAdmin username: {adminUsername}\nInitial password: {initialPassword}\nNote: password change required on first login"
+  },
+  "fields": {
+    "tenantCode": {
+      "label": "Tenant Code",
+      "placeholder": "Please enter Tenant Code",
+      "validation": {
+        "required": "Tenant Code is required",
+        "maxLength": "Tenant Code must not exceed 50 characters",
+        "exists": "Tenant code already exists"
+      }
+    },
+    "tenantName": {
+      "label": "Tenant Name",
+      "placeholder": "Please enter Tenant Name",
+      "validation": {
+        "required": "Tenant Name is required",
+        "maxLength": "Tenant Name must not exceed 100 characters"
+      }
+    },
+    "adminUsername": {
+      "label": "Admin username",
+      "placeholder": "Optional; default tenant_admin / org_admin",
+      "validation": {
+        "maxLength": "Admin username must not exceed 50 characters",
+        "invalid": "Must start with a letter; 3–50 letters, digits or underscores"
+      }
+    },
+    "rootDeptCode": {
+      "label": "Root dept code",
+      "placeholder": "Optional; default root",
+      "validation": {
+        "maxLength": "Root dept code must not exceed 50 characters",
+        "invalid": "Must start with a letter; letters, digits or underscores"
+      }
+    },
+    "rootDeptName": {
+      "label": "Root dept name",
+      "placeholder": "Optional; defaults to tenant name",
+      "validation": {
+        "maxLength": "Root dept name must not exceed 100 characters"
+      }
+    },
+    "tenantType": {
+      "label": "Tenant Type",
+      "placeholder": "Please select tenant type",
+      "validation": {
+        "required": "Tenant type is required",
+        "maxLength": "Tenant type must not exceed 20 characters"
+      }
+    },
+    "parentTenantId": {
+      "label": "Parent Organization",
+      "placeholder": "Select parent organization tenant (optional)",
+      "validation": {
+        "maxLength": "Parent tenant must not exceed 20 characters"
+      }
+    },
+    "contactName": {
+      "label": "Contact",
+      "placeholder": "Please enter Contact",
+      "validation": {
+        "maxLength": "Contact must not exceed 50 characters"
+      }
+    },
+    "contactPhone": {
+      "label": "Phone",
+      "placeholder": "Please enter Phone",
+      "validation": {
+        "maxLength": "Phone must not exceed 20 characters"
+      }
+    },
+    "status": {
+      "label": "Status",
+      "placeholder": "Please select Status",
+      "validation": {
+        "required": "Status is required",
+        "maxLength": "Status must not exceed 1 characters"
+      }
+    },
+    "remark": {
+      "label": "Remark",
+      "placeholder": "Please enter Remark",
+      "validation": {
+        "maxLength": "Remark must not exceed 500 characters"
+      }
+    },
+    "contactEmail": {
+      "label": "Contact Email",
+      "placeholder": "Please enter Contact Email",
+      "validation": {
+        "maxLength": "Contact Email must not exceed 100 characters"
+      }
+    },
+    "licenseNo": {
+      "label": "License No",
+      "placeholder": "Please enter License No",
+      "validation": {
+        "maxLength": "License No must not exceed 100 characters"
+      }
+    },
+    "expireAt": {
+      "label": "Expire At",
+      "placeholder": "Please select Expire At",
+      "validation": {}
+    },
+    "accountLimit": {
+      "label": "Account Limit",
+      "placeholder": "Please enter Account Limit",
+      "validation": {}
+    },
+    "rootRegionId": {
+      "label": "Root Region",
+      "placeholder": "Enterprise: province/city/district; Organization: country through district",
+      "validation": {
+        "required": "Root region is required",
+        "maxLength": "Root region must not exceed 20 characters"
+      }
+    }
+  },
+  "meta": {
+    "businessName": "tenant",
+    "apiModule": "tenant",
+    "functionName": "Tenant",
+    "constraints": {
+      "tenantCode": {
+        "required": true,
+        "maxLength": 50
+      },
+      "tenantName": {
+        "required": true,
+        "maxLength": 100
+      },
+      "adminUsername": {
+        "maxLength": 50
+      },
+      "rootDeptCode": {
+        "maxLength": 50
+      },
+      "rootDeptName": {
+        "maxLength": 100
+      },
+      "tenantType": {
+        "required": true,
+        "maxLength": 20
+      },
+      "parentTenantId": {
+        "maxLength": 20
+      },
+      "contactName": {
+        "maxLength": 50
+      },
+      "contactPhone": {
+        "maxLength": 20
+      },
+      "remark": {
+        "maxLength": 500
+      },
+      "contactEmail": {
+        "maxLength": 100
+      },
+      "licenseNo": {
+        "maxLength": 100
+      },
+      "expireAt": {},
+      "accountLimit": {},
+      "rootRegionId": {
+        "required": true,
+        "maxLength": 20
+      },
+      "status": {
+        "required": true,
+        "maxLength": 1
+      }
+    }
+  }
+}

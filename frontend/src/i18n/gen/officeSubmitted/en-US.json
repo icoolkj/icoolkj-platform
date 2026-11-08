@@ -1,0 +1,27 @@
+{
+  "page": {
+    "title": "Submitted",
+    "description": "Workflow view: latest cycle per document. View and withdraw while running. Close in each business list.",
+    "viewDetail": "View",
+    "withdrawApprove": "Withdraw",
+    "withdrawConfirm": "Withdraw this application?",
+    "withdrawSuccess": "Withdrawn",
+    "missingFormRoute": "Missing form route; cannot open detail",
+    "missingBizId": "Missing business document id",
+    "missingInstanceId": "Missing process instance id"
+  },
+  "fields": {
+    "bizTitle": { "label": "Title", "placeholder": "Enter title" },
+    "bizType": { "label": "Business Type", "placeholder": "Select type" },
+    "processDefinitionName": { "label": "Process" },
+    "status": { "label": "Process Status", "placeholder": "Select status" },
+    "bizApproveStatus": { "label": "Document Status" },
+    "startTime": { "label": "Started At" },
+    "endTime": { "label": "Ended At" }
+  },
+  "meta": {
+    "businessName": "officeSubmitted",
+    "apiModule": "workflow",
+    "functionName": "Submitted"
+  }
+}

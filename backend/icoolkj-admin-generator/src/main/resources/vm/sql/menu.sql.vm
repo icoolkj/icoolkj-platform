@@ -1,0 +1,56 @@
+-- ${functionName} 菜单与按钮权限
+-- 表：${tableName} | 父菜单：${parentMenuId} | 产品：${productCode} | 权限前缀：${permissionPrefix}
+-- 首次部署执行；重复执行前请确认 ID / permission_code 无冲突
+
+insert into sys_menu (
+  id, parent_id, menu_type, menu_name, name_i18n, route_name, route_path, component_path,
+  permission_code, icon, sort_no, visible, status, is_external, is_cache,
+  remark, assign_scope, product_code, created_by, created_at, updated_by, updated_at, deleted
+) values
+('${menuPageId}', '${parentMenuId}', 'C', '${functionName}',
+  json_object('zh-CN', '${functionName}', 'en-US', '${functionNameEn}'),
+  '${ClassName}', '${businessName}', '${componentPath}', '${permissionPrefix}:view', 'Document', 99, '0', '0', 0, 1, '${functionName}页面', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0),
+('${menuBtnListId}', '${menuPageId}', 'F', '${functionName}查询',
+  json_object('zh-CN', '${functionName}查询', 'en-US', '${functionNameEn} Query'),
+  null, null, null, '${permissionPrefix}:list', null, 1, '0', '0', 0, 1, '${functionName}列表', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0),
+('${menuBtnAddId}', '${menuPageId}', 'F', '${functionName}新增',
+  json_object('zh-CN', '${functionName}新增', 'en-US', '${functionNameEn} Add'),
+  null, null, null, '${permissionPrefix}:add', null, 2, '0', '0', 0, 1, '${functionName}新增', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0),
+('${menuBtnUpdateId}', '${menuPageId}', 'F', '${functionName}修改',
+  json_object('zh-CN', '${functionName}修改', 'en-US', '${functionNameEn} Edit'),
+  null, null, null, '${permissionPrefix}:update', null, 3, '0', '0', 0, 1, '${functionName}修改', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0),
+('${menuBtnDeleteId}', '${menuPageId}', 'F', '${functionName}删除',
+  json_object('zh-CN', '${functionName}删除', 'en-US', '${functionNameEn} Delete'),
+  null, null, null, '${permissionPrefix}:delete', null, 4, '0', '0', 0, 1, '${functionName}删除', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0)#if($hasExport),
+('${menuBtnExportId}', '${menuPageId}', 'F', '${functionName}导出',
+  json_object('zh-CN', '${functionName}导出', 'en-US', '${functionNameEn} Export'),
+  null, null, null, '${permissionPrefix}:export', null, 5, '0', '0', 0, 1, '${functionName}导出', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0)#end#if($hasImport),
+('${menuBtnImportId}', '${menuPageId}', 'F', '${functionName}导入',
+  json_object('zh-CN', '${functionName}导入', 'en-US', '${functionNameEn} Import'),
+  null, null, null, '${permissionPrefix}:import', null, 6, '0', '0', 0, 1, '${functionName}导入', '${assignScope}', '${productCode}', '0', now(3), '0', now(3), 0)#end;
+
+-- 平台管理员角色授权（role_id 按实际环境调整）
+insert into sys_role_menu (tenant_id, role_id, menu_id) values
+('0', '2000000000000000001', '${menuPageId}'),
+('0', '2000000000000000001', '${menuBtnListId}'),
+('0', '2000000000000000001', '${menuBtnAddId}'),
+('0', '2000000000000000001', '${menuBtnUpdateId}'),
+('0', '2000000000000000001', '${menuBtnDeleteId}')#if($hasExport),
+('0', '2000000000000000001', '${menuBtnExportId}')#end#if($hasImport),
+('0', '2000000000000000001', '${menuBtnImportId}')#end;
+
+#if($grantTenantSuperRole)
+-- 租户超级管理员角色（各租户 is_super_role=1）授权
+insert into sys_role_menu (tenant_id, role_id, menu_id)
+select r.tenant_id, r.id, m.id
+from sys_role r
+cross join (
+  select '${menuPageId}' as id union all select '${menuBtnListId}' union all select '${menuBtnAddId}'
+  union all select '${menuBtnUpdateId}' union all select '${menuBtnDeleteId}'#if($hasExport) union all select '${menuBtnExportId}'#end#if($hasImport) union all select '${menuBtnImportId}'#end
+) m
+where r.deleted = 0 and r.is_super_role = '1'
+  and not exists (
+    select 1 from sys_role_menu rm
+    where rm.tenant_id = r.tenant_id and rm.role_id = r.id and rm.menu_id = m.id
+  );
+#end

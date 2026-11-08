@@ -1,0 +1,256 @@
+# iCoolKJ 代码生成器全局配置
+
+sql_file: backend/database/migration/V1__init_icoolkj_platform.sql
+
+# 主键：Service 创建时调用 IdGeneratorUtils.nextIdStr()
+id_util: com.icoolkj.platform.common.util.IdGeneratorUtils
+
+modules:
+  system:
+    package: com.icoolkj.platform.system
+    java_dir: backend/icoolkj-admin-system/src/main/java/com/icoolkj/platform/system
+    xml_dir: backend/icoolkj-admin-system/src/main/resources/mapper/system
+    api_dir: backend/icoolkj-admin-api/src/main/java/com/icoolkj/platform/api/controller/system
+    route_prefix: /system
+  infra:
+    package: com.icoolkj.platform.infra
+    java_dir: backend/icoolkj-admin-infra/src/main/java/com/icoolkj/platform/infra
+    xml_dir: backend/icoolkj-admin-infra/src/main/resources/mapper/infra
+    api_dir: backend/icoolkj-admin-api/src/main/java/com/icoolkj/platform/api/controller/infra
+    route_prefix: /infra
+  tenant:
+    package: com.icoolkj.platform.system
+    java_dir: backend/icoolkj-admin-system/src/main/java/com/icoolkj/platform/system
+    xml_dir: backend/icoolkj-admin-system/src/main/resources/mapper/system
+    api_dir: backend/icoolkj-admin-api/src/main/java/com/icoolkj/platform/api/controller/tenant
+    route_prefix: /tenant
+
+# crud: full | readonly | none
+#   full     — 分页/详情/新增/修改/删除
+#   readonly — 分页/详情（日志类）
+#   none     — 仅 entity/mapper/xml（关联表）
+
+tables:
+  - table: sys_tenant
+    module: system
+    api_module: tenant
+    entity: TenantEntity
+    mapper: TenantMapper
+    base: base
+    crud: full
+    comment: 租户
+    list_filters: [tenantCode, tenantName, status]
+    custom: TenantMapper
+
+  - table: sys_user
+    module: system
+    entity: UserEntity
+    mapper: UserMapper
+    base: tenant
+    crud: full
+    comment: 用户
+    list_filters: [tenantId, username, nickname, phone, status, deptId]
+    custom: UserMapper
+
+  - table: sys_role
+    module: system
+    entity: RoleEntity
+    mapper: RoleMapper
+    base: tenant
+    crud: full
+    comment: 角色
+    list_filters: [tenantId, roleName, roleCode, status]
+
+  - table: sys_user_role
+    module: system
+    entity: UserRoleEntity
+    mapper: UserRoleMapper
+    base: plain
+    crud: none
+    has_id: false
+    list_filters: [tenantId, userId, roleId]
+    custom: UserRoleMapper
+
+  - table: sys_menu
+    module: system
+    entity: MenuEntity
+    mapper: MenuMapper
+    base: base
+    crud: full
+    comment: 菜单
+    list_filters: [menuName, menuType, status, parentId]
+    custom: MenuMapper
+
+  - table: sys_role_menu
+    module: system
+    entity: RoleMenuEntity
+    mapper: RoleMenuMapper
+    base: plain
+    crud: none
+    has_id: false
+    list_filters: [tenantId, roleId, menuId]
+    custom: RoleMenuMapper
+
+  - table: sys_dept
+    module: system
+    entity: DeptEntity
+    mapper: DeptMapper
+    base: tenant
+    crud: full
+    comment: 部门
+    list_filters: [tenantId, deptName, deptCode, status, parentId]
+
+  - table: sys_post
+    module: system
+    entity: PostEntity
+    mapper: PostMapper
+    base: tenant
+    crud: full
+    comment: 岗位
+    list_filters: [tenantId, postName, postCode, status]
+
+  - table: sys_user_post
+    module: system
+    entity: UserPostEntity
+    mapper: UserPostMapper
+    base: plain
+    crud: none
+    has_id: false
+    list_filters: [tenantId, userId, postId]
+
+  - table: sys_role_dept
+    module: system
+    entity: RoleDeptEntity
+    mapper: RoleDeptMapper
+    base: plain
+    crud: none
+    has_id: false
+    list_filters: [tenantId, roleId, deptId]
+
+  - table: sys_dict_type
+    module: system
+    entity: DictTypeEntity
+    mapper: DictTypeMapper
+    base: platform
+    crud: full
+    comment: 字典类型
+    list_filters: [tenantId, dictName, dictType, status]
+
+  - table: sys_dict_item
+    module: system
+    entity: DictItemEntity
+    mapper: DictItemMapper
+    base: platform
+    crud: full
+    comment: 字典项
+    list_filters: [tenantId, dictTypeId, dictLabel, dictValue, status]
+
+  - table: sys_config
+    module: system
+    entity: ConfigEntity
+    mapper: ConfigMapper
+    base: platform
+    crud: full
+    service_name: ConfigAdminService
+    service_impl_name: ConfigAdminServiceImpl
+    comment: 参数配置
+    list_filters: [tenantId, configName, configKey, configType]
+    custom: ConfigMapper
+
+  - table: sys_notice
+    module: system
+    entity: NoticeEntity
+    mapper: NoticeMapper
+    base: platform
+    crud: full
+    comment: 通知公告
+    list_filters: [tenantId, noticeTitle, noticeType, status]
+
+  - table: sys_ip_access_rule
+    module: system
+    entity: IpAccessRuleEntity
+    mapper: IpAccessRuleMapper
+    base: platform
+    crud: full
+    comment: IP访问规则
+    list_filters: [tenantId, ruleName, ruleType, applyScope, status]
+    custom: IpAccessRuleMapper
+
+  - table: sys_login_log
+    module: system
+    entity: LoginLogEntity
+    mapper: LoginLogMapper
+    base: plain
+    crud: readonly
+    gen_stack: false
+    comment: 登录日志
+    has_deleted: false
+    order_by: login_at DESC
+    list_filters: [tenantId, username, loginStatus]
+
+  - table: sys_operation_log
+    module: system
+    entity: OperationLogEntity
+    mapper: OperationLogMapper
+    base: plain
+    crud: readonly
+    gen_stack: false
+    comment: 操作日志
+    has_deleted: false
+    order_by: operation_at DESC
+    list_filters: [tenantId, operatorId, operationStatus, moduleName]
+
+  - table: infra_file
+    module: infra
+    entity: InfraFileEntity
+    mapper: InfraFileMapper
+    base: plain
+    crud: readonly
+    comment: 文件
+    route_name: file
+    controller_name: FileController
+    has_deleted: false
+    order_by: uploaded_at DESC
+    list_filters: [tenantId, bizType, bizId]
+
+  - table: infra_async_task
+    module: infra
+    entity: AsyncTaskEntity
+    mapper: AsyncTaskMapper
+    base: tenant
+    crud: full
+    comment: 异步任务
+    list_filters: [tenantId, taskType, taskStatus]
+
+  - table: infra_async_task_log
+    module: infra
+    entity: AsyncTaskLogEntity
+    mapper: AsyncTaskLogMapper
+    base: plain
+    crud: readonly
+    comment: 异步任务日志
+    has_deleted: false
+    order_by: created_at DESC
+    list_filters: [tenantId, taskId]
+
+  - table: infra_api_access_log
+    module: infra
+    entity: ApiAccessLogEntity
+    mapper: ApiAccessLogMapper
+    base: plain
+    crud: readonly
+    comment: API访问日志
+    has_deleted: false
+    order_by: accessed_at DESC
+    list_filters: [tenantId, userId, requestUri]
+
+  - table: infra_thirdparty_call_log
+    module: infra
+    entity: ThirdPartyCallLogEntity
+    mapper: ThirdPartyCallLogMapper
+    base: plain
+    crud: readonly
+    comment: 第三方调用日志
+    has_deleted: false
+    order_by: called_at DESC
+    list_filters: [tenantId, providerName, responseStatus]

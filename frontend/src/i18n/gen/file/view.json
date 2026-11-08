@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "businessName": "file",
+    "apiModule": "infra",
+    "backendModule": "infra",
+    "permissionPrefix": "infra:file",
+    "className": "InfraFile"
+  },
+  "page": {
+    "layout": "standard-crud"
+  },
+  "query": {
+    "maxVisible": 3,
+    "collapsible": true,
+    "fields": [
+      {
+        "field": "originalName",
+        "component": "input",
+        "queryType": "LIKE",
+        "width": 200
+      },
+      {
+        "field": "storageType",
+        "component": "select",
+        "queryType": "EQ",
+        "dictType": "infra_storage_type",
+        "width": 160
+      },
+      {
+        "field": "bizType",
+        "component": "input",
+        "queryType": "EQ",
+        "width": 180
+      }
+    ]
+  },
+  "table": {
+    "fields": [
+      {
+        "field": "thumbnail",
+        "component": "file-thumb",
+        "width": 70,
+        "align": "center"
+      },
+      {
+        "field": "originalName",
+        "component": "text",
+        "minWidth": 220,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "fileSizeDisplay",
+        "component": "text",
+        "width": 120,
+        "align": "right"
+      },
+      {
+        "field": "fileExt",
+        "component": "text",
+        "width": 90,
+        "align": "center"
+      },
+      {
+        "field": "storageType",
+        "component": "dict-tag",
+        "dictType": "infra_storage_type",
+        "width": 110,
+        "align": "center"
+      },
+      {
+        "field": "bizType",
+        "component": "text",
+        "width": 120,
+        "showOverflowTooltip": true
+      },
+      {
+        "field": "createdAt",
+        "component": "datetime",
+        "width": 170,
+        "align": "center"
+      }
+    ],
+    "actions": {
+      "edit": false,
+      "delete": false,
+      "width": 260
+    }
+  },
+  "form": {
+    "mode": "dialog",
+    "dialogWidth": 640,
+    "fields": []
+  },
+  "extensions": {
+    "toolbarActions": [
+      {
+        "id": "batchDelete",
+        "builtin": "batchDelete",
+        "labelKey": "batchDelete",
+        "permKey": "delete",
+        "selectionFilter": "deletable"
+      }
+    ],
+    "rowActions": [
+      {
+        "id": "preview",
+        "labelKey": "preview",
+        "handler": "infraFile.preview",
+        "permKey": "list",
+        "showWhen": {
+          "field": "previewable",
+          "values": ["true"]
+        }
+      },
+      {
+        "id": "detail",
+        "labelKey": "detail",
+        "handler": "infraFile.detail",
+        "permKey": "list"
+      },
+      {
+        "id": "download",
+        "labelKey": "download",
+        "handler": "infraFile.download",
+        "permKey": "download"
+      },
+      {
+        "id": "delete",
+        "labelKey": "delete",
+        "builtin": "delete",
+        "type": "danger",
+        "permKey": "delete",
+        "showWhen": {
+          "field": "deletable",
+          "values": ["true"]
+        }
+      }
+    ]
+  }
+}

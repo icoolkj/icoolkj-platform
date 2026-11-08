@@ -1,0 +1,54 @@
+specVersion: "1.0"
+pageKey: noticeApprove
+layout: custom
+vueVariant: noticeApprove
+
+meta:
+  apiModule: system
+  backendModule: system
+  permissionPrefix: workflow:approve:notice
+  className: NoticeApprove
+
+entity:
+  tableName: sys_notice
+  businessName: noticeApprove
+  functionName: 公告审批
+
+extensions:
+  hiddenMenu: true
+  loadApi: GET /system/notice/{bizId}/approve-detail
+  completeApi: POST /workflow/task/{taskId}/complete
+  completePermission: workflow:task:complete
+  layoutComponent: WorkflowApproveLayout
+  leftPanel:
+    component: NoticeReadonlyDetail
+    fields:
+      - noticeTitle
+      - noticeType
+      - coverPreviewUrl
+      - noticeSummary
+      - noticeContent
+      - publishLocations
+      - publishStatus
+  rightPanel:
+    component: WorkflowApproveForm
+    fields:
+      - approved
+      - comment
+  timeline:
+    source: instance
+    component: WorkflowProgressPanel
+
+viewDefaults:
+  page:
+    layout: split-approve
+
+fields:
+  - javaField: approved
+    columnComment: 审批结果
+    htmlType: radio
+    dictType: wf_approve_action
+  - javaField: comment
+    columnComment: 审批意见
+    htmlType: textarea
+    maxLength: 500

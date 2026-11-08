@@ -1,0 +1,15 @@
+{
+  "meta": {
+    "businessName": "officeApply",
+    "apiModule": "oa",
+    "backendModule": "oa",
+    "permissionPrefix": "oa:office:apply",
+    "className": "OfficeApply"
+  },
+  "page": { "layout": "card-catalog" },
+  "query": {
+    "fields": [{ "field": "keyword", "component": "input", "queryType": "LIKE", "width": 240 }]
+  },
+  "table": { "fields": [], "actions": { "edit": false, "delete": false } },
+  "form": { "mode": "dialog", "fields": [] }
+}

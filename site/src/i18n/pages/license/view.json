@@ -1,0 +1,17 @@
+{
+  "page": {
+    "layout": "marketing-simple",
+    "i18nPrefix": "license"
+  },
+  "sections": [
+    {
+      "id": "steps",
+      "type": "license-steps"
+    },
+    {
+      "id": "console",
+      "type": "license-console",
+      "cta": { "action": "console", "labelKey": "consoleCta" }
+    }
+  ]
+}

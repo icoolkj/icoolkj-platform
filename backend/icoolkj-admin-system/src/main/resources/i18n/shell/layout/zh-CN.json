@@ -1,0 +1,91 @@
+{
+  "demoBanner": "当前为演示环境，数据仅供浏览，禁止新增、修改或删除。",
+  "brand": "iCoolKJ",
+  "brandMini": "iCoolKJ",
+  "codeGen": "代码生成",
+  "configManage": "参数配置",
+  "currentTenant": "当前租户",
+  "currentTenantLabel": "当前租户：{code}",
+  "dashboard": "工作台",
+  "editGenConfig": "编辑生成配置",
+  "formDesigner": "表单设计器",
+  "oaTenantConfigure": "配置映射",
+  "home": "首页",
+  "language": "语言",
+  "fullscreen": "全屏",
+  "fullscreenExit": "退出全屏",
+  "logout": "退出登录",
+  "noAccess": "无权限",
+  "noAccessRelogin": "重新登录",
+  "noAccessSubtitle": "当前账号未分配任何菜单权限，请联系租户管理员分配角色后重新登录。",
+  "noAccessTitle": "暂无可用页面",
+  "pageTitle": "iCoolKJ 平台",
+  "sidebarNoMenus": "暂无可用菜单",
+  "menuSearchPlaceholder": "搜索菜单",
+  "menuSearchEmpty": "无匹配菜单",
+  "productSwitcher": "切换产品",
+  "messages": "消息",
+  "messagesViewAll": "查看全部",
+  "messagesEmpty": "暂无消息",
+  "overviewPlaceholder": "指标与快捷入口将在后续迭代接入",
+  "overview": {
+    "oa": {
+      "title": "办公概览",
+      "desc": "待办、发起与近期协作摘要",
+      "stat1": "待办",
+      "stat2": "已发申请",
+      "stat3": "近期公告"
+    },
+    "files": {
+      "title": "文件概览",
+      "desc": "容量、上传与策略摘要",
+      "stat1": "已用容量",
+      "stat2": "近七日上传",
+      "stat3": "策略数"
+    },
+    "ai": {
+      "title": "AI 概览",
+      "desc": "能力绑定、用量与快捷试跑",
+      "stat1": "已绑定能力",
+      "stat2": "近七日调用",
+      "stat3": "失败数"
+    }
+  },
+  "systemManage": "系统管理",
+  "systemTools": "系统工具",
+  "theme": "主题",
+  "themes": {
+    "blue": "科技蓝",
+    "green": "青绿",
+    "orange": "活力橙",
+    "purple": "典雅紫",
+    "rose": "玫瑰粉"
+  },
+  "settings": {
+    "title": "布局设置",
+    "themeColor": "主题色",
+    "headerStyle": "顶栏风格",
+    "headerPrimary": "主题色",
+    "headerLight": "浅色",
+    "sidebarStyle": "侧栏风格",
+    "sidebarDark": "深色",
+    "sidebarLight": "浅色",
+    "interface": "界面显示",
+    "breadcrumb": "面包屑",
+    "tagsView": "多标签页",
+    "pageHeader": "页面标题区",
+    "watermark": "用户水印",
+    "menuUniqueOpened": "菜单排他展开",
+    "formMode": "表单风格",
+    "formDialog": "弹窗",
+    "formDrawer": "抽屉",
+    "reset": "恢复默认",
+    "hint": "配置实时生效，并同步保存到当前账号。"
+  },
+  "tags": {
+    "more": "标签操作",
+    "closeOthers": "关闭其他",
+    "closeAll": "关闭全部",
+    "maxHint": "最多保留 {max} 个标签，超出自动关闭最早打开的"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "docs": {
+    "title": "Documentation",
+    "lead": "Organized by audience and goal—so you can evaluate value, capability boundaries, and delivery paths quickly.",
+    "eyebrow": "Docs",
+    "hubCta": "Open category",
+    "backHub": "Back to docs hub",
+    "toc": "In this category",
+    "categoriesNav": "Categories",
+    "prev": "Previous",
+    "next": "Next",
+    "relatedTitle": "Related pages",
+    "related": {
+      "product": "Capabilities overview",
+      "license": "Licence & usage",
+      "delivery": "Licence & scope",
+      "about": "About & contact"
+    },
+    "categories": [
+      {
+        "id": "overview",
+        "title": "Platform overview",
+        "summary": "What it is, what problem it solves, and who it is for—readable in five minutes.",
+        "sections": [
+          {
+            "title": "Positioning",
+            "body": "iCoolKJ Platform is a Source Available general-purpose foundation for enterprise admin systems, published for non-commercial study and research."
+          },
+          {
+            "title": "Where it fits",
+            "body": "When you need unified users, tenants, permissions, workflow, audit, and engineering norms, a foundation beats building from scratch.",
+            "bullets": [
+              "Admin consoles and internal business systems",
+              "SaaS back offices and multi-customer operations",
+              "Ticket, approval, knowledge, and CRM-style workflow systems",
+              "Regulated projects needing security governance and domestic-stack readiness"
+            ]
+          },
+          {
+            "title": "Core goals",
+            "body": "One foundation for many projects: platform capabilities sink down, business modules float up, with a unified stack and initialization baseline.",
+            "bullets": [
+              "Reuse one foundation across projects",
+              "Governable out of the box: tenants, orgs, RBAC, security, audit",
+              "Non-commercial study and research use",
+              "Multi-tenant design with long-term maintainability"
+            ]
+          },
+          {
+            "title": "Vs packaged SaaS / greenfield builds",
+            "body": "Compared with packaged SaaS, you can read and modify every layer. Compared with greenfield, you can study a working implementation of auth, tenancy, and audit."
+          }
+        ]
+      },
+      {
+        "id": "capabilities",
+        "title": "Capabilities",
+        "summary": "Deliverable-oriented capabilities: tenancy, RBAC, workflow, codegen, async import, and operations.",
+        "sections": [
+          {
+            "title": "Multi-tenant & org permissions",
+            "body": "One account per tenant with clear platform vs tenant boundaries; departments, posts, roles, and data scope for enterprise-style orgs."
+          },
+          {
+            "title": "Menus, RBAC & security",
+            "body": "Navigation separated from permission codes (directory / menu / button). Login lockout, captcha, IP rules, password policy, and log redaction are configurable."
+          },
+          {
+            "title": "Workflow & OA",
+            "body": "Process design, runtime approvals, and tenant office configuration for real leave/expense-style workloads."
+          },
+          {
+            "title": "Codegen & engineering norms",
+            "body": "CRUD generation and consistent front/back structure to accelerate standard admin modules."
+          },
+          {
+            "title": "Async jobs & Excel import/export",
+            "body": "Sync Excel import covers light workloads; async import stages the file, returns a task id immediately, and lets the UI poll results—so large files do not block HTTP threads. Business async tasks (infra_async_task) stay separate from platform cron (sys_job). Transport is environment config (in-process or dedicated worker)—tenants never pick the channel—while each task keeps tenant and owner ownership. Codegen can emit async import APIs and handlers."
+          },
+          {
+            "title": "i18n & configuration",
+            "body": "Shell, business copy, and menu titles support locales; config, dictionaries, and tenant policy seams stay clear."
+          },
+          {
+            "title": "Deploy, ops & domestic stack",
+            "body": "Initialization baselines, backup, scheduled jobs, and online sessions for production. Middleware abstractions ease regulated migrations."
+          }
+        ]
+      },
+      {
+        "id": "security",
+        "title": "Security & compliance",
+        "summary": "For security and enterprise evaluators: demonstrable, configurable controls (not a certification claim).",
+        "sections": [
+          {
+            "title": "How to read this",
+            "body": "This summarizes application-side capabilities that can be configured or demonstrated. Application alignment is not a classified-protection pass; network, host, and policy evidence still belong to deployment and operations."
+          },
+          {
+            "title": "Authentication",
+            "body": "Password complexity and history, expiry, login lockout and IP throttling, optional captcha; TOTP MFA for administrators with tenant-level force-enroll."
+          },
+          {
+            "title": "Access control",
+            "body": "RBAC with tenant isolation and data scope; IP rules where platform deny overrides tenant allow; separation-of-duty role templates with mutual exclusion."
+          },
+          {
+            "title": "Security audit",
+            "body": "Login, operation, and API access logs with sensitive-field masking; hash-chain integrity and in-DB archival retention; no casual delete APIs on audit trails."
+          },
+          {
+            "title": "Session & transport hardening",
+            "body": "JWT + Redis sessions, opaque refresh rotation, single-session policy and forced logout; CORS allowlist and security headers; Swagger off in production profiles."
+          },
+          {
+            "title": "Tenant-owned security policy",
+            "body": "Platform sets defaults; tenant admins may override login, password, captcha, and MFA policies within their scope."
+          }
+        ]
+      },
+      {
+        "id": "solutions",
+        "title": "Solutions",
+        "summary": "Map common scenarios to pain points, approach, and deliverables.",
+        "sections": [
+          {
+            "title": "Multi-tenant SaaS operations",
+            "body": "Provision tenants, admins, and policy baselines; each tenant manages orgs, roles, and data in isolation on one console.",
+            "bullets": [
+              "Pain: one stack per customer is costly; auth/audit hard to unify",
+              "Approach: shared schema + tenant_id isolation + tenant policy overrides",
+              "Deliverables: provisioning, admin accounts, defaults, runbooks"
+            ]
+          },
+          {
+            "title": "Group & subsidiary administration",
+            "body": "Enterprise and organization tenants, region trees, and org structures support group-to-unit models with scoped permissions."
+          },
+          {
+            "title": "Approval / OA mid-platform",
+            "body": "Hang workflow and forms on unified users and orgs; tenants configure office templates instead of rebuilding engines per line of business."
+          },
+          {
+            "title": "Incubate new admin products faster",
+            "body": "Ship standard CRUD modules via codegen while auth, permissions, audit, and i18n come from the foundation."
+          },
+          {
+            "title": "Domestic-stack migration path",
+            "body": "Replace DB, cache, and file adapters behind abstractions—pilot by swapping implementations, not rewriting business layers."
+          }
+        ]
+      },
+      {
+        "id": "delivery",
+        "title": "Licence and permitted use",
+        "summary": "What is allowed, what is prohibited, and how to request commercial authorisation.",
+        "sections": [
+          {
+            "title": "Primary path: non-commercial study",
+            "body": "Read the full source and architecture docs, then run, debug and modify in a local or isolated environment. Any commercial use requires prior written authorisation.",
+            "bullets": [
+              "Confirm fit for your scenario",
+              "Read LICENSE.txt and confirm your purpose is non-commercial",
+              "Initialise locally and experiment with module extension"
+            ]
+          },
+          {
+            "title": "What the repository contains",
+            "body": "Complete buildable source, database migrations and architecture docs. No production credentials or operational runbooks.",
+            "bullets": [
+              "Full source for admin, site/portal and backend services",
+              "DB initialization baseline and default security policies",
+              "Architecture specs, configuration notes and capability docs"
+            ]
+          },
+          {
+            "title": "Commercial licensing enquiries",
+            "body": "Production deployment, client delivery and custom development require a separate written licence. Contact the address in LICENSE.txt."
+          },
+          {
+            "title": "Prohibited without a commercial licence",
+            "body": "The following are expressly prohibited unless you hold a written commercial licence:",
+            "bullets": [
+              "Production deployment or processing real business data (including internal use)",
+              "Delivering products, components, scaffolds or foundations to third parties",
+              "Providing SaaS, hosting, consulting or paid implementation services",
+              "Removing attribution, misusing trademarks or sublicensing"
+            ]
+          },
+          {
+            "title": "Licence note",
+            "body": "Full terms are in LICENSE.txt. Site docs are product guidance only and do not constitute an offer."
+          }
+        ]
+      },
+      {
+        "id": "resources",
+        "title": "Resources & support",
+        "summary": "FAQ, trial entry points, and contact—to lower evaluation cost.",
+        "sections": [
+          {
+            "title": "FAQ",
+            "body": "Questions we hear most during evaluation:",
+            "bullets": [
+              "This project is Source Available under a non-commercial study and research licence. Commercial use is prohibited. It is NOT OSI Open Source.",
+              "Multi-tenant? Yes—one account per tenant with clear boundaries.",
+              "Domestic stack? Middleware abstractions are designed for adapter swaps.",
+              "Already certified? No. Docs describe alignable app controls; certification still needs infra and policy evidence."
+            ]
+          },
+          {
+            "title": "Try the console",
+            "body": "Run it locally to explore admin capabilities and UX. Read SECURITY.md and rotate all credentials before any deployment."
+          },
+          {
+            "title": "Suggested reading order",
+            "body": "Overview → Capabilities → Security → Licence & permitted use; read Solutions for scenario mapping."
+          },
+          {
+            "title": "Glossary",
+            "body": "Shared language for sales and delivery:",
+            "bullets": [
+              "Platform admin: global baselines, tenant provisioning, platform rules",
+              "Tenant admin: orgs, roles, and overridable security policy in-tenant",
+              "SoD roles: system / security / audit separation; avoid holding multiple",
+              "Tenant policy: tenant overrides for login, password, MFA, etc."
+            ]
+          },
+          {
+            "title": "Contact",
+            "body": "Reach us via the email on the About page. Include scenario, approximate user scale, and preferred delivery model for a faster response."
+          }
+        ]
+      }
+    ]
+  }
+}

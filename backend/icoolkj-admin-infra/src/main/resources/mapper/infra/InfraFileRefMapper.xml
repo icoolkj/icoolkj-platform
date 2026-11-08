@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.icoolkj.platform.infra.mapper.InfraFileRefMapper">
+
+    <resultMap id="BaseResultMap" type="com.icoolkj.platform.infra.domain.InfraFileRefEntity">
+        <id column="id" property="id"/>
+        <result column="tenant_id" property="tenantId"/>
+        <result column="file_id" property="fileId"/>
+        <result column="biz_type" property="bizType"/>
+        <result column="biz_id" property="bizId"/>
+        <result column="ref_field" property="refField"/>
+        <result column="created_by" property="createdBy"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="deleted" property="deleted"/>
+    </resultMap>
+
+    <select id="selectActive" resultMap="BaseResultMap">
+        SELECT id, tenant_id, file_id, biz_type, biz_id, ref_field, created_by, created_at, deleted
+        FROM infra_file_ref
+        WHERE tenant_id = #{tenantId}
+          AND file_id = #{fileId}
+          AND biz_type = #{bizType}
+          AND biz_id = #{bizId}
+          AND deleted = 0
+          <choose>
+            <when test="refField != null and refField != ''">
+              AND ref_field = #{refField}
+            </when>
+            <otherwise>
+              AND (ref_field IS NULL OR ref_field = '')
+            </otherwise>
+          </choose>
+        LIMIT 1
+    </select>
+
+    <select id="countActiveByFileId" resultType="long">
+        SELECT COUNT(1)
+        FROM infra_file_ref
+        WHERE tenant_id = #{tenantId}
+          AND file_id = #{fileId}
+          AND deleted = 0
+    </select>
+
+    <select id="selectActiveByFileId" resultMap="BaseResultMap">
+        SELECT id, tenant_id, file_id, biz_type, biz_id, ref_field, created_by, created_at, deleted
+        FROM infra_file_ref
+        WHERE tenant_id = #{tenantId}
+          AND file_id = #{fileId}
+          AND deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO infra_file_ref (id, tenant_id, file_id, biz_type, biz_id, ref_field, created_by, created_at, deleted)
+        VALUES (#{id}, #{tenantId}, #{fileId}, #{bizType}, #{bizId}, #{refField}, #{createdBy}, #{createdAt}, #{deleted})
+    </insert>
+
+    <update id="logicalDeleteById">
+        UPDATE infra_file_ref SET deleted = 1 WHERE id = #{id} AND deleted = 0
+    </update>
+
+    <update id="logicalDelete">
+        UPDATE infra_file_ref
+        SET deleted = 1
+        WHERE tenant_id = #{tenantId}
+          AND file_id = #{fileId}
+          AND biz_type = #{bizType}
+          AND biz_id = #{bizId}
+          AND deleted = 0
+          <choose>
+            <when test="refField != null and refField != ''">
+              AND ref_field = #{refField}
+            </when>
+            <otherwise>
+              AND (ref_field IS NULL OR ref_field = '')
+            </otherwise>
+          </choose>
+    </update>
+
+    <delete id="deleteById">
+        DELETE FROM infra_file_ref WHERE id = #{id}
+    </delete>
+
+    <delete id="deleteByFileId">
+        DELETE FROM infra_file_ref
+        WHERE tenant_id = #{tenantId}
+          AND file_id = #{fileId}
+    </delete>
+
+    <select id="selectActiveByBiz" resultMap="BaseResultMap">
+        SELECT id, tenant_id, file_id, biz_type, biz_id, ref_field, created_by, created_at, deleted
+        FROM infra_file_ref
+        WHERE tenant_id = #{tenantId}
+          AND biz_type = #{bizType}
+          AND biz_id = #{bizId}
+          AND deleted = 0
+        ORDER BY created_at DESC
+    </select>
+
+</mapper>
