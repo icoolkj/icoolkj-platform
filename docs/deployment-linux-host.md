@@ -230,7 +230,7 @@ export DB_PASSWORD='你的MySQL密码'
 
 export REDIS_HOST=127.0.0.1
 export REDIS_PORT=6379
-export REDIS_PASSWORD='test'
+export REDIS_PASSWORD='你的Redis密码'
 
 export JWT_SECRET='至少32字节的随机串'
 
